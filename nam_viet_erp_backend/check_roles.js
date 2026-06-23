@@ -1,0 +1,3 @@
+const { Client } = require('pg');
+const client = new Client({ connectionString: 'postgresql://postgres.iudkexocalqdhxuyjacu:Longlong123%40a@aws-1-ap-southeast-1.pooler.supabase.com:6543/postgres', ssl: { rejectUnauthorized: false } });
+client.connect().then(() => client.query(`SELECT r.name, rp.permission_key FROM role_permissions rp JOIN roles r ON rp.role_id = r.id WHERE rp.permission_key IN ('portal.manage', 'admin-all');`)).then(res => { console.log("ROLES:", res.rows); return client.query(`SELECT COUNT(*) FROM user_roles ur JOIN role_permissions rp ON ur.role_id = rp.role_id WHERE rp.permission_key IN ('portal.manage', 'admin-all');`); }).then(res => { console.log("USER_ROLES COUNT:", res.rows); client.end(); })

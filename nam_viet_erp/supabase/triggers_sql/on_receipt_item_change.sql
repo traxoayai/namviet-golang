@@ -1,0 +1,1 @@
+CREATE TRIGGER on_receipt_item_change AFTER INSERT OR DELETE OR UPDATE ON public.inventory_receipt_items FOR EACH ROW EXECUTE FUNCTION calculate_receipt_totals()

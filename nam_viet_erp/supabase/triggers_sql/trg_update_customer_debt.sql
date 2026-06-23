@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_update_customer_debt AFTER INSERT OR DELETE OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION fn_trigger_update_customer_debt()

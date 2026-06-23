@@ -1,0 +1,342 @@
+Created At: 2026-06-20T03:22:54Z
+Completed At: 2026-06-20T03:22:55Z
+File Path: `file:///D:/29.NamVietErp-V3/nam_viet_erp_extension/content.js`
+Total Lines: 334
+Total Bytes: 12508
+Showing lines 1 to 334
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: // --- PHẦN 1: DÀNH CHO TAB ERP (Nhận data và bắn vào web React) ---
+2: chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+3:   if (request.type === "NAMVIET_ERP_SYNC_INVOICE") {
+4:     console.log("ERP Tab nhận dữ liệu:", request.payload.length);
+5:     const event = new CustomEvent("NAMVIET_ERP_SYNC_INVOICE", {
+6:       detail: JSON.stringify(request.payload),
+7:     });
+8:     window.dispatchEvent(event);
+9:   }
+10: });
+11: 
+12: // --- PHẦN 2: DÀNH CHO TAB TỔNG CỤC THUẾ (Giao diện nổi & Thuật toán cào) ---
+13: chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+14:   if (
+15:     request.action === "START_FLOATING_SYNC" &&
+16:     window.location.hostname === "hoadondientu.gdt.gov.vn"
+17:   ) {
+18:     injectFloatingUIAndRun(request.config);
+19:   }
+20: });
+21: 
+22: async function injectFloatingUIAndRun(config) {
+23:   const existingUI = document.getElementById("nv-floating-bot");
+24:   if (existingUI) existingUI.remove();
+25: 
+26:   const ui = document.createElement("div");
+27:   ui.id = "nv-floating-bot";
+28:   ui.style.cssText = `
+29:     position: fixed; bottom: 30px; right: 30px; width: 340px;
+30:     background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+31:     border-radius: 8px; border: 2px solid #1677ff; z-index: 9999999;
+32:     font-family: Arial, sans-serif; padding: 20px; color: #333;
+33:   `;
+34: 
+35:   const btnStartHTML =
+36:     config.syncMode === "json"
+37:       ? `<button id="nv-btn-start" style="width: 100%; padding: 12px; background: #1677ff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-bottom: 10px;">📁 CHỌN THƯ MỤC LƯU & BẮT ĐẦU</button>`
+38:       : `<button id="nv-btn-start" style="width: 100%; padding: 12px; background: #1677ff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-bottom: 10px;">🚀 BẮT ĐẦU KÉO VỀ ERP</button>`;
+39: 
+40:   ui.innerHTML = `
+41:     <div style="display:flex; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px;">
+42:       <div style="width:30px; height:30px; background:#fa541c; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; border-radius:4px; margin-right:10px;">NV</div>
+43:       <strong style="color: #1677ff; font-size: 16px; text-transform: uppercase;">Đồng bộ Hóa Đơn TCT</strong>
+44:     </div>
+45:     
+46:     <div id="nv-pre-start">
+47:         <p style="font-size: 13px; color: #666; margin-top: 0;">Thời gian: <b>${config.fromDateStr}</b> đến <b>${config.toDateStr}</b></p>
+48:         ${btnStartHTML}
+49:     </div>
+50: 
+51:     <div id="nv-running-ui" style="display: none;">
+52:         <div id="nv-status" style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Đang chuẩn bị...</div>
+53:         <div id="nv-detail" style="font-size: 12px; color: #666; margin-bottom: 15px; min-height: 45px;"></div>
+54:         <div style="background: #f0f0f0; border-radius: 4px; height: 12px; overflow: hidden; margin-bottom: 15px;">
+55:           <div id="nv-progress" style="width: 0%; height: 100%; background: #1677ff; transition: width 0.3s;"></div>
+56:         </div>
+57:     </div>
+58:     <button id="nv-close" style="display:none; width: 100%; padding: 10px; background: #52c41a; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">ĐÓNG BẢNG NÀY</button>
+59:   `;
+60:   document.body.appendChild(ui);
+61: 
+62:   const setStatus = (main, detail, percent) => {
+63:     document.getElementById("nv-status").innerText = main;
+64:     document.getElementById("nv-detail").innerHTML = detail;
+65:     document.getElementById("nv-progress").style.width = percent + "%";
+66:   };
+67: 
+68:   document
+69:     .getElementById("nv-close")
+70:     .addEventListener("click", () => ui.remove());
+71: 
+72:   let jwt =
+73:     sessionStorage.getItem("jwt") ||
+74:     (document.cookie.match(/(?:^|; )jwt=([^;]+)/) || [])[1];
+75:   if (!jwt) {
+76:     document.getElementById("nv-pre-start").innerHTML =
+77:       "<span style='color:red; font-weight:bold;'>❌ Không tìm thấy Token. Hãy tải lại trang TCT và đăng nhập lại!</span>";
+78:     return;
+79:   }
+80: 
+81:   function chunkDateRange(startStr, endStr) {
+82:     let chunks = [];
+83:     let curr = new Date(startStr);
+84:     let end = new Date(endStr);
+85:     while (curr <= end) {
+86:       let next = new Date(curr);
+87:       next.setDate(next.getDate() + 25);
+88:       if (next > end) next = new Date(end);
+89:       chunks.push({
+90:         start: curr.toISOString().split("T")[0],
+91:         end: next.toISOString().split("T")[0],
+92:       });
+93:       curr = new Date(next);
+94:       curr.setDate(curr.getDate() + 1);
+95:     }
+96:     return chunks;
+97:   }
+98: 
+99:   document
+100:     .getElementById("nv-btn-start")
+101:     .addEventListener("click", async () => {
+102:       let dirHandle = null;
+103:       if (config.syncMode === "json") {
+104:         try {
+105:           dirHandle = await window.showDirectoryPicker({ mode: "readwrite" });
+106:         } catch (error) {
+107:           alert("Bạn đã hủy chọn thư mục. Quá trình đồng bộ bị hủy!");
+108:           return;
+109:         }
+110:       }
+111: 
+112:       document.getElementById("nv-pre-start").style.display = "none";
+113:       document.getElementById("nv-running-ui").style.display = "block";
+114: 
+115:       const chunks = chunkDateRange(config.fromDateStr, config.toDateStr);
+116:       let totalInvoicesFound = 0;
+117: 
+118:       try {
+119:         for (let i = 0; i < chunks.length; i++) {
+120:           const c = chunks[i];
+121:           let chunkInvoices = [];
+122: 
+123:           setStatus(
+124:             `Đợt ${i + 1}/${chunks.length}: Quét danh sách`,
+125:             `Khoảng thời gian: <b>${c.start}</b> đến <b>${c.end}</b>`,
+126:             (i / chunks.length) * 100,
+127:           );
+128: 
+129:           // Kéo danh sách với API động
+130:           const listData = await fetchList(
+131:             jwt,
+132:             c.start,
+133:             c.end,
+134:             config.invoiceType,
+135:           );
+136: 
+137:           if (listData.length > 0) {
+138:             totalInvoicesFound += listData.length;
+139: 
+140:             for (let j = 0; j < listData.length; j++) {
+141:               const inv = listData[j];
+142:               setStatus(
+143:                 `Đợt ${i + 1}/${chunks.length}: Xử lý chi tiết`,
+144:                 `Đang kéo: <b>${j + 1} / ${listData.length}</b> hóa đơn<br/>(Cơ chế chậm an toàn & Tự động thử lại)`,
+145:                 (i / chunks.length) * 100 +
+146:                   ((j + 1) / listData.length) * (100 / chunks.length),
+147:               );
+148: 
+149:               // Auto-Retry Detail
+150:               const detailData = await fetchDetail(
+151:                 jwt,
+152:                 inv.nbmst,
+153:                 inv.khhdon,
+154:                 inv.shdon,
+155:                 inv.khmshdon,
+156:               );
+157:               inv.hdhhdvu = detailData.hdhhdvu || [];
+158: 
+159:               if (config.syncMode === "erp") {
+160:                 chrome.runtime.sendMessage({
+161:                   action: "FORWARD_TO_ERP",
+162:                   payload: [inv],
+163:                 });
+164:               } else {
+165:                 chunkInvoices.push(inv);
+166:               }
+167: 
+168:               // PHANH GIẢM TỐC: Ngủ ngẫu nhiên từ 1.5s - 2.5s (Chống sót HĐ)
+169:               await new Promise((r) =>
+170:                 setTimeout(r, Math.floor(Math.random() * 500) + 1000),
+171:               );
+172:             }
+173: 
+174:             if (config.syncMode === "json" && chunkInvoices.length > 0) {
+175:               setStatus(
+176:                 `Đợt ${i + 1}/${chunks.length}: Đang lưu File`,
+177:                 `Đang ghi file cho đợt này...`,
+178:                 ((i + 1) / chunks.length) * 100,
+179:               );
+180: 
+181:               let loaiTxt =
+182:                 config.invoiceType === "purchase" ? "MuaVao" : "BanRa";
+183:               if (config.invoiceType === "sco_sold")
+184:                 loaiTxt = "BanRa_MayTinhTien";
+185: 
+186:               const fileName = `NamViet_${loaiTxt}_Tu_${c.start}_Den_${c.end}_[${chunkInvoices.length}_HD].json`;
+187: 
+188:               const fileHandle = await dirHandle.getFileHandle(fileName, {
+189:                 create: true,
+190:               });
+191:               const writable = await fileHandle.createWritable();
+192:               await writable.write(JSON.stringify(chunkInvoices, null, 2));
+193:               await writable.close();
+194:             }
+195:             chunkInvoices = null;
+196:           }
+197:           await new Promise((r) => setTimeout(r, 1500));
+198:         }
+199: 
+200:         setStatus(
+201:           "🎉 Hoàn Tất Toàn Bộ!",
+202:           `Đã xử lý <b>${totalInvoicesFound}</b> hóa đơn không sót tờ nào!<br/>Tốc độ chậm đã phát huy hiệu quả.`,
+203:           100,
+204:         );
+205:         document.getElementById("nv-progress").style.background = "#52c41a";
+206:         document.getElementById("nv-close").style.display = "block";
+207:       } catch (err) {
+208:         setStatus(
+209:           "Hệ thống báo lỗi",
+210:           `<span style='color:red;'>${err.message}</span>`,
+211:           100,
+212:         );
+213:         document.getElementById("nv-progress").style.background = "#ff4d4f";
+214:         document.getElementById("nv-close").style.display = "block";
+215:       }
+216:     });
+217: }
+218: 
+219: // ---------------------------------------------------------
+220: // KIẾN TRÚC GỌI API MỚI (PHÂN LUỒNG TUYỆT ĐỐI)
+221: // ---------------------------------------------------------
+222: 
+223: async function fetchList(jwt, startStr, endStr, rawType) {
+224:   const [fY, fM, fD] = startStr.split("-");
+225:   const [tY, tM, tD] = endStr.split("-");
+226:   const geDate = `${fD}/${fM}/${fY}T00:00:00`;
+227:   const leDate = `${tD}/${tM}/${tY}T23:59:59`;
+228: 
+229:   // Dùng .trim() để ép kiểu, xóa sạch khoảng trắng vô tình lọt vào từ thẻ HTML
+230:   const type = (rawType || "").trim();
+231: 
+232:   let apiBasePath = "query";
+233:   let queryType = type;
+234:   let searchParam = `tdlap=ge=${geDate};tdlap=le=${leDate}`;
+235: 
+236:   // Khai báo biến
+237:   let dir = "";
+238:   let src = "";
+239: 
+240:   // Thuật toán rẽ nhánh bọc thép
+241:   switch (type) {
+242:     case "purchase":
+243:       apiBasePath = "query";
+244:       queryType = "purchase";
+245:       searchParam += ";ttxly==5";
+246:       dir = "inbound"; // Hóa đơn đầu vào
+247:       src = "standard";
+248:       break;
+249: 
+250:     case "sold":
+251:       apiBasePath = "query";
+252:       queryType = "sold";
+253:       searchParam += ";ttxly==5";
+254:       dir = "outbound"; // CHỐT CỨNG ĐẦU RA TẠI ĐÂY
+255:       src = "standard";
+256:       break;
+257: 
+258:     case "sco_sold":
+259:       apiBasePath = "sco-query";
+260:       queryType = "sold";
+261:       // Không nối thêm ;ttxly==5
+262:       dir = "outbound"; // CHỐT CỨNG ĐẦU RA TẠI ĐÂY
+263:       src = "cash_register";
+264:       break;
+265: 
+266:     default:
+267:       console.error("Lỗi: Mã loại hóa đơn không hợp lệ từ Popup ->", type);
+268:       // Fallback an toàn
+269:       dir = "inbound";
+270:       src = "unknown";
+271:       break;
+272:   }
+273: 
+274:   let all = [];
+275:   let state = "";
+276:   let hasMore = true;
+277:   while (hasMore) {
+278:     let url = `https://hoadondientu.gdt.gov.vn/api/${apiBasePath}/invoices/${queryType}?sort=tdlap:desc&size=50&search=${searchParam}`;
+279:     if (state) url += `&state=${encodeURIComponent(state)}`;
+280: 
+281:     const res = await fetch(url, {
+282:       headers: { Authorization: `Bearer ${jwt}` },
+283:     });
+284:     if (!res.ok) {
+285:       if (res.status === 400) {
+286:         const errorData = await res.json();
+287:         throw new Error(`Cục thuế chặn 400: ${errorData.message}`);
+288:       }
+289:       throw new Error("Cục thuế chặn kết nối, mã lỗi: " + res.status);
+290:     }
+291: 
+292:     const json = await res.json();
+293:     all = all.concat(json.datas || []);
+294: 
+295:     if ((json.datas || []).length < 50) hasMore = false;
+296:     else if (json.state) {
+297:       state = json.state;
+298:       await new Promise((r) => setTimeout(r, 600));
+299:     } else hasMore = false;
+300:   }
+301: 
+302:   // Gán nhãn dữ liệu chuẩn xác 100% trước khi đẩy sang ERP
+303:   return all.map((inv) => ({
+304:     ...inv,
+305:     direction: dir,
+306:     invoice_source: src,
+307:   }));
+308: }
+309: 
+310: // Hàm lấy chi tiết trang bị Vòng lặp bất tử (Retry 3 lần)
+311: async function fetchDetail(jwt, nbmst, khhdon, shdon, khmshdon) {
+312:   // Chú ý: Cả hóa đơn thường và hóa đơn Máy tính tiền đều dùng chung cổng /query/invoices/detail này
+313:   const url = `https://hoadondientu.gdt.gov.vn/api/query/invoices/detail?nbmst=${nbmst}&khhdon=${khhdon}&shdon=${shdon}&khmshdon=${khmshdon}`;
+314: 
+315:   let lastError;
+316:   for (let attempt = 1; attempt <= 3; attempt++) {
+317:     try {
+318:       const res = await fetch(url, {
+319:         headers: { Authorization: `Bearer ${jwt}` },
+320:       });
+321:       if (!res.ok) throw new Error(`HTTP Lỗi ${res.status}`);
+322:       return await res.json();
+323:     } catch (err) {
+324:       lastError = err;
+325:       console.warn(
+326:         `Lỗi kéo HĐ ${shdon} lần ${attempt}. Đang thử lại sau 2 giây...`,
+327:       );
+328:       await new Promise((r) => setTimeout(r, 2000));
+329:     }
+330:   }
+331:   console.error(`Thất bại hoàn toàn HĐ ${shdon} sau 3 lần thử. Bỏ qua.`);
+332:   return {};
+333: }
+334: 
+The above content shows the entire, complete file contents of the requested file.

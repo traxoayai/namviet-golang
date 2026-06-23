@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_sync_payment_to_order_after_complete AFTER UPDATE OF status ON public.finance_transactions FOR EACH ROW WHEN ((((new.status = 'completed'::transaction_status) AND (old.status <> 'completed'::transaction_status)) OR ((old.status = 'completed'::transaction_status) AND (new.status <> 'completed'::transaction_status)))) EXECUTE FUNCTION fn_sync_payment_to_order()

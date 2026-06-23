@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_payment_received AFTER UPDATE OF paid_amount, status ON public.orders FOR EACH ROW EXECUTE FUNCTION notify_payment_received()

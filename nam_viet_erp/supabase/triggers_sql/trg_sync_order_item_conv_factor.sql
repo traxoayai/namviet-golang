@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_sync_order_item_conv_factor BEFORE INSERT OR UPDATE OF product_id, uom, conversion_factor ON public.order_items FOR EACH ROW EXECUTE FUNCTION _sync_order_item_conversion_factor()

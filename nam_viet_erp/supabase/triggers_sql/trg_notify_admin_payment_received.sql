@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_admin_payment_received AFTER INSERT ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION fn_notify_admin_payment_received()

@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_admin_new_portal_order AFTER INSERT ON public.orders FOR EACH ROW EXECUTE FUNCTION fn_notify_admin_new_portal_order()

@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_set_check_in_time BEFORE UPDATE ON public.appointments FOR EACH ROW EXECUTE FUNCTION trigger_update_check_in_time()

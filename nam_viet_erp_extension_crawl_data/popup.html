@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nam Việt Crawler</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        padding: 15px;
+        width: 350px;
+        color: #333;
+      }
+      h3 {
+        margin-top: 0;
+        color: #1677ff;
+        font-size: 18px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+      }
+      .btn {
+        background: #1677ff;
+        color: white;
+        border: none;
+        padding: 12px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: 0.3s;
+      }
+      .btn:hover { background: #4096ff; }
+      .btn:disabled { background: #d9d9d9; cursor: not-allowed; color: #888; }
+      .btn-stop { background: #ff4d4f; margin-top: 10px; }
+      .btn-stop:hover { background: #ff7875; }
+      
+      .upload-container {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 2px dashed #1677ff;
+        border-radius: 6px;
+        text-align: center;
+        background: #f0f5ff;
+      }
+      .upload-container input[type="file"] {
+        display: none;
+      }
+      .upload-container label {
+        cursor: pointer;
+        color: #1677ff;
+        font-weight: bold;
+        margin: 0;
+      }
+      .upload-info {
+        font-size: 12px;
+        color: #555;
+        margin-top: 5px;
+        display: block;
+      }
+
+      .status-box {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        background: #f5f5f5;
+        border: 1px solid #d9d9d9;
+      }
+      .progress-bar-container {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        margin-top: 10px;
+        height: 10px;
+        overflow: hidden;
+      }
+      .progress-bar {
+        height: 100%;
+        background-color: #1677ff;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+      .log-container {
+        margin-top: 10px;
+        font-family: monospace;
+        font-size: 11px;
+        background: #222;
+        color: #0f0;
+        padding: 8px;
+        height: 120px;
+        overflow-y: auto;
+        border-radius: 4px;
+      }
+      .log-entry { margin-bottom: 4px; }
+    </style>
+  </head>
+  <body>
+    <h3>Cào Dữ Liệu Sản Phẩm</h3>
+
+    <div class="form-group" style="display:none;">
+      <label>URL Backend Supabase:</label>
+      <input type="text" id="supabaseUrl" style="width:100%; padding: 6px;" placeholder="https://xxx.supabase.co" />
+    </div>
+    <div class="form-group" style="display:none;">
+      <label>Anon Key Supabase:</label>
+      <input type="password" id="supabaseKey" style="width:100%; padding: 6px;" placeholder="ey..." />
+    </div>
+
+    <div class="upload-container" id="uploadBox">
+      <label for="csvFile">📁 Chọn file CSV sản phẩm</label>
+      <input type="file" id="csvFile" accept=".csv" />
+      <span class="upload-info" id="fileInfo">Chưa chọn file (Cột: sku, name, note)</span>
+    </div>
+
+    <button id="btnStart" class="btn" disabled>Bắt Đầu Cào Dữ Liệu</button>
+    <button id="btnStop" class="btn btn-stop" style="display:none;">Dừng Lại</button>
+
+    <div class="status-box">
+      <div>Trạng thái: <span id="statusText">Đang chờ...</span></div>
+      <div>Tiến độ: <span id="progressText">0/0</span></div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="log-container" id="logContainer"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

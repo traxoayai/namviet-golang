@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_protect_task_columns BEFORE UPDATE ON public.tasks FOR EACH ROW EXECUTE FUNCTION fn_protect_task_columns()

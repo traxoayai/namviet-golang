@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Đồng Bộ Hóa Đơn</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        padding: 15px;
+        width: 450px;
+        color: #333;
+      }
+      h3 {
+        margin-top: 0;
+        color: #1677ff;
+        font-size: 18px;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+      }
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+
+      /* Input Date Group */
+      .date-input-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .date-input-group input {
+        padding: 8px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .date-input-group input:focus {
+        border-color: #1677ff;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+      }
+      .inp-dd,
+      .inp-mm {
+        width: 50px;
+      }
+      .inp-yyyy {
+        width: 70px;
+      }
+      .separator {
+        font-weight: bold;
+        color: #ccc;
+      }
+
+      /* Quick Select Buttons */
+      .quick-dates {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+      .quick-btn {
+        flex: 1;
+        padding: 6px;
+        font-size: 12px;
+        background: #f5f5f5;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .quick-btn:hover {
+        border-color: #1677ff;
+        color: #1677ff;
+      }
+
+      /* Action Options */
+      .action-options {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        background: #e6f4ff;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #91caff;
+      }
+      .radio-label {
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #0958d9;
+      }
+
+      .btn {
+        background: #1677ff;
+        color: white;
+        border: none;
+        padding: 12px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        background: #4096ff;
+      }
+      .btn:disabled {
+        background: #d9d9d9;
+        cursor: not-allowed;
+        color: #888;
+      }
+
+      .error {
+        color: #ff4d4f;
+        font-size: 13px;
+        padding: 10px;
+        background: #fff2f0;
+        border: 1px solid #ffccc7;
+        border-radius: 6px;
+        display: none;
+        margin-bottom: 15px;
+      }
+      .success {
+        color: #52c41a;
+        font-size: 13px;
+        padding: 10px;
+        background: #f6ffed;
+        border: 1px solid #b7eb8f;
+        border-radius: 6px;
+        display: none;
+        margin-bottom: 15px;
+      }
+      .warning-box {
+        color: #d46b08;
+        font-size: 13px;
+        padding: 10px;
+        background: #fff7e6;
+        border: 1px solid #ffd591;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+
+      .loader {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #1677ff;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Đồng Bộ Hóa Đơn TCT</h3>
+
+    <div id="errorMessage" class="error"></div>
+    <div id="successMessage" class="success"></div>
+
+    <div id="mainForm" style="display: none">
+      <div class="form-group">
+        <label>Loại hóa đơn:</label>
+        <select id="invoiceType">
+          <option value="purchase">Đồng bộ HĐ Đầu vào</option>
+          <option value="sold">Đồng bộ HĐ Bán Ra (Thông thường)</option>
+          <option value="sco_sold">Đồng bộ HĐ Bán đầu Máy Tính Tiền</option>
+        </select>
+      </div>
+
+      <label>Chọn nhanh thời gian:</label>
+      <div class="quick-dates">
+        <button type="button" class="quick-btn" id="btnYesterday">
+          Hôm qua
+        </button>
+        <button type="button" class="quick-btn" id="btnLast30Days">
+          30 ngày qua
+        </button>
+        <button type="button" class="quick-btn" id="btnThisYear">
+          Năm nay
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 20px">
+        <div class="form-group">
+          <label>Từ ngày:</label>
+          <div class="date-input-group">
+            <input
+              type="text"
+              id="f_dd"
+              class="inp-dd auto-jump"
+              placeholder="DD"
+              maxlength="2"
+            />
+            <span class="separator">/</span>
+            <input
+              type="text"
+              id="f_mm"
+              class="inp-mm auto-jump"
+              placeholder="MM"
+              maxlength="2"
+            />
+            <span class="separator">/</span>
+            <input
+              type="text"
+              id="f_yyyy"
+              class="inp-yyyy"
+              placeholder="YYYY"
+              maxlength="4"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Đến ngày:</label>
+          <div class="date-input-group">
+            <input
+              type="text"
+              id="t_dd"
+              class="inp-dd auto-jump"
+              placeholder="DD"
+              maxlength="2"
+            />
+            <span class="separator">/</span>
+            <input
+              type="text"
+              id="t_mm"
+              class="inp-mm auto-jump"
+              placeholder="MM"
+              maxlength="2"
+            />
+            <span class="separator">/</span>
+            <input
+              type="text"
+              id="t_yyyy"
+              class="inp-yyyy"
+              placeholder="YYYY"
+              maxlength="4"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="warningLongRun" class="warning-box" style="display: none">
+        ⚠️ Cảnh báo: Thời gian > 31 ngày.<br />
+        Extension sẽ tự động chia nhỏ để tải. Quá trình có thể mất nhiều phút.
+        <b>TUYỆT ĐỐI KHÔNG CLICK CHUỘT RA NGOÀI BẢNG NÀY</b> để tránh bị ngắt
+        kết nối!
+      </div>
+
+      <label>Chế độ xử lý:</label>
+      <div class="action-options">
+        <label class="radio-label">
+          <input type="radio" name="syncMode" value="erp" checked /> Đồng bộ ERP
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="syncMode" value="json" /> Xuất File JSON
+        </label>
+      </div>
+
+      <button id="btnSync" class="btn">Thực Thi Tự Động</button>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

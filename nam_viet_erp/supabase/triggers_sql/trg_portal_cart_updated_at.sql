@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_portal_cart_updated_at BEFORE UPDATE ON public.portal_cart_items FOR EACH ROW EXECUTE FUNCTION fn_portal_cart_updated_at()

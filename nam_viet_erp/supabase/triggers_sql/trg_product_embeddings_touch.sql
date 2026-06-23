@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_product_embeddings_touch BEFORE UPDATE ON public.product_embeddings FOR EACH ROW EXECUTE FUNCTION touch_product_embeddings()

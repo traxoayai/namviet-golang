@@ -1,0 +1,555 @@
+definitions:
+  domain.Appointment:
+    properties:
+      appointment_time:
+        type: string
+      check_in_time:
+        type: string
+      created_at:
+        type: string
+      doctor_id:
+        type: integer
+      id:
+        type: string
+      patient_id:
+        type: integer
+      service_type:
+        description: e.g., 'examination'
+        type: string
+      status:
+        description: '''pending'', ''waiting'', ''completed'', ''cancelled'''
+        type: string
+      updated_at:
+        type: string
+    type: object
+  domain.BookAppointmentRequest:
+    properties:
+      appointment_time:
+        type: string
+      doctor_id:
+        type: integer
+      patient_id:
+        type: integer
+      service_type:
+        type: string
+    required:
+    - appointment_time
+    - doctor_id
+    - patient_id
+    - service_type
+    type: object
+  domain.CheckInRequest:
+    properties:
+      notes:
+        type: string
+    type: object
+  domain.CreateOrderRequest:
+    properties:
+      customer_id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/domain.OrderItemRequest'
+        minItems: 1
+        type: array
+      payment_method:
+        type: string
+      voucher_code:
+        type: string
+      warehouse_id:
+        type: integer
+    required:
+    - customer_id
+    - items
+    - payment_method
+    - warehouse_id
+    type: object
+  domain.CreateReceiptRequest:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.ReceiptItem'
+        minItems: 1
+        type: array
+      note:
+        type: string
+      warehouse_id:
+        type: integer
+    required:
+    - items
+    - warehouse_id
+    type: object
+  domain.CreateTransactionRequest:
+    properties:
+      amount:
+        type: number
+      description:
+        type: string
+      flow:
+        type: string
+      fund_account_id:
+        type: integer
+      ref_id:
+        type: string
+      ref_type:
+        type: string
+    required:
+    - amount
+    - flow
+    - fund_account_id
+    type: object
+  domain.DeductStockRequest:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.ValidateStockItem'
+        minItems: 1
+        type: array
+      warehouse_id:
+        type: integer
+    required:
+    - items
+    - warehouse_id
+    type: object
+  domain.EarnLoyaltyRequest:
+    properties:
+      amount:
+        type: number
+      customer_id:
+        type: integer
+      order_id:
+        type: integer
+    required:
+    - amount
+    - customer_id
+    - order_id
+    type: object
+  domain.Order:
+    properties:
+      created_at:
+        type: string
+      customer_id:
+        type: integer
+      discount_amount:
+        type: number
+      final_amount:
+        type: number
+      id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/domain.OrderItem'
+        type: array
+      order_code:
+        type: string
+      payment_method:
+        type: string
+      payment_status:
+        description: unpaid, paid
+        type: string
+      status:
+        description: pending, confirmed, completed
+        type: string
+      total_amount:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  domain.OrderItem:
+    properties:
+      conversion_factor:
+        type: number
+      id:
+        type: integer
+      order_id:
+        type: integer
+      product_id:
+        type: integer
+      quantity:
+        type: number
+      total_price:
+        type: number
+      unit_price:
+        type: number
+      uom:
+        type: string
+    type: object
+  domain.OrderItemRequest:
+    properties:
+      product_id:
+        type: integer
+      quantity:
+        type: number
+      unit_price:
+        minimum: 0
+        type: number
+      uom:
+        type: string
+    required:
+    - product_id
+    - quantity
+    - unit_price
+    - uom
+    type: object
+  domain.ReceiptItem:
+    properties:
+      batch_code:
+        type: string
+      expiry_date:
+        type: string
+      product_id:
+        type: integer
+      quantity:
+        type: number
+      unit_price:
+        type: number
+    required:
+    - batch_code
+    - expiry_date
+    - product_id
+    - quantity
+    type: object
+  domain.VATAllocationRequest:
+    properties:
+      customer_id:
+        type: integer
+      target_amount:
+        type: number
+    required:
+    - customer_id
+    - target_amount
+    type: object
+  domain.ValidateStockItem:
+    properties:
+      product_id:
+        type: integer
+      quantity:
+        type: number
+      uom:
+        description: The requested unit of measurement
+        type: string
+    required:
+    - product_id
+    - quantity
+    - uom
+    type: object
+  domain.ValidateStockRequest:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.ValidateStockItem'
+        minItems: 1
+        type: array
+      warehouse_id:
+        type: integer
+    required:
+    - items
+    - warehouse_id
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/clinic/appointments:
+    post:
+      consumes:
+      - application/json
+      description: Lễ tân tạo lịch hẹn khám bệnh cho bệnh nhân
+      parameters:
+      - description: Book appointment request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.BookAppointmentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Appointment'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Đặt lịch khám
+      tags:
+      - Clinic
+  /api/v1/clinic/appointments/{id}/check-in:
+    post:
+      consumes:
+      - application/json
+      description: Lễ tân xác nhận bệnh nhân đã tới và đưa vào hàng đợi chờ khám
+      parameters:
+      - description: Appointment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Check-in request payload
+        in: body
+        name: req
+        schema:
+          $ref: '#/definitions/domain.CheckInRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Bệnh nhân Check-in
+      tags:
+      - Clinic
+  /api/v1/crm/loyalty/earn:
+    post:
+      consumes:
+      - application/json
+      description: Cộng điểm cho khách hàng dựa trên giá trị đơn hàng
+      parameters:
+      - description: Earn loyalty request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.EarnLoyaltyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tích điểm thành viên
+      tags:
+      - CRM
+  /api/v1/finance/transactions:
+    post:
+      consumes:
+      - application/json
+      description: Sinh phiếu thu chi, tự động chặn nếu vi phạm luật thuế, chẻ phiếu
+        nếu lệch tiền
+      parameters:
+      - description: Create transaction request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo giao dịch thu/chi
+      tags:
+      - Finance
+  /api/v1/finance/vat-allocation:
+    post:
+      consumes:
+      - application/json
+      description: Sử dụng thuật toán Knapsack để gom nhóm các Order Items khớp với
+        tổng giá trị hóa đơn yêu cầu
+      parameters:
+      - description: VAT allocation request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.VATAllocationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Phân bổ hóa đơn VAT
+      tags:
+      - Finance
+  /api/v1/inventory/deduct:
+    post:
+      consumes:
+      - application/json
+      description: Trừ tồn kho theo thuật toán FEFO
+      parameters:
+      - description: Stock deduction request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.DeductStockRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Trừ tồn kho FEFO
+      tags:
+      - Inventory
+  /api/v1/inventory/receipt:
+    post:
+      consumes:
+      - application/json
+      description: Nhập kho sản phẩm
+      parameters:
+      - description: Stock receipt request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateReceiptRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Nhập kho
+      tags:
+      - Inventory
+  /api/v1/inventory/validate:
+    post:
+      consumes:
+      - application/json
+      description: Validate if stock is available for given items and warehouse
+      parameters:
+      - description: Stock validation request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.ValidateStockRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Kiểm tra tồn kho
+      tags:
+      - Inventory
+  /api/v1/orders:
+    post:
+      consumes:
+      - application/json
+      description: Tạo đơn hàng, kiểm tra voucher, trừ tồn kho và ghi nhận thanh toán
+      parameters:
+      - description: Create order request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreateOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Order'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo đơn bán hàng
+      tags:
+      - Orders
+  /ws/v1/clinic/queue:
+    get:
+      description: Kết nối WebSocket để nhận realtime updates từ queue
+      responses: {}
+      summary: WebSocket cho hàng đợi
+      tags:
+      - Clinic
+swagger: "2.0"

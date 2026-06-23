@@ -1,0 +1,1 @@
+CREATE TRIGGER orders_deduct_on_confirm AFTER UPDATE OF status ON public.orders FOR EACH ROW EXECUTE FUNCTION trg_orders_deduct_on_confirm()

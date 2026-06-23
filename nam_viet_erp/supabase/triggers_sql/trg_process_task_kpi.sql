@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_process_task_kpi BEFORE UPDATE OF status ON public.tasks FOR EACH ROW EXECUTE FUNCTION fn_process_task_kpi()

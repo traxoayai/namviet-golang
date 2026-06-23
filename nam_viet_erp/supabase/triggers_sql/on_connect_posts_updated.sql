@@ -1,0 +1,1 @@
+CREATE TRIGGER on_connect_posts_updated BEFORE UPDATE ON public.connect_posts FOR EACH ROW EXECUTE FUNCTION handle_updated_at()

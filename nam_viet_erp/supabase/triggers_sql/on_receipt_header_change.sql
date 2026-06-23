@@ -1,0 +1,1 @@
+CREATE TRIGGER on_receipt_header_change BEFORE UPDATE OF discount_order, shipping_fee, other_fee ON public.inventory_receipts FOR EACH ROW EXECUTE FUNCTION recalculate_final_amount()

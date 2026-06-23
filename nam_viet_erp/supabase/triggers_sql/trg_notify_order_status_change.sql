@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_order_status_change AFTER UPDATE OF status ON public.orders FOR EACH ROW EXECUTE FUNCTION fn_notify_order_status_change()

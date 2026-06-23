@@ -1,0 +1,1 @@
+CREATE TRIGGER on_finance_transaction_notify AFTER INSERT ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION trigger_notify_finance_approval()

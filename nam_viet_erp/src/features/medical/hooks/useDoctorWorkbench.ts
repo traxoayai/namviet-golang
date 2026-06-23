@@ -1,0 +1,345 @@
+// src/features/medical/hooks/useDoctorWorkbench.ts
+import { message } from "antd";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import {
+  MedicalVisitRow,
+  ClinicalPrescriptionItem,
+} from "../types/medical.types";
+
+import { useAuthStore } from "@/features/auth/stores/useAuthStore";
+import { supabase } from "@/shared/lib/supabaseClient";
+import { safeRpc } from "@/shared/lib/safeRpc";
+import { printMedicalVisit } from "@/shared/utils/printTemplates";
+
+export const useDoctorWorkbench = () => {
+  const { id: appointmentId } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { user } = useAuthStore();
+
+  // --- STATE ---
+  const [loading, setLoading] = useState(false);
+  const [visit, setVisit] = useState<Partial<MedicalVisitRow>>({});
+
+  // Khám lâm sàng
+  const [vitals, setVitals] = useState<any>({
+    pulse: null,
+    temperature: null,
+    sp02: null,
+    bp_systolic: null,
+    bp_diastolic: null,
+    weight: null,
+    height: null,
+  });
+
+  const [clinical, setClinical] = useState<any>({
+    symptoms: "",
+    diagnosis: "",
+    icd_code: "",
+    doctor_notes: "",
+    examination_summary: "",
+    fontanelle: null,
+    reflexes: null,
+    jaundice: null,
+    feeding_status: null,
+    dental_status: null,
+    motor_development: null,
+    language_development: null,
+    puberty_stage: null,
+    scoliosis_status: null,
+    visual_acuity_left: null,
+    visual_acuity_right: null,
+    lifestyle_alcohol: false,
+    lifestyle_smoking: false,
+    red_flags: [],
+    vac_screening: {},
+  });
+
+  const [prescriptionItems, setPrescriptionItems] = useState<
+    ClinicalPrescriptionItem[]
+  >([]);
+  const [serviceOrders, setServiceOrders] = useState<any[]>([]);
+  const [patientInfo, setPatientInfo] = useState<any>(null);
+  const [isPrescriptionSent, setIsPrescriptionSent] = useState(false);
+  const [prePurchasedVaccines, setPrePurchasedVaccines] = useState<any[]>([]);
+  const [pharmacyWarehouses, setPharmacyWarehouses] = useState<{id: number, name: string}[]>([]);
+  const [selectedPharmacy, setSelectedPharmacy] = useState<number>(1);
+
+  // --- FETCH PHARMACY WAREHOUSES ---
+  useEffect(() => {
+    const fetchPharmacies = async () => {
+      const { data } = await supabase
+        .from('warehouses')
+        .select('id, name')
+        .eq('type', 'pharmacy')
+        .order('name');
+      if (data && data.length > 0) {
+        setPharmacyWarehouses(data);
+        setSelectedPharmacy(data[0].id);
+      }
+    };
+    fetchPharmacies();
+  }, []);
+
+  // --- LOADING ---
+  useEffect(() => {
+    if (appointmentId) fetchAppointmentData(appointmentId);
+  }, [appointmentId]);
+
+  const fetchAppointmentData = async (apptId: string) => {
+    setLoading(true);
+    try {
+      const { data: appt, error: apptError } = await supabase
+        .from("appointments")
+        .select(`*, patient:customers!customer_id(*)`)
+        .eq("id", apptId)
+        .single();
+      if (apptError) throw apptError;
+      setPatientInfo(appt.patient);
+
+      // Fetch Medical Visit
+      const { data: visitData } = await supabase
+        .from("medical_visits")
+        .select("*")
+        .eq("appointment_id", apptId)
+        .maybeSingle();
+
+      // Fetch Chỉ định Cận Lâm Sàng hiện có
+      let currentRequests: any[] = [];
+      if (visitData?.id) {
+        const { data: requests } = await supabase
+          .from("clinical_service_requests")
+          .select("*")
+          .eq("medical_visit_id", visitData.id);
+        if (requests) {
+          currentRequests = requests;
+          setServiceOrders(requests);
+        }
+      }
+
+      // Fetch Vắc xin đã mua sẵn
+      const { data: vaccines } = await supabase
+        .from("customer_vaccination_records")
+        .select("id, dose_number, products(name)")
+        .eq("appointment_id", apptId);
+        
+      if (vaccines) {
+        setPrePurchasedVaccines(vaccines);
+        // [FIX BLOCK 3]: Gộp vắc-xin vào mảng Service Orders để hiển thị trên Table
+        const mappedVaccines = vaccines.map((v: any) => ({
+          id: `vac_${v.id}`, 
+          request_id: v.id, 
+          service_name_snapshot: `${v.products?.name} (Mũi ${v.dose_number})`,
+          category: 'vaccination',
+          price: 0, 
+          payment_order_id: 'PAID' // Đánh dấu đã thanh toán để không bị xóa
+        }));
+        
+        // Nối vào mảng existing requests
+        if (currentRequests.length > 0) {
+           setServiceOrders([...currentRequests, ...mappedVaccines]);
+        } else {
+           setServiceOrders(mappedVaccines);
+        }
+      }
+
+      if (visitData) {
+        setVisit(visitData as Partial<MedicalVisitRow>);
+        setVitals({
+          pulse: visitData.pulse,
+          temperature: visitData.temperature,
+          sp02: visitData.sp02,
+          bp_systolic: visitData.bp_systolic,
+          bp_diastolic: visitData.bp_diastolic,
+          weight: visitData.weight,
+          height: visitData.height,
+        });
+        setClinical({
+          symptoms: visitData.symptoms || "",
+          diagnosis: visitData.diagnosis || "",
+          icd_code: visitData.icd_code || "",
+          doctor_notes: visitData.doctor_notes || "",
+          examination_summary: visitData.examination_summary || "",
+          fontanelle: visitData.fontanelle,
+          reflexes: visitData.reflexes,
+          jaundice: visitData.jaundice,
+          feeding_status: visitData.feeding_status,
+          dental_status: visitData.dental_status,
+          motor_development: visitData.motor_development,
+          language_development: visitData.language_development,
+          puberty_stage: visitData.puberty_stage,
+          scoliosis_status: visitData.scoliosis_status,
+          visual_acuity_left: visitData.visual_acuity_left,
+          visual_acuity_right: visitData.visual_acuity_right,
+          lifestyle_alcohol: visitData.lifestyle_alcohol,
+          lifestyle_smoking: visitData.lifestyle_smoking,
+          red_flags: visitData.red_flags || [],
+          vac_screening: visitData.vac_screening || {},
+        });
+      }
+    } catch (err: any) {
+      console.error(err);
+      message.error("Không thể tải dữ liệu khám!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- ACTIONS ---
+  const isReadOnly = visit.status === "finished";
+
+  const handleSave = async (status: "in_progress" | "finished" | "ready_for_vaccine") => {
+    if (!user || !user.id) {
+      message.error("Lỗi phiên đăng nhập!");
+      return;
+    }
+    if (loading && !visit.id) return; // Prevent double click
+
+    setLoading(true);
+    try {
+      // [FIX 1]: MERGE DATA ĐỂ TRÁNH NULL (Lấy cái cũ đè cái mới)
+      const flatPayload = {
+        ...visit, // Base data từ DB
+        ...vitals, // Data mới nhập
+        ...clinical, // Data mới nhập
+        status: status,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Cleanup các field không tồn tại trong bảng medical_visits
+      delete (flatPayload as any).id;
+      delete (flatPayload as any).created_at;
+      delete (flatPayload as any).doctor;
+      delete (flatPayload as any).patient;
+      delete (flatPayload as any).prescriptions;
+
+      // [FIX 2]: Lệnh duy nhất - Upsert thông qua RPC
+      const { data } = await safeRpc("create_medical_visit", {
+        p_appointment_id: appointmentId ?? "",
+        p_customer_id: patientInfo?.id,
+        p_data: flatPayload as unknown as import("@/shared/lib/database.types").Json,
+      });
+      
+      const currentVisitId = data;
+
+      // [FIX 3]: CẬP NHẬT STATE NGAY LẬP TỨC
+      setVisit((prev) => ({
+        ...prev,
+        id: currentVisitId,
+        ...flatPayload,
+        status: status,
+      }));
+
+      // [FIX ROUTING]: Thông báo và đá bác sĩ ra ngoài
+      if (status === "finished") {
+        message.success("Đã hoàn thành & Chuyển Dược!");
+      } else if (status === "ready_for_vaccine") {
+        message.success("Bệnh nhân Đủ điều kiện. Đã chuyển sang Trạm Tiêm Chủng!");
+        navigate("/medical/examination"); // Đá bác sĩ về màn hình danh sách chờ
+        return; 
+      } else {
+        message.success("Đã lưu nháp!");
+      }
+    } catch (err: any) {
+      console.error("Save Error:", err);
+      message.error("Lỗi lưu: " + (err.message || "Unknown error"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePrint = () => {
+    if (!patientInfo) return;
+    const printData = {
+      patientInfo: { ...patientInfo },
+      vitals: vitals,
+      clinical: clinical,
+      prescriptionItems: prescriptionItems,
+      doctorName: user?.user_metadata?.full_name || "Bác sĩ chỉ định",
+      visitDate: visit?.created_at || new Date().toISOString(),
+    };
+    printMedicalVisit(printData);
+  };
+
+  const handleScheduleFollowUp = async (_dateStr: string) => {
+    // Logic cũ giữ nguyên
+  };
+
+  // --- API THU TIỀN VÀ KÊ ĐƠN ---
+  const handleCheckoutClinicalServices = async (
+    selectedServicesJson: any[]
+  ) => {
+    if (!appointmentId || !patientInfo)
+      return message.error("Chưa có thông tin khám bệnh/bệnh nhân");
+    if (!selectedServicesJson.length)
+      return message.warning("Chưa chọn dịch vụ nào");
+    setLoading(true);
+    try {
+      await safeRpc("checkout_clinical_services", {
+        p_appointment_id: appointmentId ?? "",
+        p_customer_id: patientInfo.id,
+        p_services: selectedServicesJson as unknown as import("@/shared/lib/database.types").Json,
+      });
+      message.success("Đã tạo phiếu thu tiền thành công!");
+
+      // Reload Cận lâm sàng
+      const { data: requests } = await supabase
+        .from("clinical_service_requests")
+        .select("*")
+        .eq("medical_visit_id", visit.id ?? "");
+      if (requests) setServiceOrders(requests);
+    } catch (err: any) {
+      message.error("Lỗi thu tiền: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSendToPharmacy = async (warehouseId: number) => {
+    if (!appointmentId || !patientInfo)
+      return message.error("Chưa có thông tin khám");
+    if (!prescriptionItems.length) return message.warning("Đơn thuốc trống!");
+    setLoading(true);
+    try {
+      await safeRpc("send_prescription_to_pos", {
+        p_appointment_id: appointmentId ?? "",
+        p_customer_id: patientInfo.id,
+        p_items: prescriptionItems as unknown as import("@/shared/lib/database.types").Json,
+        p_pharmacy_warehouse_id: warehouseId,
+      });
+      message.success("Đã chuyển Đơn tới Quầy Thuốc thành công!");
+      setIsPrescriptionSent(true);
+    } catch (err: any) {
+      message.error("Lỗi gửi toa: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    loading,
+    patientInfo,
+    visit,
+    vitals,
+    setVitals,
+    clinical,
+    setClinical,
+    prescriptionItems,
+    setPrescriptionItems,
+    serviceOrders,
+    setServiceOrders,
+    handleSave,
+    handlePrint,
+    handleScheduleFollowUp,
+    handleCheckoutClinicalServices,
+    handleSendToPharmacy,
+    medicalVisitId: visit.id,
+    isReadOnly,
+    isPrescriptionSent,
+    prePurchasedVaccines,
+    pharmacyWarehouses,
+    selectedPharmacy,
+    setSelectedPharmacy,
+  };
+};

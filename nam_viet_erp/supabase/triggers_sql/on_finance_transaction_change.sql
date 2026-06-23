@@ -1,0 +1,1 @@
+CREATE TRIGGER on_finance_transaction_change AFTER INSERT OR DELETE OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION handle_fund_balance_update()

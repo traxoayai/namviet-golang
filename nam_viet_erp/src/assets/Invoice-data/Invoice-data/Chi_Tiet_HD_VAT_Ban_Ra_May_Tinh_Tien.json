@@ -1,0 +1,417 @@
+{
+  "nbmst": "4900886412",
+  "khmshdon": 1,
+  "khhdon": "C26MYH",
+  "shdon": 315,
+  "cqt": "2012",
+  "cttkhac": [
+    {
+      "ttruong": "InvoiceTemplateID",
+      "kdlieu": "string",
+      "dlieu": "854100fc-9eb3-4028-8ca8-9f122addad31"
+    },
+    {
+      "ttruong": "IsTaxReduction",
+      "kdlieu": "numeric",
+      "dlieu": "False"
+    },
+    {
+      "ttruong": "IsTaxReduction43",
+      "kdlieu": "numeric",
+      "dlieu": "False"
+    },
+    {
+      "ttruong": "RefID",
+      "kdlieu": "string",
+      "dlieu": "c9819a0c-ad0d-4e4e-b9e8-1d3cb2bb298e"
+    },
+    {
+      "ttruong": "AmountDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "0"
+    },
+    {
+      "ttruong": "AmountOCDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "CoefficientDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "ExchangRateDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "MainCurrency",
+      "kdlieu": "string",
+      "dlieu": "VND"
+    },
+    {
+      "ttruong": "QuantityDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "UnitPriceDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "UnitPriceOCDecimalDigits",
+      "kdlieu": "string",
+      "dlieu": "2"
+    },
+    {
+      "ttruong": "AppID",
+      "kdlieu": "string",
+      "dlieu": "F7E8D7E5-BB5A-421B-8B39-D3A35D661F08"
+    },
+    {
+      "ttruong": "TransactionID",
+      "kdlieu": "string",
+      "dlieu": "3VFJSKMLRDQG"
+    }
+  ],
+  "hdon": "01",
+  "hsgoc": "cf50bcae-a851-48f3-9637-016d857b6995",
+  "hthdon": 5,
+  "id": "fffe7210-e7bf-4c67-9799-22a2426c8871",
+  "idtbao": null,
+  "idtbhgthdon": null,
+  "idtbhgtrinh": null,
+  "khhdgoc": null,
+  "khmshdgoc": null,
+  "lhdgoc": null,
+  "mhdon": "M1-26-DNHKC-00000000875",
+  "mtdtchieu": "V01012431503242BCBBFCC249558B1E135509634417",
+  "nbdchi": "Số 17, đường Bắc Sơn, khu An Ninh, Xã Hữu Lũng, Lạng Sơn, Việt Nam.",
+  "nbten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+  "ncnhat": "2026-06-19T14:51:47.146Z",
+  "ngcnhat": null,
+  "nky": null,
+  "nmmst": null,
+  "nmten": null,
+  "nmtnmua": "Khách lẻ không cung cấp thông tin",
+  "ntao": "2026-06-19T14:51:47.146Z",
+  "ntnhan": "2026-06-19T14:26:40.293Z",
+  "pban": "2.1.0",
+  "ptgui": 1,
+  "shdgoc": null,
+  "tchat": 1,
+  "tdlap": "2026-06-18T17:00:00Z",
+  "tgtcthue": 38095.0,
+  "tgtthue": 1905.0,
+  "tgtttbchu": "Bốn mươi nghìn đồng.",
+  "tgtttbso": 40000.0,
+  "thdon": "Hóa đơn GTGT khởi tạo từ máy tính tiền",
+  "thlap": 202606,
+  "thttltsuat": [
+    {
+      "tsuat": "5%",
+      "thtien": 38095.0,
+      "tthue": 1905.0,
+      "gttsuat": null
+    }
+  ],
+  "tlhdon": "Hóa đơn GTGT khởi tạo từ máy tính tiền",
+  "ttcktmai": 0.0,
+  "tthai": 1,
+  "tttbao": 0,
+  "ttttkhac": [
+    {
+      "ttruong": "TotalAmount",
+      "kdlieu": "numeric",
+      "dlieu": "40000.0"
+    },
+    {
+      "ttruong": "TotalAmountInWordsByENG",
+      "kdlieu": "string",
+      "dlieu": "Forty thousand dong."
+    },
+    {
+      "ttruong": "TotalAmountInWordsVN",
+      "kdlieu": "string",
+      "dlieu": "Bốn mươi nghìn đồng."
+    },
+    {
+      "ttruong": "TotalAmountWithoutVAT",
+      "kdlieu": "numeric",
+      "dlieu": "38095.0"
+    },
+    {
+      "ttruong": "TotalAmountWithoutVATOC",
+      "kdlieu": "numeric",
+      "dlieu": "38095.0"
+    },
+    {
+      "ttruong": "TotalSaleAmount",
+      "kdlieu": "numeric",
+      "dlieu": "38095.0"
+    },
+    {
+      "ttruong": "TotalSaleAmountOC",
+      "kdlieu": "numeric",
+      "dlieu": "38095.0"
+    },
+    {
+      "ttruong": "TotalVATAmount",
+      "kdlieu": "numeric",
+      "dlieu": "1905.0"
+    },
+    {
+      "ttruong": "TotalAmountOC",
+      "kdlieu": "numeric",
+      "dlieu": "40000.0"
+    },
+    {
+      "ttruong": "TotalVATAmountOC",
+      "kdlieu": "numeric",
+      "dlieu": "1905.0"
+    }
+  ],
+  "ttxly": 8,
+  "tvandnkntt": "0101243150",
+  "ladhddt": 1,
+  "nbsdthoai": "0585123888",
+  "nbcks": null,
+  "nmsdthoai": null,
+  "nmcccd": null,
+  "bhphap": 0,
+  "gchdgoc": null,
+  "tbhgtngay": null,
+  "bhpldo": null,
+  "bhpcbo": null,
+  "bhpngay": null,
+  "tdlhdgoc": null,
+  "tentvandnkntt": "tvan_misa",
+  "kqcht": null,
+  "nbttkhac": [
+    {
+      "ttruong": "SellerAddress",
+      "kdlieu": "string",
+      "dlieu": "Số 17, đường Bắc Sơn, khu An Ninh, Xã Hữu Lũng, Lạng Sơn, Việt Nam."
+    },
+    {
+      "ttruong": "SellerBankAccount",
+      "kdlieu": "string",
+      "dlieu": "111610908688"
+    },
+    {
+      "ttruong": "SellerBankName",
+      "kdlieu": "string",
+      "dlieu": "TMCP Công Thương Việt Nam Vietinbank"
+    },
+    {
+      "ttruong": "SellerEmail",
+      "kdlieu": "string",
+      "dlieu": "hoadon.namviet.co@gmail.com"
+    },
+    {
+      "ttruong": "SellerFax",
+      "kdlieu": "string",
+      "dlieu": "0585123888"
+    },
+    {
+      "ttruong": "SellerPhoneNumber",
+      "kdlieu": "string",
+      "dlieu": "0585123888"
+    },
+    {
+      "ttruong": "SellerWebsite",
+      "kdlieu": "string",
+      "dlieu": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT"
+    }
+  ],
+  "nmttkhac": [],
+  "ttkhac": [
+    {
+      "ttruong": "StockTotalAmount",
+      "kdlieu": "numeric",
+      "dlieu": "40000.0"
+    },
+    {
+      "ttruong": "StockTotalAmountOC",
+      "kdlieu": "numeric",
+      "dlieu": "40000.0"
+    }
+  ],
+  "nmloai": null,
+  "tghdmman": 0,
+  "tghdmmldo": null,
+  "cnhan": null,
+  "kqchtmloi": [],
+  "nmdchi": null,
+  "chma": null,
+  "chten": null,
+  "nmshchieu": null,
+  "nbstkhoan": "111610908688",
+  "nbtnhang": "TMCP Công Thương Việt Nam Vietinbank",
+  "nmhvtnmhang": null,
+  "thtttoan": "Chuyển khoản",
+  "nmmdvqhnsach": null,
+  "dksbke": null,
+  "dknlbke": null,
+  "hdhhdvu": [
+    {
+      "idhdon": "fffe7210-e7bf-4c67-9799-22a2426c8871",
+      "id": "c3b4c188-bfbc-4e3b-a6f6-951089b2a7f0",
+      "dgia": 14285.0,
+      "dvtinh": "Túi",
+      "ltsuat": "5%",
+      "mhhdvu": "375",
+      "sluong": 1.0,
+      "stbchu": null,
+      "stckhau": 0.0,
+      "stt": 1,
+      "sxep": 1,
+      "tchat": 1,
+      "ten": "Dán hạ sốt Aikido Tartra",
+      "thtcthue": null,
+      "thtien": 14285.0,
+      "tlckhau": 0.0,
+      "tsuat": 0.05,
+      "tthue": null,
+      "ttkhac": [
+        {
+          "ttruong": "Amount",
+          "kdlieu": "numeric",
+          "dlieu": "14285.0"
+        },
+        {
+          "ttruong": "AmountOC",
+          "kdlieu": "numeric",
+          "dlieu": "14285.0"
+        },
+        {
+          "ttruong": "AmountWithoutVATOC",
+          "kdlieu": "numeric",
+          "dlieu": "14285.0"
+        },
+        {
+          "ttruong": "DiscountAmount",
+          "kdlieu": "numeric",
+          "dlieu": "0.0"
+        },
+        {
+          "ttruong": "ExpiryDate",
+          "kdlieu": "date",
+          "dlieu": "2028-09-29"
+        },
+        {
+          "ttruong": "SortOrder",
+          "kdlieu": "numeric",
+          "dlieu": "1"
+        },
+        {
+          "ttruong": "UnitPrice",
+          "kdlieu": "numeric",
+          "dlieu": "14285.0"
+        },
+        {
+          "ttruong": "VATAmount",
+          "kdlieu": "numeric",
+          "dlieu": "714.0"
+        },
+        {
+          "ttruong": "VATAmountOC",
+          "kdlieu": "numeric",
+          "dlieu": "714.0"
+        }
+      ],
+      "tthhdtrung": []
+    },
+    {
+      "idhdon": "fffe7210-e7bf-4c67-9799-22a2426c8871",
+      "id": "097324f8-70c5-42dd-9dfe-56e2f9eb777f",
+      "dgia": 23809.52,
+      "dvtinh": "Hộp",
+      "ltsuat": "5%",
+      "mhhdvu": "583",
+      "sluong": 1.0,
+      "stbchu": null,
+      "stckhau": 0.0,
+      "stt": 2,
+      "sxep": 2,
+      "tchat": 1,
+      "ten": "Tẩy giun Fugacar Janssen",
+      "thtcthue": null,
+      "thtien": 23810.0,
+      "tlckhau": 0.0,
+      "tsuat": 0.05,
+      "tthue": null,
+      "ttkhac": [
+        {
+          "ttruong": "Amount",
+          "kdlieu": "numeric",
+          "dlieu": "23810.0"
+        },
+        {
+          "ttruong": "AmountOC",
+          "kdlieu": "numeric",
+          "dlieu": "23810.0"
+        },
+        {
+          "ttruong": "AmountWithoutVATOC",
+          "kdlieu": "numeric",
+          "dlieu": "23810.0"
+        },
+        {
+          "ttruong": "DiscountAmount",
+          "kdlieu": "numeric",
+          "dlieu": "0.0"
+        },
+        {
+          "ttruong": "ExpiryDate",
+          "kdlieu": "date",
+          "dlieu": "2028-09-29"
+        },
+        {
+          "ttruong": "InventoryItemCategoryCode",
+          "kdlieu": "string",
+          "dlieu": "HH"
+        },
+        {
+          "ttruong": "InventoryItemCategoryName",
+          "kdlieu": "string",
+          "dlieu": "Hàng hóa"
+        },
+        {
+          "ttruong": "SortOrder",
+          "kdlieu": "numeric",
+          "dlieu": "2"
+        },
+        {
+          "ttruong": "UnitPrice",
+          "kdlieu": "numeric",
+          "dlieu": "23809.52"
+        },
+        {
+          "ttruong": "VATAmount",
+          "kdlieu": "numeric",
+          "dlieu": "1191.0"
+        },
+        {
+          "ttruong": "VATAmountOC",
+          "kdlieu": "numeric",
+          "dlieu": "1191.0"
+        }
+      ],
+      "tthhdtrung": []
+    }
+  ],
+  "qrcode": "00020101021202000400260052005300540058005900600062009963000001104900886412020110306C26MYH0403315050820260619060740000.0",
+  "ttmstten": null,
+  "ladhddtten": null,
+  "hdxkhau": null,
+  "hdxkptquan": null,
+  "hdgktkhthue": null,
+  "hdonLquans": null,
+  "tthdclquan": false,
+  "pdndungs": null,
+  "mtthdtbssrs": null,
+  "tcsvhdChinh": null
+}

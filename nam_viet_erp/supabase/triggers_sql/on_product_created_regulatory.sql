@@ -1,0 +1,1 @@
+CREATE TRIGGER on_product_created_regulatory AFTER INSERT ON public.products FOR EACH ROW EXECUTE FUNCTION create_product_regulatory_row()

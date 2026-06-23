@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_task_notify AFTER UPDATE OF status ON public.tasks FOR EACH ROW EXECUTE FUNCTION fn_task_status_notify()

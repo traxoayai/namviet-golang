@@ -1,0 +1,192 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* --- POS VOUCHER ANIMATIONS --- */
+@keyframes neon-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0.4);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(114, 46, 209, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0);
+    transform: scale(1);
+  }
+}
+
+.voucher-btn-glow {
+  animation: neon-pulse 2s infinite;
+  background-color: #f9f0ff !important; /* Tím nhạt nền */
+  border-color: #722ed1 !important;      /* Viền tím đậm */
+  color: #722ed1 !important;
+  font-weight: 600 !important;
+  transition: all 0.3s;
+}
+
+.voucher-btn-glow:hover {
+  background-color: #efdbff !important;
+}
+
+/* Style cho Badge số lượng */
+.voucher-badge .ant-badge-count {
+  background-color: #722ed1; 
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+/* --- POS VOUCHER ANIMATIONS --- */
+@keyframes neon-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0.4);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(114, 46, 209, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0);
+    transform: scale(1);
+  }
+}
+
+.voucher-btn-glow {
+  animation: neon-pulse 2s infinite;
+  background-color: #f9f0ff !important; /* Tím nhạt nền */
+  border-color: #722ed1 !important;      /* Viền tím đậm */
+  color: #722ed1 !important;
+  font-weight: 600 !important;
+  transition: all 0.3s;
+}
+
+.voucher-btn-glow:hover {
+  background-color: #efdbff !important;
+}
+
+/* Style cho Badge số lượng */
+.voucher-badge .ant-badge-count {
+  background-color: #722ed1; 
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+/* --- POS VOUCHER ANIMATIONS --- */
+@keyframes neon-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0.4);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(114, 46, 209, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0);
+    transform: scale(1);
+  }
+}
+
+.voucher-btn-glow {
+  animation: neon-pulse 2s infinite;
+  background-color: #f9f0ff !important; /* Tím nhạt nền */
+  border-color: #722ed1 !important;      /* Viền tím đậm */
+  color: #722ed1 !important;
+  font-weight: 600 !important;
+  transition: all 0.3s;
+}
+
+.voucher-btn-glow:hover {
+  background-color: #efdbff !important;
+}
+
+/* Style cho Badge số lượng */
+.voucher-badge .ant-badge-count {
+  background-color: #722ed1; 
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+/* --- ROW FLASH ANIMATION --- */
+@keyframes flashRow {
+  0% { background-color: #e6f7ff; }
+  100% { background-color: transparent; }
+}
+.flash-row {
+  animation: flashRow 1.5s ease-out;
+}
+
+/* --- UI OVERRIDES --- */
+.dosage-select-no-right-radius .ant-select-selector {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.huge-input-number-centered .ant-input-number-input {
+  text-align: center !important;
+}

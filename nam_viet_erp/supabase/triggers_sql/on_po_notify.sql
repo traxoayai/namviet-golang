@@ -1,0 +1,1 @@
+CREATE TRIGGER on_po_notify AFTER INSERT OR UPDATE ON public.purchase_orders FOR EACH ROW EXECUTE FUNCTION trigger_notify_warehouse_po()

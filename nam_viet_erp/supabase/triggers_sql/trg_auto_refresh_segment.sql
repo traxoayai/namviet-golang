@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_auto_refresh_segment AFTER UPDATE ON public.customer_segments FOR EACH ROW EXECUTE FUNCTION trigger_refresh_on_criteria_change()

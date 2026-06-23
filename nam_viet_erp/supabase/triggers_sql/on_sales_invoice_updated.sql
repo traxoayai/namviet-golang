@@ -1,0 +1,1 @@
+CREATE TRIGGER on_sales_invoice_updated BEFORE UPDATE ON public.sales_invoices FOR EACH ROW EXECUTE FUNCTION handle_updated_at()

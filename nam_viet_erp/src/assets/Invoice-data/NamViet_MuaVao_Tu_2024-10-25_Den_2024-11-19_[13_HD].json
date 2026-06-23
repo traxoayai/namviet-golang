@@ -1,0 +1,4113 @@
+[
+  {
+    "nbmst": "0106671946",
+    "khmshdon": 1,
+    "khhdon": "C24TPM",
+    "shdon": 488,
+    "cqt": "0109",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "ca319d03-3255-4a57-9858-2a2dadb9eaec",
+    "hsgoc": "13f1be29-12de-4513-a92a-1cfd3758ebe0",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "7219e2a4-cef3-4be8-bfa8-16ac72390570",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00E48D0EDAA01342F1A2D8DC3DF6C261B3",
+    "mtdiep": null,
+    "mtdtchieu": "V0102519041EF3A6230A64D11EF8E685B3BC2ABB60A",
+    "nbdchi": "Số 51, Ngách 99/120 Định Công, Phường Định Công, Quận Hoàng Mai, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH TRANG THIẾT BỊ Y TẾ PHÚC MINH",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-11-19T08:11:54.178Z",
+    "ncnhat": "2024-11-19T08:11:54.184Z",
+    "ngcnhat": "tvan_efy",
+    "nky": "2024-11-19T08:11:51Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-19T08:11:54.148Z",
+    "ntnhan": "2024-11-19T08:11:54.120Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-18T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 125000,
+    "tgtthue": 6250,
+    "tgtttbchu": "Một trăm ba mươi mốt nghìn hai trăm năm mươi đồng chẵn.",
+    "tgtttbso": 131250,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 125000,
+        "tthue": 6250,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0102519041",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "4900886412",
+    "nbsdthoai": "0978299688",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"UID=MST:0106671946, CN=Công Ty TNHH Trang Thiết Bị Y Tế Phúc Minh, ST=THÀNH PHỐ HÀ NỘI, C=VN\",\"SerialNumber\":\"540101043EFFC4C1E095E23D480538B5\",\"Issuer\":\"CN=FPT Certification Authority SHA256, OU=FPT Information System, O=FPT Corporation, ST=Hà Nội, C=VN\",\"NotAfter\":\"2025-04-17T10:35:30\",\"NotBefore\":\"2021-12-31T04:21:30\",\"SigningTime\":\"2024-11-19T15:11:51\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": "hoadon.namviet.co@gmail.com",
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0102519041",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-19T15:11:54\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "7219e2a4-cef3-4be8-bfa8-16ac72390570",
+        "id": "f34406d9-3dd1-413e-a287-bb97ddb2bebb",
+        "dgia": 25000,
+        "dvtinh": "Chiếc",
+        "ltsuat": "5%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Garo - Dây garo có khóa",
+        "thtcthue": null,
+        "thtien": 125000,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0106671946",
+    "khmshdon": 1,
+    "khhdon": "C24TPM",
+    "shdon": 489,
+    "cqt": "0109",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "a1216e6b-d97f-4699-9691-5037e2f1e060",
+    "hsgoc": "e7d7c911-e1ac-4c11-8d58-87ada55608ce",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "3aab6a2b-e72a-4818-b6ee-9f71b3189bc7",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00CCBD32A2FFF24831A7D805A262EEE221",
+    "mtdiep": null,
+    "mtdtchieu": "V01025190414DA16420A64E11EFAD60439B69BAE71F",
+    "nbdchi": "Số 51, Ngách 99/120 Định Công, Phường Định Công, Quận Hoàng Mai, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH TRANG THIẾT BỊ Y TẾ PHÚC MINH",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-11-19T08:14:36.452Z",
+    "ncnhat": "2024-11-19T08:14:36.458Z",
+    "ngcnhat": "tvan_efy",
+    "nky": "2024-11-19T08:14:30Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-19T08:14:36.399Z",
+    "ntnhan": "2024-11-19T08:14:32.484Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-18T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 1500000,
+    "tgtthue": 120000,
+    "tgtttbchu": "Một triệu sáu trăm hai mươi nghìn đồng chẵn.",
+    "tgtttbso": 1620000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "8%",
+        "thtien": 1500000,
+        "tthue": 120000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0102519041",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "4900886412",
+    "nbsdthoai": "0978299688",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"UID=MST:0106671946, CN=Công Ty TNHH Trang Thiết Bị Y Tế Phúc Minh, ST=THÀNH PHỐ HÀ NỘI, C=VN\",\"SerialNumber\":\"540101043EFFC4C1E095E23D480538B5\",\"Issuer\":\"CN=FPT Certification Authority SHA256, OU=FPT Information System, O=FPT Corporation, ST=Hà Nội, C=VN\",\"NotAfter\":\"2025-04-17T10:35:30\",\"NotBefore\":\"2021-12-31T04:21:30\",\"SigningTime\":\"2024-11-19T15:14:30\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": "hoadon.namviet.co@gmail.com",
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0102519041",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-19T15:14:36\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "3aab6a2b-e72a-4818-b6ee-9f71b3189bc7",
+        "id": "e6714337-769c-439d-b3f0-fb1bf387ceb9",
+        "dgia": 550000,
+        "dvtinh": "Cái",
+        "ltsuat": "8%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Cáng bạt",
+        "thtcthue": null,
+        "thtien": 550000,
+        "tlckhau": null,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "3aab6a2b-e72a-4818-b6ee-9f71b3189bc7",
+        "id": "dabce609-8fbc-4d10-9637-8a29160dfd50",
+        "dgia": 400000,
+        "dvtinh": "Cái",
+        "ltsuat": "8%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Bảng đo thị lực",
+        "thtcthue": null,
+        "thtien": 400000,
+        "tlckhau": null,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "3aab6a2b-e72a-4818-b6ee-9f71b3189bc7",
+        "id": "4e5efb2c-c1e4-4f92-ab30-82132c461a78",
+        "dgia": 550000,
+        "dvtinh": "Cái",
+        "ltsuat": "8%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Xe đẩy tiêm 2 tầng",
+        "thtcthue": null,
+        "thtien": 550000,
+        "tlckhau": null,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0102727210",
+    "khmshdon": 1,
+    "khhdon": "C24TMB",
+    "shdon": 124866,
+    "cqt": "0103",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "a3cea376-a650-490c-b706-1850a188d47c",
+    "hsgoc": "cca008ec-a973-4deb-9375-5d2cee48a36b",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "22247aea-d799-40b6-8acd-4eda0bc5af50",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "004B9BF0A42DFE4106A17455A59DA4726C",
+    "mtdiep": null,
+    "mtdtchieu": "V0100684378B94AE3D34AF84885A4DC649183481D63",
+    "nbdchi": "Số 5 Láng Hạ - Phường Thành Công - Quận Ba Đình - Hà Nội",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "2220792182",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM SOHACO MIỀN BẮC",
+    "nbtnhang": "Ngân hàng TMCP ĐT và PTVN Chi nhánh Thanh Xuân",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "string",
+        "dlieu": "2925714"
+      }
+    ],
+    "ncma": "2024-11-16T02:25:50.799Z",
+    "ncnhat": "2024-11-16T02:25:50.808Z",
+    "ngcnhat": "tvan_buuchinhvt",
+    "nky": "2024-11-16T02:25:50Z",
+    "nmdchi": "Số 14, đường Tôn Thất Tùng, khu An Ninh, thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược- Thiết bị y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [
+      {
+        "ttruong": "Extra6",
+        "kdlieu": "string",
+        "dlieu": "12.2555444_1"
+      }
+    ],
+    "ntao": "2024-11-16T02:25:50.752Z",
+    "ntnhan": "2024-11-16T02:25:50.724Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-15T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 2925714,
+    "tgtthue": 146286,
+    "tgtttbchu": "Ba triệu, không trăm bẩy mươi hai ngàn    đồng",
+    "tgtttbso": 3072000,
+    "thdon": "Hóa đơn GTGT",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 2925714,
+        "tthue": 146286,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn GTGT",
+    "ttcktmai": null,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Extra1",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "Extra2",
+        "kdlieu": "string",
+        "dlieu": "0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0100684378",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "MKH10106093",
+    "nbsdthoai": "024.7304.9669",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0102727210, CN=CÔNG TY CỔ PHẦN DƯỢC PHẨM SOHACO MIỀN BẮC, O=CÔNG TY CỔ PHẦN DƯỢC PHẨM SOHACO MIỀN BẮC, L=Quận Ba Đình, S=HÀ NỘI, C=VN\",\"SerialNumber\":\"54010101F053F9D622AA4B982AD47475\",\"Issuer\":\"CN=VNPT-CA SHA-256, O=VIETNAM POSTS AND TELECOMMUNICATIONS GROUP, C=VN\",\"NotAfter\":\"2025-07-28T11:09:47\",\"NotBefore\":\"2024-05-22T08:52:00\",\"SigningTime\":\"2024-11-16T09:25:50\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0100684378",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-16T09:25:50\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "22247aea-d799-40b6-8acd-4eda0bc5af50",
+        "id": "f3c9ee4b-9b88-427e-a61c-bcc01ba345cb",
+        "dgia": 73142.857,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 40,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Prospan Cough Syrup 100ml",
+        "thtcthue": null,
+        "thtien": 2925714,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "3072000"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "146286"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "23N133A-31/12/2026"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104224702",
+    "khmshdon": 1,
+    "khhdon": "C24TDG",
+    "shdon": 1608,
+    "cqt": "0156",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "06ce1490-e4ab-4554-87da-2fa89f26ad24",
+    "hsgoc": "f16955c0-48fe-49af-a907-51e9fd112cda",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "f2424d28-66c7-4320-969a-f7e64ccc841e",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "003B5C65A6528F49C2AC565662A47ABB14",
+    "mtdiep": null,
+    "mtdtchieu": "V01013606970E9847CB2297443C9EF895D9DDEB7FC3",
+    "nbdchi": "Tầng 4, tháp CEO, HH2-1 đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM DGC",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-11-15T09:37:32.976Z",
+    "ncnhat": "2024-11-15T09:37:32.982Z",
+    "ngcnhat": "tvan_bkav",
+    "nky": "2024-11-15T09:37:13Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng-Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmttkhac": [],
+    "ntao": "2024-11-15T09:37:32.948Z",
+    "ntnhan": "2024-11-15T09:37:32.441Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-14T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 8500000,
+    "tgtthue": 425000,
+    "tgtttbchu": "Tám triệu chín trăm hai mươi lăm nghìn đồng chẵn./.",
+    "tgtttbso": 8925000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 8500000,
+        "tthue": 425000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101360697",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN, ST=Hà Nội, CN=Công Ty Cổ Phần Dược Phẩm DGC, UID=MST:0104224702\",\"SerialNumber\":\"5403239F06ABEAFAA3134F519BA8D540\",\"Issuer\":\"CN=BkavCA SHA256, O=Bkav Corporation, C=VN\",\"NotAfter\":\"2029-05-09T03:33:06\",\"NotBefore\":\"2024-05-13T04:54:41\",\"SigningTime\":\"2024-11-15T16:37:13\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101360697",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-15T16:37:32\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "f2424d28-66c7-4320-969a-f7e64ccc841e",
+        "id": "5ea00eb7-5c04-4226-9a81-79fc7709ea5d",
+        "dgia": 170000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Augmetin 500mg (bột)",
+        "thtcthue": null,
+        "thtien": 8500000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104224702",
+    "khmshdon": 1,
+    "khhdon": "C24TDG",
+    "shdon": 1601,
+    "cqt": "0156",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "a65fba96-fcfe-4f42-afa1-21df0cb5fa75",
+    "hsgoc": "cbdd2926-dab4-4563-9571-5e625235d50b",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "004ED422B2A6A645F8968C5F3F37CE54AF",
+    "mtdiep": null,
+    "mtdtchieu": "V010136069728A05B6D167B4C828808B5232949B721",
+    "nbdchi": "Tầng 4, tháp CEO, HH2-1 đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM DGC",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-11-14T09:18:11.345Z",
+    "ncnhat": "2024-11-14T09:18:11.352Z",
+    "ngcnhat": "tvan_bkav",
+    "nky": "2024-11-14T09:17:59Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng-Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmttkhac": [],
+    "ntao": "2024-11-14T09:18:11.311Z",
+    "ntnhan": "2024-11-14T09:18:11.275Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-13T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 16074000,
+    "tgtthue": 803700,
+    "tgtttbchu": "Mười sáu triệu tám trăm bảy mươi bảy nghìn bảy trăm đồng chẵn./.",
+    "tgtttbso": 16877700,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 16074000,
+        "tthue": 803700,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101360697",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN, ST=Hà Nội, CN=Công Ty Cổ Phần Dược Phẩm DGC, UID=MST:0104224702\",\"SerialNumber\":\"5403239F06ABEAFAA3134F519BA8D540\",\"Issuer\":\"CN=BkavCA SHA256, O=Bkav Corporation, C=VN\",\"NotAfter\":\"2029-05-09T03:33:06\",\"NotBefore\":\"2024-05-13T04:54:41\",\"SigningTime\":\"2024-11-14T16:17:59\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101360697",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-14T16:18:11\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "5ed38208-9c69-40d9-91e4-32c225177b73",
+        "dgia": 120000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Augmetin 250mg bột",
+        "thtcthue": null,
+        "thtien": 6000000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "2dbc57c9-2e98-4df9-8522-7c6c85eb0759",
+        "dgia": 148000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 3,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Enterogenina",
+        "thtcthue": null,
+        "thtien": 444000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "c6c32f55-c8f2-48e4-b931-ba26ea20391a",
+        "dgia": 24000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Bổ phế ngậm viên NH",
+        "thtcthue": null,
+        "thtien": 480000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "baab0bc9-c046-4ea8-9221-416226dfc1dd",
+        "dgia": 108000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Zithromax SR 200mg",
+        "thtcthue": null,
+        "thtien": 5400000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "82967d5f-d320-4dfe-94e6-044eac16e4a9",
+        "dgia": 450000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Avodart 0,5mg H30",
+        "thtcthue": null,
+        "thtien": 2250000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "173c5049-cc10-4bba-8aa3-8df00a6fbeee",
+        "dgia": 21000,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "Atussin 60ml UNT",
+        "thtcthue": null,
+        "thtien": 420000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "c95357c4-e645-4f8f-8137-6ab5c18b60f7",
+        "id": "8ec03889-951f-481a-8f18-7b204ec551e7",
+        "dgia": 216000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "Panadol extra H180",
+        "thtcthue": null,
+        "thtien": 1080000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104563656",
+    "khmshdon": 1,
+    "khhdon": "C24TVI",
+    "shdon": 1601,
+    "cqt": "0108",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "03e42351-1e03-4eb6-881b-50cc210680e3"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "e371437c-c2f8-48a2-9f31-32e230c28f3e"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "4"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "F7E8D7E5-BB5A-421B-8B39-D3A35D661F08"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "59CAH697QLNM"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "c629fe38-5b2f-4dce-a617-741bbe925c10",
+    "hsgoc": "86cf0d4d-155b-42de-9a79-064b1d2c7d45",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "ba58d89f-f8d9-439f-b98f-b91339e2a984",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00580E35CF4E80412784EE3AA013364734",
+    "mtdiep": null,
+    "mtdtchieu": "V01012431502C53D204C9C348FDB86299AC7E6E4BCD",
+    "nbdchi": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0551101405008",
+    "nbten": "CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á",
+    "nbtnhang": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "0551101405008"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội"
+      },
+      {
+        "ttruong": "SellerEmail",
+        "kdlieu": "string",
+        "dlieu": "admin@vietainter.vn"
+      },
+      {
+        "ttruong": "SellerPhoneNumber",
+        "kdlieu": "string",
+        "dlieu": "02436462689"
+      }
+    ],
+    "ncma": "2024-11-13T02:16:24.026Z",
+    "ncnhat": "2024-11-13T02:16:24.034Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-11-13T02:16:21Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-13T02:16:23.981Z",
+    "ntnhan": "2024-11-13T02:16:23.954Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-12T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 11446857,
+    "tgtthue": 572343,
+    "tgtttbchu": "Mười hai triệu không trăm mười chín nghìn hai trăm đồng chẵn.",
+    "tgtttbso": 12019200,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 11446857,
+        "tthue": 572343,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ExciseTaxAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ExciseTaxAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ExciseTaxRate",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ReturnTicketAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ReturnTicketAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "StockTotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "StockTotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Twelve million, nineteen thousand, two hundred dong."
+      },
+      {
+        "ttruong": "TotalAmountInWordsVN",
+        "kdlieu": "string",
+        "dlieu": "Mười hai triệu không trăm mười chín nghìn hai trăm đồng chẵn."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "572343.0"
+      },
+      {
+        "ttruong": "TotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "TotalVATAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "572343.0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "LS0033",
+    "nbsdthoai": "02436462689",
+    "nbdctdtu": "admin@vietainter.vn",
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"E=VIETA@GMAIL.COM, OID.0.9.2342.19200300.100.1.1=MST:0104563656, CN=CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á, L=HÀ NỘI, C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201BBDE19D\",\"Issuer\":\"CN=Viettel-CA SHA-256, O=Viettel Group, C=VN\",\"NotAfter\":\"2025-09-24T10:41:11\",\"NotBefore\":\"2024-04-16T10:13:54\",\"SigningTime\":\"2024-11-13T09:16:21\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-13T09:16:24\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "ba58d89f-f8d9-439f-b98f-b91339e2a984",
+        "id": "7b882946-72f1-4800-ab09-e9addbcaab2e",
+        "dgia": 2384.7619,
+        "dvtinh": "Viên",
+        "ltsuat": "5%",
+        "sluong": 4800,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Sastan - H",
+        "thtcthue": null,
+        "thtien": 11446857,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "ExpiryDate",
+            "kdlieu": "date",
+            "dlieu": "2026-03-22"
+          },
+          {
+            "ttruong": "InventoryItemCategoryCode",
+            "kdlieu": "string",
+            "dlieu": "HH"
+          },
+          {
+            "ttruong": "InventoryItemCategoryName",
+            "kdlieu": "string",
+            "dlieu": "Hàng hóa"
+          },
+          {
+            "ttruong": "InventoryItemSource",
+            "kdlieu": "string",
+            "dlieu": "India"
+          },
+          {
+            "ttruong": "LotNo",
+            "kdlieu": "string",
+            "dlieu": "SHT6011 - India"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "TaxReduction43Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReduction43AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "2384.7619"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "572343.0"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "572343.0"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0106025149",
+    "khmshdon": 1,
+    "khhdon": "C24TYY",
+    "shdon": 2359,
+    "cqt": "0109",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "60864208-e440-4482-af03-ba674bc7b885"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "dd03a6cf-9a0d-4293-a809-84d47cce9532"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "2AC7D9700E1A472895FC8FC2CE91BD07"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "KEC0HLJ1Z08E"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "f83d250e-7d08-405c-a7f1-2895eda50b7c",
+    "hsgoc": "681d93f5-fda5-4d3b-9889-84639dd5973d",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "dfcae50a-0a4f-47e3-9792-384489146fcf",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00A5F28C25A4964EECB36A50891C3CBC42",
+    "mtdiep": null,
+    "mtdtchieu": "V010124315020E50A4E66A44BC297885CEC8B28E534",
+    "nbdchi": "Số 9 ngách 2 ngõ 115 Nguyễn Văn Trỗi, Phường Định Công, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "100114851043922",
+    "nbten": "CÔNG TY TNHH NC VIỆT NAM",
+    "nbtnhang": "Ngân hàng TMCP Xuất nhập khẩu Việt Nam ( Eximbank)",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "CompanyBankNameWithBranch",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Xuất nhập khẩu Việt Nam ( Eximbank) - CN Hà Nội"
+      },
+      {
+        "ttruong": "CompanyBranchBankName",
+        "kdlieu": "string",
+        "dlieu": "CN Hà Nội"
+      },
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số 9 ngách 2 ngõ 115 Nguyễn Văn Trỗi, Phường Định Công, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "100114851043922"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Xuất nhập khẩu Việt Nam ( Eximbank)"
+      }
+    ],
+    "ncma": "2024-11-11T09:23:07.904Z",
+    "ncnhat": "2024-11-11T09:23:07.926Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-11-11T09:23:04Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-11T09:23:07.871Z",
+    "ntnhan": "2024-11-11T09:23:07.565Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-10T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 4614280,
+    "tgtthue": 230714,
+    "tgtttbchu": "Bốn triệu tám trăm bốn mươi bốn nghìn chín trăm chín mươi bốn đồng.",
+    "tgtttbso": 4844994,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 4614280,
+        "tthue": 230714,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ListStockAddress",
+        "kdlieu": "string",
+        "dlieu": "105 Phương Mai - P Phương Mai - Đống Đa - Hà Nội"
+      },
+      {
+        "ttruong": "ListStockName",
+        "kdlieu": "string",
+        "dlieu": "Kho NC"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "4844994.0000"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Four million, eight hundred forty-four thousand, nine hundred ninety-four dong."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "4614280.00000000"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "4614280.0000"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0000"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0000"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "4614280.0000"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "4614280.0000"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "230714.0000"
+      },
+      {
+        "ttruong": "TotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "4844994.0000"
+      },
+      {
+        "ttruong": "TotalVATAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "230714.0000"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "1516",
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0106025149, CN=CÔNG TY TNHH NC VIỆT NAM, O=CÔNG TY TNHH NC VIỆT NAM, L=\\\"Số 508, ngõ 115 Nguyễn Văn Trỗi - Phường Định Công - Quận Hoàng Mai\\\", S=Hà Nội, C=VN\",\"SerialNumber\":\"54010AF23362FFCD8CF8B0E92166CBF8\",\"Issuer\":\"CN=EFY-CA, OU=EFY-CA, O=Vietnam EFY Informatics Technology JSC, ST=Hanoi, C=VN\",\"NotAfter\":\"2024-12-23T10:34:35\",\"NotBefore\":\"2023-10-16T03:37:53\",\"SigningTime\":\"2024-11-11T16:23:04\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-11T16:23:07\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "dfcae50a-0a4f-47e3-9792-384489146fcf",
+        "id": "e0b37288-66b0-44bd-8a7a-762c958bb78f",
+        "dgia": 230714,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Bột pha hỗn dịch PEGinpol",
+        "thtcthue": null,
+        "thtien": 4614280,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "4614280.000000"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "4614280.000000"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "4614280.000000"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.000000"
+          },
+          {
+            "ttruong": "MainConvertRate",
+            "kdlieu": "numeric",
+            "dlieu": "20.000000"
+          },
+          {
+            "ttruong": "MainQuantity",
+            "kdlieu": "numeric",
+            "dlieu": "400.000000"
+          },
+          {
+            "ttruong": "MainUnitName",
+            "kdlieu": "string",
+            "dlieu": "Gói"
+          },
+          {
+            "ttruong": "MainUnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "11536.000000"
+          },
+          {
+            "ttruong": "RowType",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "230714.000000"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "230714.000000"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "230714.000000"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0109140319",
+    "khmshdon": 1,
+    "khhdon": "C24TKH",
+    "shdon": 605,
+    "cqt": "0109",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "9f0fbd0d-55b5-47fe-a180-ba884077b17b"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "28597e33-dad0-410a-9342-5507f4a4e73e"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "F7E8D7E5-BB5A-421B-8B39-D3A35D661F08"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "_8CJHG6XE59A"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "c3651755-c651-4f9a-b9d7-f1b05e10ec46",
+    "hsgoc": "58d9e699-7760-444a-bdb1-161835da7bac",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "8cd6e6fe-d4e2-4eba-a9c6-929cf9c7000e",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00967C0C5F26AC4B4CBC18B2A59D08F397",
+    "mtdiep": null,
+    "mtdtchieu": "V0101243150252D1291AEB547A7AD5B04361914FCA2",
+    "nbdchi": "Số 12, ngõ 94 phố Đại Từ, tổ 1, Phường Đại Kim, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "886868332",
+    "nbten": "CÔNG TY TNHH THƯƠNG MẠI DƯỢC PHẨM KHÁNH HUY",
+    "nbtnhang": "Ngân hàng Quân Đội MB - Chi Nhánh Sở Giao Dịch 1",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số 12, ngõ 94 phố Đại Từ, tổ 1, Phường Đại Kim, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "886868332"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng Quân Đội MB - Chi Nhánh Sở Giao Dịch 1"
+      }
+    ],
+    "ncma": "2024-11-08T09:10:42.917Z",
+    "ncnhat": "2024-11-08T09:10:42.925Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-11-08T09:09:40Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-08T09:10:42.884Z",
+    "ntnhan": "2024-11-08T09:10:42.857Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-07T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 3800000,
+    "tgtthue": 190000,
+    "tgtttbchu": "Ba triệu chín trăm chín mươi nghìn đồng chẵn.",
+    "tgtttbso": 3990000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 3800000,
+        "tthue": 190000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ExciseTaxAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ExciseTaxAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ExciseTaxRate",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ReturnTicketAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ReturnTicketAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "StockTotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "3990000.0"
+      },
+      {
+        "ttruong": "StockTotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "3990000.0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "3990000.0"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Three million, nine hundred ninety thousand dong."
+      },
+      {
+        "ttruong": "TotalAmountInWordsVN",
+        "kdlieu": "string",
+        "dlieu": "Ba triệu chín trăm chín mươi nghìn đồng chẵn."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "3800000.0"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "3800000.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "3800000.0"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "3800000.0"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "190000.0"
+      },
+      {
+        "ttruong": "TotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "3990000.0"
+      },
+      {
+        "ttruong": "TotalVATAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "190000.0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "namviet",
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0109140319, CN=CÔNG TY TNHH THƯƠNG MẠI DƯỢC PHẨM KHÁNH HUY, O=CÔNG TY TNHH THƯƠNG MẠI DƯỢC PHẨM KHÁNH HUY, L=Số 12, ngõ 94 phố Đại Từ, tổ 41, Phường Đại Kim, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam, S=Hà Nội, C=VN\",\"SerialNumber\":\"5401132881D311EED5C9E11356A799BF\",\"Issuer\":\"CN=HILO-CA SHA-256, O=T-VAN HILO, C=VN\",\"NotAfter\":\"2025-12-11T03:48:11\",\"NotBefore\":\"2024-06-14T03:48:11\",\"SigningTime\":\"2024-11-08T16:09:40\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-08T16:10:42\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "8cd6e6fe-d4e2-4eba-a9c6-929cf9c7000e",
+        "id": "e528d265-167e-49db-a07f-f060248c2791",
+        "dgia": 38000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Miduc",
+        "thtcthue": null,
+        "thtien": 3800000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "3800000.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "3800000.0"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "3800000.0"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "ExpiryDate",
+            "kdlieu": "date",
+            "dlieu": "2026-06-26"
+          },
+          {
+            "ttruong": "InventoryItemCategoryCode",
+            "kdlieu": "string",
+            "dlieu": "HH"
+          },
+          {
+            "ttruong": "InventoryItemCategoryName",
+            "kdlieu": "string",
+            "dlieu": "Hàng hóa"
+          },
+          {
+            "ttruong": "InventoryItemSource",
+            "kdlieu": "string",
+            "dlieu": "Ấn Độ"
+          },
+          {
+            "ttruong": "LotNo",
+            "kdlieu": "string",
+            "dlieu": "MDOO12411"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "TaxReduction43Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReduction43AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "38000.0"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "190000.0"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "190000.0"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0106671946",
+    "khmshdon": 1,
+    "khhdon": "C24TPM",
+    "shdon": 463,
+    "cqt": "0109",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "314dfdc4-6748-48cf-8b4c-c6b6f4718c18",
+    "hsgoc": "98529c26-c777-444b-a9b2-f444aa1d48c9",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "ccd21296-5e5f-4bef-a06a-6ce3d8a597e4",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "005FDB945C73934E228DC23069B2501F17",
+    "mtdiep": null,
+    "mtdtchieu": "V01025190410A9BA7C09C1511EF899B771FD167779C",
+    "nbdchi": "Số 51, Ngách 99/120 Định Công, Phường Định Công, Quận Hoàng Mai, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH TRANG THIẾT BỊ Y TẾ PHÚC MINH",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-11-06T07:59:27.301Z",
+    "ncnhat": "2024-11-06T07:59:27.306Z",
+    "ngcnhat": "tvan_efy",
+    "nky": "2024-11-06T07:59:24Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-06T07:59:27.273Z",
+    "ntnhan": "2024-11-06T07:59:27.071Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-05T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 400000,
+    "tgtthue": 32000,
+    "tgtttbchu": "Bốn trăm ba mươi hai nghìn đồng chẵn.",
+    "tgtttbso": 432000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "8%",
+        "thtien": 400000,
+        "tthue": 32000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0102519041",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "4900886412",
+    "nbsdthoai": "0978299688",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"UID=MST:0106671946, CN=Công Ty TNHH Trang Thiết Bị Y Tế Phúc Minh, ST=THÀNH PHỐ HÀ NỘI, C=VN\",\"SerialNumber\":\"540101043EFFC4C1E095E23D480538B5\",\"Issuer\":\"CN=FPT Certification Authority SHA256, OU=FPT Information System, O=FPT Corporation, ST=Hà Nội, C=VN\",\"NotAfter\":\"2025-04-17T10:35:30\",\"NotBefore\":\"2021-12-31T04:21:30\",\"SigningTime\":\"2024-11-06T14:59:24\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": "hoadon.namviet.co@gmail.com",
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0102519041",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-06T14:59:27\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "ccd21296-5e5f-4bef-a06a-6ce3d8a597e4",
+        "id": "5d4df2c0-e10b-40a4-ab42-1d0f5b147bc2",
+        "dgia": 400000,
+        "dvtinh": "Cái",
+        "ltsuat": "8%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Bảng đo thị lực",
+        "thtcthue": null,
+        "thtien": 400000,
+        "tlckhau": null,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0102805821",
+    "khmshdon": 1,
+    "khhdon": "C24TAP",
+    "shdon": 1434,
+    "cqt": "0111",
+    "cttkhac": [
+      {
+        "ttruong": "InvSubTotal",
+        "kdlieu": "string",
+        "dlieu": "3800000"
+      },
+      {
+        "ttruong": "DiscountAmount",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "RowPerPage",
+        "kdlieu": "numberic",
+        "dlieu": "10"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "87b91665-e565-45e3-9571-aa6ddb5e5197",
+    "hsgoc": "f09ab105-d04a-4ecd-8f5e-ad5f47ce0c11",
+    "hthdon": 1,
+    "htttoan": 3,
+    "id": "61a58656-588b-490a-877b-ab9ef70b7868",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00E1925740F3D24775B9A565003A1F239C",
+    "mtdiep": null,
+    "mtdtchieu": "V0105987432AF4919802B904ECD8C9219FBB1946A30",
+    "nbdchi": "Tầng 3, số 116 ngõ Thái Thịnh I, Phường Thịnh Quang, Quận Đống Đa, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "020040500945",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ THIẾT BỊ Y TẾ AN PHÚ",
+    "nbtnhang": "Ngân hàng thương mại cổ phần Sài Gòn Thương Tín - Phòng giao dịch Nam Đồng",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "ComWebSite",
+        "kdlieu": "string",
+        "dlieu": "www.anphumedical.com.vn"
+      }
+    ],
+    "ncma": "2024-11-04T09:31:28.770Z",
+    "ncnhat": "2024-11-04T09:31:28.776Z",
+    "ngcnhat": "tvan_softdreams",
+    "nky": "2024-11-04T09:29:34Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-04T09:31:28.739Z",
+    "ntnhan": "2024-11-04T09:31:28.708Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-03T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 3800000,
+    "tgtthue": 190000,
+    "tgtttbchu": "Ba  triệu chín  trăm chín  mươi nghìn đồng.",
+    "tgtttbso": 3990000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [
+      {
+        "tlphi": null,
+        "tphi": null
+      }
+    ],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 3800000,
+        "tthue": 190000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "PortalLink",
+        "kdlieu": "string",
+        "dlieu": "http://0102805821hd.easyinvoice.vn"
+      },
+      {
+        "ttruong": "Fkey",
+        "kdlieu": "string",
+        "dlieu": "T6H3n8B6063341476252813"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "Amount5",
+        "kdlieu": "decimal",
+        "dlieu": "3990000"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0105987432",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "TBYTVIETNAM",
+    "nbsdthoai": "(024)35626781",
+    "nbdctdtu": null,
+    "nbfax": "(024)35626782",
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"Phone=(024)35626781, OID.0.9.2342.19200300.100.1.1=MST:0102805821, CN=CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ THIẾT BỊ Y TẾ AN PHÚ, O=CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ THIẾT BỊ Y TẾ AN PHÚ, L=\\\"Tầng 3, số 116 ngõ Thái Thịnh I, Phường Thịnh Quang, Quận Đống Đa, Thành phố Hà Nội, Việt Nam\\\", S=Hà Nội, C=VN\",\"SerialNumber\":\"54011000682CB4690B9AB3D357962B89\",\"Issuer\":\"CN=EASYCA, OU=EASYCA, O=SOFTDREAMS TECHNOLOGY INVESTMENT AND TRADING JSC, C=VN\",\"NotAfter\":\"2025-06-01T10:22:26\",\"NotBefore\":\"2024-06-27T08:14:54\",\"SigningTime\":\"2024-11-04T16:29:34\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt/Chuyển khoản",
+    "msttcgp": "0105987432",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-04T16:31:28\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": 0,
+    "tgtkhac": 0,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "61a58656-588b-490a-877b-ab9ef70b7868",
+        "id": "221b869e-0583-4c66-a555-b14580c245c1",
+        "dgia": 1900,
+        "dvtinh": "Bộ",
+        "ltsuat": "5%",
+        "sluong": 2000,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Dây truyền dịch",
+        "thtcthue": null,
+        "thtien": 3800000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "190000"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "3990000"
+          },
+          {
+            "ttruong": "ProdSubTotal",
+            "kdlieu": "string",
+            "dlieu": "3800000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104563656",
+    "khmshdon": 1,
+    "khhdon": "C24TVI",
+    "shdon": 1537,
+    "cqt": "0108",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "03e42351-1e03-4eb6-881b-50cc210680e3"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "37b65f57-ad63-4c1e-90a5-66e8e13a8b01"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "4"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "F7E8D7E5-BB5A-421B-8B39-D3A35D661F08"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "JACWH2BRXPE2"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "1d87a9c2-8b9f-4757-9d56-1f3426156f8d",
+    "hsgoc": "49dbf071-97e0-407b-8a01-8076673af7b8",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "f9b70ff6-727c-42b8-9af5-807e51a149c5",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00F038D446A4734C018CD6BEEF51D9EF73",
+    "mtdiep": null,
+    "mtdtchieu": "V0101243150681246E53A984C4288A1D1D000041534",
+    "nbdchi": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0551101405008",
+    "nbten": "CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á",
+    "nbtnhang": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "0551101405008"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội"
+      },
+      {
+        "ttruong": "SellerEmail",
+        "kdlieu": "string",
+        "dlieu": "admin@vietainter.vn"
+      },
+      {
+        "ttruong": "SellerPhoneNumber",
+        "kdlieu": "string",
+        "dlieu": "02436462689"
+      }
+    ],
+    "ncma": "2024-11-04T01:11:21.851Z",
+    "ncnhat": "2024-11-04T01:11:21.858Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-11-04T01:11:17Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-11-04T01:11:21.809Z",
+    "ntnhan": "2024-11-04T01:11:21.769Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-11-03T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 11446857,
+    "tgtthue": 572343,
+    "tgtttbchu": "Mười hai triệu không trăm mười chín nghìn hai trăm đồng chẵn.",
+    "tgtttbso": 12019200,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202411,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 11446857,
+        "tthue": 572343,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ExciseTaxAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ExciseTaxAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ExciseTaxRate",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ReturnTicketAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ReturnTicketAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "StockTotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "StockTotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Twelve million, nineteen thousand, two hundred dong."
+      },
+      {
+        "ttruong": "TotalAmountInWordsVN",
+        "kdlieu": "string",
+        "dlieu": "Mười hai triệu không trăm mười chín nghìn hai trăm đồng chẵn."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "11446857.0"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "572343.0"
+      },
+      {
+        "ttruong": "TotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "12019200.0"
+      },
+      {
+        "ttruong": "TotalVATAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "572343.0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "LS0033",
+    "nbsdthoai": "02436462689",
+    "nbdctdtu": "admin@vietainter.vn",
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"E=VIETA@GMAIL.COM, OID.0.9.2342.19200300.100.1.1=MST:0104563656, CN=CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á, L=HÀ NỘI, C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201BBDE19D\",\"Issuer\":\"CN=Viettel-CA SHA-256, O=Viettel Group, C=VN\",\"NotAfter\":\"2025-09-24T10:41:11\",\"NotBefore\":\"2024-04-16T10:13:54\",\"SigningTime\":\"2024-11-04T08:11:17\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-11-04T08:11:21\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "f9b70ff6-727c-42b8-9af5-807e51a149c5",
+        "id": "db936f18-90ec-4604-a1da-20343a5d4621",
+        "dgia": 2384.7619,
+        "dvtinh": "Viên",
+        "ltsuat": "5%",
+        "sluong": 4800,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Sastan - H",
+        "thtcthue": null,
+        "thtien": 11446857,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "11446857.0"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "ExpiryDate",
+            "kdlieu": "date",
+            "dlieu": "2026-03-19"
+          },
+          {
+            "ttruong": "InventoryItemCategoryCode",
+            "kdlieu": "string",
+            "dlieu": "HH"
+          },
+          {
+            "ttruong": "InventoryItemCategoryName",
+            "kdlieu": "string",
+            "dlieu": "Hàng hóa"
+          },
+          {
+            "ttruong": "InventoryItemSource",
+            "kdlieu": "string",
+            "dlieu": "India"
+          },
+          {
+            "ttruong": "LotNo",
+            "kdlieu": "string",
+            "dlieu": "SHT6010 - India"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "TaxReduction43Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReduction43AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "2384.7619"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "572343.0"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "572343.0"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0800011018",
+    "khmshdon": 1,
+    "khhdon": "C24TKD",
+    "shdon": 21448,
+    "cqt": "3001",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "33e2e858-3f32-4e25-97c1-29bc0d9c2e1c",
+    "hsgoc": "b8d9e92f-4edc-4cca-87af-523b574814f9",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "9cfd47ba-5705-4001-b2b9-7413da9b2f67",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "000AC669AC5100435385FAFF1500333675",
+    "mtdiep": null,
+    "mtdtchieu": "V0100109106AAED5D0E29E1428AA5AAE57490ABDF73",
+    "nbdchi": "Số 102 Phố Chi Lăng, Phường Nguyễn Trãi, Thành phố Hải Dương, Tỉnh Hải Dương, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "46310000002408",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC VẬT TƯ Y TẾ HẢI DƯƠNG",
+    "nbtnhang": "BIDV - CN Hải Dương",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Quận, huyện người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tỉnh/Thành phố người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Mã quốc gia người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Link tra cứu người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "ncma": "2024-10-31T09:44:05.921Z",
+    "ncnhat": "2024-10-31T09:44:05.927Z",
+    "ngcnhat": "tvan_viettel",
+    "nky": "2024-10-31T09:44:02Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, khu An Ninh, thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược- Thiết bị y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [
+      {
+        "ttruong": "Số fax người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Quận Huyện người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tỉnh/Thành phố người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Mã quốc gia  người mua",
+        "kdlieu": "string",
+        "dlieu": "VN"
+      },
+      {
+        "ttruong": "Loại giấy tờ  người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số giấy tờ  người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ngày sinh người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "ntao": "2024-10-31T09:44:05.858Z",
+    "ntnhan": "2024-10-31T09:44:03.169Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-10-30T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 28514304,
+    "tgtthue": 1425715,
+    "tgtttbchu": "Hai mươi chín triệu chín trăm bốn mươi nghìn không trăm mười chín đồng",
+    "tgtttbso": 29940019,
+    "thdon": "HÓA ĐƠN ĐIỆN TỬ GIÁ TRỊ GIA TĂNG (ND123 - TT78)",
+    "thlap": 202410,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 28514304,
+        "tthue": 1425715,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "0%",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "HÓA ĐƠN ĐIỆN TỬ GIÁ TRỊ GIA TĂNG (ND123 - TT78)",
+    "ttcktmai": 1188096,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Ngày cuối kỳ",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ngày đầu kỳ",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số BH",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Cửa hàng bán hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Chiết khấu thương mại",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số hợp đồng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Địa chỉ cửa hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số phiếu xuất",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số đơn hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Đơn đặt hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tuyến",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ghi chú",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Phiếu giao hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Trạng thái thanh toán",
+        "kdlieu": "string",
+        "dlieu": "Đã thanh toán"
+      },
+      {
+        "ttruong": "Mã số bí mật",
+        "kdlieu": "string",
+        "dlieu": "QFDEYQ5BCLKZEHN"
+      },
+      {
+        "ttruong": "Ghi chú hóa đơn",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "Tổng tiền thuế tiêu thụ đặc biệt",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "Tổng tiền phí",
+        "kdlieu": "string",
+        "dlieu": "0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0100109106",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": "03203853848",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"1.2.840.113549.1.9.1=#161464756e676e763633363640676d61696c2e636f6d,UID=MST:0800011018,CN=CÔNG TY CỔ PHẦN DƯỢC VẬT TƯ Y TẾ HẢI DƯƠNG,L=HẢI DƯƠNG,C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201BB1B695\",\"Issuer\":\"CN=Viettel-CA SHA-256, O=Viettel Group, C=VN\",\"NotAfter\":\"2025-08-11T09:54:49\",\"NotBefore\":\"2024-03-11T09:54:49\",\"SigningTime\":\"2024-10-31T16:44:02\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt, Chuyển khoản, Bù trừ",
+    "msttcgp": "0100109106",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-10-31T16:44:05\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "9cfd47ba-5705-4001-b2b9-7413da9b2f67",
+        "id": "2c7ecfe4-7e04-4098-923f-a95989dbf7f7",
+        "dgia": 952,
+        "dvtinh": "Ống",
+        "ltsuat": "5%",
+        "sluong": 31200,
+        "stbchu": null,
+        "stckhau": 1188096,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Vitamin B1 100mg/2ml K/48h/50ống (CB) HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 28514304,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "161024"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "06/10/2027"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "29940019"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "1425715"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "9cfd47ba-5705-4001-b2b9-7413da9b2f67",
+        "id": "4894e024-ce0d-4a85-a11c-1618c4f1e207",
+        "dgia": null,
+        "dvtinh": "",
+        "ltsuat": "5%",
+        "sluong": null,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": null,
+        "tchat": 3,
+        "ten": "ckbs",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "9cfd47ba-5705-4001-b2b9-7413da9b2f67",
+        "id": "7ecafb6a-9860-4082-8abe-60200a4818ad",
+        "dgia": null,
+        "dvtinh": "",
+        "ltsuat": "0%",
+        "sluong": null,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": null,
+        "tchat": 3,
+        "ten": "gtk",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": null,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0200572501-001",
+    "khmshdon": 1,
+    "khhdon": "C24THN",
+    "shdon": 53382,
+    "cqt": "0101",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "b77d9193-4fd8-4919-8316-d1d79dfb9b1a",
+    "hsgoc": "fc4afd54-a700-4a96-beae-61af5931e67c",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "2250fcae-a90c-497e-a1a1-7db57c9607c6",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00E89D6A6BC4E94CB3B1734577F05275F1",
+    "mtdiep": null,
+    "mtdtchieu": "V01007278250CF713503DC5443EAD7E247A92827001",
+    "nbdchi": "Ô đất số 6, dãy B, Lô TT5B, Dự án Tây Nam Hồ Linh Đàm, Phường Hoàng Liệt, Quận Hoàng Mai, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "88262688",
+    "nbten": "CHI NHÁNH CÔNG TY CỔ PHẦN DƯỢC PHẨM TRUNG ƯƠNG 3 TẠI HÀ NỘI",
+    "nbtnhang": "Ngân hàng TMCP Á Châu (ACB) - Chi nhánh Hà Nội",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "UnitCode",
+        "kdlieu": "string",
+        "dlieu": "CNHN"
+      },
+      {
+        "ttruong": "KindOfInvoice",
+        "kdlieu": "string",
+        "dlieu": "1"
+      },
+      {
+        "ttruong": "VoucherDate",
+        "kdlieu": "string",
+        "dlieu": "2024-10-28T15:36:09"
+      },
+      {
+        "ttruong": "InvoiceDate",
+        "kdlieu": "string",
+        "dlieu": "2024-10-28"
+      },
+      {
+        "ttruong": "NumberExternal1",
+        "kdlieu": "numeric",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "NumberExternal2",
+        "kdlieu": "numeric",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "NumberExternal3",
+        "kdlieu": "numeric",
+        "dlieu": "0"
+      }
+    ],
+    "ncma": "2024-10-28T08:36:47.008Z",
+    "ncnhat": "2024-10-28T08:36:47.017Z",
+    "ngcnhat": "tvan_pmqldoanhnghiep",
+    "nky": "2024-10-28T08:36:09Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [
+      {
+        "ttruong": "Reference",
+        "kdlieu": "string",
+        "dlieu": "0"
+      }
+    ],
+    "ntao": "2024-10-28T08:36:46.978Z",
+    "ntnhan": "2024-10-28T08:36:46.889Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-10-27T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 3900600,
+    "tgtthue": 195030,
+    "tgtttbchu": "Bốn triệu, không trăm chín mươi lăm nghìn, sáu trăm ba mươi đồng chẵn",
+    "tgtttbso": 4095630,
+    "thdon": "Hóa đơn điện tử giá trị gia tăng",
+    "thlap": 202410,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 3900600,
+        "tthue": 195030,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn điện tử giá trị gia tăng",
+    "ttcktmai": 59400,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "KeySearch",
+        "kdlieu": "string",
+        "dlieu": "AQAAAMmBdtBCQAgEDyvIDlxBr+3EgPOg7Y87sbVNKOD68MfzRhRfni6YFkw=004002"
+      },
+      {
+        "ttruong": "InvoiceType",
+        "kdlieu": "string",
+        "dlieu": "1"
+      },
+      {
+        "ttruong": "AdjustmentType",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "VoucherType",
+        "kdlieu": "string",
+        "dlieu": "0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TaxExternal",
+        "kdlieu": "string",
+        "dlieu": "0$0$0$0$0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0100727825",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "21120240",
+    "nbsdthoai": "02435268686",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0200572501-001, CN=CN CÔNG TY CP DƯỢC PHẨM TRUNG ƯƠNG 3 TẠI HÀ NỘI, S=THÀNH PHỐ HÀ NỘI, C=VN\",\"SerialNumber\":\"540101042726F58C0321DA97923C0C64\",\"Issuer\":\"CN=FPT Certification Authority SHA256, OU=FPT Information System, O=FPT Corporation, ST=Hà Nội, C=VN\",\"NotAfter\":\"2025-04-17T10:35:30\",\"NotBefore\":\"2023-04-26T10:00:51\",\"SigningTime\":\"2024-10-28T15:36:09\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0100727825",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-10-28T15:36:46\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "2250fcae-a90c-497e-a1a1-7db57c9607c6",
+        "id": "8db0ab86-72a4-42e4-8b0d-a5cbb1712ee7",
+        "dgia": 132000,
+        "dvtinh": "Hộp 30v",
+        "ltsuat": "5%",
+        "sluong": 30,
+        "stbchu": null,
+        "stckhau": 59400,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Sâm nhung bổ thận TW3; Chai 30v",
+        "thtcthue": null,
+        "thtien": 3960000,
+        "tlckhau": 1.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "ExternalValue",
+            "kdlieu": "string",
+            "dlieu": "1$1$0$5$195030"
+          },
+          {
+            "ttruong": "External1",
+            "kdlieu": "string",
+            "dlieu": "6324"
+          },
+          {
+            "ttruong": "External2",
+            "kdlieu": "string",
+            "dlieu": "15/09/2027"
+          },
+          {
+            "ttruong": "NumberExternal1",
+            "kdlieu": "numeric",
+            "dlieu": "3900600"
+          },
+          {
+            "ttruong": "NumberExternal2",
+            "kdlieu": "numeric",
+            "dlieu": "195030"
+          },
+          {
+            "ttruong": "NumberExternal3",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  }
+]

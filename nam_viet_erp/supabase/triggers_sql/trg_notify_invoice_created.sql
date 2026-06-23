@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_invoice_created AFTER INSERT ON public.sales_invoices FOR EACH ROW EXECUTE FUNCTION fn_notify_invoice_created()

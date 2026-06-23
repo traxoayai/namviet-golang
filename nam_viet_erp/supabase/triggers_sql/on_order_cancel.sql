@@ -1,0 +1,1 @@
+CREATE TRIGGER on_order_cancel AFTER UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION trigger_order_cancel_restore_stock()

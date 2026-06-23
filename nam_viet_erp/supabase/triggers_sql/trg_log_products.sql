@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_products AFTER INSERT OR DELETE OR UPDATE ON public.products FOR EACH ROW EXECUTE FUNCTION log_system_action()

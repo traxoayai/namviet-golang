@@ -1,0 +1,1 @@
+CREATE TRIGGER on_sales_invoice_issue AFTER UPDATE ON public.sales_invoices FOR EACH ROW EXECUTE FUNCTION trigger_deduct_vat_inventory()

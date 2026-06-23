@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_auto_allocate_payment AFTER INSERT OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION auto_allocate_payment_to_orders()

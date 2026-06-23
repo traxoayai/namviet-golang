@@ -1,0 +1,848 @@
+// src/pages/inventory/receipt/WarehouseReceiptPage.tsx
+import {
+  Affix,
+  Button,
+  Card,
+  DatePicker,
+  Grid,
+  Input,
+  InputNumber,
+  Row,
+  Col,
+  Space,
+  Spin,
+  Table,
+  Tag,
+  Tooltip,
+  Typography,
+  Result,
+  Empty,
+  Upload as AntUpload,
+  message,
+  List,
+} from "antd";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import {
+  ArrowLeft,
+  Camera,
+  CheckCircle,
+  Mic,
+  Printer,
+  Upload,
+  Package,
+} from "lucide-react";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+dayjs.extend(customParseFormat);
+
+import { inboundService } from "@/features/inventory/api/inboundService"; // [NEW]
+import { PutawayListTemplate } from "@/features/inventory/components/print/PutawayListTemplate";
+import { useInboundDetail } from "@/features/inventory/hooks/useInboundDetail";
+import { InboundDetailItem } from "@/features/inventory/types/inbound";
+import { BarcodeAssignModal } from "@/features/product/components/BarcodeAssignModal"; // [NEW]
+import { useRowFlasher } from "@/shared/hooks/useRowFlasher"; // [NEW]
+import { safeRpc } from "@/shared/lib/safeRpc";
+import { ScannerListener } from "@/shared/ui/warehouse-tools/ScannerListener"; // [NEW]
+
+const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
+
+interface ReceivedBatch {
+  lot_number: string;
+  expiry_date?: string;
+  quantity?: number;
+}
+type ReceivedBatchRecord = InboundDetailItem & {
+  received_batches?: ReceivedBatch[];
+};
+
+// [FIX] Utility function to safely parse dates that might be in DD/MM/YYYY format
+const parseDateString = (dateStr?: string) => {
+  if (!dateStr) return null;
+  const parsed = dayjs(dateStr, ["DD/MM/YYYY", "YYYY-MM-DDTHH:mm:ss.SSSZ", "YYYY-MM-DD", "YYYY-MM-DDTHH:mm:ssZ"]);
+  return parsed.isValid() ? parsed : dayjs(dateStr);
+};
+
+const WarehouseReceiptPage = () => {
+  const params = useParams();
+  const navigate = useNavigate();
+  const screens = useBreakpoint();
+
+  // [NEW] Row Flasher Hook
+  const { highlightedKey, flash } = useRowFlasher();
+
+  // FIX ID LOGIC: Handle id, poId, taskId
+  const idStr = params.id || params.poId || params.taskId;
+
+  const {
+    detail,
+    workingItems,
+    loading,
+    error,
+    isSubmitting,
+    isDocScanning,
+    updateWorkingItem,
+    handleSubmit,
+    handleSaveDraft,
+    handleVoiceCommand,
+    handleCameraScan,
+    handleDocUpload,
+    refetch, // [NEW]
+  } = useInboundDetail(idStr);
+
+  const [costLoading, setCostLoading] = useState(false);
+
+  const handleAllocateCosts = async () => {
+    if (!idStr) return;
+    setCostLoading(true);
+    try {
+      await inboundService.allocateCosts(parseInt(idStr));
+      message.success("Đã phân bổ chi phí và cập nhật giá vốn!");
+      refetch();
+    } catch (err: unknown) {
+      console.error(err);
+      const msg = err instanceof Error ? err.message : String(err);
+      message.error("Lỗi phân bổ: " + msg);
+    } finally {
+      setCostLoading(false);
+    }
+  };
+
+  // [NEW] Integration Logic
+  const [assignModalVisible, setAssignModalVisible] = useState(false);
+  const [unknownBarcode, setUnknownBarcode] = useState("");
+
+  const handleScan = async (code: string) => {
+    // 1. Kiểm tra Local trước (Ưu tiên sản phẩm đã có trong phiếu)
+    // Tìm theo Barcode hoặc SKU
+    const existingItem = workingItems.find(
+      (i) => i.barcode === code || i.sku === code
+    );
+
+    if (existingItem) {
+      const inputId = `qty-input-${existingItem.product_id}`;
+      const wrapperEl = document.getElementById(inputId);
+      const inputEl = wrapperEl?.querySelector("input");
+
+      // [LOGIC MỚI]: Kiểm tra xem ô input này có đang được Focus không?
+      const isFocused = document.activeElement === inputEl;
+
+      if (!isFocused) {
+        // --- QUÉT LẦN 1: TÌM VỊ TRÍ, BÔI ĐEN, KHÔNG CỘNG SỐ LƯỢNG ---
+        message.info(`Đã chọn: ${existingItem.product_name}`);
+        flash(existingItem.product_id);
+
+        setTimeout(() => {
+          if (wrapperEl && inputEl) {
+            wrapperEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            inputEl.focus();
+            inputEl.select(); // Bôi đen để sẵn sàng gõ số đè lên
+          }
+        }, 100);
+      } else {
+        // --- QUÉT LẦN 2 (Và các lần sau): CỘNG +1 SỐ LƯỢNG ---
+        const newQty = (existingItem.input_quantity || 0) + 1;
+        updateWorkingItem(existingItem.product_id, { input_quantity: newQty });
+        message.success(`+1 ${existingItem.product_name} (Tổng: ${newQty})`);
+        flash(existingItem.product_id);
+
+        // Giữ bôi đen sau khi cộng để user vẫn có thể gõ đè nếu đổi ý
+        setTimeout(() => inputEl?.select(), 50);
+      }
+      return;
+    }
+
+    const hide = message.loading("Tra cứu...", 0);
+    try {
+      // 2. Lookup via RPC
+      const { data } = await safeRpc("search_products_pos", {
+        p_keyword: code,
+        p_limit: 1,
+        p_warehouse_id: 0, // Global search or use proper ID if available
+      });
+
+      if (data && data.length > 0) {
+        const product = data[0];
+        // Check again by ID in case barcode mismatch locally
+        const item = workingItems.find((i) => i.product_id === product.id);
+        if (item) {
+          const inputId = `qty-input-${item.product_id}`;
+          const wrapperEl = document.getElementById(inputId);
+          const inputEl = wrapperEl?.querySelector("input");
+
+          const isFocused = document.activeElement === inputEl;
+
+          if (!isFocused) {
+            // --- QUÉT LẦN 1: TÌM VỊ TRÍ, BÔI ĐEN, KHÔNG CỘNG SỐ LƯỢNG ---
+            message.info(`Đã chọn: ${product.name}`);
+            flash(item.product_id);
+            setTimeout(() => {
+              if (wrapperEl && inputEl) {
+                wrapperEl.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+                inputEl.focus();
+                inputEl.select();
+              }
+            }, 100);
+          } else {
+            // --- QUÉT LẦN 2: CỘNG +1 SỐ LƯỢNG ---
+            const newQty = (item.input_quantity || 0) + 1;
+            updateWorkingItem(item.product_id, { input_quantity: newQty });
+            message.success(`+1 ${product.name} (Tổng: ${newQty})`);
+            flash(item.product_id);
+            setTimeout(() => inputEl?.select(), 50);
+          }
+        } else {
+          message.warning(
+            `Sản phẩm "${product.name}" không có trong phiếu nhập này!`
+          );
+        }
+      } else {
+        // Not found -> Quick Assign
+        setUnknownBarcode(code);
+        setAssignModalVisible(true);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      hide();
+    }
+  };
+
+  const handleAssignSuccess = (product: { id: number; name: string }) => {
+    setAssignModalVisible(false);
+    const item = workingItems.find((i) => i.product_id === product.id);
+    if (item) {
+      updateWorkingItem(item.product_id, {
+        input_quantity: (item.input_quantity || 0) + 1,
+      });
+      message.success(`Đã gán mã & Nhập thêm: ${product.name}`);
+      flash(item.product_id);
+      setTimeout(() => {
+        const wrapperId = `qty-input-${item.product_id}`;
+        const wrapperEl = document.getElementById(wrapperId);
+        if (wrapperEl) {
+          wrapperEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          const inputEl = wrapperEl.querySelector("input");
+          if (inputEl) {
+            inputEl.focus();
+            inputEl.select();
+          }
+        }
+      }, 100);
+    } else {
+      message.warning(
+        `Đã gán mã cho "${product.name}", nhưng sản phẩm này không nằm trong phiếu nhập!`
+      );
+    }
+  };
+
+  // [NEW] Xác định trạng thái "Đã hoàn tất" để khóa giao diện
+  const currentStatus = (detail?.po_info?.status || "").toLowerCase();
+  const deliveryStatus = (
+    (detail?.po_info as { delivery_status?: string } | undefined)
+      ?.delivery_status || ""
+  ).toLowerCase();
+  const isDone =
+    currentStatus === "completed" ||
+    currentStatus === "delivered" ||
+    deliveryStatus === "delivered";
+
+  // --- COLUMNS ---
+  const columns = [
+    {
+      title: "Sản phẩm",
+      dataIndex: "product_name",
+      width: 250,
+      render: (text: string, record: InboundDetailItem) => (
+        <Space>
+          <div
+            style={{
+              width: 48,
+              height: 48,
+              background: "#f0f0f0",
+              borderRadius: 4,
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={record.image_url || "https://placehold.co/48"}
+              alt=""
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+          <div>
+            <div style={{ fontWeight: 600 }}>
+              {text}
+              {(record as InboundDetailItem & { is_bonus?: boolean })
+                .is_bonus ? (
+                <Tag color="purple" style={{ marginLeft: 8 }}>
+                  🎁 Tặng
+                </Tag>
+              ) : null}
+            </div>
+            <div style={{ fontSize: 12, color: "#666" }}>{record.sku}</div>
+          </div>
+        </Space>
+      ),
+    },
+    {
+      title: "ĐVT",
+      dataIndex: "unit",
+      width: 80,
+      align: "center" as const,
+    },
+    // [NEW] Vị trí sản phẩm
+    {
+      title: "Vị trí",
+      dataIndex: "shelf_location",
+      width: 120,
+      render: (val: string) =>
+        val ? (
+          <Tag color="geekblue" style={{ margin: 0 }}>
+            {val}
+          </Tag>
+        ) : (
+          <Text type="secondary">N/A</Text>
+        ),
+    },
+    // [RESTORED] Landed Cost Columns — phí phân bổ + giá vốn cuối (dual-ledger actual_cost)
+    {
+      title: "Phí PB",
+      dataIndex: "allocated_cost",
+      width: 100,
+      align: "right" as const,
+      responsive: ["lg" as const],
+      render: (val: number) =>
+        val ? <Text type="secondary">{val.toLocaleString()}</Text> : "-",
+    },
+    {
+      title: "Giá Vốn",
+      dataIndex: "final_unit_cost",
+      width: 110,
+      align: "right" as const,
+      responsive: ["lg" as const],
+      render: (val: number) =>
+        val ? <Text strong>{val.toLocaleString()}</Text> : "-",
+    },
+    {
+      title: "Tiến độ",
+      width: 50,
+      render: (_: unknown, record: InboundDetailItem) => {
+        const received = record.quantity_received_prev;
+        const total = record.quantity_ordered;
+        const remaining = record.quantity_remaining;
+        const isFull = remaining <= 0;
+
+        return (
+          <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                fontSize: 13,
+              }}
+            >
+              <span>
+                Đã về: <b>{received}</b>/{total}
+              </span>
+            </div>
+            {isFull ? (
+              <Tag color="success">Đủ hàng</Tag>
+            ) : (
+              <Text type="warning" style={{ fontSize: 12 }}>
+                Thiếu: {remaining}
+              </Text>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Số Lượng Nhập",
+      width: 60,
+      render: (_: unknown, record: InboundDetailItem) => {
+        const displayQty = isDone
+          ? record.quantity_received_prev
+          : record.input_quantity;
+
+        return (
+          <div id={`qty-input-${record.product_id}`}>
+            <InputNumber
+              min={0}
+              value={displayQty}
+              onChange={(val) =>
+                updateWorkingItem(record.product_id, {
+                  input_quantity: val || 0,
+                })
+              }
+              style={{ width: "100%" }}
+              disabled={isDone}
+              placeholder="0"
+              status={
+                !isDone && (record.input_quantity || 0) > 0 ? "warning" : ""
+              }
+            />
+          </div>
+        );
+      },
+    },
+    {
+      title: "Số Lô đã nhập",
+      width: 150,
+      render: (_: unknown, record: ReceivedBatchRecord) => {
+        if (record.stock_management_type !== "lot_date")
+          return <Text disabled>--</Text>;
+
+        const hasReceivedBatches =
+          record.received_batches && record.received_batches.length > 0;
+
+        if (hasReceivedBatches) {
+          return (
+            <Space direction="vertical" size={4} style={{ width: "100%" }}>
+              {record.received_batches?.map((batch, idx: number) => (
+                <Tag
+                  color="geekblue"
+                  key={idx}
+                  style={{ margin: 0, display: "block", whiteSpace: "normal" }}
+                >
+                  <b>Lô:</b> {batch.lot_number} <br />
+                  <span style={{ fontSize: 11 }}>
+                    <b>HSD:</b>{" "}
+                    {batch.expiry_date
+                      ? parseDateString(batch.expiry_date)?.format("DD/MM/YY") || "N/A"
+                      : "N/A"}{" "}
+                    - ({batch.quantity} {record.unit})
+                  </span>
+                </Tag>
+              ))}
+            </Space>
+          );
+        }
+
+        const displayLot = record.input_lot || "";
+        return (
+          <Input
+            placeholder="Nhập số lô"
+            value={displayLot}
+            onChange={(e) =>
+              updateWorkingItem(record.product_id, {
+                input_lot: e.target.value,
+              })
+            }
+            disabled={isDone}
+          />
+        );
+      },
+    },
+    {
+      title: "Hạn Sử Dụng",
+      width: 180,
+      render: (_: unknown, record: ReceivedBatchRecord) => {
+        if (record.stock_management_type !== "lot_date")
+          return <Text disabled>--</Text>;
+
+        if (record.received_batches && record.received_batches.length > 0) {
+          return (
+            <Text type="secondary" italic style={{ fontSize: 12 }}>
+              Đã lưu theo lô
+            </Text>
+          );
+        }
+
+        const displayExpiry = record.input_expiry;
+        return (
+          <DatePicker
+            placeholder="VD: 140228"
+            style={{ width: "100%" }}
+            format={["DD/MM/YYYY", "DDMMYY", "DDMMYYYY", "D/M/YY", "D/M/YYYY"]}
+            value={parseDateString(displayExpiry)}
+            onChange={(date) =>
+              updateWorkingItem(record.product_id, {
+                input_expiry: date ? date.toISOString() : undefined,
+              })
+            }
+            disabled={isDone}
+          />
+        );
+      },
+    },
+  ];
+
+  if (!idStr)
+    return (
+      <Result
+        status="404"
+        title="URL không hợp lệ"
+        subTitle="Không tìm thấy mã phiếu nhập"
+        extra={
+          <Button type="primary" onClick={() => navigate("/inventory/inbound")}>
+            Quay lại
+          </Button>
+        }
+      />
+    );
+
+  if (loading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spin size="large" />
+      </div>
+    );
+  if (error)
+    return (
+      <Result
+        status="error"
+        title="Lỗi"
+        subTitle={error}
+        extra={
+          <Button onClick={() => navigate("/inventory/inbound")}>
+            Quay lại
+          </Button>
+        }
+      />
+    );
+  if (!detail) return <Empty description="Không tìm thấy dữ liệu" />;
+
+  const handlePrintPutaway = () => {
+    window.print();
+  };
+
+  return (
+    <div
+      style={{
+        padding: screens.md ? 24 : 12,
+        paddingBottom: 100,
+        background: "#f5f5f5",
+        minHeight: "100vh",
+      }}
+    >
+      {/* HEADER & TOOLS */}
+      <Card
+        bodyStyle={{ padding: "16px 24px" }}
+        style={{ marginBottom: 16 }}
+        bordered={false}
+      >
+        <Row justify="space-between" align="middle" gutter={[16, 16]}>
+          <Col>
+            <Space align="center">
+              <Button
+                icon={<ArrowLeft size={18} />}
+                onClick={() => navigate("/inventory/inbound")}
+                type="text"
+              />
+              <div>
+                <Title level={4} style={{ margin: 0 }}>
+                  {detail.po_info.code} - {detail.po_info.supplier_name}
+                </Title>
+              </div>
+              <Tag color="geekblue">{detail.po_info.status}</Tag>
+            </Space>
+          </Col>
+          <Col>
+            <Space>
+              <Tooltip title="Đọc lệnh giọng nói (Sắp ra mắt)">
+                <Button
+                  icon={<Mic size={16} />}
+                  onClick={handleVoiceCommand}
+                  shape="circle"
+                  size="large"
+                  disabled
+                />
+              </Tooltip>
+              <Tooltip title="Quét Camera AI (Sắp ra mắt)">
+                <Button
+                  icon={<Camera size={16} />}
+                  onClick={handleCameraScan}
+                  shape="circle"
+                  size="large"
+                  disabled
+                />
+              </Tooltip>
+              <AntUpload
+                accept="image/*,application/pdf"
+                maxCount={1}
+                showUploadList={false}
+                beforeUpload={(file) => {
+                  handleDocUpload(file);
+                  return false; // ngăn upload mặc định, hook tự upload qua storage
+                }}
+              >
+                <Button 
+                  type="primary"
+                  icon={<Upload size={16} />} 
+                  loading={isDocScanning}
+                  style={{ 
+                    background: 'linear-gradient(90deg, #1890ff, #722ed1)', 
+                    borderColor: 'transparent',
+                    boxShadow: '0 2px 4px rgba(114, 46, 209, 0.2)'
+                  }}
+                >
+                  Upload Hóa Đơn / Phiếu Xuất
+                </Button>
+              </AntUpload>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
+
+      {/* MAIN TABLE */}
+      <Card bodyStyle={{ padding: screens.md ? 0 : 8 }} bordered={false} style={{ background: "transparent" }}>
+        {screens.md ? (
+          <Table
+            columns={columns}
+            dataSource={workingItems}
+            rowKey="product_id"
+            pagination={false}
+            scroll={{ x: 1210 }}
+            // [NEW] Highlight row animation
+            rowClassName={(record) =>
+              String(record.product_id) === highlightedKey ? "flash-row" : ""
+            }
+          />
+        ) : (
+          <List
+            dataSource={workingItems}
+            renderItem={(item) => {
+              const remains = item.quantity_remaining;
+              const input = item.input_quantity || 0;
+              let tagColor = "default";
+              let tagText = "Chờ nhập";
+              if (input === remains && remains > 0) {
+                tagColor = "success";
+                tagText = "Đủ";
+              } else if (input > 0 && input < remains) {
+                tagColor = "warning";
+                tagText = "Thiếu";
+              } else if (input > remains) {
+                tagColor = "error";
+                tagText = "Vượt";
+              }
+
+              return (
+                <Card 
+                  size="small" 
+                  style={{ 
+                    marginBottom: 12, 
+                    borderLeft: `4px solid ${tagColor === 'success' ? '#52c41a' : tagColor === 'warning' ? '#faad14' : tagColor === 'error' ? '#ff4d4f' : '#d9d9d9'}`,
+                    borderRadius: 8,
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                  }}
+                  className={String(item.product_id) === highlightedKey ? "flash-row" : ""}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <Space>
+                      <Tag color="geekblue" style={{ margin: 0 }}>
+                        {item.shelf_location || "N/A"}
+                      </Tag>
+                    </Space>
+                    <Tag color={tagColor}>{tagText}</Tag>
+                  </div>
+                  
+                  <Space style={{ marginBottom: 12, alignItems: 'flex-start', width: '100%' }}>
+                    <div
+                      style={{
+                        width: 48,
+                        height: 48,
+                        background: "#f0f0f0",
+                        borderRadius: 6,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        overflow: 'hidden'
+                      }}
+                    >
+                      {item.image_url ? (
+                        <img src={item.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      ) : (
+                        <Package size={24} color="#ccc" />
+                      )}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <Text strong style={{ fontSize: 15 }}>{item.product_name}</Text>
+                      <br />
+                      <Text type="secondary">{item.sku}</Text>
+                    </div>
+                  </Space>
+
+                  {/* Quantity Block */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f5f5f5', padding: '8px 12px', borderRadius: 6, marginBottom: 8 }}>
+                    <div>
+                      <Text type="secondary" style={{ fontSize: 12 }}>Cần nhập</Text>
+                      <div style={{ fontSize: 16, fontWeight: 'bold' }}>{remains} <Text type="secondary" style={{ fontSize: 13, fontWeight: 'normal' }}>{item.unit}</Text></div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <Text type="secondary" style={{ fontSize: 12 }}>Nhập Đợt Này</Text>
+                      <div id={`qty-input-${item.product_id}`}>
+                        <InputNumber
+                          min={0}
+                          value={item.input_quantity}
+                          onChange={(val) =>
+                            updateWorkingItem(item.product_id, {
+                              input_quantity: val || 0,
+                            })
+                          }
+                          status={input > remains ? "error" : ""}
+                          style={{ width: 100 }}
+                          disabled={isDone}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Lot / Date Block */}
+                  {item.stock_management_type === "lot_date" && input > 0 && (
+                    <div style={{ background: '#e6f7ff', padding: '8px 12px', borderRadius: 6 }}>
+                      <Row gutter={[8, 8]}>
+                        <Col span={12}>
+                          <Text type="secondary" style={{ fontSize: 12 }}>Số Lô</Text>
+                          <Input
+                            placeholder="Số lô..."
+                            value={item.input_lot}
+                            onChange={(e) =>
+                              updateWorkingItem(item.product_id, {
+                                input_lot: e.target.value,
+                              })
+                            }
+                            status={!item.input_lot ? "error" : ""}
+                            disabled={isDone}
+                          />
+                        </Col>
+                        <Col span={12}>
+                          <Text type="secondary" style={{ fontSize: 12 }}>Hạn sử dụng</Text>
+                          <DatePicker
+                            style={{ width: "100%" }}
+                            placeholder="HSD"
+                            format="DD/MM/YYYY"
+                            value={
+                              item.input_expiry
+                                ? dayjs(item.input_expiry, [
+                                    "DD/MM/YYYY",
+                                    "YYYY-MM-DD",
+                                    "YYYY-MM-DDTHH:mm:ss.SSSZ"
+                                  ])
+                                : null
+                            }
+                            onChange={(date) =>
+                              updateWorkingItem(item.product_id, {
+                                input_expiry: date
+                                  ? date.toISOString()
+                                  : undefined,
+                              })
+                            }
+                            status={!item.input_expiry ? "error" : ""}
+                            disabled={isDone}
+                          />
+                        </Col>
+                      </Row>
+                    </div>
+                  )}
+                </Card>
+              );
+            }}
+          />
+        )}
+      </Card>
+
+      {/* FOOTER ACTIONS */}
+      <Affix offsetBottom={0}>
+        <div
+          style={{
+            padding: "16px 24px",
+            background: "#fff",
+            boxShadow: "0 -2px 10px rgba(0,0,0,0.05)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderTop: "1px solid #f0f0f0",
+          }}
+        >
+          <Button icon={<Printer size={16} />} onClick={handlePrintPutaway}>
+            In Phiếu Xếp Kệ
+          </Button>
+
+          <Space>
+            <Button onClick={() => navigate("/inventory/inbound")}>
+              Thoát
+            </Button>
+            <Button
+              onClick={handleSaveDraft}
+              disabled={isDone}
+              style={{ borderColor: "#faad14", color: "#faad14" }}
+            >
+              Lưu Nháp (F3)
+            </Button>
+            <Button
+              type="primary"
+              icon={<CheckCircle size={16} />}
+              size="large"
+              onClick={handleSubmit}
+              loading={isSubmitting}
+              disabled={isDone} // [NEW] Sử dụng biến isDone
+            >
+              Hoàn tất Nhập Kho
+            </Button>
+            <Button
+              type="default"
+              onClick={handleAllocateCosts}
+              loading={costLoading}
+              disabled={
+                detail.po_info.status !== "pending" &&
+                detail.po_info.status !== "partial"
+              }
+            >
+              Phân bổ chi phí
+            </Button>
+          </Space>
+        </div>
+      </Affix>
+
+      {/* PRINT TEMPLATE */}
+      <PutawayListTemplate
+        items={workingItems.filter((i) => (i.input_quantity || 0) > 0)}
+        poCode={detail.po_info.code}
+      />
+
+      {/* [NEW] Tools */}
+      <ScannerListener onScan={handleScan} enabled={true} />
+      <BarcodeAssignModal
+        visible={assignModalVisible}
+        scannedBarcode={unknownBarcode}
+        onCancel={() => setAssignModalVisible(false)}
+        onSuccess={handleAssignSuccess}
+      />
+
+      <style>{`
+        /* Định nghĩa hiệu ứng chớp tắt */
+        @keyframes rowFlash {
+          0% { background-color: #b7eb8f !important; }  /* Xanh lá đậm lúc mới quét */
+          40% { background-color: #f6ffed !important; } /* Giữ xanh lá nhạt */
+          100% { background-color: transparent !important; }
+        }
+
+        /* Gắn animation vào class */
+        .flash-row {
+          animation: rowFlash 1.5s ease-out !important;
+        }
+        
+        /* Bắt buộc phải đè màu nền mặc định của Ant Design Table Cell */
+        .flash-row td {
+          background-color: transparent !important;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default WarehouseReceiptPage;

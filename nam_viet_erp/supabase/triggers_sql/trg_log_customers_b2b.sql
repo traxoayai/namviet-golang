@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_customers_b2b AFTER INSERT OR DELETE OR UPDATE ON public.customers_b2b FOR EACH ROW EXECUTE FUNCTION log_system_action()

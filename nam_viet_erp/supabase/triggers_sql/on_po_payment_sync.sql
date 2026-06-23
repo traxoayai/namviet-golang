@@ -1,0 +1,1 @@
+CREATE TRIGGER on_po_payment_sync AFTER INSERT OR DELETE OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION sync_po_payment_status()

@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_user_roles AFTER INSERT OR DELETE OR UPDATE ON public.user_roles FOR EACH ROW EXECUTE FUNCTION log_system_action()

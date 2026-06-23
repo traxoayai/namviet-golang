@@ -1,0 +1,1 @@
+CREATE TRIGGER on_finance_transaction_remittance_sync AFTER UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION sync_order_remittance_status()

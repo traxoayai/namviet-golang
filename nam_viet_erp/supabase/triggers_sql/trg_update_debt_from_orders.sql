@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_update_debt_from_orders AFTER INSERT OR DELETE OR UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION fn_trigger_update_debt_from_orders()

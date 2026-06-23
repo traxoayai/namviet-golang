@@ -1,0 +1,1 @@
+CREATE TRIGGER on_user_status_change AFTER INSERT OR UPDATE OF status ON public.users FOR EACH ROW EXECUTE FUNCTION sync_user_status_to_auth()

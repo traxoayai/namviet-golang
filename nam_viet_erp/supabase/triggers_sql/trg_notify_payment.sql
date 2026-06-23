@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_payment AFTER INSERT OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION notify_sales_on_payment()

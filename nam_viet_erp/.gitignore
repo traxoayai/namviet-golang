@@ -1,0 +1,74 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+dist-ssr
+
+# Env
+.env
+.env.*
+!.env.production
+*.local
+
+# MCP local config (chứa Supabase PAT thật — KHÔNG commit)
+.mcp.local.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test results & artifacts
+test-results/
+playwright-report/
+blob-report/
+
+# Supabase local
+supabase/.temp/
+
+# Data dumps (sensitive)
+prod_auth.sql
+prod_data.sql
+prod_po.sql
+prod_public.sql
+
+# Temp & docs (local only)
+tmp/
+docs/
+.claude/
+scratch/
+check_schema*.cjs
+check_schema*.ts
+
+# Deployment
+.vercel
+
+backups
+backups/
+
+.playwright-mcp
+
+.claude
+docs
+.vercel
+.cursor/
+.cursorrulessupabase/.env.local

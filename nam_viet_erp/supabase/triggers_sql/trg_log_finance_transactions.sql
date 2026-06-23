@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_finance_transactions AFTER INSERT OR DELETE OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION log_system_action()

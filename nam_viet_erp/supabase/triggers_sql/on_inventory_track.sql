@@ -1,0 +1,1 @@
+CREATE TRIGGER on_inventory_track AFTER UPDATE ON public.product_inventory FOR EACH ROW EXECUTE FUNCTION track_inventory_changes()

@@ -1,0 +1,1 @@
+CREATE TRIGGER on_sales_order_confirm AFTER UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION handle_sales_inventory_deduction()

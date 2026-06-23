@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_service_packages AFTER INSERT OR DELETE OR UPDATE ON public.service_packages FOR EACH ROW EXECUTE FUNCTION log_system_action()

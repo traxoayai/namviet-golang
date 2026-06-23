@@ -1,0 +1,1 @@
+CREATE TRIGGER on_updated_at BEFORE UPDATE ON public.selling_rules FOR EACH ROW EXECUTE FUNCTION handle_updated_at()

@@ -1,0 +1,168 @@
+// src/stores/supplierStore.ts
+import { create } from "zustand";
+
+import {
+  SupplierStoreState,
+  SupplierFilters,
+  Supplier,
+} from "@/features/purchasing/types/supplier";
+import { supabase } from "@/shared/lib/supabaseClient";
+import { safeRpc } from "@/shared/lib/safeRpc";
+
+export const useSupplierStore = create<SupplierStoreState>((set, get) => ({
+  suppliers: [],
+  currentSupplier: null,
+  loading: false,
+  loadingDetails: false,
+  filters: {},
+  page: 1,
+  pageSize: 10,
+  totalCount: 0,
+
+  fetchSuppliers: async () => {
+    set({ loading: true });
+    try {
+      const { filters, page, pageSize } = get();
+
+      // [CORE UPDATE]: Gọi RPC mới có trả về cột 'debt'
+      const { data } = await safeRpc("get_suppliers_list", {
+        search_query: filters.search_query || "",
+        status_filter: filters.status_filter || "",
+        page_num: page,
+        page_size: pageSize,
+      });
+
+      // Map dữ liệu từ RPC vào State
+      // Lưu ý: data trả về từ RPC đã khớp với interface Supplier mở rộng (có thêm cột debt)
+      const mappedSuppliers = (data || []).map((item: any) => ({
+        ...item,
+        // Đảm bảo debt luôn là số
+        debt: item.debt ? Number(item.debt) : 0,
+      }));
+
+      const totalCount = data && data.length > 0 ? data[0].total_count : 0;
+      set({ suppliers: mappedSuppliers, totalCount, loading: false });
+    } catch (error) {
+      console.error("Lỗi khi tải Nhà Cung Cấp:", error);
+      set({ loading: false });
+    }
+  },
+
+  getSupplierDetails: async (id: number) => {
+    set({ loadingDetails: true, currentSupplier: null });
+    try {
+      const { data, error } = await supabase
+        .from("suppliers")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+      set({ currentSupplier: data as unknown as Supplier, loadingDetails: false });
+    } catch (error) {
+      console.error("Lỗi khi tải chi tiết NCC:", error);
+      set({ loadingDetails: false });
+    }
+  },
+
+  setFilters: (newFilters: Partial<SupplierFilters>) => {
+    set((state) => ({ filters: { ...state.filters, ...newFilters }, page: 1 }));
+    get().fetchSuppliers();
+  },
+
+  setPage: (page: number, pageSize: number) => {
+    set({ page, pageSize });
+    get().fetchSuppliers();
+  },
+
+  addSupplier: async (values: any) => {
+    set({ loading: true });
+    try {
+      const { data } = await safeRpc("create_supplier", {
+        p_name: values.name,
+        p_tax_code: values.tax_code || null,
+        p_contact_person: values.contact_person || null,
+        p_phone: values.phone,
+        p_email: values.email || null,
+        p_address: values.address || null,
+        p_payment_term: values.payment_term || null,
+        p_bank_account: values.bank_account || null,
+        p_bank_name: values.bank_name || null,
+        p_bank_holder: values.bank_holder || null,
+        p_delivery_method: values.delivery_method || null,
+        p_lead_time: values.lead_time || null,
+        p_status: values.status,
+        p_notes: values.notes || null,
+      });
+
+      // Update the new shipping_partner_id column directly since RPC might not support it yet
+      if (data && values.shipping_partner_id !== undefined) {
+        await supabase
+          .from("suppliers")
+          .update({ shipping_partner_id: values.shipping_partner_id })
+          .eq("id", (data as unknown as Supplier).id);
+      }
+
+      await get().fetchSuppliers();
+      set({ loading: false });
+      return data as unknown as Supplier; // Trả về kết quả RPC
+    } catch (error: unknown) {
+      console.error("Lỗi khi thêm NCC:", (error as Error).message);
+      set({ loading: false });
+      return null;
+    }
+  },
+
+  updateSupplier: async (id: number, values: any) => {
+    set({ loadingDetails: true });
+    try {
+      await safeRpc("update_supplier", {
+        p_id: id,
+        p_name: values.name,
+        p_tax_code: values.tax_code || null,
+        p_contact_person: values.contact_person || null,
+        p_phone: values.phone,
+        p_email: values.email || null,
+        p_address: values.address || null,
+        p_payment_term: values.payment_term || null,
+        p_bank_account: values.bank_account || null,
+        p_bank_name: values.bank_name || null,
+        p_bank_holder: values.bank_holder || null,
+        p_delivery_method: values.delivery_method || null,
+        p_lead_time: values.lead_time || null,
+        p_status: values.status,
+        p_notes: values.notes || null,
+      });
+
+      // Update the shipping_partner_id directly
+      if (values.shipping_partner_id !== undefined) {
+        await supabase
+          .from("suppliers")
+          .update({ shipping_partner_id: values.shipping_partner_id })
+          .eq("id", id);
+      }
+
+      set({ loadingDetails: false });
+      await get().fetchSuppliers();
+      return true;
+    } catch (error) {
+      console.error("Lỗi khi cập nhật NCC:", error);
+      set({ loadingDetails: false });
+      return false;
+    }
+  },
+
+  deleteSupplier: async (id: number) => {
+    set({ loading: true });
+    try {
+      await safeRpc("delete_supplier", { p_id: id });
+      await get().fetchSuppliers();
+      set({ loading: false });
+      return true;
+    } catch (error) {
+      console.error("Lỗi khi xóa NCC:", error);
+      set({ loading: false });
+      return false;
+    }
+  },
+}));

@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_sync_sales_invoice_payment AFTER UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION sync_invoice_payment_status()

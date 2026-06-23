@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_enforce_same_conv_rate_per_uom BEFORE INSERT OR UPDATE OF unit_name, conversion_rate ON public.product_units FOR EACH ROW EXECUTE FUNCTION _enforce_same_conv_rate_per_uom()

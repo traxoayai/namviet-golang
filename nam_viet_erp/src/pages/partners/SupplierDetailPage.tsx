@@ -1,0 +1,574 @@
+// src/pages/partners/SupplierDetailPage.tsx
+import {
+  InfoCircleOutlined,
+  SaveOutlined,
+  CloseCircleOutlined,
+  EditOutlined,
+  UserOutlined,
+  PhoneOutlined,
+  MailOutlined,
+  BankOutlined,
+  FileTextOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
+import {
+  Input,
+  Button,
+  Card,
+  Typography,
+  Select,
+  Row,
+  Col,
+  Space,
+  InputNumber,
+  Divider,
+  Affix,
+  Form,
+  App as AntApp,
+  Spin,
+  Tabs,
+} from "antd";
+import { Statistic } from "antd"; // [NEW]
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { PERMISSIONS } from "@/features/auth/constants/permissions"; // [NEW]
+import { financeService } from "@/features/finance/api/financeService";
+import { useBankStore } from "@/features/finance/stores/useBankStore";
+import { supplierService } from "@/features/purchasing/api/supplierService"; // [NEW]
+import { useSupplierStore } from "@/features/purchasing/stores/supplierStore";
+import { useShippingPartnerStore } from "@/features/partners/stores/useShippingPartnerStore";
+import { FinanceFormModal } from "@/pages/finance/components/FinanceFormModal"; // [NEW]
+import { Access } from "@/shared/components/auth/Access"; // [NEW]
+import { PermissionGuard } from "@/shared/components/auth/PermissionGuard"; // [NEW]
+import SupplierProductMappingTab from "./components/SupplierProductMappingTab"; // [NEW]
+
+const { Title, Text } = Typography;
+const { Option } = Select;
+
+const SupplierDetailPage: React.FC = () => {
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { message: antMessage } = AntApp.useApp();
+
+  // Lấy dữ liệu từ Supplier Store
+  const {
+    currentSupplier,
+    loadingDetails,
+    getSupplierDetails,
+    addSupplier,
+    updateSupplier,
+  } = useSupplierStore();
+
+  // Lấy dữ liệu từ Bank Store (MỚI)
+  const { banks, fetchBanks } = useBankStore();
+
+  // Lấy dữ liệu Đơn vị vận chuyển
+  const { partners: shippingPartners, fetchPartners: fetchShippingPartners } = useShippingPartnerStore();
+
+  // Quyết định xem đây là trang "Thêm" (id=undefined) hay "Sửa"
+  const isEditing = !!id;
+  // State để bật/tắt chế độ chỉnh sửa trên form
+  const [formDisabled, setFormDisabled] = useState(isEditing);
+
+  // [NEW] Finance States
+  const [financeModalOpen, setFinanceModalOpen] = useState(false);
+  const [financeModalFlow, setFinanceModalFlow] = useState<"in" | "out">("out"); // [NEW] Control Flow
+  const [quickInfo, setQuickInfo] = useState<any>(null);
+  // [NEW] Công nợ lấy thẳng từ supplier_debt_view — single source. Tách khỏi
+  // quickInfo.current_debt (RPC có thể trả số cached/lệch) để Statistic + Modal
+  // prefill cùng dùng 1 số → tránh thanh toán quá/thiếu.
+  const [currentDebt, setCurrentDebt] = useState<number>(0);
+
+  const selectedDeliveryType = Form.useWatch("delivery_type", form);
+
+  const fetchQuickInfo = async () => {
+    if (!id) return;
+    try {
+      const [data, debt] = await Promise.all([
+        supplierService.getQuickInfo(Number(id)),
+        financeService.getSupplierDebt(Number(id)).catch((err: unknown) => {
+          console.error("[fetchQuickInfo] getSupplierDebt failed", err);
+          return 0;
+        }),
+      ]);
+      setQuickInfo(data);
+      setCurrentDebt(debt);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    if (isEditing) fetchQuickInfo();
+  }, [isEditing, id]);
+
+  // Danh sách chuẩn hóa các hình thức giao hàng
+  const DELIVERY_TYPES = [
+    { value: "NCC tự giao", label: "NCC tự giao hàng (Freeship)" },
+    { value: "app", label: "Dịch vụ vận chuyển (Viettel/GHTK...)" },
+    { value: "coach", label: "Xe khách / Chành xe (Cần ra bến lấy)" },
+    { value: "internal", label: "Xe công ty đi lấy (Tự lấy)" },
+  ];
+
+  // 1. Tải danh sách Ngân hàng và ĐVVC ngay khi vào trang
+  useEffect(() => {
+    fetchBanks();
+    fetchShippingPartners({ status: "active" });
+  }, [fetchBanks, fetchShippingPartners]);
+
+  // 2. Tải dữ liệu chi tiết nếu là trang "Sửa"
+  useEffect(() => {
+    if (isEditing) {
+      getSupplierDetails(Number(id));
+    }
+  }, [isEditing, id, getSupplierDetails]);
+
+  // 3. Điền dữ liệu vào form sau khi tải xong
+  useEffect(() => {
+    if (isEditing && currentSupplier) {
+      const valuesToSet = { ...currentSupplier } as any;
+      const dm = currentSupplier.delivery_method || "";
+      
+      // Map từ giá trị cũ sang chuẩn mới (nếu cần)
+      if (dm === "Dịch vụ vận chuyển") valuesToSet.delivery_type = "app";
+      else if (dm === "Xe khách/Chành xe") valuesToSet.delivery_type = "coach";
+      else if (dm === "Xe nhà (Tự lấy)") valuesToSet.delivery_type = "internal";
+      else valuesToSet.delivery_type = dm;
+
+      valuesToSet.delivery_partner = currentSupplier.shipping_partner_id || undefined;
+      
+      form.setFieldsValue(valuesToSet);
+    } else {
+      form.resetFields();
+      form.setFieldsValue({
+        status: "active",
+        lead_time: 0,
+        payment_term: "Thanh toán ngay",
+      });
+    }
+  }, [isEditing, currentSupplier, form]);
+
+  const handleCancel = () => {
+    if (isEditing && !formDisabled) {
+      setFormDisabled(true);
+      form.setFieldsValue(currentSupplier);
+    } else {
+      navigate("/partners");
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      const values = await form.validateFields();
+      let success = false;
+
+      const payload = { 
+        ...values, 
+        delivery_method: values.delivery_type,
+        shipping_partner_id: values.delivery_partner || null
+      };
+
+      if (isEditing) {
+        success = await updateSupplier(Number(id), payload);
+        if (success) antMessage.success("Cập nhật thành công!");
+        setFormDisabled(true);
+      } else {
+        const newSupplier = await addSupplier(payload);
+        if (newSupplier) {
+          antMessage.success("Thêm mới thành công!");
+          navigate(`/partners/edit/${newSupplier}`);
+        }
+      }
+
+      if (!success) {
+        antMessage.error("Thao tác thất bại. Vui lòng thử lại.");
+      }
+    } catch (info) {
+      console.log("Validate Failed:", info);
+    }
+  };
+
+  return (
+    <Spin spinning={loadingDetails} tip="Đang tải dữ liệu...">
+      <Card styles={{ body: { padding: 12 } }}>
+        {/* Header */}
+        <Row
+          justify="space-between"
+          align="middle"
+          style={{ marginBottom: 24 }}
+        >
+          <Col>
+            <Title level={4} style={{ margin: 0 }}>
+              {isEditing
+                ? `Chi tiết NCC: ${currentSupplier?.name || `(ID: ${id})`}`
+                : "Thêm Nhà Cung Cấp Mới"}
+            </Title>
+          </Col>
+          <Col>
+            <Space>
+              <Button type="default" onClick={() => navigate("/partners")}>
+                Về danh sách
+              </Button>
+              {isEditing && formDisabled ? (
+                <Access permission={PERMISSIONS.PARTNER.SUPPLIER.EDIT}>
+                  <Button
+                    type="primary"
+                    icon={<EditOutlined />}
+                    onClick={() => setFormDisabled(false)}
+                  >
+                    Chỉnh sửa
+                  </Button>
+                </Access>
+              ) : null}
+            </Space>
+          </Col>
+        </Row>
+
+        <Form
+          form={form}
+          layout="vertical"
+          disabled={formDisabled ? isEditing : undefined}
+        >
+          <Tabs type="card">
+            {/* TAB 1: THÔNG TIN CHUNG */}
+            <Tabs.TabPane
+              tab={
+                <Space>
+                  <InfoCircleOutlined /> Thông tin chung
+                </Space>
+              }
+              key="info"
+            >
+              <Card bordered={false}>
+                <Row gutter={24}>
+                  <Col span={12}>
+                    <Form.Item
+                      name="name"
+                      label="Tên Nhà Cung Cấp"
+                      rules={[{ required: true }]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={6}>
+                    <Form.Item name="tax_code" label="Mã số thuế">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item name="address" label="Địa chỉ">
+                      <Input.TextArea rows={2} />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item name="contact_person" label="Người liên hệ">
+                      <Input prefix={<UserOutlined />} />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      name="phone"
+                      label="Số điện thoại"
+                      rules={[{ required: true }]}
+                    >
+                      <Input prefix={<PhoneOutlined />} />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item name="email" label="Email">
+                      <Input prefix={<MailOutlined />} />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Divider orientation="left" plain>
+                  Thông tin Tài chính & Vận hành
+                </Divider>
+
+                <Row gutter={24}>
+                  {/* --- CẬP NHẬT: CHỌN NGÂN HÀNG TỪ DANH SÁCH --- */}
+                  <Col span={8}>
+                    <Form.Item
+                      name="bank_name"
+                      label="Ngân hàng (Thụ hưởng)"
+                      tooltip="Chọn đúng ngân hàng để hỗ trợ tạo mã QR thanh toán sau này."
+                    >
+                      <Select
+                        showSearch
+                        placeholder="Chọn ngân hàng..."
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "")
+                            .toLowerCase()
+                            .includes(input.toLowerCase())
+                        }
+                        options={banks.map((bank) => ({
+                          value: bank.short_name, // Lưu tên viết tắt (VD: VCB)
+                          label: `${bank.short_name} - ${bank.name}`, // Hiển thị đầy đủ
+                        }))}
+                        allowClear
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item name="bank_account" label="Số Tài khoản TT">
+                      <Input prefix={<BankOutlined />} />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item name="bank_holder" label="Chủ Tài khoản">
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  {/* --------------------------------------------- */}
+
+                  <Col span={8}>
+                    <Form.Item
+                      name="payment_term"
+                      label="Điều khoản Thanh toán"
+                    >
+                      <Input placeholder="VD: Công nợ 30 ngày" />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      name="delivery_type"
+                      label="Hình thức Giao hàng Mặc định"
+                      tooltip="Hệ thống sẽ dùng thông tin này để tự động tính toán phương án vận chuyển khi tạo đơn hàng."
+                    >
+                      <Select
+                        placeholder="Chọn hình thức..."
+                        options={DELIVERY_TYPES}
+                        onChange={() => form.setFieldValue("delivery_partner", undefined)}
+                        allowClear
+                      />
+                    </Form.Item>
+                  </Col>
+                  {selectedDeliveryType && selectedDeliveryType !== "NCC tự giao" && (
+                    <Col span={8}>
+                      <Form.Item
+                        name="delivery_partner"
+                        label="Đơn vị Vận chuyển"
+                        rules={[{ required: true, message: "Vui lòng chọn Đơn vị vận chuyển" }]}
+                      >
+                        <Select
+                          showSearch
+                          placeholder="Chọn đơn vị vận chuyển..."
+                          options={shippingPartners
+                            .filter((p) => p.type === selectedDeliveryType)
+                            .map((p) => ({ label: p.name, value: p.id }))}
+                          allowClear
+                        />
+                      </Form.Item>
+                    </Col>
+                  )}
+                  <Col span={8}>
+                    <Form.Item
+                      name="lead_time"
+                      label="Thời gian Giao hàng (ngày)"
+                    >
+                      <InputNumber
+                        min={0}
+                        style={{ width: "100%" }}
+                        addonAfter="ngày"
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      name="status"
+                      label="Trạng thái"
+                      rules={[{ required: true }]}
+                      initialValue="active"
+                    >
+                      <Select>
+                        <Option value="active">Đang hợp tác</Option>
+                        <Option value="inactive">Ngừng hợp tác</Option>
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Form.Item name="notes" label="Ghi chú">
+                  <Input.TextArea rows={3} />
+                </Form.Item>
+              </Card>
+            </Tabs.TabPane>
+
+            {/* CÁC TAB KHÁC */}
+            <Tabs.TabPane
+              tab={
+                <Space>
+                  <FileTextOutlined /> Hợp đồng & CTKM
+                </Space>
+              }
+              key="contracts"
+              disabled
+            >
+              <Text type="secondary">Tính năng đang được phát triển.</Text>
+            </Tabs.TabPane>
+            <Tabs.TabPane
+              tab={
+                <Space>
+                  <SwapOutlined /> Ánh xạ Sản phẩm
+                </Space>
+              }
+              key="mapping"
+            >
+              <Card bordered={false}>
+                <SupplierProductMappingTab 
+                  vendorTaxCode={currentSupplier?.tax_code || ""} 
+                  vendorId={Number(id) || undefined}
+                  vendorName={currentSupplier?.name || ""}
+                />
+              </Card>
+            </Tabs.TabPane>
+            {/* TAB FINANCE - [NEW] */}
+            <Tabs.TabPane
+              tab={
+                <Space>
+                  <BankOutlined /> Tài chính & Công nợ
+                </Space>
+              }
+              key="finance"
+            >
+              <Card bordered={false}>
+                <Row gutter={24}>
+                  <Col span={8}>
+                    <Statistic
+                      title="Nợ cần trả"
+                      value={currentDebt}
+                      precision={0}
+                      suffix="₫"
+                      valueStyle={{
+                        color: currentDebt > 0 ? "#cf1322" : "#3f8600",
+                      }}
+                    />
+                    <Space style={{ marginTop: 16 }}>
+                      <Button
+                        type="primary"
+                        danger
+                        onClick={() => {
+                          setFinanceModalFlow("out");
+                          setFinanceModalOpen(true);
+                        }}
+                        disabled={currentDebt <= 0}
+                      >
+                        Thanh toán công nợ
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setFinanceModalFlow("in");
+                          setFinanceModalOpen(true);
+                        }}
+                      >
+                        Nhận Chiết khấu/Hoàn tiền
+                      </Button>
+                    </Space>
+                  </Col>
+                  <Col span={8}>
+                    <Statistic
+                      title="Đã mua (Tháng này)"
+                      value={quickInfo?.purchased_this_month || 0}
+                      precision={0}
+                      suffix="₫"
+                    />
+                  </Col>
+                </Row>
+              </Card>
+            </Tabs.TabPane>
+
+            {/* Modal Finance */}
+            <FinanceFormModal
+              open={financeModalOpen}
+              onCancel={() => setFinanceModalOpen(false)}
+              onSuccess={() => {
+                setFinanceModalOpen(false);
+                fetchQuickInfo(); // Reload debt info
+              }}
+              initialFlow={financeModalFlow}
+              initialValues={{
+                business_type: "trade",
+                partner_type: "supplier",
+                partner_id: Number(id),
+                // Logic dynamic initial values — dùng currentDebt từ supplier_debt_view
+                // để prefill chính xác, tránh thanh toán quá/thiếu so với UI hiển thị.
+                amount: financeModalFlow === "out" ? currentDebt : 0,
+                description:
+                  financeModalFlow === "out"
+                    ? `Thanh toán công nợ cho NCC ${currentSupplier?.name}`
+                    : `Nhận chiết khấu thương mại / Trả hàng từ ${currentSupplier?.name}`,
+              }}
+            />
+
+            {/* TAB HISTORY - Renamed key to keep old key if needed, or just replace */}
+            {/* <Tabs.TabPane ... removed/replaced above */}
+          </Tabs>
+
+          {/* Thanh Action */}
+          {!isEditing || (isEditing && !formDisabled) ? (
+            <Affix offsetBottom={0}>
+              <Card
+                styles={{
+                  body: {
+                    padding: "12px 24px",
+                    textAlign: "right",
+                    borderTop: "1px solid #f0f0f0",
+                    background: "rgba(255,255,255,0.8)",
+                    backdropFilter: "blur(5px)",
+                  },
+                }}
+              >
+                <Space>
+                  <Button icon={<CloseCircleOutlined />} onClick={handleCancel}>
+                    Hủy
+                  </Button>
+                  <Button
+                    type="primary"
+                    icon={<SaveOutlined />}
+                    onClick={handleSave}
+                    loading={loadingDetails}
+                    disabled={isEditing ? formDisabled : undefined} // Allow save if editing enabled
+                  >
+                    Lưu thay đổi
+                  </Button>
+                </Space>
+              </Card>
+            </Affix>
+          ) : null}
+        </Form>
+      </Card>
+
+      {/* --- HOTFIX: CHÈN MODAL VÀO ĐÂY --- */}
+      <FinanceFormModal
+        open={financeModalOpen}
+        onCancel={() => setFinanceModalOpen(false)}
+        initialFlow={financeModalFlow}
+        initialValues={{
+          business_type: "trade",
+          partner_type: "supplier",
+          partner_id: String(id), // Ép kiểu string cho chắc
+          amount: financeModalFlow === "out" ? currentDebt : 0,
+          description:
+            financeModalFlow === "out"
+              ? `Thanh toán công nợ cho NCC ${currentSupplier?.name}`
+              : `Nhận chiết khấu/hoàn tiền từ NCC ${currentSupplier?.name}`,
+        }}
+        onSuccess={() => {
+          setFinanceModalOpen(false);
+          fetchQuickInfo(); // Reload số nợ
+          antMessage.success("Giao dịch thành công!");
+        }}
+      />
+    </Spin>
+  );
+};
+
+const ProtectedSupplierDetailPage = () => (
+  <PermissionGuard permission={PERMISSIONS.PARTNER.SUPPLIER.VIEW}>
+    <SupplierDetailPage />
+  </PermissionGuard>
+);
+
+export default ProtectedSupplierDetailPage;

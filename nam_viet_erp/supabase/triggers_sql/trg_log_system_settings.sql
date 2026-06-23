@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_system_settings AFTER INSERT OR DELETE OR UPDATE ON public.system_settings FOR EACH ROW EXECUTE FUNCTION log_system_action()

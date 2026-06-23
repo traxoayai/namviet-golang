@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_auto_sync_order_payment AFTER INSERT OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION trigger_sync_order_payment()

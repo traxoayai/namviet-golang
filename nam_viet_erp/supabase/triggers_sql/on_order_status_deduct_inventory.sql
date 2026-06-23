@@ -1,0 +1,1 @@
+CREATE TRIGGER on_order_status_deduct_inventory AFTER UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION handle_order_inventory_deduction()

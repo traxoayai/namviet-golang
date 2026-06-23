@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_sync_product_inventory AFTER INSERT OR DELETE OR UPDATE OF quantity, product_id, warehouse_id ON public.inventory_batches FOR EACH ROW EXECUTE FUNCTION sync_product_inventory_from_batches()

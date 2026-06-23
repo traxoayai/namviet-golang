@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_suppliers AFTER INSERT OR DELETE OR UPDATE ON public.suppliers FOR EACH ROW EXECUTE FUNCTION log_system_action()

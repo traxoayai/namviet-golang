@@ -1,0 +1,61 @@
+// src/main.tsx
+import "regenerator-runtime/runtime"; // <--- [BẮT BUỘC] THÊM DÒNG NÀY ĐẦU TIÊN
+import "@ant-design/v5-patch-for-react-19";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ConfigProvider, App as AntApp } from "antd";
+import viVN from "antd/locale/vi_VN";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+
+import App from "./App.tsx";
+import "antd/dist/reset.css";
+import "./app/styles/globals.css";
+import "dayjs/locale/vi";
+
+// --- React Query ---
+
+// --- MỚI: Import Context ---
+import { AuthProvider } from "@/app/contexts/AuthProvider";
+import { NotificationProvider } from "@/app/contexts/NotificationContext";
+import { PermissionGate } from "@/app/providers/PermissionGate";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 min
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        {/* Bọc AuthProvider ở đây để quản lý phiên đăng nhập toàn cục */}
+        <AuthProvider>
+          <ConfigProvider
+            locale={viVN}
+            theme={{
+              token: {
+                colorPrimary: "#00b96b",
+                borderRadius: 4,
+              },
+            }}
+          >
+            {/* Bọc NotificationProvider trong ConfigProvider để ăn theo Theme */}
+            <NotificationProvider>
+              <PermissionGate>
+                <AntApp>
+                  <App />
+                </AntApp>
+              </PermissionGate>
+            </NotificationProvider>
+          </ConfigProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </React.StrictMode>
+);

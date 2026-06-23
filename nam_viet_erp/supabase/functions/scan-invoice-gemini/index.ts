@@ -1,0 +1,472 @@
+// Setup: deno install --allow-net --allow-env --allow-read index.ts
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+// CORS allowlist — chỉ chấp nhận origin Portal/ERP đã đăng ký (env ALLOWED_ORIGINS,
+// CSV). Trả "" khi origin lạ để browser tự block. Pattern giống sepay-proxy.
+const ALLOWED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+function getCorsOrigin(req) {
+  const origin = req.headers.get("origin") || "";
+  if (ALLOWED_ORIGINS.length === 0) return origin; // Dev fallback khi env chưa set
+  return ALLOWED_ORIGINS.includes(origin) ? origin : "";
+}
+function buildCorsHeaders(req) {
+  return {
+    "Access-Control-Allow-Origin": getCorsOrigin(req),
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Max-Age": "86400",
+  };
+}
+// Rate-limit per-user dùng llm_request_log (provider='gemini') — chống cost-attack.
+// Default 30 scan / 10 phút / user; override qua env SCAN_RATE_LIMIT / SCAN_RATE_WINDOW_SEC.
+const RATE_LIMIT = Number(Deno.env.get("SCAN_RATE_LIMIT") ?? "30");
+const RATE_WINDOW_SEC = Number(Deno.env.get("SCAN_RATE_WINDOW_SEC") ?? "600");
+async function checkRateLimit(supabase, userId) {
+  const since = new Date(Date.now() - RATE_WINDOW_SEC * 1000).toISOString();
+  const { count, error } = await supabase
+    .from("llm_request_log")
+    .select("id", {
+      count: "exact",
+      head: true,
+    })
+    .eq("user_id", userId)
+    .eq("provider", "gemini")
+    .gte("created_at", since);
+  if (error) {
+    // Fail-open nhẹ: log warn, không chặn vì lỗi đếm (tránh self-DoS khi DB lag)
+    console.warn("[rate-limit] count failed (allow request):", error.message);
+    return true;
+  }
+  return (count ?? 0) < RATE_LIMIT;
+}
+// Helper: log mỗi attempt vào llm_request_log để track cost/quota (memory rule
+// project_llm_free_tier_models — luôn check llm_request_log khi user kêu scan fail)
+async function logLlmAttempt(supabase, payload) {
+  try {
+    await supabase.from("llm_request_log").insert(payload);
+  } catch (e) {
+    console.warn(
+      "[llm_request_log] insert failed (non-fatal):",
+      e?.message ?? e
+    );
+  }
+}
+// Gọi Gemini với 1 model cụ thể — tách function để fallback chain dễ retry
+async function callGemini(model, geminiApiKey, prompt, base64Data, mimeType) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiApiKey}`;
+  const started = Date.now();
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [
+            {
+              text: prompt,
+            },
+            {
+              inline_data: {
+                mime_type: mimeType || "image/jpeg",
+                data: base64Data,
+              },
+            },
+          ],
+        },
+      ],
+    }),
+  });
+  const latencyMs = Date.now() - started;
+  const data = await resp.json();
+  if (!resp.ok) {
+    const errMsg = data?.error?.message ?? `HTTP ${resp.status}`;
+    const status = resp.status === 429 ? "rate_limit" : "error";
+    const err = new Error(`Gemini ${model} fail: ${errMsg}`);
+    err.latencyMs = latencyMs;
+    err.status = status;
+    err.providerStatus = resp.status;
+    throw err;
+  }
+  return {
+    data,
+    latencyMs,
+  };
+}
+serve(async (req) => {
+  const corsHeaders = buildCorsHeaders(req);
+  if (req.method === "OPTIONS")
+    return new Response("ok", {
+      headers: corsHeaders,
+    });
+  // Khởi tạo client sớm để log được cả case fail trước khi vào main logic
+  const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+  const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  const supabase =
+    supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+  // === SECURITY: Verify caller JWT TRƯỚC mọi xử lý ===
+  // Service-role client bypass RLS nên BẮT BUỘC kiểm danh tính caller, nếu không
+  // bất kỳ ai trên internet đều có thể drain Gemini quota + bơm finance_invoices.
+  if (!supabase) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Server misconfigured: Missing Supabase credentials",
+      }),
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  const authHeader = req.headers.get("Authorization") || "";
+  const token = authHeader.replace("Bearer ", "");
+  if (!token) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Unauthorized: Missing Authorization header",
+      }),
+      {
+        status: 401,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  const {
+    data: { user: caller },
+    error: authError,
+  } = await supabase.auth.getUser(token);
+  if (authError || !caller) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Unauthorized: Invalid token",
+      }),
+      {
+        status: 401,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  // Per-user rate-limit (chống cost-attack Gemini quota)
+  const allowed = await checkRateLimit(supabase, caller.id);
+  if (!allowed) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: `Quá nhiều request scan trong ${Math.round(RATE_WINDOW_SEC / 60)} phút. Vui lòng thử lại sau.`,
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  try {
+    // 1. Config & Validation
+    const geminiApiKey = Deno.env.get("GEMINI_API_KEY");
+    if (!geminiApiKey) throw new Error("Missing GEMINI_API_KEY");
+    // Model config qua env var — rollback không cần redeploy. Pin snapshot cụ thể
+    // (gemini-2.5-flash-002) thay vì alias rolling để chống silent break khi Google
+    // xoay underlying version. Fallback xuống 2.0-flash khi primary fail/quota.
+    const primaryModel = Deno.env.get("GEMINI_MODEL") ?? "gemini-2.5-flash-002";
+    const fallbackModel =
+      Deno.env.get("GEMINI_MODEL_FALLBACK") ?? "gemini-2.0-flash";
+    // 2. Parse Payload (Robust V9)
+    const rawBody = await req.text();
+    if (!rawBody) throw new Error("Empty Request Body");
+    let body;
+    try {
+      body = JSON.parse(rawBody);
+      if (typeof body === "string") body = JSON.parse(body);
+    } catch {
+      throw new Error("Invalid JSON");
+    }
+    // 3. Ping Mode
+    if (body.action === "ping") {
+      // ... (Giữ nguyên logic Ping nếu cần, hoặc trả về simple pong)
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "Pong",
+        }),
+        {
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+    // 4. Main Logic
+    const { file_url, mime_type, mode } = body;
+    if (!file_url) throw new Error("Missing file_url");
+    // mode='extract_only' → chỉ scan + trả parsed_data, KHÔNG insert/update
+    // finance_invoices. Dùng cho phiếu xuất kho NCC ở trang nhập kho/mua hàng
+    // (mục đích chỉ auto-fill lot/expiry, không phải hóa đơn VAT).
+    const extractOnly = mode === "extract_only";
+    // Download & Convert
+    const fileResp = await fetch(file_url);
+    if (!fileResp.ok) throw new Error("Download failed");
+    const arrayBuffer = await fileResp.arrayBuffer();
+    const base64Data = encodeBase64(arrayBuffer);
+    // Prompt (V12 - Date Fixed)
+    const prompt = `
+      Bạn là chuyên gia OCR hóa đơn thuốc. Nhiệm vụ: Trích xuất dữ liệu JSON (tuyệt đối không markdown).
+      
+      🚨 QUY TẮC NGÀY THÁNG BẮT BUỘC (CRITICAL):
+      - Mọi thông tin ngày tháng (invoice_date, expiry_date) PHẢI được chuyển đổi sang định dạng ISO 8601: "YYYY-MM-DD".
+      - Ví dụ: Thấy "30/11/2026", "30.11.26" hay "30-Nov-2026" -> Trả về "2026-11-30". Nhưng nên nhớ, các thông tin gửi cho bạn có thể luôn luôn là định dạng dd mm yyyy, nên bạn phải biết đâu là "dd"; đâu là "mm"; đâu là "yyyy". Ví dụ: thông tin 07.06.2030 thì có nghĩa là ngày 07 tháng 06 năm 2030.
+      - Nếu chỉ có tháng/năm (11/2026) -> Lấy ngày cuối tháng "2026-11-30".
+      - Nếu không tìm thấy ngày -> Trả về null.
+
+      Output JSON format:
+      {
+        "invoice_number": "string",
+        "invoice_symbol": "string", 
+        "invoice_date": "YYYY-MM-DD",
+        "supplier_name": "string",
+        "tax_code": "string",
+        "supplier_address": "string",
+        "total_amount_pre_tax": number,
+        "tax_amount": number,
+        "total_amount_post_tax": number,
+        "items": [
+           { "name": "string", "unit": "string", "quantity": number, "unit_price": number, "total_amount": number, "vat_rate": number, "lot_number": "string", "expiry_date": "YYYY-MM-DD" }
+        ]
+      }
+    `;
+    console.log(`[Gemini] Scanning with primary=${primaryModel}...`);
+    // Fallback chain: thử primary → catch → retry fallback. Mỗi attempt log riêng
+    // vào llm_request_log để debug cost spike và phân biệt fail vì model nào.
+    const attempted = [];
+    let aiData;
+    let usedModel = primaryModel;
+    try {
+      const r = await callGemini(
+        primaryModel,
+        geminiApiKey,
+        prompt,
+        base64Data,
+        mime_type
+      );
+      aiData = r.data;
+      attempted.push(primaryModel);
+      if (supabase) {
+        const usage = aiData?.usageMetadata ?? {};
+        await logLlmAttempt(supabase, {
+          provider: "gemini",
+          model: primaryModel,
+          status: "success",
+          latency_ms: r.latencyMs,
+          tokens_in: usage.promptTokenCount ?? null,
+          tokens_out: usage.candidatesTokenCount ?? null,
+          attempted_providers: [primaryModel],
+          user_id: caller.id,
+        });
+      }
+    } catch (primaryErr) {
+      attempted.push(primaryModel);
+      console.warn(
+        `[Gemini] Primary ${primaryModel} fail, fallback ${fallbackModel}:`,
+        primaryErr.message
+      );
+      if (supabase) {
+        await logLlmAttempt(supabase, {
+          provider: "gemini",
+          model: primaryModel,
+          status: primaryErr.status ?? "error",
+          latency_ms: primaryErr.latencyMs ?? null,
+          error_message: primaryErr.message,
+          attempted_providers: [primaryModel],
+          user_id: caller.id,
+        });
+      }
+      // Nếu primary === fallback (env override) thì không retry tránh loop
+      if (primaryModel === fallbackModel) throw primaryErr;
+      const r = await callGemini(
+        fallbackModel,
+        geminiApiKey,
+        prompt,
+        base64Data,
+        mime_type
+      );
+      aiData = r.data;
+      usedModel = fallbackModel;
+      attempted.push(fallbackModel);
+      if (supabase) {
+        const usage = aiData?.usageMetadata ?? {};
+        await logLlmAttempt(supabase, {
+          provider: "gemini",
+          model: fallbackModel,
+          status: "success",
+          latency_ms: r.latencyMs,
+          tokens_in: usage.promptTokenCount ?? null,
+          tokens_out: usage.candidatesTokenCount ?? null,
+          attempted_providers: attempted,
+          user_id: caller.id,
+        });
+      }
+    }
+    // Parse Result — 2.5-flash có thể trả thêm `thinking` parts; lọc đúng text part
+    const parts = aiData.candidates?.[0]?.content?.parts ?? [];
+    const textPart = parts.find(
+      (p) => typeof p?.text === "string" && p.text.trim().length > 0
+    );
+    const rawText = textPart?.text ?? "{}";
+    const parsedInvoice = JSON.parse(
+      rawText.replace(/```json|```/g, "").trim()
+    );
+    console.log(
+      `[Gemini] Parsed via ${usedModel} (attempts=${attempted.join("→")})`
+    );
+    // ==================================================================
+    // 5. EXTRACT-ONLY SHORT-CIRCUIT (cho flow nhập kho từ phiếu xuất NCC)
+    // ==================================================================
+    if (extractOnly) {
+      console.log(`[ExtractOnly] Skip DB insert, return parsed only`);
+      return new Response(
+        JSON.stringify({
+          success: true,
+          data: parsedInvoice,
+          action: "EXTRACT_ONLY",
+        }),
+        {
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+    // ==================================================================
+    // 6. DEDUPLICATION LOGIC (CHỐNG TRÙNG LẶP) - THEO YÊU CẦU AURA
+    // ==================================================================
+    if (!supabase) throw new Error("Missing Supabase credentials for DB write");
+    let targetId;
+    let actionType = "INSERT";
+    // Chỉ check trùng nếu AI đọc được Số hóa đơn (Nếu AI ko đọc được thì đành tạo mới)
+    if (parsedInvoice.invoice_number) {
+      // Query check tồn tại (Dựa trên Số hóa đơn + MST Nhà cung cấp)
+      // Lưu ý: Nếu MST AI đọc null thì chỉ check Số hóa đơn (rủi ro thấp nhưng chấp nhận được)
+      let query = supabase
+        .from("finance_invoices")
+        .select("id, status, invoice_number")
+        .eq("invoice_number", parsedInvoice.invoice_number);
+      if (parsedInvoice.tax_code) {
+        query = query.eq("supplier_tax_code", parsedInvoice.tax_code);
+      }
+      const { data: existingInvoices, error: searchError } = await query;
+      if (!searchError && existingInvoices && existingInvoices.length > 0) {
+        const existing = existingInvoices[0]; // Lấy bản ghi đầu tiên tìm thấy
+        console.log(
+          `[Deduplication] Found existing invoice ID: ${existing.id} Status: ${existing.status}`
+        );
+        // Case A: Đã nhập kho (Verified/Posted) -> Báo lỗi Conflict
+        if (existing.status === "verified" || existing.status === "posted") {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: `Hóa đơn số ${existing.invoice_number} này đã được nhập kho/xử lý rồi. Không thể ghi đè.`,
+            }),
+            {
+              status: 409,
+              headers: {
+                ...corsHeaders,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+        }
+        // Case B: Đang là nháp (Draft) -> Update đè
+        if (existing.status === "draft" || existing.status === "rejected") {
+          targetId = existing.id;
+          actionType = "UPDATE";
+        }
+      }
+    }
+    // Thực thi DB (Insert hoặc Update)
+    const dbPayload = {
+      invoice_number: parsedInvoice.invoice_number,
+      invoice_symbol: parsedInvoice.invoice_symbol,
+      invoice_date: parsedInvoice.invoice_date,
+      supplier_name_raw: parsedInvoice.supplier_name,
+      supplier_tax_code: parsedInvoice.tax_code,
+      supplier_address_raw: parsedInvoice.supplier_address,
+      total_amount_pre_tax: parsedInvoice.total_amount_pre_tax,
+      tax_amount: parsedInvoice.tax_amount,
+      total_amount_post_tax: parsedInvoice.total_amount_post_tax,
+      items_json: parsedInvoice.items,
+      parsed_data: parsedInvoice,
+      file_url: file_url,
+      file_type: mime_type,
+      status: "draft",
+      updated_at: new Date().toISOString(),
+    };
+    let dbResult;
+    if (actionType === "UPDATE") {
+      dbResult = await supabase
+        .from("finance_invoices")
+        .update(dbPayload)
+        .eq("id", targetId)
+        .select("id")
+        .single();
+    } else {
+      dbResult = await supabase
+        .from("finance_invoices")
+        .insert(dbPayload)
+        .select("id")
+        .single();
+    }
+    if (dbResult.error) throw dbResult.error;
+    console.log(`[Success] Action: ${actionType} - ID: ${dbResult.data.id}`);
+    return new Response(
+      JSON.stringify({
+        success: true,
+        invoice_id: dbResult.data.id,
+        data: parsedInvoice,
+        action: actionType,
+      }),
+      {
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Fatal:", error.message);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: error.message,
+      }),
+      {
+        status: 400,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+});

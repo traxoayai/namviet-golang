@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_freeze_stock_quantity BEFORE UPDATE OF stock_quantity ON public.product_inventory FOR EACH ROW EXECUTE FUNCTION freeze_stock_quantity_update()

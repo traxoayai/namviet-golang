@@ -1,0 +1,6829 @@
+[
+  {
+    "nbmst": "0104224702",
+    "khmshdon": 1,
+    "khhdon": "C24TDG",
+    "shdon": 455,
+    "cqt": "0156",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "322f866f-4ec7-4885-8067-6a9cdf4b8dbf",
+    "hsgoc": "e0db666b-e505-46be-ab91-4384498c8101",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "7477047b-47b3-4610-98a8-7fcdcb276a37",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00AA9277F8A1804EE2BBAA63A2C25A53E8",
+    "mtdiep": null,
+    "mtdtchieu": "V01013606970004F0AC957D4352BE1C7E1654A63F42",
+    "nbdchi": "Tầng 4, tháp CEO, HH2-1 đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM DGC",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-25T09:01:16.641Z",
+    "ncnhat": "2024-03-25T09:01:16.648Z",
+    "ngcnhat": "tvan_bkav",
+    "nky": "2024-03-25T09:01:02Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng-Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmttkhac": [],
+    "ntao": "2024-03-25T09:01:16.600Z",
+    "ntnhan": "2024-03-25T09:01:16.574Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-24T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 2400000,
+    "tgtthue": 120000,
+    "tgtttbchu": "Hai triệu năm trăm hai mươi nghìn đồng chẵn./.",
+    "tgtttbso": 2520000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 2400000,
+        "tthue": 120000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101360697",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN, ST=Hà Nội, CN=Công Ty Cổ Phần Dược Phẩm DGC, UID=MST:0104224702\",\"SerialNumber\":\"54033D982D42F0EBBB2170512997B7DB\",\"Issuer\":\"CN=BkavCA, O=Bkav Corporation, L=Hanoi, C=VN\",\"NotAfter\":\"2024-05-10T08:03:07\",\"NotBefore\":\"2020-05-09T10:22:03\",\"SigningTime\":\"2024-03-25T16:01:02\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101360697",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-25T16:01:16\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "7477047b-47b3-4610-98a8-7fcdcb276a37",
+        "id": "815cc0ca-a049-4be8-ab94-1a4945666cf0",
+        "dgia": 120000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Augmetin 250mg bột",
+        "thtcthue": null,
+        "thtien": 2400000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0110304272",
+    "khmshdon": 1,
+    "khhdon": "C24TAP",
+    "shdon": 75,
+    "cqt": "0139",
+    "cttkhac": [
+      {
+        "ttruong": "Số bảo mật",
+        "kdlieu": "string",
+        "dlieu": "3FC75322C9331ABE"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "90305dc1-e9df-4071-8440-1ff66603ac69",
+    "hsgoc": "04ad0b72-2f2f-46a5-a0b4-42c23221fb87",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "33994462-b003-4df7-a917-0ccb8ec829a2",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00553503B6D007459790FE34F412FF0521",
+    "mtdiep": null,
+    "mtdtchieu": "V01060264951B0B70C883F64234A65F47D8EB268683",
+    "nbdchi": "Số 6, Ngách 44/3, Ngõ 44, Đường Tiền Lệ 1,  Thôn Tiền Lệ , Xã Tiền Yên, Huyện Hoài Đức, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH DƯỢC PHẨM VÀ TBYT AN PHÁT",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-25T09:05:58.907Z",
+    "ncnhat": "2024-03-25T09:05:58.914Z",
+    "ngcnhat": "tvan_invoice",
+    "nky": "2024-03-25T09:05:49Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-25T09:05:58.874Z",
+    "ntnhan": "2024-03-25T09:05:58.845Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-24T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 18563000,
+    "tgtthue": 928150,
+    "tgtttbchu": "Mười chín triệu bốn trăm chín mươi mốt nghìn một trăm năm mươi  đồng",
+    "tgtttbso": 19491150,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 18563000,
+        "tthue": 928150,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0106026495",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0110304272, CN=CÔNG TY TNHH DƯỢC PHẨM VÀ TBYT AN PHÁT, S=Hà Nội, C=VN\",\"SerialNumber\":\"5401016B9FF4F712E380612650D9BF3A\",\"Issuer\":\"C=VN, O=CÔNG TY CỔ PHẦN CHỮ KÝ SỐ FASTCA, CN=FastCA SHA-256\",\"NotAfter\":\"2025-12-22T08:28:52\",\"NotBefore\":\"2023-05-04T10:22:00\",\"SigningTime\":\"2024-03-25T16:05:49\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0106026495",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-25T16:05:58\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": 0,
+    "tgtkhac": 0,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "0ea4eb61-98f9-4e9a-85b0-52d12ed9af3a",
+        "dgia": 85400,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Hapacol pain v/10 h/100 t/8400",
+        "thtcthue": null,
+        "thtien": 1708000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "0fd89de3-db81-4d43-8383-e9f73e3ac4da",
+        "dgia": 67300,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Hapacol Blue v/10 h/100 t/9600",
+        "thtcthue": null,
+        "thtien": 3365000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "d886eaf7-9433-4321-ba91-d317a97b6f35",
+        "dgia": 32500,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Hagimox 250 gói/1.5g h/24 t/3456",
+        "thtcthue": null,
+        "thtien": 3250000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "14c9d246-d47d-4ea6-8fe6-26d9047e7630",
+        "dgia": 48600,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Hapacol Extra v/10 h/100 t/9600",
+        "thtcthue": null,
+        "thtien": 4860000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "10250869-7006-4074-bf4b-3a6343d9448c",
+        "dgia": 25800,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Hapacol 325 V/10 H/100 T/12000",
+        "thtcthue": null,
+        "thtien": 2580000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "33994462-b003-4df7-a917-0ccb8ec829a2",
+        "id": "eb0f00f3-8a1a-4a75-95b2-cb8903208599",
+        "dgia": 28000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "Hapacol sủi v/4 h/16 t/2160",
+        "thtcthue": null,
+        "thtien": 2800000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0109219368",
+    "khmshdon": 1,
+    "khhdon": "C24TVA",
+    "shdon": 509,
+    "cqt": "0111",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "dd40d099-8777-442a-929c-c7e6eb66a1af"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "2ccd37d4-e3f2-4b0b-a5f1-f9874d0bdf69"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "2AC7D9700E1A472895FC8FC2CE91BD07"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "2ACGCVA5WDNJ"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "9f626f86-21d6-4992-a8be-dc78f4ab048d",
+    "hsgoc": "e2f7c751-45da-4340-a64e-24d6cb7a535f",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "01d4bd1c-b16c-49c5-a7ee-6d2889885abc",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00FB8687B22D4E4A1DBA98093A94EB3484",
+    "mtdiep": null,
+    "mtdtchieu": "V010124315026E85A547AA6416782BC163333396BB7",
+    "nbdchi": "Số 20 ngõ 64/49 Nguyễn Lương Bằng, Phường Ô Chợ Dừa, Quận Đống Đa, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "12610001512559",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ THIẾT BỊ Y TẾ VIỆT ANH",
+    "nbtnhang": "BIDV",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "CompanyBankNameWithBranch",
+        "kdlieu": "string",
+        "dlieu": "BIDV - Ba Đình"
+      },
+      {
+        "ttruong": "CompanyBranchBankName",
+        "kdlieu": "string",
+        "dlieu": "Ba Đình"
+      },
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số 20 ngõ 64/49 Nguyễn Lương Bằng, Phường Ô Chợ Dừa, Quận Đống Đa, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "12610001512559"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "BIDV"
+      },
+      {
+        "ttruong": "SellerEmail",
+        "kdlieu": "string",
+        "dlieu": "ctvietanh@yahoo.com"
+      },
+      {
+        "ttruong": "SellerPhoneNumber",
+        "kdlieu": "string",
+        "dlieu": "02435116270"
+      }
+    ],
+    "ncma": "2024-03-20T03:24:06.420Z",
+    "ncnhat": "2024-03-20T03:24:06.427Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-03-20T03:24:01Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-20T03:24:06.378Z",
+    "ntnhan": "2024-03-20T03:24:06.344Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-19T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 2880002,
+    "tgtthue": 144000,
+    "tgtttbchu": "Ba triệu không trăm hai mươi bốn nghìn không trăm linh hai đồng chẵn.",
+    "tgtttbso": 3024002,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 2880002,
+        "tthue": 144000,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ListStockName",
+        "kdlieu": "string",
+        "dlieu": "Hàng hóa"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "3024002.0000"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Three million, twenty-four thousand, two dong."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "2880002.00000000"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "2880002.0000"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0000"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0000"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "2880002.0000"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "2880002.0000"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "144000.0000"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "CTYNAMVIET",
+    "nbsdthoai": "02435116270",
+    "nbdctdtu": "ctvietanh@yahoo.com",
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0109219368, CN=CÔNG TY CỔ PHẦN DƯỢC PHẨM VÀ THIẾT BỊ Y TẾ VIỆT ANH, L=HÀ NỘI, C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201B918ED7\",\"Issuer\":\"CN=Viettel-CA, O=Viettel Group, L=Hà Nội, C=VN\",\"NotAfter\":\"2024-05-13T12:05:12\",\"NotBefore\":\"2023-02-16T04:19:23\",\"SigningTime\":\"2024-03-20T10:24:01\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-20T10:24:06\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "01d4bd1c-b16c-49c5-a7ee-6d2889885abc",
+        "id": "192e70d0-0ddd-4340-a443-d08f68632f4c",
+        "dgia": 5142.86,
+        "dvtinh": "Vỉ",
+        "ltsuat": "5%",
+        "sluong": 560,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Trimazon  vỉ 20v Pharbaco",
+        "thtcthue": null,
+        "thtien": 2880002,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "2880002.000000"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "2880002.000000"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "2880002.000000"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.000000"
+          },
+          {
+            "ttruong": "MainConvertRate",
+            "kdlieu": "numeric",
+            "dlieu": "1.000000"
+          },
+          {
+            "ttruong": "MainQuantity",
+            "kdlieu": "numeric",
+            "dlieu": "560.000000"
+          },
+          {
+            "ttruong": "MainUnitName",
+            "kdlieu": "string",
+            "dlieu": "Vỉ"
+          },
+          {
+            "ttruong": "MainUnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "5142.860000"
+          },
+          {
+            "ttruong": "RowType",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "5142.860000"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "144000.000000"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "144000.000000"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104224702",
+    "khmshdon": 1,
+    "khhdon": "C24TDG",
+    "shdon": 416,
+    "cqt": "0156",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "0df77a99-5237-4c7d-b882-eefda4850958",
+    "hsgoc": "064f5eea-05d2-4aa7-989e-b840cb873ce7",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "7714caf3-62d8-43d0-829a-176ce435197c",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00E6B350BE35A2475AAC1882A98ACE2AFD",
+    "mtdiep": null,
+    "mtdtchieu": "V01013606975B06E34ACECB4CF093644875ED660218",
+    "nbdchi": "Tầng 4, tháp CEO, HH2-1 đường Phạm Hùng, Phường Mễ Trì, Quận Nam Từ Liêm, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM DGC",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-18T09:06:30.977Z",
+    "ncnhat": "2024-03-18T09:06:30.983Z",
+    "ngcnhat": "tvan_bkav",
+    "nky": "2024-03-18T09:06:11Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng-Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": "Công ty TNHH Dược - Thiết Bị Y tế Nam Việt",
+    "nmttkhac": [],
+    "ntao": "2024-03-18T09:06:30.936Z",
+    "ntnhan": "2024-03-18T09:06:30.907Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-17T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 8150000,
+    "tgtthue": 407500,
+    "tgtttbchu": "Tám triệu năm trăm năm mươi bảy nghìn năm trăm đồng chẵn./.",
+    "tgtttbso": 8557500,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 8150000,
+        "tthue": 407500,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101360697",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN, ST=Hà Nội, CN=Công Ty Cổ Phần Dược Phẩm DGC, UID=MST:0104224702\",\"SerialNumber\":\"54033D982D42F0EBBB2170512997B7DB\",\"Issuer\":\"CN=BkavCA, O=Bkav Corporation, L=Hanoi, C=VN\",\"NotAfter\":\"2024-05-10T08:03:07\",\"NotBefore\":\"2020-05-09T10:22:03\",\"SigningTime\":\"2024-03-18T16:06:11\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101360697",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-18T16:06:30\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "7714caf3-62d8-43d0-829a-176ce435197c",
+        "id": "d9c0d738-4377-4acb-ad44-451764bf9639",
+        "dgia": 10000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Aspirin 100mg",
+        "thtcthue": null,
+        "thtien": 1000000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7714caf3-62d8-43d0-829a-176ce435197c",
+        "id": "3f001878-5d9d-4c75-b089-8a88d5f636b1",
+        "dgia": 4000,
+        "dvtinh": "viên",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Fubenzon H1v",
+        "thtcthue": null,
+        "thtien": 400000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7714caf3-62d8-43d0-829a-176ce435197c",
+        "id": "5bfde681-6900-4f4f-9142-27746840bce3",
+        "dgia": 166000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 30,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Panadon cảm cúm",
+        "thtcthue": null,
+        "thtien": 4980000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7714caf3-62d8-43d0-829a-176ce435197c",
+        "id": "03328b49-d381-4648-80a9-ee0481748bdf",
+        "dgia": 30000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Piracetam  H6*10viên",
+        "thtcthue": null,
+        "thtien": 600000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7714caf3-62d8-43d0-829a-176ce435197c",
+        "id": "cfe3d88a-1eee-4685-83f3-50c7029d006c",
+        "dgia": 78000,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 15,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Debridat pháp 100mg H30v Pháp",
+        "thtcthue": null,
+        "thtien": 1170000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0105279165",
+    "khmshdon": 1,
+    "khhdon": "C24TVM",
+    "shdon": 1552,
+    "cqt": "0113",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "8a1f9b9f-d962-4e89-b557-774682f2685e",
+    "hsgoc": "5c2e08c5-4d05-48e8-8a9d-a8dd57e90ba2",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "a3bbfcba-a3ec-4d9d-991f-73e2eb2c43cc",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00F90841FE765B44EFBE27D35BB4474DDB",
+    "mtdiep": null,
+    "mtdtchieu": "V0102519041E233F9C0E51511EE9F30ABF25468B21F",
+    "nbdchi": "Số nhà 18, ngõ 318 phố Bùi Xương Trạch, Phường Khương Đình, Quận Thanh Xuân, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ THIẾT BỊ Y TẾ VTM",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-18T10:54:25.991Z",
+    "ncnhat": "2024-03-18T10:54:25.997Z",
+    "ngcnhat": "tvan_efy",
+    "nky": "2024-03-18T10:54:23Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-18T10:54:25.959Z",
+    "ntnhan": "2024-03-18T10:54:25.922Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-17T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 985000,
+    "tgtthue": 70850,
+    "tgtttbchu": "Một triệu không trăm năm mươi lăm nghìn tám trăm năm mươi đồng chẵn.",
+    "tgtttbso": 1055850,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "8%",
+        "thtien": 720000,
+        "tthue": 57600,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "5%",
+        "thtien": 265000,
+        "tthue": 13250,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0102519041",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "ANHHUNGLANGSON",
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"UID=MST:0105279165, CN=CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ THIẾT BỊ Y TẾ VTM, C=VN\",\"SerialNumber\":\"5401016CF119B143E9C965683AC44826\",\"Issuer\":\"C=VN, O=CÔNG TY CỔ PHẦN CHỮ KÝ SỐ FASTCA, CN=FastCA SHA-256\",\"NotAfter\":\"2024-10-16T08:31:00\",\"NotBefore\":\"2021-04-16T08:31:00\",\"SigningTime\":\"2024-03-18T17:54:23\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0102519041",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-18T17:54:25\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "a3bbfcba-a3ec-4d9d-991f-73e2eb2c43cc",
+        "id": "7e8aaa4c-e392-42db-b9d9-8f8f9af42696",
+        "dgia": 720000,
+        "dvtinh": "Cái",
+        "ltsuat": "8%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Cân cơ khí hiệu OROMI, Model : SS-SH04",
+        "thtcthue": null,
+        "thtien": 720000,
+        "tlckhau": null,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "a3bbfcba-a3ec-4d9d-991f-73e2eb2c43cc",
+        "id": "2164e797-1f51-4ad1-98cb-e0b80acce557",
+        "dgia": 13000,
+        "dvtinh": "Chiếc",
+        "ltsuat": "5%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Nhiệt kế điện tử hiệu BERRCOM, Model : DT007",
+        "thtcthue": null,
+        "thtien": 130000,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "a3bbfcba-a3ec-4d9d-991f-73e2eb2c43cc",
+        "id": "3b4cd895-5c85-4968-ad24-b297d815f56b",
+        "dgia": 135000,
+        "dvtinh": "Chiếc",
+        "ltsuat": "5%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Máy trợ thính (gài tai) hiệu ALKATO, Model : JH-125",
+        "thtcthue": null,
+        "thtien": 135000,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0101225867",
+    "khmshdon": 1,
+    "khhdon": "C24THL",
+    "shdon": 20395,
+    "cqt": "0101",
+    "cttkhac": [
+      {
+        "ttruong": "DVKy",
+        "kdlieu": "string",
+        "dlieu": "CÔNG TY TNHH DƯỢC PHẨM HOA LINH"
+      },
+      {
+        "ttruong": "NKy",
+        "kdlieu": "date",
+        "dlieu": "2024-03-15"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "bdccc89c-4f57-4a3f-9782-bd48b6b33405",
+    "hsgoc": "46fa4a0a-2917-46ee-ac6c-a99a975159a9",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "0093DA501028634BBDBC2DD6FC26796003",
+    "mtdiep": null,
+    "mtdtchieu": "V010068620996568AF8490B4FE98E9E7DA407D6B685",
+    "nbdchi": "B19, D6 Khu đô thị mới Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CÔNG TY TNHH DƯỢC PHẨM HOA LINH",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-15T05:20:22.153Z",
+    "ncnhat": "2024-03-15T05:20:22.161Z",
+    "ngcnhat": "tvan_mobifone",
+    "nky": "2024-03-15T05:20:21Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-15T05:20:22.078Z",
+    "ntnhan": "2024-03-15T05:20:22.042Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-14T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 17329974,
+    "tgtthue": 1352115,
+    "tgtttbchu": "Mười tám triệu sáu trăm tám mươi hai nghìn không trăm tám mươi chín đồng",
+    "tgtttbso": 18682089,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 7617618,
+        "tthue": 380880,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "0%",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "10%",
+        "thtien": 9712356,
+        "tthue": 971235,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": null,
+    "tthai": 1,
+    "ttkhac": [],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0100686209",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "LSO00228",
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN, S=Hà Nội, L=\\\"B19, D6 Khu đô thị mới Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Thành Phố Hà Nội, Việt Nam\\\", CN=CÔNG TY TNHH DƯỢC PHẨM HOA LINH, OID.0.9.2342.19200300.100.1.1=MST:0101225867, E=tuyetkt@hoalinhpharma.com.vn\",\"SerialNumber\":\"54010108221020FD14B3380EFE51857B\",\"Issuer\":\"CN=SAFE-CA SHA-256 2020, O=SAFETY CERTIFY CORPORATION, C=VN\",\"NotAfter\":\"2025-07-14T17:00:00\",\"NotBefore\":\"2022-04-12T08:16:56\",\"SigningTime\":\"2024-03-15T12:20:21\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": "namviet.co@gmail.com",
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0100686209",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-15T12:20:22\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "c3dc45f2-1164-4063-942e-c816ee929f65",
+        "dgia": 30000,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 90000,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Dạ hương tươi mới 100ml",
+        "thtcthue": null,
+        "thtien": 510000,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "51000.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "561000.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "X257"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "29/12/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "4d3ae0be-ef4d-4198-af27-18c3ee745c67",
+        "dgia": 37273,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 55910,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Dạ hương tươi mới 120ml",
+        "thtcthue": null,
+        "thtien": 316820,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "31682.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "348502.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "X44"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "30/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "fca2a20b-c222-4c2c-b26a-f67995aa3430",
+        "dgia": 30000,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 45000,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Dạ hương lavender tươi mới 100ml",
+        "thtcthue": null,
+        "thtien": 255000,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "25500.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "280500.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "L01"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "10/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "32f910e7-6f39-42b5-bf9f-678c331cbf92",
+        "dgia": 30000,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 15,
+        "stbchu": null,
+        "stckhau": 67500,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Dạ Hương trà xanh 100ml",
+        "thtcthue": null,
+        "thtien": 382500,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "38250.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "420750.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "T38"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "09/12/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "8e78c572-13f6-4b60-8eb8-530f608fc6aa",
+        "dgia": 57273,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 42955,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Dầu xả DL Nguyên xuân 150ml KM 30ml",
+        "thtcthue": null,
+        "thtien": 243410,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "24341.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "267751.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "01224"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "21/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "994625a7-af61-4803-9d63-c807bf62693c",
+        "dgia": 36364,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 4,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "Xịt thơm miệng GreeLux Fresh Mint Cool",
+        "thtcthue": null,
+        "thtien": 145456,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "14546.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "160002.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "5523"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "22/12/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "afd8a46e-e8be-472f-826d-d8b21449515c",
+        "dgia": 36364,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 4,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "Xịt thơm miệng GreeLux Extra Cool",
+        "thtcthue": null,
+        "thtien": 145456,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "14546.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "160002.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "5323"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "11/12/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "56405d45-ed34-4468-93b8-e15c77bfb3c6",
+        "dgia": 22727,
+        "dvtinh": "Lọ",
+        "ltsuat": "10%",
+        "sluong": 12,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 8,
+        "tchat": 1,
+        "ten": "Zuchi Family (xịt giầy)",
+        "thtcthue": null,
+        "thtien": 272724,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 8,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "27272.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "299996.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "1024"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "03/02/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "aab011e3-910d-4f44-9c49-c6967850f26e",
+        "dgia": 18182,
+        "dvtinh": "Lọ",
+        "ltsuat": "10%",
+        "sluong": 7,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 9,
+        "tchat": 1,
+        "ten": "Zuchi Spray (Xịt nách)",
+        "thtcthue": null,
+        "thtien": 127274,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 9,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "12727.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "140001.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "1823"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "27/11/2025"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "fc87426b-8a2b-47ee-a5bf-4f1b7605da28",
+        "dgia": 18182,
+        "dvtinh": "Lọ",
+        "ltsuat": "10%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 10,
+        "tchat": 1,
+        "ten": "Zuchi Spray (Xịt nách tím)",
+        "thtcthue": null,
+        "thtien": 90910,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 10,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "9091.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "100001.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "1823"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "27/11/2025"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "7da45141-a88c-4fa8-9418-194abb0df5f2",
+        "dgia": 41905,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 30,
+        "stbchu": null,
+        "stckhau": 188573,
+        "stt": 11,
+        "tchat": 1,
+        "ten": "Thuốc ho Bảo Thanh (90ml)",
+        "thtcthue": null,
+        "thtien": 1068577,
+        "tlckhau": 15,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 11,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "53429.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "1122006.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "0924"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "03/03/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "902a1ac4-45c1-4a7e-80b3-9540b5669770",
+        "dgia": 55238,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 165714,
+        "stt": 12,
+        "tchat": 1,
+        "ten": "Thuốc ho Bảo Thanh (125ml)",
+        "thtcthue": null,
+        "thtien": 939046,
+        "tlckhau": 15,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 12,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "46952.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "985998.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "6723"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "05/03/2025"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "48501499-df00-470b-bcba-b2e3850b0e7e",
+        "dgia": 42727,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 18,
+        "stbchu": null,
+        "stckhau": 115363,
+        "stt": 13,
+        "tchat": 1,
+        "ten": "KĐR DL Ngọc Châu truyền thống 125g",
+        "thtcthue": null,
+        "thtien": 653723,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 13,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "65372.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "719095.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "779"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "04/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "774964be-8a8c-413e-9284-a63309d0181e",
+        "dgia": 64545,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 193635,
+        "stt": 14,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên Xuân 250ml",
+        "thtcthue": null,
+        "thtien": 1097265,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 14,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "109727.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "1206992.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "00924"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "16/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "cafec722-9fda-4ae0-9b4c-82cfaacaf16b",
+        "dgia": 69091,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 30,
+        "stbchu": null,
+        "stckhau": 310910,
+        "stt": 15,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên Xuân dưỡng tóc  250ml",
+        "thtcthue": null,
+        "thtien": 1761820,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 15,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "176182.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "1938002.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "03924"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "16/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "fda2904f-97cc-45ff-8921-8b5ab70964a0",
+        "dgia": 80000,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 120000,
+        "stt": 16,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên xuân Bồng bềnh 250ml",
+        "thtcthue": null,
+        "thtien": 680000,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 16,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "68000.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "748000.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "00624"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "23/01/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "4f5d7d51-b579-4c3b-9671-d48c1e5491c2",
+        "dgia": 90909,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 272727,
+        "stt": 17,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên Xuân sạch gàu 250ml",
+        "thtcthue": null,
+        "thtien": 1545453,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 17,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "154545.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "1699998.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "11423"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "23/12/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "75a20541-ad59-406e-a03b-53b074dcba34",
+        "dgia": 89091,
+        "dvtinh": "Hộp",
+        "ltsuat": "10%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 133637,
+        "stt": 18,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên Xuân dưỡng tóc hương bưởi 250ml",
+        "thtcthue": null,
+        "thtien": 757273,
+        "tlckhau": 15,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 18,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "75727.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "833000.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "03623"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "14/09/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "a1c6ca02-b33a-42eb-b3d6-b4c6a8b3a7d1",
+        "dgia": 90909,
+        "dvtinh": "Bộ",
+        "ltsuat": "10%",
+        "sluong": 8,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 19,
+        "tchat": 1,
+        "ten": "Dầu gội DL Nguyên Vương 250ml kèm dao cạo râu",
+        "thtcthue": null,
+        "thtien": 727272,
+        "tlckhau": 0,
+        "tsuat": 0.1,
+        "tthue": null,
+        "sxep": 19,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "72727.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "799999.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "00823"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "16/03/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "bf76c33d-6e1d-4f50-8425-132c81f75365",
+        "dgia": 190476,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 32,
+        "stbchu": null,
+        "stckhau": 914285,
+        "stt": 20,
+        "tchat": 1,
+        "ten": "Viên ngậm ho bổ phế Bảo Thanh (20 vỉ/hộp)",
+        "thtcthue": null,
+        "thtien": 5180947,
+        "tlckhau": 15,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 20,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "259047.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "5439994.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "1424"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "01/02/2026"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "ae3274bb-465b-48e9-8062-cd047420ef7b",
+        "dgia": 252381,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 2,
+        "stbchu": null,
+        "stckhau": 75714,
+        "stt": 21,
+        "tchat": 1,
+        "ten": "Viên ngậm ho bổ phế Bảo Thanh NS (20 vỉ/hộp)",
+        "thtcthue": null,
+        "thtien": 429048,
+        "tlckhau": 15,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 21,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "21452.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "450500.0000"
+          },
+          {
+            "ttruong": "so_lo",
+            "kdlieu": "String",
+            "dlieu": "0224"
+          },
+          {
+            "ttruong": "han_dung",
+            "kdlieu": "String",
+            "dlieu": "16/02/2027"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "24cf2592-c5de-4e6d-9279-b2cda740b783",
+        "dgia": 0,
+        "dvtinh": "Bộ",
+        "ltsuat": "0%",
+        "sluong": 2,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 22,
+        "tchat": 1,
+        "ten": "Hàng KM - Dầu gội DL Nguyên Vương 250ml kèm dao cạo râu",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 22,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "0dcdade1-6bc5-44e7-be2c-fc6d54a3d20b",
+        "dgia": 0,
+        "dvtinh": "Lọ",
+        "ltsuat": "0%",
+        "sluong": 3,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 23,
+        "tchat": 1,
+        "ten": "Hàng khuyến mại - Zuchi Family (xịt giầy)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 23,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "b0987c93-10a7-465d-9c2c-ae539786fa55",
+        "dgia": 0,
+        "dvtinh": "Lọ",
+        "ltsuat": "0%",
+        "sluong": 3,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 24,
+        "tchat": 1,
+        "ten": "Hàng khuyến mại - Zuchi Spray (Xịt nách)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 24,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "73e22591-491f-4800-8f7d-15044241df78",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "0%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 25,
+        "tchat": 1,
+        "ten": "Hàng khuyến mại - Xịt thơm miệng GreeLux Fresh Mint Cool",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 25,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "7b2d5388-25e8-45cb-a737-c2ffd0b61dc9",
+        "id": "90d5b5c4-84cf-49c7-b966-56ccaa51c067",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "0%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 26,
+        "tchat": 1,
+        "ten": "Hàng khuyến mại - Xịt thơm miệng GreeLux Extra Cool",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 26,
+        "ttkhac": [
+          {
+            "ttruong": "tthue",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          },
+          {
+            "ttruong": "tgtien",
+            "kdlieu": "Decimal",
+            "dlieu": "0.0000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "1800156801-053",
+    "khmshdon": 1,
+    "khhdon": "C24TBH",
+    "shdon": 12389,
+    "cqt": "2701",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "1c0ab6d5-36fd-4a07-94bc-0b6121e99697",
+    "hsgoc": "f355e4a2-35d3-486a-8055-52090ca6e44b",
+    "hthdon": 1,
+    "htttoan": null,
+    "id": "25bdf1af-6545-4c82-9619-123601983738",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "002F62E1D53943436E9B8802AC0EC1095F",
+    "mtdiep": null,
+    "mtdtchieu": "V01006843781CB0B00DEEA34BF09E6043891A1F4402",
+    "nbdchi": "Số 39, đường Lý Đạo Thành, P. Ninh Xá, TP. Bắc Ninh,Tỉnh Bắc Ninh",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0351000639023",
+    "nbten": "CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH",
+    "nbtnhang": "NH TMCP Ngoại Thương Chi Nhánh Bắc Ninh",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "String",
+        "dlieu": "-2|"
+      },
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "string",
+        "dlieu": "-2|"
+      }
+    ],
+    "ncma": "2024-03-14T07:03:12.040Z",
+    "ncnhat": "2024-03-14T07:03:12.046Z",
+    "ngcnhat": "tvan_buuchinhvt",
+    "nky": "2024-03-14T07:03:11Z",
+    "nmdchi": "SỐ 14, TÔN THẤT TÙNG, KHU AN NINH, THỊ TRẤN HỮU LŨNG, HUYỆN HỮU LŨNG, TỈNH LẠNG SƠN, VIỆT NAM",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": "LÊ VIỆT HÙNG",
+    "nmttkhac": [],
+    "ntao": "2024-03-14T07:03:12Z",
+    "ntnhan": "2024-03-14T07:03:11.974Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-13T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 0,
+    "tgtthue": 0,
+    "tgtttbchu": "Không đồng",
+    "tgtttbso": 0,
+    "thdon": "Hóa đơn GTGT",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "KKKNT",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn GTGT",
+    "ttcktmai": null,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Extra",
+        "kdlieu": "String",
+        "dlieu": "DHB/BNH09/24/02346"
+      },
+      {
+        "ttruong": "Extra",
+        "kdlieu": "string",
+        "dlieu": "DHB/BNH09/24/02346"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0100684378",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "025000242",
+    "nbsdthoai": "02223.812.281",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:1800156801-053, CN=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, O=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, L=Thành phố Bắc Ninh, S=BẮC NINH, C=VN\",\"SerialNumber\":\"54010101AAC3D9BE9C68C3A702D2DE3E\",\"Issuer\":\"CN=VNPT Certification Authority, OU=VNPT-CA Trust Network, O=VNPT Group, C=VN\",\"NotAfter\":\"2024-06-09T09:40:00\",\"NotBefore\":\"2023-06-05T00:49:00\",\"SigningTime\":\"2024-03-14T14:03:11\"}",
+    "nmsdthoai": "0965637788",
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": null,
+    "msttcgp": "0100684378",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-14T14:03:12\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "25bdf1af-6545-4c82-9619-123601983738",
+        "id": "057f74f2-77e9-440e-931f-867294445d85",
+        "dgia": 0,
+        "dvtinh": "Món",
+        "ltsuat": "KKKNT",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 2,
+        "ten": "Nhẫn siêu PNJ Nhẫn trơn 1chỉ_999.9,HLV 99.99% ,GN0000Y000297.100|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "25bdf1af-6545-4c82-9619-123601983738",
+        "id": "e2c19f76-0867-421c-b64c-8a011839eb44",
+        "dgia": 0,
+        "dvtinh": "Chiếc",
+        "ltsuat": "KKKNT",
+        "sluong": 7,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 2,
+        "ten": "Thẻ Cào Vinaphone MG 100.000|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "25bdf1af-6545-4c82-9619-123601983738",
+        "id": "69b02fa2-977e-413f-95ef-ab7986acd358",
+        "dgia": 0,
+        "dvtinh": "Chiếc",
+        "ltsuat": "KKKNT",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 2,
+        "ten": "Thẻ Cào Vinaphone MG 100.000|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "25bdf1af-6545-4c82-9619-123601983738",
+        "id": "faae3c83-dc28-4cd0-a4c0-fbae7ecee4e2",
+        "dgia": 0,
+        "dvtinh": "Chiếc",
+        "ltsuat": "KKKNT",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 2,
+        "ten": "Thẻ Cào Vinaphone MG 20.000|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104563656",
+    "khmshdon": 1,
+    "khhdon": "C24TVI",
+    "shdon": 277,
+    "cqt": "0108",
+    "cttkhac": [
+      {
+        "ttruong": "InvoiceTemplateID",
+        "kdlieu": "string",
+        "dlieu": "03e42351-1e03-4eb6-881b-50cc210680e3"
+      },
+      {
+        "ttruong": "IsTaxReduction",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "IsTaxReduction43",
+        "kdlieu": "numeric",
+        "dlieu": "False"
+      },
+      {
+        "ttruong": "RefID",
+        "kdlieu": "string",
+        "dlieu": "0ab94dab-7a43-4527-812a-0bdbef991a58"
+      },
+      {
+        "ttruong": "AmountDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "AmountOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "CoefficientDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "ExchangRateDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "MainCurrency",
+        "kdlieu": "string",
+        "dlieu": "VND"
+      },
+      {
+        "ttruong": "QuantityDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "UnitPriceDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "4"
+      },
+      {
+        "ttruong": "UnitPriceOCDecimalDigits",
+        "kdlieu": "string",
+        "dlieu": "2"
+      },
+      {
+        "ttruong": "AppID",
+        "kdlieu": "string",
+        "dlieu": "F7E8D7E5-BB5A-421B-8B39-D3A35D661F08"
+      },
+      {
+        "ttruong": "TransactionID",
+        "kdlieu": "string",
+        "dlieu": "DBCMCN6EJ3M0"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "255b3729-ebaf-48a0-9161-f7e8c2add2c3",
+    "hsgoc": "6ed0beca-bb5a-4cab-b723-b58c30e962f9",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "a719934a-5d87-4961-8eb3-c8fc20d68095",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "000749B44191F54E9685749AAF872732A8",
+    "mtdiep": null,
+    "mtdtchieu": "V010124315032E9BABE7D7E41EB9F7636D43C363F40",
+    "nbdchi": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0551101405008",
+    "nbten": "CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á",
+    "nbtnhang": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "SellerAddress",
+        "kdlieu": "string",
+        "dlieu": "Số nhà 13B, ngõ 61/16, phố Lạc Trung, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội, Việt Nam"
+      },
+      {
+        "ttruong": "SellerBankAccount",
+        "kdlieu": "string",
+        "dlieu": "0551101405008"
+      },
+      {
+        "ttruong": "SellerBankName",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Quân Đội-PGD Minh Khai, CN Hai Bà Trưng, Hà Nội"
+      },
+      {
+        "ttruong": "SellerEmail",
+        "kdlieu": "string",
+        "dlieu": "admin@vietainter.vn"
+      },
+      {
+        "ttruong": "SellerPhoneNumber",
+        "kdlieu": "string",
+        "dlieu": "02436462689"
+      }
+    ],
+    "ncma": "2024-03-12T01:27:48.162Z",
+    "ncnhat": "2024-03-12T01:27:48.169Z",
+    "ngcnhat": "tvan_misa",
+    "nky": "2024-03-12T01:27:44Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-12T01:27:48.115Z",
+    "ntnhan": "2024-03-12T01:27:48.086Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-11T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 10788571,
+    "tgtthue": 539429,
+    "tgtttbchu": "Mười một triệu ba trăm hai mươi tám nghìn đồng chẵn.",
+    "tgtttbso": 11328000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 10788571,
+        "tthue": 539429,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "ExciseTaxAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ExciseTaxAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ExciseTaxRate",
+        "kdlieu": "numeric",
+        "dlieu": "0.00"
+      },
+      {
+        "ttruong": "ReturnTicketAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "ReturnTicketAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "StockTotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "11328000.0"
+      },
+      {
+        "ttruong": "StockTotalAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "11328000.0"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "TotalAmount",
+        "kdlieu": "numeric",
+        "dlieu": "11328000.0"
+      },
+      {
+        "ttruong": "TotalAmountInWordsByENG",
+        "kdlieu": "string",
+        "dlieu": "Eleven million, three hundred twenty-eight thousand dong."
+      },
+      {
+        "ttruong": "TotalAmountInWordsVN",
+        "kdlieu": "string",
+        "dlieu": "Mười một triệu ba trăm hai mươi tám nghìn đồng chẵn."
+      },
+      {
+        "ttruong": "TotalAmountWithoutVAT",
+        "kdlieu": "numeric",
+        "dlieu": "10788571.0"
+      },
+      {
+        "ttruong": "TotalAmountWithoutVATOC",
+        "kdlieu": "numeric",
+        "dlieu": "10788571.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmount",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalDiscountAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "0.0"
+      },
+      {
+        "ttruong": "TotalSaleAmount",
+        "kdlieu": "numeric",
+        "dlieu": "10788571.0"
+      },
+      {
+        "ttruong": "TotalSaleAmountOC",
+        "kdlieu": "numeric",
+        "dlieu": "10788571.0"
+      },
+      {
+        "ttruong": "TotalVATAmount",
+        "kdlieu": "numeric",
+        "dlieu": "539429.0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0101243150",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "LS0033",
+    "nbsdthoai": "02436462689",
+    "nbdctdtu": "admin@vietainter.vn",
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"E=VIETA@GMAIL.COM, OID.0.9.2342.19200300.100.1.1=MST:0104563656, CN=CÔNG TY CỔ PHẦN ĐẦU TƯ QUỐC TẾ VIỆT Á, L=HÀ NỘI, C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201B887536\",\"Issuer\":\"CN=Viettel-CA, O=Viettel Group, L=Hà Nội, C=VN\",\"NotAfter\":\"2024-05-13T12:05:12\",\"NotBefore\":\"2021-07-14T03:56:53\",\"SigningTime\":\"2024-03-12T08:27:44\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0101243150",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-12T08:27:48\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "a719934a-5d87-4961-8eb3-c8fc20d68095",
+        "id": "a9f49be6-6178-43be-8be1-140292993bd2",
+        "dgia": 2247.619,
+        "dvtinh": "Viên",
+        "ltsuat": "5%",
+        "sluong": 4800,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Sastan - H",
+        "thtcthue": null,
+        "thtien": 10788571,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "10788571.0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "10788571.0"
+          },
+          {
+            "ttruong": "AmountWithoutVATOC",
+            "kdlieu": "numeric",
+            "dlieu": "10788571.0"
+          },
+          {
+            "ttruong": "DiscountAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "ExpiryDate",
+            "kdlieu": "date",
+            "dlieu": "2025-08-25"
+          },
+          {
+            "ttruong": "InventoryItemCategoryCode",
+            "kdlieu": "string",
+            "dlieu": "HH"
+          },
+          {
+            "ttruong": "InventoryItemCategoryName",
+            "kdlieu": "string",
+            "dlieu": "Hàng hóa"
+          },
+          {
+            "ttruong": "InventoryItemSource",
+            "kdlieu": "string",
+            "dlieu": "India"
+          },
+          {
+            "ttruong": "LotNo",
+            "kdlieu": "string",
+            "dlieu": "SHT5031 - India"
+          },
+          {
+            "ttruong": "SortOrder",
+            "kdlieu": "numeric",
+            "dlieu": "1"
+          },
+          {
+            "ttruong": "TaxReduction43Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReduction43AmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "TaxReductionAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "0.0"
+          },
+          {
+            "ttruong": "UnitPrice",
+            "kdlieu": "numeric",
+            "dlieu": "2247.619"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "539429.0"
+          },
+          {
+            "ttruong": "VATAmountOC",
+            "kdlieu": "numeric",
+            "dlieu": "539429.0"
+          },
+          {
+            "ttruong": "UnitPriceAfterExciseVAT",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTaxOC",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "AmountAfterExciseTax",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0800011018",
+    "khmshdon": 1,
+    "khhdon": "C24TKD",
+    "shdon": 4669,
+    "cqt": "3001",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "2aa02c50-4cc6-41ff-b83c-05d5a05bfb8e",
+    "hsgoc": "62a70b94-2335-4e96-ab86-00aa6d2f8942",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00F1F26FF3461F4363A06DC81A8F46E692",
+    "mtdiep": null,
+    "mtdtchieu": "V0100109106263BD4BDE0264196B4F54F365295DA1C",
+    "nbdchi": "Số 102 Phố Chi Lăng, Phường Nguyễn Trãi, Thành phố Hải Dương, Tỉnh Hải Dương, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "46310000002408",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC VẬT TƯ Y TẾ HẢI DƯƠNG",
+    "nbtnhang": "BIDV - CN Hải Dương",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Quận, huyện người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tỉnh/Thành phố người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Mã quốc gia người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Link tra cứu người bán",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "ncma": "2024-03-12T00:26:03.292Z",
+    "ncnhat": "2024-03-12T00:26:03.300Z",
+    "ngcnhat": "tvan_viettel",
+    "nky": "2024-03-12T00:26:02Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, khu An Ninh, thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược- Thiết bị y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [
+      {
+        "ttruong": "Số fax người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Quận Huyện người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tỉnh/Thành phố người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Mã quốc gia  người mua",
+        "kdlieu": "string",
+        "dlieu": "VN"
+      },
+      {
+        "ttruong": "Loại giấy tờ  người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số giấy tờ  người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ngày sinh người mua",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "ntao": "2024-03-12T00:26:03.230Z",
+    "ntnhan": "2024-03-12T00:26:03.178Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-11T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 14309799,
+    "tgtthue": 715490,
+    "tgtttbchu": "Mười lăm triệu không trăm hai mươi lăm nghìn hai trăm tám mươi chín đồng",
+    "tgtttbso": 15025289,
+    "thdon": "HÓA ĐƠN ĐIỆN TỬ GIÁ TRỊ GIA TĂNG (ND123 - TT78)",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 14309799,
+        "tthue": 715490,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "0%",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "HÓA ĐƠN ĐIỆN TỬ GIÁ TRỊ GIA TĂNG (ND123 - TT78)",
+    "ttcktmai": 596241,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Ngày cuối kỳ",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ngày đầu kỳ",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số BH",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Cửa hàng bán hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Chiết khấu thương mại",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số hợp đồng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Địa chỉ cửa hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số phiếu xuất",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Số đơn hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Đơn đặt hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Tuyến",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Ghi chú",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Phiếu giao hàng",
+        "kdlieu": "string",
+        "dlieu": null
+      },
+      {
+        "ttruong": "Trạng thái thanh toán",
+        "kdlieu": "string",
+        "dlieu": "Đã thanh toán"
+      },
+      {
+        "ttruong": "Mã số bí mật",
+        "kdlieu": "string",
+        "dlieu": "AG8YA2KMBQFFJ2P"
+      },
+      {
+        "ttruong": "Ghi chú hóa đơn",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "Tổng tiền thuế tiêu thụ đặc biệt",
+        "kdlieu": "string",
+        "dlieu": "0"
+      },
+      {
+        "ttruong": "Tổng tiền phí",
+        "kdlieu": "string",
+        "dlieu": "0"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0100109106",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": "03203853848",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"1.2.840.113549.1.9.1=#161464756e676e763633363640676d61696c2e636f6d,UID=MST:0800011018,CN=CÔNG TY CỔ PHẦN DƯỢC VẬT TƯ Y TẾ HẢI DƯƠNG,L=HẢI DƯƠNG,C=VN\",\"SerialNumber\":\"5404FFFEB7033FB316D672201B954EAA\",\"Issuer\":\"CN=Viettel-CA, O=Viettel Group, L=Hà Nội, C=VN\",\"NotAfter\":\"2024-05-13T12:05:12\",\"NotBefore\":\"2023-07-09T08:39:45\",\"SigningTime\":\"2024-03-12T07:26:02\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt, Chuyển khoản, Bù trừ",
+    "msttcgp": "0100109106",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-12T07:26:03\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "1096ae4e-70aa-44b6-adeb-759f973933d9",
+        "dgia": 2381,
+        "dvtinh": "Lọ",
+        "ltsuat": "5%",
+        "sluong": 95,
+        "stbchu": null,
+        "stckhau": 9048,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Natri Clorid 0,9% 10ml mắt mũi K/450hộp HDPharma-Việt Nam*",
+        "thtcthue": null,
+        "thtien": 217147,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "070124"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "07/01/2027"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "228004"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "10857"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "7245e20b-5240-4734-b449-9acc5c5f9e8f",
+        "dgia": 0,
+        "dvtinh": "Lọ",
+        "ltsuat": "5%",
+        "sluong": 5,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Natri Clorid 0,9% 10ml mắt mũi K/450hộp HDPharma-Việt Nam*",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "070124"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "07/01/2027"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "2714633b-ee7e-41ec-800d-a440668cf74d",
+        "dgia": 900,
+        "dvtinh": "Ống",
+        "ltsuat": "5%",
+        "sluong": 1000,
+        "stbchu": null,
+        "stckhau": 36000,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Dexamethasone 4mg/1ml K/72hộpx50ống  HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 864000,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "191123"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "02/11/2026"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "907200"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "43200"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "dfa00f01-bfb1-4907-92ba-a59d77f11793",
+        "dgia": 953,
+        "dvtinh": "Ống",
+        "ltsuat": "5%",
+        "sluong": 1000,
+        "stbchu": null,
+        "stckhau": 38120,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Dexamethasone 4mg/1ml K/360hộpx10ống  HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 914880,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "020224"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "02/02/2027"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "960624"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "45744"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "f5cdcac2-1b81-4812-bc6f-21a1242dbfd6",
+        "dgia": 1048,
+        "dvtinh": "Ống",
+        "ltsuat": "5%",
+        "sluong": 500,
+        "stbchu": null,
+        "stckhau": 20960,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Diclofenac 75mg/3ml K/120H/10ống HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 503040,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "161023"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "03/10/2026"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "528192"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "25152"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "62bb7d5b-ccb0-45f9-950e-ad25f0964d6d",
+        "dgia": 1320,
+        "dvtinh": "Ống",
+        "ltsuat": "5%",
+        "sluong": 500,
+        "stbchu": null,
+        "stckhau": 26400,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "Gentamicin 80mg/2ml K/120hộp/10ống HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 633600,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "130224"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "25/02/2027"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "665280"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "31680"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "53750984-dc97-4ce7-810e-82a1aa3244dd",
+        "dgia": 95238,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 60,
+        "stbchu": null,
+        "stckhau": 228571,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "Kodemin(Codein10mg +Guaifenesin100mg) HDPharma-Việt Nam K/60H/100v",
+        "thtcthue": null,
+        "thtien": 5485709,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "621123"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "16/11/2025"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "5759994"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "274285"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "802a0527-e8c4-44ec-98b2-542b10c73b8b",
+        "dgia": 95238,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 60,
+        "stbchu": null,
+        "stckhau": 228571,
+        "stt": 8,
+        "tchat": 1,
+        "ten": "Terpin-Codein HD 10mg+100mg K/60 hộpx10vỉx10viên Softcaps HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 5485709,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 8,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "361123"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "17/11/2026"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "5759994"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "274285"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "b2646bb2-095e-4a84-ba41-2772a590b491",
+        "dgia": 4285.7,
+        "dvtinh": "Lọ",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 8571,
+        "stt": 9,
+        "tchat": 1,
+        "ten": "Povidon-Iod HD 10% 20ml K/360lọ HDPharma-Việt Nam",
+        "thtcthue": null,
+        "thtien": 205714,
+        "tlckhau": 4,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 9,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": "341223"
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": "31/12/2026"
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "216001"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "10287"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "94690467-1265-4339-acf5-15a34aba9fb8",
+        "dgia": null,
+        "dvtinh": "",
+        "ltsuat": "5%",
+        "sluong": null,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": null,
+        "tchat": 3,
+        "ten": "ckbs",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 10,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "98d89d80-e701-40af-a4f2-e368c27e85a3",
+        "id": "7689bfa1-2eca-45cb-b491-302484216562",
+        "dgia": null,
+        "dvtinh": "",
+        "ltsuat": "0%",
+        "sluong": null,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": null,
+        "tchat": 3,
+        "ten": "gtk",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": null,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 11,
+        "ttkhac": [
+          {
+            "ttruong": "Số lô",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Hạn dùng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Ghi chú dòng",
+            "kdlieu": "string",
+            "dlieu": null
+          },
+          {
+            "ttruong": "Thành tiền thanh toán của hàng hóa",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Tiền thuế dòng (Tiền thuế GTGT)",
+            "kdlieu": "string",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Chiết khấu lần 2",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "1800156801-053",
+    "khmshdon": 1,
+    "khhdon": "C24TBH",
+    "shdon": 11142,
+    "cqt": "2701",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "8304113b-14a5-45f5-81e6-0ef242b73e16",
+    "hsgoc": "d2c4f7c9-39c0-4e67-b969-d594e354f418",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "14acd7fd-b81b-4f7d-b2df-f86fd9577a3a",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00E46BE42F139042FBA449873ABF691FC4",
+    "mtdiep": null,
+    "mtdtchieu": "V01006843786C13B66B18184763A4F57A134E4B995A",
+    "nbdchi": "Số 39, đường Lý Đạo Thành, P. Ninh Xá, TP. Bắc Ninh,Tỉnh Bắc Ninh",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0351000639023",
+    "nbten": "CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH",
+    "nbtnhang": "NH TMCP Ngoại Thương Chi Nhánh Bắc Ninh",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "String",
+        "dlieu": "-2|"
+      },
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "string",
+        "dlieu": "-2|"
+      }
+    ],
+    "ncma": "2024-03-11T09:42:24.528Z",
+    "ncnhat": "2024-03-11T09:42:24.534Z",
+    "ngcnhat": "tvan_buuchinhvt",
+    "nky": "2024-03-11T09:42:24Z",
+    "nmdchi": "SỐ 14, TÔN THẤT TÙNG, KHU AN NINH, THỊ TRẤN HỮU LŨNG, HUYỆN HỮU LŨNG, TỈNH LẠNG SƠN, VIỆT NAM",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": "LÊ VIỆT HÙNG",
+    "nmttkhac": [],
+    "ntao": "2024-03-11T09:42:24.489Z",
+    "ntnhan": "2024-03-11T09:42:24.463Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-10T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 5056800,
+    "tgtthue": 252840,
+    "tgtttbchu": "Năm triệu ba trăm lẻ chín ngàn sáu trăm bốn mươi đồng",
+    "tgtttbso": 5309640,
+    "thdon": "Hóa đơn GTGT",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 5056800,
+        "tthue": 252840,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "KKKNT",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn GTGT",
+    "ttcktmai": null,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Extra",
+        "kdlieu": "String",
+        "dlieu": "DHB/BNH/24/07591"
+      },
+      {
+        "ttruong": "Extra",
+        "kdlieu": "string",
+        "dlieu": "DHB/BNH/24/07591"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0100684378",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "025000242",
+    "nbsdthoai": "02223.812.281",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:1800156801-053, CN=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, O=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, L=Thành phố Bắc Ninh, S=BẮC NINH, C=VN\",\"SerialNumber\":\"54010101AAC3D9BE9C68C3A702D2DE3E\",\"Issuer\":\"CN=VNPT Certification Authority, OU=VNPT-CA Trust Network, O=VNPT Group, C=VN\",\"NotAfter\":\"2024-06-09T09:40:00\",\"NotBefore\":\"2023-06-05T00:49:00\",\"SigningTime\":\"2024-03-11T16:42:24\"}",
+    "nmsdthoai": "0965637788",
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Chuyển khoản/Tiền Mặt",
+    "msttcgp": "0100684378",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-11T16:42:24\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "14acd7fd-b81b-4f7d-b2df-f86fd9577a3a",
+        "id": "296c1760-ba9f-4073-b8ff-900193b1ef7f",
+        "dgia": 51600,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 98,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Hapacol 250 goí/1.5gr h/24 t/3456",
+        "thtcthue": null,
+        "thtien": 5056800,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "5309640"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "252840"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "241123"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "241126|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "14acd7fd-b81b-4f7d-b2df-f86fd9577a3a",
+        "id": "cd5e68cc-9cd3-49a9-b079-060ceec77f83",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "KKKNT",
+        "sluong": 14,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 2,
+        "ten": "Hapacol 250 goí/1.5gr h/24 t/3456|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "241123"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "241126|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "14acd7fd-b81b-4f7d-b2df-f86fd9577a3a",
+        "id": "1e08aeab-d843-47cb-b221-1eb7bd3c3272",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "KKKNT",
+        "sluong": 49,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 2,
+        "ten": "Hapacol 250 goí/1.5gr h/24 t/3456|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "241123"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "241126|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0600206147-039",
+    "khmshdon": 1,
+    "khhdon": "C24TAA",
+    "shdon": 15823,
+    "cqt": "0101",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "261885bd-790c-40d3-80c8-06631d5c8d4b",
+    "hsgoc": "edbe052d-81f3-4a0a-a5f5-d0d95d7ab5d1",
+    "hthdon": 1,
+    "htttoan": 1,
+    "id": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "0021257AFFD2864400B39BFEA452AEB4BF",
+    "mtdiep": null,
+    "mtdtchieu": "V0101360697053945F634F44F5685F2D909FF3871B8",
+    "nbdchi": "Số 423 Vũ Tông Phan, Phường Khương Đình, Quận Thanh Xuân, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": null,
+    "nbten": "CHI NHÁNH CÔNG TY CỔ PHẦN DƯỢC PHẨM NAM HÀ",
+    "nbtnhang": null,
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-08T08:20:40.738Z",
+    "ncnhat": "2024-03-08T08:20:40.744Z",
+    "ngcnhat": "tvan_bkav",
+    "nky": "2024-03-08T08:19:16Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, khu An Ninh, thị trấn Hữu Lũng, huyện Hữu Lũng, tỉnh Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết bị y tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": "Lê Việt Hùng",
+    "nmttkhac": [],
+    "ntao": "2024-03-08T08:20:40.680Z",
+    "ntnhan": "2024-03-08T08:20:40.650Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-07T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 5966667,
+    "tgtthue": 278942,
+    "tgtttbchu": "Năm triệu tám trăm năm mươi bảy nghìn bảy trăm bảy mươi sáu đồng chẵn./.",
+    "tgtttbso": 5857776,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 5578834,
+        "tthue": 278942,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 387833,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "SDTNguoiMua",
+        "kdlieu": "String",
+        "dlieu": "0965637788"
+      },
+      {
+        "ttruong": "KhoXuat",
+        "kdlieu": "String",
+        "dlieu": "Kho hàng của chi nhánh Hà Nội"
+      },
+      {
+        "ttruong": "MaKH",
+        "kdlieu": "String",
+        "dlieu": "LSO00248"
+      },
+      {
+        "ttruong": "SoDonHang",
+        "kdlieu": "String",
+        "dlieu": "572093"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101360697",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": null,
+    "nbsdthoai": null,
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"C=VN,ST=Hà Nội,CN=CHI NHÁNH CÔNG TY CỔ PHẦN DƯỢC PHẨM NAM HÀ,UID=MST:0600206147-039\",\"SerialNumber\":\"54033B8A04F7327B57C775FB4CAB665E\",\"Issuer\":\"CN=BkavCA, O=Bkav Corporation, L=Hanoi, C=VN\",\"NotAfter\":\"2024-05-10T08:03:07\",\"NotBefore\":\"2022-05-06T03:38:25\",\"SigningTime\":\"2024-03-08T15:19:16\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Tiền mặt",
+    "msttcgp": "0101360697",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-08T15:20:40\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "abb0a728-5868-4e1e-b1f6-d3f6fcc1be1b",
+        "dgia": 21904.76,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 80,
+        "stbchu": null,
+        "stckhau": 113904,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Naphacogyl (Thùng x 300 hộp x 2 vỉ x 10 viên)",
+        "thtcthue": null,
+        "thtien": 1752381,
+        "tlckhau": 6.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "22140"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "03/11/2027"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "22140"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "39f0cb5e-d4fc-46da-9b40-812f90bec5d9",
+        "dgia": 38095.24,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 49524,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "Codeforte (Hộp x 2 vỉ x 10 viên)",
+        "thtcthue": null,
+        "thtien": 761905,
+        "tlckhau": 6.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "24101"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "25/01/2028"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "24101"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "ab27964f-011c-4091-8f81-dd266ba93b65",
+        "dgia": 5714.29,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 100,
+        "stbchu": null,
+        "stckhau": 37143,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "Mebendazol (Thùng x 525 hộp x 1 lọ x 1 viên)",
+        "thtcthue": null,
+        "thtien": 571429,
+        "tlckhau": 6.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "23159"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "08/04/2026"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "23159"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "ab9bf395-0bcf-49f4-b545-1eb0923b799d",
+        "dgia": 25238.0952,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 16404,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "Zilgo 102 new trắng xanh (Thùng x 100 hộp x 102 miếng)",
+        "thtcthue": null,
+        "thtien": 252381,
+        "tlckhau": 6.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "02/11/2026"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "97c6f259-f82e-49d2-8e56-3fe5ae3a221c",
+        "dgia": 43809.5238,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 60,
+        "stbchu": null,
+        "stckhau": 170858,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "Siro thuốc ho bổ phế Nam Hà chỉ khái lộ (Thùng x 60 hộp x 1 lọ 125ml)",
+        "thtcthue": null,
+        "thtien": 2628571,
+        "tlckhau": 6.5,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "24127"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "15/02/2028"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "24127"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "947a0e12-983e-421c-9a89-b837785a2997",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 2,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "Codeforte (Hộp x 2 vỉ x 10 viên) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "24101"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "25/01/2028"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "24101"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "05940b27-99a1-489a-a2c7-5687d3e8a329",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 10,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "Mebendazol (Thùng x 525 hộp x 1 lọ x 1 viên) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "23159"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "08/04/2026"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "23159"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "e69ba66a-cc5f-48b7-b5cb-e535144ca254",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 3,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 8,
+        "tchat": 1,
+        "ten": "Zilgo 102 new trắng xanh (Thùng x 100 hộp x 102 miếng) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 8,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "02/11/2026"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "c94d819e-79b3-4ecf-8870-b8cecacba2b0",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 16,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 9,
+        "tchat": 1,
+        "ten": "Naphacogyl (Thùng x 300 hộp x 2 vỉ x 10 viên) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 9,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "22140"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "03/11/2027"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "22140"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "1396c214-d77c-4d72-9bc3-9037455d346b",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 1,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 10,
+        "tchat": 1,
+        "ten": "Zilgo 102 new trắng xanh (Thùng x 100 hộp x 102 miếng) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 10,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "02/11/2026"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "20231103"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "f55ee98b-5f91-43f3-99b3-91ed031b5fd9",
+        "id": "5265376e-4787-4aba-9f5f-4d7b1d38c74b",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 6,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 11,
+        "tchat": 1,
+        "ten": "Siro thuốc ho bổ phế Nam Hà chỉ khái lộ KĐ (Thùng x 60 hộp x 1 lọ 125ml) - Hàng KM không thu tiền",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 11,
+        "ttkhac": [
+          {
+            "ttruong": "SoLo",
+            "kdlieu": "String",
+            "dlieu": "24116"
+          },
+          {
+            "ttruong": "HanDung",
+            "kdlieu": "String",
+            "dlieu": "23/01/2028"
+          },
+          {
+            "ttruong": "SoBao",
+            "kdlieu": "String",
+            "dlieu": "24116"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104067464",
+    "khmshdon": 1,
+    "khhdon": "C24TLG",
+    "shdon": 5815,
+    "cqt": "0115",
+    "cttkhac": [
+      {
+        "ttruong": "RowPerPage",
+        "kdlieu": "numberic",
+        "dlieu": "10"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "014e2b6b-bbdc-4efa-afd5-e0622770ae5a",
+    "hsgoc": "727f6791-c780-43e4-81d3-d27b7c25aa3d",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "008B953DBA003649CEB2126932DC32D823",
+    "mtdiep": null,
+    "mtdtchieu": "V0105987432FD5F18E8C87849DA849D3A1AACF31CBA",
+    "nbdchi": "Số 10-11 ÔC2/NO, phố Mạc Thái Tông, Phường Trung Hoà, Quận Cầu Giấy, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "6265757-001",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH",
+    "nbtnhang": "Ngân hàng Indovina, Chi Nhánh Mỹ Đình",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "ComBankNo2",
+        "kdlieu": "string",
+        "dlieu": "19134755109018"
+      },
+      {
+        "ttruong": "ComBankName2",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Kỹ Thương Việt Nam, Chi Nhánh Đông Đô"
+      },
+      {
+        "ttruong": "ComBankNo3",
+        "kdlieu": "string",
+        "dlieu": "110000047766"
+      },
+      {
+        "ttruong": "ComBankName3",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Công Thương Việt Nam, Chi Nhánh Thanh Xuân"
+      },
+      {
+        "ttruong": "ComBankNo4",
+        "kdlieu": "string",
+        "dlieu": "0201133888999"
+      },
+      {
+        "ttruong": "ComBankName4",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Quân Đội, Chi Nhánh Trần Duy Hưng, PGD Nam Trung Yên"
+      }
+    ],
+    "ncma": "2024-03-06T09:35:02.314Z",
+    "ncnhat": "2024-03-06T09:35:02.321Z",
+    "ngcnhat": "tvan_softdreams",
+    "nky": "2024-03-06T09:33:29Z",
+    "nmdchi": "Số 14 Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y Tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-06T09:35:02.272Z",
+    "ntnhan": "2024-03-06T09:35:02.235Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-05T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 13286048,
+    "tgtthue": 664302,
+    "tgtttbchu": "Mười ba triệu chín trăm năm mươi nghìn ba trăm năm mươi đồng.",
+    "tgtttbso": 13950350,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [
+      {
+        "tlphi": null,
+        "tphi": null
+      }
+    ],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 13286048,
+        "tthue": 664302,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "PortalLink",
+        "kdlieu": "string",
+        "dlieu": "http://0104067464hd.easyinvoice.com.vn"
+      },
+      {
+        "ttruong": "Fkey",
+        "kdlieu": "string",
+        "dlieu": "A6n3d8y405339047442967887"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "Amount5",
+        "kdlieu": "decimal",
+        "dlieu": "13950350"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0105987432",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "CT1274",
+    "nbsdthoai": "024.3786 8921",
+    "nbdctdtu": "gialinhpharma@gmail.com",
+    "nbfax": "024.3786 8920",
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0104067464, CN=CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH, OU=IT, O=CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH, S=Hà Nội, C=VN\",\"SerialNumber\":\"5401100045FC2FFD409A4C36C11271CB\",\"Issuer\":\"CN=EASYCA, OU=EASYCA, O=SOFTDREAMS TECHNOLOGY INVESTMENT AND TRADING JSC, C=VN\",\"NotAfter\":\"2024-03-22T06:34:57\",\"NotBefore\":\"2021-03-23T06:34:57\",\"SigningTime\":\"2024-03-06T16:33:29\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0105987432",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-06T16:35:02\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": 0,
+    "tgtkhac": 0,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "a7e3484e-4683-42e5-97ab-8805ff690641",
+        "dgia": 37485.71,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 50,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "AZICINE 500mg (H/6v)",
+        "thtcthue": null,
+        "thtien": 1874286,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "93714"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1968000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "e9d8ae3e-9031-4f3e-8247-56694a5067dd",
+        "dgia": 5857.14,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 200,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "MIFESTAD 10 (H/1v)",
+        "thtcthue": null,
+        "thtien": 1171429,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "58571"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1230000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "1ab74e7e-4d0b-4e2a-ace4-2e8cd63ba5d3",
+        "dgia": 16166.66,
+        "dvtinh": "Tube",
+        "ltsuat": "5%",
+        "sluong": 150,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "DONGKWANG SILKRON (Tube/10g)-Korea",
+        "thtcthue": null,
+        "thtien": 2424999,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "121250"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "2546249"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "c01d87ff-46c4-42d4-9cbb-9221b0aa428d",
+        "dgia": 17272.73,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 165,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "AZICINE 250mg(H/6gói)",
+        "thtcthue": null,
+        "thtien": 2850000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "142500"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "2992500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "f7468cc6-ff28-45b6-8bf8-452f6c8f004c",
+        "dgia": 53463.2,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 33,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "SCANAX 500  (H/50v)",
+        "thtcthue": null,
+        "thtien": 1764286,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "88214"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1852500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "b0b7c450-fab0-47f7-abc4-fb5575bfb98a",
+        "dgia": 63497.84,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 22,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "STACYTINE 200 CAP (H/100v)",
+        "thtcthue": null,
+        "thtien": 1396952,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "69848"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1466800"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "c58d6eea-6ed8-4c49-8914-8bc8793ab445",
+        "dgia": 18012.99,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 22,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "STADOVAS 5 CAP (H/30v)",
+        "thtcthue": null,
+        "thtien": 396286,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "19814"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "416100"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "1d32c392-dc5e-4797-ad5c-05f463db23d3",
+        "dgia": 16121.21,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 8,
+        "tchat": 1,
+        "ten": "ASPIRIN STELLA 81mg (H/56v)",
+        "thtcthue": null,
+        "thtien": 177333,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 8,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "8867"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "186200"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "2e90e1fa-efdb-4083-8a67-ddda4447bf73",
+        "dgia": 46060.61,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 9,
+        "tchat": 1,
+        "ten": "CAPTOPRIL STELLA 25mg (H/100v)",
+        "thtcthue": null,
+        "thtien": 506667,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 9,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "25333"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "532000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "6b9f873e-9b50-49a9-b73b-b1a4de0472b9",
+        "id": "bea6d3a2-f7b6-431b-abbd-93a1b7e5df76",
+        "dgia": 16450.22,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 44,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 10,
+        "tchat": 1,
+        "ten": "ENALAPRIL STELLA 5mg(H/30v)",
+        "thtcthue": null,
+        "thtien": 723810,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 10,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "36191"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "760001"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "0104067464",
+    "khmshdon": 1,
+    "khhdon": "C24TLG",
+    "shdon": 5816,
+    "cqt": "0115",
+    "cttkhac": [
+      {
+        "ttruong": "RowPerPage",
+        "kdlieu": "numberic",
+        "dlieu": "10"
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "2da61557-a7c7-4d96-b4c7-373146ba0327",
+    "hsgoc": "dce0c489-2381-4672-a2d4-26e7703f889f",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00FD89A48FD8644343AD5A452CE3F8454B",
+    "mtdiep": null,
+    "mtdtchieu": "V010598743253078332DBAC4C98B298DA3F7E29CE76",
+    "nbdchi": "Số 10-11 ÔC2/NO, phố Mạc Thái Tông, Phường Trung Hoà, Quận Cầu Giấy, Thành phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "6265757-001",
+    "nbten": "CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH",
+    "nbtnhang": "Ngân hàng Indovina, Chi Nhánh Mỹ Đình",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "ComBankNo2",
+        "kdlieu": "string",
+        "dlieu": "19134755109018"
+      },
+      {
+        "ttruong": "ComBankName2",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Kỹ Thương Việt Nam, Chi Nhánh Đông Đô"
+      },
+      {
+        "ttruong": "ComBankNo3",
+        "kdlieu": "string",
+        "dlieu": "110000047766"
+      },
+      {
+        "ttruong": "ComBankName3",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Công Thương Việt Nam, Chi Nhánh Thanh Xuân"
+      },
+      {
+        "ttruong": "ComBankNo4",
+        "kdlieu": "string",
+        "dlieu": "0201133888999"
+      },
+      {
+        "ttruong": "ComBankName4",
+        "kdlieu": "string",
+        "dlieu": "Ngân hàng TMCP Quân Đội, Chi Nhánh Trần Duy Hưng, PGD Nam Trung Yên"
+      }
+    ],
+    "ncma": "2024-03-06T09:35:02.702Z",
+    "ncnhat": "2024-03-06T09:35:02.710Z",
+    "ngcnhat": "tvan_softdreams",
+    "nky": "2024-03-06T09:33:29Z",
+    "nmdchi": "Số 14 Tôn Thất Tùng, Khu An Ninh, Thị Trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn, Việt Nam",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "Công ty TNHH Dược - Thiết Bị Y Tế Nam Việt",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-06T09:35:02.663Z",
+    "ntnhan": "2024-03-06T09:35:02.636Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-05T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 5754286,
+    "tgtthue": 287714,
+    "tgtttbchu": "Sáu triệu không trăm bốn mươi hai nghìn đồng.",
+    "tgtttbso": 6042000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [
+      {
+        "tlphi": null,
+        "tphi": null
+      }
+    ],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 5754286,
+        "tthue": 287714,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": 0,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "PortalLink",
+        "kdlieu": "string",
+        "dlieu": "http://0104067464hd.easyinvoice.com.vn"
+      },
+      {
+        "ttruong": "Fkey",
+        "kdlieu": "string",
+        "dlieu": "R6b3S8Y405339047442967888"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [
+      {
+        "ttruong": "Amount5",
+        "kdlieu": "decimal",
+        "dlieu": "6042000"
+      }
+    ],
+    "ttxly": 5,
+    "tvandnkntt": "0105987432",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "CT1274",
+    "nbsdthoai": "024.3786 8921",
+    "nbdctdtu": "gialinhpharma@gmail.com",
+    "nbfax": "024.3786 8920",
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:0104067464, CN=CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH, OU=IT, O=CÔNG TY CỔ PHẦN DƯỢC PHẨM GIA LINH, S=Hà Nội, C=VN\",\"SerialNumber\":\"5401100045FC2FFD409A4C36C11271CB\",\"Issuer\":\"CN=EASYCA, OU=EASYCA, O=SOFTDREAMS TECHNOLOGY INVESTMENT AND TRADING JSC, C=VN\",\"NotAfter\":\"2024-03-22T06:34:57\",\"NotBefore\":\"2021-03-23T06:34:57\",\"SigningTime\":\"2024-03-06T16:33:29\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0105987432",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-06T16:35:02\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": 0,
+    "tgtkhac": 0,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "3aec758f-8214-4283-80e1-7b9f423e634c",
+        "dgia": 23852.81,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 33,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "ENALAPRIL STELLA 10mg (H/30v)",
+        "thtcthue": null,
+        "thtien": 787143,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "39357"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "826500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "12275bdb-80c2-45f7-bfd4-08ae3ce88827",
+        "dgia": 37012.98,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "LIPISTAD 20(H/30v)",
+        "thtcthue": null,
+        "thtien": 407143,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "20357"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "427500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "6b9512e6-4da4-41f0-8a08-07455be3771b",
+        "dgia": 56753.25,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 33,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 3,
+        "tchat": 1,
+        "ten": "NIFEDIPIN T20 Retard (H/100v)",
+        "thtcthue": null,
+        "thtien": 1872857,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 3,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "93643"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1966500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "4e46e9cd-eacb-436f-a151-d6a1fc2dcd6a",
+        "dgia": 17272.73,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 4,
+        "tchat": 1,
+        "ten": "SIMETHICONE STELLA (Chai/15ml) - VN",
+        "thtcthue": null,
+        "thtien": 190000,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 4,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "9500"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "199500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "1d6c2bb1-64f1-4dbe-84b3-9a87f289f06c",
+        "dgia": 27142.86,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 33,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 5,
+        "tchat": 1,
+        "ten": "ALLOPURINOL STELLA 300mg (H/30v)",
+        "thtcthue": null,
+        "thtien": 895714,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 5,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "44786"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "940500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "07e58cfb-15bf-4333-94c9-708278ef6155",
+        "dgia": 18095.24,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 6,
+        "tchat": 1,
+        "ten": "CETIRIZINE STELLA 10mg (H/50v)",
+        "thtcthue": null,
+        "thtien": 199048,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 6,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "9952"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "209000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "370d6d2c-1fe7-4f7e-bd0d-e83dddcc9437",
+        "dgia": 12337.66,
+        "dvtinh": "Chai",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 7,
+        "tchat": 1,
+        "ten": "LORASTAD SP (Chai/60ml)",
+        "thtcthue": null,
+        "thtien": 135714,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 7,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "6786"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "142500"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "1e0333e7-ab90-42df-890c-dd2ca54ac461",
+        "dgia": 18095.24,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 55,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 8,
+        "tchat": 1,
+        "ten": "AZICINE 250mg (H/6v)",
+        "thtcthue": null,
+        "thtien": 995238,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 8,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "49762"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "1045000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "b0951918-06f7-40e1-9075-9eeb5e5bfca9",
+        "id": "8691199a-2b11-4b73-927b-8614f976ce9d",
+        "dgia": 24675.32,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 11,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 9,
+        "tchat": 1,
+        "ten": "LIPISTAD 10 (H/30V)",
+        "thtcthue": null,
+        "thtien": 271429,
+        "tlckhau": 0,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 9,
+        "ttkhac": [
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "decimal",
+            "dlieu": "13571"
+          },
+          {
+            "ttruong": "Amount",
+            "kdlieu": "decimal",
+            "dlieu": "285000"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "1800156801-053",
+    "khmshdon": 1,
+    "khhdon": "C24TBH",
+    "shdon": 10445,
+    "cqt": "2701",
+    "cttkhac": [],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "a7a486d4-0858-43d2-ab62-43dc68b7b417",
+    "hsgoc": "6d6a1c28-3d3e-4bc5-9085-f5cf17e510b7",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "211aa434-7bb3-4229-a8ee-f6846223747b",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "0060C48812B29347878C0CE555DAF36AD7",
+    "mtdiep": null,
+    "mtdtchieu": "V0100684378B39279F88B674089BA3E4D2C0BEC63C9",
+    "nbdchi": "Số 39, đường Lý Đạo Thành, P. Ninh Xá, TP. Bắc Ninh,Tỉnh Bắc Ninh",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "0351000639023",
+    "nbten": "CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH",
+    "nbtnhang": "NH TMCP Ngoại Thương Chi Nhánh Bắc Ninh",
+    "nbtnvchuyen": null,
+    "nbttkhac": [
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "String",
+        "dlieu": "-2|400000"
+      },
+      {
+        "ttruong": "Extra3",
+        "kdlieu": "string",
+        "dlieu": "-2|400000"
+      }
+    ],
+    "ncma": "2024-03-05T10:47:32.875Z",
+    "ncnhat": "2024-03-05T10:47:32.881Z",
+    "ngcnhat": "tvan_buuchinhvt",
+    "nky": "2024-03-05T10:44:01Z",
+    "nmdchi": "SỐ 14, TÔN THẤT TÙNG, KHU AN NINH, THỊ TRẤN HỮU LŨNG, HUYỆN HỮU LŨNG, TỈNH LẠNG SƠN, VIỆT NAM",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": "LÊ VIỆT HÙNG",
+    "nmttkhac": [],
+    "ntao": "2024-03-05T10:47:32.832Z",
+    "ntnhan": "2024-03-05T10:44:02Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-04T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 3600000,
+    "tgtthue": 288000,
+    "tgtttbchu": "Ba triệu tám trăm tám mươi tám ngàn đồng",
+    "tgtttbso": 3888000,
+    "thdon": "Hóa đơn GTGT",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "8%",
+        "thtien": 3600000,
+        "tthue": 288000,
+        "gttsuat": null
+      },
+      {
+        "tsuat": "KKKNT",
+        "thtien": 0,
+        "tthue": 0,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn GTGT",
+    "ttcktmai": 400000,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Extra",
+        "kdlieu": "String",
+        "dlieu": "DHB/BNH/24/06897"
+      },
+      {
+        "ttruong": "Extra",
+        "kdlieu": "string",
+        "dlieu": "DHB/BNH/24/06897"
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0100684378",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "025000242",
+    "nbsdthoai": "02223.812.281",
+    "nbdctdtu": null,
+    "nbfax": null,
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"OID.0.9.2342.19200300.100.1.1=MST:1800156801-053, CN=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, O=CHI NHÁNH CÔNG TY CP DƯỢC HẬU GIANG TẠI TỈNH BẮC NINH, L=Thành phố Bắc Ninh, S=BẮC NINH, C=VN\",\"SerialNumber\":\"54010101AAC3D9BE9C68C3A702D2DE3E\",\"Issuer\":\"CN=VNPT Certification Authority, OU=VNPT-CA Trust Network, O=VNPT Group, C=VN\",\"NotAfter\":\"2024-06-09T09:40:00\",\"NotBefore\":\"2023-06-05T00:49:00\",\"SigningTime\":\"2024-03-05T17:44:01\"}",
+    "nmsdthoai": "0965637788",
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "Chuyển khoản/Tiền Mặt",
+    "msttcgp": "0100684378",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-05T17:47:32\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "211aa434-7bb3-4229-a8ee-f6846223747b",
+        "id": "fcbf3235-14f5-419b-bcf6-7073a35f5bbf",
+        "dgia": 200000,
+        "dvtinh": "Hộp",
+        "ltsuat": "8%",
+        "sluong": 20,
+        "stbchu": null,
+        "stckhau": 400000,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "Giải độc gan Naturenz v/10 h/100 t/7200",
+        "thtcthue": null,
+        "thtien": 3600000,
+        "tlckhau": 0,
+        "tsuat": 0.08,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "3888000"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "288000"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "010323"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "230326|(10,00)"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "211aa434-7bb3-4229-a8ee-f6846223747b",
+        "id": "64aa7509-4e17-4066-8881-f692d794ea1f",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "KKKNT",
+        "sluong": 4,
+        "stbchu": null,
+        "stckhau": 0,
+        "stt": 2,
+        "tchat": 2,
+        "ten": "Giải độc gan Naturenz v/10 h/100 t/7200|(HÀNG KHUYẾN MÃI KHÔNG THU TIỀN)",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": 0,
+        "tsuat": 0,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "Amount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "VATAmount",
+            "kdlieu": "numeric",
+            "dlieu": "0"
+          },
+          {
+            "ttruong": "Extra1",
+            "kdlieu": "string",
+            "dlieu": "010323"
+          },
+          {
+            "ttruong": "Extra2",
+            "kdlieu": "string",
+            "dlieu": "230326|"
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  },
+  {
+    "nbmst": "4400251975-003",
+    "khmshdon": 1,
+    "khhdon": "C24THB",
+    "shdon": 4649,
+    "cqt": "0101",
+    "cttkhac": [
+      {
+        "ttruong": "Loại hiển thị",
+        "kdlieu": "string",
+        "dlieu": "HD"
+      },
+      {
+        "ttruong": "TTKMR",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "dvtte": "VND",
+    "hdon": "01",
+    "hsgcma": "eeadf7ef-6539-4a64-a087-44a5e1e01e41",
+    "hsgoc": "c029cf2b-d75d-4fe5-b5cc-962fc058c073",
+    "hthdon": 1,
+    "htttoan": 9,
+    "id": "e464c416-fee3-4132-9268-d825f36264ad",
+    "idtbao": null,
+    "khdon": null,
+    "khhdgoc": null,
+    "khmshdgoc": null,
+    "lhdgoc": null,
+    "mhdon": "00BF05B95E801945ABBC11AEB24EFCE833",
+    "mtdiep": null,
+    "mtdtchieu": "V01013008428C1BD9C1384143619515B4729BF856C2",
+    "nbdchi": "Lô CN 42-2, Khu công nghiệp Quang Minh, Thị Trấn Quang Minh, Huyện Mê Linh, Thành Phố Hà Nội, Việt Nam",
+    "chma": null,
+    "chten": null,
+    "nbhdktngay": null,
+    "nbhdktso": null,
+    "nbhdso": null,
+    "nblddnbo": null,
+    "nbptvchuyen": null,
+    "nbstkhoan": "42710000383835",
+    "nbten": "CÔNG TY TNHH THAI NAKORN PATANA VIỆT NAM - CHI NHÁNH TẠI HÀ NỘI",
+    "nbtnhang": "TMCP Đầu Tư & PT VN - CN Quang Minh",
+    "nbtnvchuyen": null,
+    "nbttkhac": [],
+    "ncma": "2024-03-05T09:19:01.838Z",
+    "ncnhat": "2024-03-05T09:19:01.845Z",
+    "ngcnhat": "tvan_thaison",
+    "nky": "2024-03-05T09:02:05Z",
+    "nmdchi": "Số 14, Tôn Thất Tùng, Khu An Ninh, Thị trấn Hữu Lũng, Huyện Hữu Lũng, Tỉnh Lạng Sơn",
+    "nmmst": "4900886412",
+    "nmstkhoan": null,
+    "nmten": "CÔNG TY TNHH DƯỢC - THIẾT BỊ Y TẾ NAM VIỆT",
+    "nmtnhang": null,
+    "nmtnmua": null,
+    "nmttkhac": [],
+    "ntao": "2024-03-05T09:19:01.802Z",
+    "ntnhan": "2024-03-05T09:19:01.776Z",
+    "pban": "2.0.1",
+    "ptgui": 1,
+    "shdgoc": null,
+    "tchat": 1,
+    "tdlap": "2024-03-04T17:00:00Z",
+    "tgia": 1,
+    "tgtcthue": 66285714,
+    "tgtthue": 3314286,
+    "tgtttbchu": "Sáu mươi chín triệu sáu trăm nghìn đồng",
+    "tgtttbso": 69600000,
+    "thdon": "Hóa đơn giá trị gia tăng",
+    "thlap": 202403,
+    "thttlphi": [],
+    "thttltsuat": [
+      {
+        "tsuat": "5%",
+        "thtien": 66285714,
+        "tthue": 3314286,
+        "gttsuat": null
+      }
+    ],
+    "tlhdon": "Hóa đơn giá trị gia tăng",
+    "ttcktmai": null,
+    "tthai": 1,
+    "ttkhac": [
+      {
+        "ttruong": "Mã TC",
+        "kdlieu": "string",
+        "dlieu": "X5UWV7LVU"
+      },
+      {
+        "ttruong": "Trang thái DC",
+        "kdlieu": "string",
+        "dlieu": "1"
+      },
+      {
+        "ttruong": "TTKMR",
+        "kdlieu": "string",
+        "dlieu": null
+      }
+    ],
+    "tttbao": 1,
+    "ttttkhac": [],
+    "ttxly": 5,
+    "tvandnkntt": "0101300842",
+    "mhso": null,
+    "ladhddt": 1,
+    "mkhang": "58029180",
+    "nbsdthoai": "(024) 35576794",
+    "nbdctdtu": "daothiphuong82@gmail.com",
+    "nbfax": "(024) 35690229",
+    "nbwebsite": null,
+    "nbcks": "{\"Subject\":\"CN=\\\"CÔNG TY TNHH THAI NAKORN PATANA VIỆT NAM - CHI NHÁNH TẠI HÀ NỘI \\\", O=\\\"CÔNG TY TNHH THAI NAKORN PATANA VIỆT NAM - CHI NHÁNH TẠI HÀ NỘI \\\", L=\\\"Lô CN 42-2, Khu công nghiệp Quang Minh, Thị Trấn Quang Minh, Huyện Mê Linh, Thành phố Hà Nội, Việt Nam\\\", OID.0.9.2342.19200300.100.1.1=MST:4400251975-003, C=VN\",\"SerialNumber\":\"5402BC5CACCE669C2015000200073BDC\",\"Issuer\":\"CN=CA2, O=NACENCOMM SCT, C=VN\",\"NotAfter\":\"2025-03-06T09:38:19\",\"NotBefore\":\"2023-12-15T06:45:51\",\"SigningTime\":\"2024-03-05T16:02:05\"}",
+    "nmsdthoai": null,
+    "nmdctdtu": null,
+    "nmcmnd": null,
+    "nmcks": null,
+    "bhphap": 0,
+    "hddunlap": null,
+    "gchdgoc": null,
+    "tbhgtngay": null,
+    "bhpldo": null,
+    "bhpcbo": null,
+    "bhpngay": null,
+    "tdlhdgoc": null,
+    "tgtphi": null,
+    "unhiem": null,
+    "mstdvnunlhdon": null,
+    "tdvnunlhdon": null,
+    "nbmdvqhnsach": null,
+    "nbsqdinh": null,
+    "nbncqdinh": null,
+    "nbcqcqdinh": null,
+    "nbhtban": null,
+    "nmmdvqhnsach": null,
+    "nmddvchden": null,
+    "nmtgvchdtu": null,
+    "nmtgvchdden": null,
+    "nbtnban": null,
+    "dcdvnunlhdon": null,
+    "dksbke": null,
+    "dknlbke": null,
+    "thtttoan": "TM/CK",
+    "msttcgp": "0101300842",
+    "cqtcks": "{\"Subject\":\"CN=TỔNG CỤC THUẾ,O=BỘ TÀI CHÍNH,L=Hà Nội,C=VN\",\"SerialNumber\":\"75580955FC81D6A7\",\"Issuer\":\"CN=CA phục vụ các cơ quan Nhà nước G2, O=Ban Cơ yếu Chính phủ, C=VN\",\"NotAfter\":\"2026-11-16T08:09:00\",\"NotBefore\":\"2021-11-17T08:09:00\",\"SigningTime\":\"2024-03-05T16:19:01\"}",
+    "gchu": "",
+    "kqcht": null,
+    "hdntgia": null,
+    "tgtkcthue": null,
+    "tgtkhac": null,
+    "nmshchieu": null,
+    "nmnchchieu": null,
+    "nmnhhhchieu": null,
+    "nmqtich": null,
+    "ktkhthue": null,
+    "nmstttoan": null,
+    "nmttttoan": null,
+    "hdhhdvu": [
+      {
+        "idhdon": "e464c416-fee3-4132-9268-d825f36264ad",
+        "id": "d9085a4c-1268-4ce9-a153-f2e0fa5be5a5",
+        "dgia": 110476.19,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 600,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 1,
+        "tchat": 1,
+        "ten": "TIFFY DEY 25x4 VIÊN",
+        "thtcthue": null,
+        "thtien": 66285714,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 1,
+        "ttkhac": [
+          {
+            "ttruong": "HangMR",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      },
+      {
+        "idhdon": "e464c416-fee3-4132-9268-d825f36264ad",
+        "id": "d286106b-4f99-4b30-85e6-0c4f4c6fbac6",
+        "dgia": 0,
+        "dvtinh": "Hộp",
+        "ltsuat": "5%",
+        "sluong": 60,
+        "stbchu": null,
+        "stckhau": null,
+        "stt": 2,
+        "tchat": 1,
+        "ten": "TIFFY DEY 25x4 VIÊN",
+        "thtcthue": null,
+        "thtien": 0,
+        "tlckhau": null,
+        "tsuat": 0.05,
+        "tthue": null,
+        "sxep": 2,
+        "ttkhac": [
+          {
+            "ttruong": "HangMR",
+            "kdlieu": "string",
+            "dlieu": null
+          }
+        ],
+        "dvtte": null,
+        "tgia": null,
+        "tthhdtrung": []
+      }
+    ],
+    "qrcode": null,
+    "ttmstten": null,
+    "ladhddtten": null,
+    "hdxkhau": null,
+    "hdxkptquan": null,
+    "hdgktkhthue": null,
+    "hdonLquans": null,
+    "tthdclquan": false,
+    "pdndungs": null,
+    "hdtbssrses": null,
+    "hdTrung": null,
+    "isHDTrung": null,
+    "hdcttchinh": null,
+    "dlhquan": null,
+    "dlnhtmai": null,
+    "bltphi": null,
+    "tcsvhdChinh": null,
+    "direction": "inbound"
+  }
+]

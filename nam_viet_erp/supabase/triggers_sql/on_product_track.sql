@@ -1,0 +1,1 @@
+CREATE TRIGGER on_product_track AFTER UPDATE ON public.products FOR EACH ROW EXECUTE FUNCTION track_product_changes()

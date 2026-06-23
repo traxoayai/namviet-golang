@@ -1,0 +1,1 @@
+CREATE TRIGGER orders_restock_on_cancel AFTER UPDATE OF status ON public.orders FOR EACH ROW EXECUTE FUNCTION trg_orders_restock_on_cancel()

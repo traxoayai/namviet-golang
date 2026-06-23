@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_log_inventory_transfers AFTER INSERT OR DELETE OR UPDATE ON public.inventory_transfers FOR EACH ROW EXECUTE FUNCTION log_system_action()

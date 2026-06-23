@@ -1,0 +1,1 @@
+CREATE TRIGGER trg_notify_admin_new_registration AFTER INSERT ON public.registration_requests FOR EACH ROW EXECUTE FUNCTION fn_notify_admin_new_registration()
