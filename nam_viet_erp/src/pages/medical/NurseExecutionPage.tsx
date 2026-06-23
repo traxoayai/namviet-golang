@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 import { nurseService } from "@/features/medical/api/nurseService";
 import { VaccineWorkstation } from "@/features/medical/components/nurse/VaccineWorkstation";
-import { supabase } from "@/shared/lib/supabaseClient";
 
 // Simple Countdown Component for Observing
 const ObservingCountdown = ({ startTime }: { startTime?: string }) => {

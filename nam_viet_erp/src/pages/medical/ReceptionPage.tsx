@@ -28,7 +28,6 @@ import { SellPackageDrawer } from "@/features/medical/components/reception/SellP
 import { VaccineSalesDrawer } from "@/features/medical/components/reception/VaccineSalesDrawer";
 import { VaccineTimelineDrawer } from "@/features/medical/components/vaccination/VaccineTimelineDrawer";
 import { ReceptionAppointment } from "@/features/medical/types/reception.types";
-import { supabase } from "@/shared/lib/supabaseClient";
 import { printAppointmentSlip } from "@/shared/utils/printTemplates"; // Import hàm in mới
 
 // --- HELPERS ---
