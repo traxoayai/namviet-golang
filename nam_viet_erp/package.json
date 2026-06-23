@@ -20,7 +20,8 @@
     "test:unit": "node scripts/run-vitest.mjs run",
     "test:all": "npm run test:unit && npm run test:rpc && npm run test:e2e",
     "test:ci": "npm run test:unit && npm run test:rpc",
-    "test:rpc:prod": "TEST_TARGET=prod node scripts/run-vitest.mjs run --config vitest.config.integration.ts"
+    "test:rpc:prod": "TEST_TARGET=prod node scripts/run-vitest.mjs run --config vitest.config.integration.ts",
+    "api:gen": "openapi-typescript https://namviet-erp-backend-1051286041700.asia-southeast1.run.app/swagger/doc.json -o src/shared/types/api.types.ts"
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
@@ -36,6 +37,7 @@
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^5.0.4",
     "antd": "^5.28.0",
+    "axios": "^1.18.1",
     "dayjs": "^1.11.19",
     "dotenv": "^17.4.2",
     "firebase": "^12.5.0",
@@ -81,6 +83,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.4.0",
     "jsdom": "^29.0.1",
+    "openapi-typescript": "^5.4.2",
     "pg": "^8.21.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",

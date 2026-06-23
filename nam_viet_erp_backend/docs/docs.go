@@ -15,6 +15,40 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/ai/chat": {
+            "post": {
+                "description": "Gửi câu hỏi cho AI và nhận câu trả lời dạng Server-Sent Events (SSE)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/event-stream"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "AI Chatbot Streaming",
+                "parameters": [
+                    {
+                        "description": "Chat request",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.AIChatRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "SSE Stream",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/clinic/appointments": {
             "post": {
                 "description": "Lễ tân tạo lịch hẹn khám bệnh cho bệnh nhân",
@@ -405,6 +439,43 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/logistics/orders/{id}/shipping": {
+            "post": {
+                "description": "Gửi API sang hãng vận chuyển để tạo mã vận đơn",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Logistics"
+                ],
+                "summary": "Tạo vận đơn giao hàng",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/orders": {
             "post": {
                 "description": "Tạo đơn hàng, kiểm tra voucher, trừ tồn kho và ghi nhận thanh toán",
@@ -451,6 +522,118 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/promotions/verify": {
+            "post": {
+                "description": "Xác thực và tính toán số tiền được giảm của Voucher",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Xác thực mã khuyến mãi",
+                "parameters": [
+                    {
+                        "description": "Verify promotion request payload",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.VerifyPromotionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.VerifyPromotionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/purchasing/orders": {
+            "post": {
+                "description": "Tạo đơn hàng từ nhà cung cấp",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Purchasing"
+                ],
+                "summary": "Tạo đơn đặt hàng PO",
+                "parameters": [
+                    {
+                        "description": "Create PO request",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.CreatePurchaseOrderRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.PurchaseOrder"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/webhooks/logistics/status-update": {
+            "post": {
+                "description": "Hãng vận chuyển gọi API này để báo cáo trạng thái đơn hàng",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Logistics"
+                ],
+                "summary": "Webhook nhận trạng thái từ GHN",
+                "responses": {}
             }
         },
         "/ws/v1/clinic/queue": {
@@ -560,6 +743,49 @@ const docTemplate = `{
                 }
             }
         },
+        "domain.CreatePOItemRequest": {
+            "type": "object",
+            "required": [
+                "product_id",
+                "quantity_ordered",
+                "unit"
+            ],
+            "properties": {
+                "is_bonus": {
+                    "type": "boolean"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity_ordered": {
+                    "type": "number"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "unit_price": {
+                    "type": "number"
+                }
+            }
+        },
+        "domain.CreatePurchaseOrderRequest": {
+            "type": "object",
+            "required": [
+                "items",
+                "supplier_id"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.CreatePOItemRequest"
+                    }
+                },
+                "supplier_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "domain.CreateReceiptRequest": {
             "type": "object",
             "required": [
@@ -657,6 +883,9 @@ const docTemplate = `{
                 "customer_id": {
                     "type": "integer"
                 },
+                "delivery_status": {
+                    "type": "string"
+                },
                 "discount_amount": {
                     "type": "number"
                 },
@@ -688,6 +917,9 @@ const docTemplate = `{
                 },
                 "total_amount": {
                     "type": "number"
+                },
+                "tracking_code": {
+                    "type": "string"
                 },
                 "updated_at": {
                     "type": "string"
@@ -747,6 +979,72 @@ const docTemplate = `{
                 }
             }
         },
+        "domain.PurchaseOrder": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.PurchaseOrderItem"
+                    }
+                },
+                "order_code": {
+                    "type": "string"
+                },
+                "status": {
+                    "description": "'pending', 'completed', 'cancelled'",
+                    "type": "string"
+                },
+                "supplier_id": {
+                    "type": "integer"
+                },
+                "total_amount": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.PurchaseOrderItem": {
+            "type": "object",
+            "properties": {
+                "base_quantity": {
+                    "description": "Quantity in base unit",
+                    "type": "number"
+                },
+                "conversion_factor": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_bonus": {
+                    "type": "boolean"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "purchase_order_id": {
+                    "type": "integer"
+                },
+                "quantity_ordered": {
+                    "type": "number"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "unit_price": {
+                    "type": "number"
+                }
+            }
+        },
         "domain.ReceiptItem": {
             "type": "object",
             "required": [
@@ -796,6 +1094,10 @@ const docTemplate = `{
                 "uom"
             ],
             "properties": {
+                "items_per_carton": {
+                    "description": "Added for Purchasing",
+                    "type": "integer"
+                },
                 "product_id": {
                     "type": "integer"
                 },
@@ -804,6 +1106,10 @@ const docTemplate = `{
                 },
                 "uom": {
                     "description": "The requested unit of measurement",
+                    "type": "string"
+                },
+                "wholesale_unit": {
+                    "description": "Added for Purchasing",
                     "type": "string"
                 }
             }
@@ -824,6 +1130,52 @@ const docTemplate = `{
                 },
                 "warehouse_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "domain.VerifyPromotionRequest": {
+            "type": "object",
+            "required": [
+                "order_value",
+                "voucher_code"
+            ],
+            "properties": {
+                "customer_id": {
+                    "type": "integer"
+                },
+                "order_value": {
+                    "type": "number"
+                },
+                "voucher_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.VerifyPromotionResponse": {
+            "type": "object",
+            "properties": {
+                "discount_amount": {
+                    "type": "number"
+                },
+                "is_valid": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "promotion_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handlers.AIChatRequest": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
                 }
             }
         }

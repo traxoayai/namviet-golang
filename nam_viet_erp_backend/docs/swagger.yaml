@@ -64,6 +64,35 @@ definitions:
     - payment_method
     - warehouse_id
     type: object
+  domain.CreatePOItemRequest:
+    properties:
+      is_bonus:
+        type: boolean
+      product_id:
+        type: integer
+      quantity_ordered:
+        type: number
+      unit:
+        type: string
+      unit_price:
+        type: number
+    required:
+    - product_id
+    - quantity_ordered
+    - unit
+    type: object
+  domain.CreatePurchaseOrderRequest:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.CreatePOItemRequest'
+        type: array
+      supplier_id:
+        type: integer
+    required:
+    - items
+    - supplier_id
+    type: object
   domain.CreateReceiptRequest:
     properties:
       items:
@@ -130,6 +159,8 @@ definitions:
         type: string
       customer_id:
         type: integer
+      delivery_status:
+        type: string
       discount_amount:
         type: number
       final_amount:
@@ -152,6 +183,8 @@ definitions:
         type: string
       total_amount:
         type: number
+      tracking_code:
+        type: string
       updated_at:
         type: string
     type: object
@@ -191,6 +224,50 @@ definitions:
     - unit_price
     - uom
     type: object
+  domain.PurchaseOrder:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/domain.PurchaseOrderItem'
+        type: array
+      order_code:
+        type: string
+      status:
+        description: '''pending'', ''completed'', ''cancelled'''
+        type: string
+      supplier_id:
+        type: integer
+      total_amount:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  domain.PurchaseOrderItem:
+    properties:
+      base_quantity:
+        description: Quantity in base unit
+        type: number
+      conversion_factor:
+        type: number
+      id:
+        type: integer
+      is_bonus:
+        type: boolean
+      product_id:
+        type: integer
+      purchase_order_id:
+        type: integer
+      quantity_ordered:
+        type: number
+      unit:
+        type: string
+      unit_price:
+        type: number
+    type: object
   domain.ReceiptItem:
     properties:
       batch_code:
@@ -221,12 +298,18 @@ definitions:
     type: object
   domain.ValidateStockItem:
     properties:
+      items_per_carton:
+        description: Added for Purchasing
+        type: integer
       product_id:
         type: integer
       quantity:
         type: number
       uom:
         description: The requested unit of measurement
+        type: string
+      wholesale_unit:
+        description: Added for Purchasing
         type: string
     required:
     - product_id
@@ -246,9 +329,62 @@ definitions:
     - items
     - warehouse_id
     type: object
+  domain.VerifyPromotionRequest:
+    properties:
+      customer_id:
+        type: integer
+      order_value:
+        type: number
+      voucher_code:
+        type: string
+    required:
+    - order_value
+    - voucher_code
+    type: object
+  domain.VerifyPromotionResponse:
+    properties:
+      discount_amount:
+        type: number
+      is_valid:
+        type: boolean
+      message:
+        type: string
+      promotion_id:
+        type: integer
+    type: object
+  handlers.AIChatRequest:
+    properties:
+      message:
+        type: string
+    required:
+    - message
+    type: object
 info:
   contact: {}
 paths:
+  /api/v1/ai/chat:
+    post:
+      consumes:
+      - application/json
+      description: Gửi câu hỏi cho AI và nhận câu trả lời dạng Server-Sent Events
+        (SSE)
+      parameters:
+      - description: Chat request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.AIChatRequest'
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: SSE Stream
+          schema:
+            type: string
+      summary: AI Chatbot Streaming
+      tags:
+      - System
   /api/v1/clinic/appointments:
     post:
       consumes:
@@ -513,6 +649,31 @@ paths:
       summary: Kiểm tra tồn kho
       tags:
       - Inventory
+  /api/v1/logistics/orders/{id}/shipping:
+    post:
+      description: Gửi API sang hãng vận chuyển để tạo mã vận đơn
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo vận đơn giao hàng
+      tags:
+      - Logistics
   /api/v1/orders:
     post:
       consumes:
@@ -545,6 +706,81 @@ paths:
       summary: Tạo đơn bán hàng
       tags:
       - Orders
+  /api/v1/promotions/verify:
+    post:
+      consumes:
+      - application/json
+      description: Xác thực và tính toán số tiền được giảm của Voucher
+      parameters:
+      - description: Verify promotion request payload
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.VerifyPromotionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.VerifyPromotionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Xác thực mã khuyến mãi
+      tags:
+      - Promotions
+  /api/v1/purchasing/orders:
+    post:
+      consumes:
+      - application/json
+      description: Tạo đơn hàng từ nhà cung cấp
+      parameters:
+      - description: Create PO request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/domain.CreatePurchaseOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.PurchaseOrder'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo đơn đặt hàng PO
+      tags:
+      - Purchasing
+  /api/v1/webhooks/logistics/status-update:
+    post:
+      consumes:
+      - application/json
+      description: Hãng vận chuyển gọi API này để báo cáo trạng thái đơn hàng
+      produces:
+      - application/json
+      responses: {}
+      summary: Webhook nhận trạng thái từ GHN
+      tags:
+      - Logistics
   /ws/v1/clinic/queue:
     get:
       description: Kết nối WebSocket để nhận realtime updates từ queue

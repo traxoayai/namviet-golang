@@ -42,10 +42,16 @@ export const inboundService = {
 
   // 3. Submit Receipt
   async submitReceipt(payload: ProcessInboundPayload): Promise<void> {
-    await safeRpc("process_inbound_receipt", {
-      p_po_id: payload.p_po_id,
-      p_warehouse_id: payload.p_warehouse_id,
-      p_items: payload.p_items,
+    const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+    await axiosClient.post("/api/v1/inventory/receipt", {
+      po_id: payload.p_po_id,
+      warehouse_id: payload.p_warehouse_id,
+      items: payload.p_items.map(item => ({
+        product_id: item.product_id,
+        quantity: item.quantity,
+        lot_number: item.lot_number,
+        expiry_date: item.expiry_date
+      }))
     });
   },
 

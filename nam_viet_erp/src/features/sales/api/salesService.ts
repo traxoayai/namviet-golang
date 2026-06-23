@@ -89,14 +89,10 @@ export const salesService = {
   },
 
   // 5. Tạo đơn hàng (QUAN TRỌNG: Mapping Payload Mới)
-  async createOrder(payload: CreateSalesOrderPayload) {
-    // Payload lúc này đã bao gồm: p_delivery_method, p_shipping_partner_id
-    const { data } = await safeRpc(
-      "create_sales_order",
-      payload as unknown as Database["public"]["Functions"]["create_sales_order"]["Args"]
-    );
-
-    return data; // Trả về UUID đơn hàng
+  async createOrder(payload: any) {
+    const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+    const response = await axiosClient.post("/api/v1/orders", payload);
+    return response.data;
   },
 
   // 5.1 [NEW] Cập nhật đơn hàng (Spec V41)

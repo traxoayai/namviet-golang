@@ -68,9 +68,10 @@ export const posService = {
     }
   },
 
-  // 4. Tạo đơn hàng (Omnichannel V2)
-  async createOrder(payload: any): Promise<string> {
-    const { data } = await safeRpc("create_sales_order", payload);
-    return data as string; // Trả về UUID của đơn hàng
+  // 4. Tạo Đơn Hàng (Chuyển sang Golang API)
+  async createOrder(payload: any) {
+    const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+    const response = await axiosClient.post("/api/v1/orders", payload);
+    return response.data as string; // Trả về UUID của đơn hàng
   },
 };

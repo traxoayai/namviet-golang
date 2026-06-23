@@ -50,7 +50,11 @@ func main() {
 	financeSvc := services.NewFinanceService(financeRepo)
 	financeHandler := handlers.NewFinanceHandler(db, financeSvc)
 
-	orderSvc := services.NewOrderService(orderRepo, invSvc, financeSvc)
+	promoRepo := postgres.NewPromotionRepository()
+	promoSvc := services.NewPromotionService(promoRepo)
+	promoHandler := handlers.NewPromotionHandler(db, promoSvc)
+
+	orderSvc := services.NewOrderService(orderRepo, invSvc, financeSvc, promoSvc)
 	orderHandler := handlers.NewOrderHandler(db, orderSvc)
 
 	crmRepo := postgres.NewCRMRepository()
@@ -66,10 +70,6 @@ func main() {
 	clinicRepo := postgres.NewClinicRepository()
 	clinicSvc := services.NewClinicService(clinicRepo)
 	clinicHandler := handlers.NewClinicHandler(db, clinicSvc)
-
-	promoRepo := postgres.NewPromotionRepository()
-	promoSvc := services.NewPromotionService(promoRepo)
-	promoHandler := handlers.NewPromotionHandler(db, promoSvc)
 
 	purchRepo := postgres.NewPurchasingRepository()
 	purchSvc := services.NewPurchasingService(purchRepo)

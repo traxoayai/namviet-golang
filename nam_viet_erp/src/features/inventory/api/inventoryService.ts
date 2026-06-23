@@ -52,12 +52,14 @@ export interface ProductCardexItem {
   created_by_name: string; // Tên nhân viên thực hiện
 }
 
+import axiosClient from "@/shared/utils/axiosClient";
+
 export const inventoryService = {
   // =================================================================
-  // PHẦN 1: NGHIỆP VỤ NHẬP KHO (INBOUND & AI) - [GIỮ NGUYÊN TỪ CODE CŨ]
+  // PHẦN 1: NGHIỆP VỤ NHẬP KHO (INBOUND & AI) - [GOLANG API]
   // =================================================================
 
-  // 1. Tạo Phiếu Nhập Kho (Gọi RPC)
+  // 1. Tạo Phiếu Nhập Kho (Gọi REST API Golang)
   async createReceipt(payload: {
     po_id: number;
     warehouse_id: number;
@@ -69,17 +71,25 @@ export const inventoryService = {
       expiry_date?: string | null;
     }>;
   }) {
-    const { data } = await safeRpc("create_inventory_receipt", {
-      p_po_id: payload.po_id,
-      p_warehouse_id: payload.warehouse_id,
-      p_note: payload.note ?? "",
-      p_items: payload.items, // Array [{product_id, quantity, lot_number, expiry_date}]
+    // API /api/v1/inventory/receipt expects:
+    // { warehouse_id, note, items: [{product_id, quantity, lot_number, expiry_date}] }
+    // Note: Backend might not use po_id in the new receipt payload directly, but we pass it if needed, or backend extracts it from logic.
+    // Assuming domain.CreateReceiptRequest matches the struct.
+    const response = await axiosClient.post('/api/v1/inventory/receipt', {
+      warehouse_id: payload.warehouse_id,
+      note: payload.note,
+      items: payload.items,
     });
-    return data;
+    return response.data;
   },
 
-  // [NEW] Check Tồn kho khả dụng (V20 Logic)
+  // [NEW] Check Tồn kho khả dụng (Gọi REST API Golang)
   async getAvailability(warehouseId: number, productIds: number[]) {
+    // The backend endpoint for checking stock is /api/v1/inventory/validate
+    // It accepts items: [{product_id, quantity, uom}]
+    // If we just need to "check" what the available stock is, this might be a GET or we map it differently.
+    // Wait, the old RPC was get_product_available_stock. If backend didn't provide a GET, we might still use safeRpc for READ.
+    // "Đọc dữ liệu (Read/GET): Vẫn có thể giữ nguyên cách sử dụng supabase.from/rpc"
     const { data } = await safeRpc("get_product_available_stock", {
       p_warehouse_id: warehouseId,
       p_product_ids: productIds,
