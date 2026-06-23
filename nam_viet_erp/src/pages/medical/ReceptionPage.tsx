@@ -222,22 +222,23 @@ export default function ReceptionPage() {
     fetchData();
   }, [searchTerm, filterDate, filterRoom, filterStaff]);
 
-  // Effect 2: Subscribe realtime 1 lần duy nhất
+  // Effect 2: Subscribe realtime 1 lần duy nhất (Chuyển sang Golang WebSocket)
   useEffect(() => {
-    const channel = supabase
-      .channel("reception_live_queue")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "appointments" },
-        (payload) => {
-          console.log("Có thay đổi lịch hẹn, Auto-refresh!", payload);
-          fetchDataRef.current();
-        }
-      )
-      .subscribe();
+    const wsUrl = import.meta.env.VITE_WS_URL || "wss://namviet-erp-backend-1051286041700.asia-southeast1.run.app";
+    const ws = new WebSocket(`${wsUrl}/ws/v1/clinic/queue`);
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log("Có thay đổi lịch hẹn từ Golang, Auto-refresh!", data);
+      fetchDataRef.current();
+    };
+
+    ws.onerror = (err) => {
+      console.error("WebSocket Error:", err);
+    };
 
     return () => {
-      supabase.removeChannel(channel);
+      ws.close();
     };
   }, []);
 

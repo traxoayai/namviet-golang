@@ -39,23 +39,19 @@ export default function NurseExecutionPage() {
   useEffect(() => {
     fetchData();
 
-    // Lắng nghe realtime từ bảng appointments và clinical_queues
-    const channel = supabase
-      .channel("nurse_live_queue")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "appointments" },
-        () => fetchData()
-      )
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "clinical_queues" },
-        () => fetchData()
-      )
-      .subscribe();
+    // Lắng nghe realtime từ Golang WebSocket
+    const wsUrl = import.meta.env.VITE_WS_URL || "wss://namviet-erp-backend-1051286041700.asia-southeast1.run.app";
+    const ws = new WebSocket(`${wsUrl}/ws/v1/clinic/queue`);
+    
+    ws.onmessage = (event) => {
+      console.log("Cập nhật từ Nurse Queue:", JSON.parse(event.data));
+      fetchData();
+    };
+
+    ws.onerror = (err) => console.error("WebSocket Error:", err);
 
     return () => {
-      supabase.removeChannel(channel);
+      ws.close();
     };
   }, [filterDate]);
 
