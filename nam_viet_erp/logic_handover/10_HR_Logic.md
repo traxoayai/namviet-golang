@@ -17,10 +17,11 @@ Giao diện phải được xây dựng trong thư mục `src/pages/hr/`.
 ### 1.2. Giao diện Hợp Đồng & Lương (`ContractTypePage.tsx`)
 - Form cấu hình tự động: Khai báo "Hợp đồng thử việc". Cấu hình: "Lương cơ bản = 3.000.000đ", "Chuyển chính thức sau khi đạt KPI X và pass Khóa học Y".
 
-### 1.3. Giao diện Ca Làm Việc (`WorkShiftPage.tsx`)
+### 1.3. Giao diện Ca Làm Việc & Chấm Công (`WorkShiftPage.tsx`)
 - Lịch (Calendar View) hiển thị các ngày trong tuần.
 - Cho phép Nhân viên kéo-thả (Drag & Drop) để đăng ký ca làm (Sáng, Chiều, Tối).
 - Quản lý duyệt: Nút "Duyệt ca" dành cho Quản lý chi nhánh.
+- **[QUAN TRỌNG] Nút Điểm Danh (Check-in/Check-out):** Tích hợp ngay trên màn hình hệ thống ERP. Khi nhân viên đến chi nhánh, bấm nút "Check-in" để bắt đầu tính giờ làm. Không cần API kết nối máy chấm công ngoài. Giao diện cần lấy Geolocation (Vị trí) hoặc IP của chi nhánh để chống gian lận.
 
 ## 2. Yêu Cầu Logic & API (Backend Team)
 - `GET /api/v1/hr/employees`: Lọc danh sách nhân sự có phân trang.

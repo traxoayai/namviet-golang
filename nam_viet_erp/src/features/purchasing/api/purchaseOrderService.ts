@@ -6,6 +6,8 @@ import type { Database } from "@/shared/lib/database.types";
 import { safeRpc } from "@/shared/lib/safeRpc";
 import { supabase } from "@/shared/lib/supabaseClient";
 
+import axiosClient from "@/shared/utils/axiosClient";
+
 export const purchaseOrderService = {
   // 1. Lấy danh sách PO
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy filters shape, refactor riêng PR
@@ -26,10 +28,29 @@ export const purchaseOrderService = {
 
   // 2. Lấy chi tiết PO
   async getPODetail(id: number) {
-    const { data } = await safeRpc("get_purchase_order_detail", {
-      p_po_id: id,
-    });
-    return data;
+    const response = await axiosClient.get(`/api/v1/purchasing/orders/${id}`);
+    const po = response.data;
+    
+    // Map Golang API response to legacy Supabase shape expected by Frontend
+    return {
+      id: po.id,
+      code: po.order_code,
+      supplier: { id: po.supplier_id }, // Will fetch supplier info via get_supplier_quick_info
+      status: po.delivery_status === "draft" ? "DRAFT" : po.delivery_status.toUpperCase(),
+      payment_status: po.payment_status,
+      expected_delivery_date: po.expected_date,
+      note: po.note,
+      delivery_method: po.delivery_method,
+      shipping_partner: po.shipping_partner_id ? { id: po.shipping_partner_id } : null,
+      shipping_fee: po.shipping_fee,
+      discount_amount: po.discount_amount,
+      total_amount: po.total_amount,
+      final_amount: po.final_amount,
+      costing_confirmed_at: po.costing_confirmed_at,
+      created_at: po.created_at,
+      updated_at: po.updated_at,
+      items: po.items, // Has total_stock and avg_monthly_sold now
+    };
   },
 
   // 3. Tạo Đơn Nháp (Create) - [UPDATE] Hàm tạo đơn mua hàng (Khớp với RPC V29.1 của Core)

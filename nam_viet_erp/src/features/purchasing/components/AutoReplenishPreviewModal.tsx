@@ -1,11 +1,13 @@
 import React from "react";
-import { Modal, Table, Typography, Tag, Space, Button } from "antd";
+import { PictureOutlined } from "@ant-design/icons";
+import { Modal, Table, Typography, Tag, Space, Button, Avatar } from "antd";
 
 const { Text } = Typography;
 
 interface ReplenishItem {
   product_id: number;
   product_name?: string;
+  image_url?: string;
   quantity_ordered: number;
   unit: string;
   unit_price: number;
@@ -72,7 +74,19 @@ export const AutoReplenishPreviewModal: React.FC<AutoReplenishPreviewModalProps>
       dataIndex: "product_id",
       key: "product_id",
       render: (val: number, record: any) => (
-        <Text>{record.product_name || `Sản phẩm #${val}`}</Text>
+        <Space>
+          <Avatar
+            shape="square"
+            size={40}
+            src={record.image_url}
+            icon={<PictureOutlined />}
+            style={{ backgroundColor: "#f5f5f5", border: "1px solid #d9d9d9" }}
+          />
+          <Space direction="vertical" size={0}>
+            <Text strong>{record.product_name || `Sản phẩm #${val}`}</Text>
+            <Text type="secondary" style={{ fontSize: 12 }}>ID: {val}</Text>
+          </Space>
+        </Space>
       ),
     },
     {

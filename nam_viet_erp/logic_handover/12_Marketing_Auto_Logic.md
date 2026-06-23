@@ -9,7 +9,8 @@ Xây dựng trong `src/pages/marketing/`
 - Đây là giao diện Khó nhất. Sử dụng thư viện **React Flow** để xây dựng Canvas Kéo-Thả (Drag & Drop Node).
 - **Node Cấu Hình Chung:** Ngân sách, Tệp khách hàng (Lấy từ Module CRM).
 - **Node Kích Hoạt (Trigger):** "Gửi 1 lần vào ngày X", hoặc "Tự động khi khách hàng sinh nhật".
-- **Node Hành Động (Action):** "Gửi Zalo ZNS", "Gửi SMS", "Tặng Voucher".
+- **Node Hành Động (Action):** "Gửi tin nhắn Zalo", "Gửi SMS", "Tặng Voucher".
+  - **[QUAN TRỌNG - ZALO ACTION]:** Tại Action "Gửi tin nhắn Zalo", Frontend phải cung cấp Dropdown cho User chọn 1 trong 2 loại: **1. Zalo ZNS** (Tốn phí, gửi được cho số ĐT chưa quan tâm OA, bắt buộc chọn Template mẫu đã duyệt), hoặc **2. Zalo OA thông thường** (Miễn phí, chỉ gửi cho người đã quan tâm OA, gửi nội dung tự do). Backend xử lý gọi API Zalo tương ứng.
 - **Node Điều Kiện (Condition / Delay):** "Đợi 3 ngày", "Nếu đã xem thì...".
 - **Dashboard Report:** Biểu đồ hình Phễu (Funnel Chart) dùng thư viện ECharts/Ant Design Charts hiển thị: Sent -> Open -> Clicked -> Redeemed.
 

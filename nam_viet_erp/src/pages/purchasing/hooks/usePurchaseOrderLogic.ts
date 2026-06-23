@@ -192,7 +192,7 @@ export const usePurchaseOrderLogic = () => {
             id: i.id as number,
             product_id: i.product_id as number,
             sku: i.sku as string,
-            name: i.product_name as string,
+            name: (i.name as string) || (i.product_name as string),
             image_url: i.image_url as string,
             quantity: i.quantity_ordered as number,
             available_units:
@@ -217,6 +217,9 @@ export const usePurchaseOrderLogic = () => {
 
             input_lot: draftItem?.input_lot || undefined,
             input_expiry: draftItem?.input_expiry || undefined,
+            
+            total_stock: i.total_stock as number,
+            avg_monthly_sold: i.avg_monthly_sold as number,
           };
         }
       );

@@ -8,6 +8,7 @@ Xây dựng trong `src/pages/medical/`
 ### 1.1. Giao diện Danh Sách Bệnh (`DiseaseDictionaryPage.tsx`)
 - Form CRUD Bệnh (Tên bệnh, Mã DIC10).
 - Component chọn "Triệu chứng điển hình" dạng Tags Multi-select.
+- **[QUAN TRỌNG - SEED DATA]:** Team Backend KHÔNG yêu cầu Admin nhập tay 10.000 bệnh. Cần tải file JSON chuẩn DIC10 của Bộ Y Tế, lọc ra khoảng **300 bệnh phổ thông nhất** (Sốt, cảm cúm, viêm họng, tiêu hóa...) và viết Script Import (Seed) chạy 1 lần vào Database. Giao diện Frontend chỉ việc lấy ra dùng hoặc cho phép Admin tạo mới thêm nếu thiếu.
 
 ### 1.2. Giao diện Đơn Thuốc Mẫu (`PrescriptionTemplatePage.tsx`)
 - Chọn Bệnh (Dropdown).
