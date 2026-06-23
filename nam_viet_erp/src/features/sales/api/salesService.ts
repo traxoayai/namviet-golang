@@ -1,12 +1,11 @@
 // src/services/salesService.ts
-import type { Database, Json } from "@/shared/lib/database.types";
+import type { Json } from "@/shared/lib/database.types";
 
 import {
   CustomerB2B,
   ProductB2B,
   ShippingPartner,
   VoucherRecord,
-  CreateSalesOrderPayload,
 } from "@/features/sales/types/b2b_sales"; // Import Type mới nhất
 import { safeRpc } from "@/shared/lib/safeRpc";
 import { supabase } from "@/shared/lib/supabaseClient";
