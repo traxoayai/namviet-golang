@@ -53,3 +53,41 @@ func (h *PurchasingHandler) CreatePurchaseOrder(c *gin.Context) {
 	tx.Commit()
 	c.JSON(http.StatusOK, po)
 }
+
+// AutoReplenishMinMax godoc
+// @Summary Tạo dự trù mua hàng hàng loạt theo mức Min-Max
+// @Description Quét kho và tự động đẻ các đơn đặt hàng nháp cho sản phẩm thiếu hụt
+// @Tags Purchasing
+// @Accept json
+// @Produce json
+// @Success 200 {object} domain.AutoReplenishResponse
+// @Failure 400 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Router /api/v1/purchasing/auto-replenish-min-max [post]
+func (h *PurchasingHandler) AutoReplenishMinMax(c *gin.Context) {
+	// Giả sử request chỉ có warehouse_id, mặc định là B2B warehouse (id=1)
+	warehouseID := int64(1) // Trong thực tế lấy từ query hoặc body
+
+	// Giả sử lấy user_id từ JWT
+	userID := "system-auto"
+	if uid, exists := c.Get("user_id"); exists {
+		userID = uid.(string)
+	}
+
+	tx := h.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	res, err := h.purchSvc.AutoReplenishMinMax(c.Request.Context(), tx, warehouseID, userID)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, res)
+}

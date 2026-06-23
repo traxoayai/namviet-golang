@@ -1,5 +1,4 @@
 // src/features/booking/api/bookingService.ts
-import { safeRpc } from "@/shared/lib/safeRpc";
 import type { Json } from "@/shared/types/database.types";
 
 export interface BookingPayload {
