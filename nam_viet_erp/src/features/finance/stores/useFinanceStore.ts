@@ -106,10 +106,15 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
   createTransaction: async (payload) => {
     set({ loading: true });
     try {
-      // 1. Gọi API tạo phiếu Hoàn ứng
-      await safeRpc("create_finance_transaction", {
-        ...payload,
-        p_ref_advance_id: payload.p_ref_advance_id ?? undefined,
+      // 1. Gọi API tạo phiếu Hoàn ứng qua Backend Golang
+      const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+      await axiosClient.post("/api/v1/finance/transactions", {
+        amount: payload.p_amount,
+        description: payload.p_description,
+        flow: payload.p_flow,
+        fund_account_id: payload.p_fund_id,
+        ref_id: payload.p_ref_id,
+        ref_type: payload.p_ref_type,
       });
 
       // 2. AURA FIX: Chủ động cập nhật trạng thái phiếu Tạm ứng cũ thành 'completed'

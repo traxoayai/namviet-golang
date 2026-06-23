@@ -31,35 +31,41 @@ export const bookingService = {
         ? payload.doctor_id
         : undefined;
 
-    const { data } = await safeRpc("create_appointment_booking", {
-      p_customer_id: payload.customer_id,
-      p_doctor_id: doctorId,
-      p_time: payload.appointment_time,
-      p_symptoms: payload.symptoms,
-      p_note: payload.notes || "",
-      p_type: "examination",
-      p_status: payload.status || "confirmed",
+    const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+    const { data } = await axiosClient.post("/api/v1/clinic/appointments", {
+      patient_id: payload.customer_id,
+      doctor_id: doctorId ? Number(doctorId) : 0, // Fallback to 0 if not provided
+      appointment_time: payload.appointment_time,
+      service_type: "examination",
     });
-    return data; // Returns appointment_id
+
+    return data?.id; // Returns appointment_id
   },
 
   /**
    * Check-in ngay vào Clinical Queue via RPC
    */
   checkInNow: async (payload: CheckInPayload) => {
-    // Sanitize doctor_id: ensure empty string becomes null
-    const doctorId =
-      payload.doctor_id && payload.doctor_id.trim() !== ""
-        ? payload.doctor_id
-        : undefined;
-
-    const { data } = await safeRpc("check_in_patient", {
-      p_customer_id: payload.customer_id,
-      p_doctor_id: doctorId,
-      p_priority: payload.priority === "urgent" ? "high" : "normal",
-      p_symptoms: payload.symptoms,
-      p_notes: payload.notes || "",
+    // 1. Tạo cuộc hẹn trước
+    const appointmentId = await bookingService.createBooking({
+      customer_id: payload.customer_id,
+      doctor_id: payload.doctor_id,
+      appointment_time: new Date().toISOString(),
+      symptoms: payload.symptoms,
+      notes: payload.notes,
+      status: "confirmed",
     });
-    return data; // Returns queue_number or queue_id
+
+    if (!appointmentId) {
+      throw new Error("Không thể tạo cuộc hẹn để check-in");
+    }
+
+    // 2. Gọi API Check-in
+    const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+    const { data } = await axiosClient.post(`/api/v1/clinic/appointments/${appointmentId}/check-in`, {
+      notes: payload.notes || "",
+    });
+
+    return data; // Returns queue information
   },
 };
