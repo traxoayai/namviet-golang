@@ -175,17 +175,21 @@ export const usePurchaseOrderMaster = () => {
         content: "Đang tính toán dự trù...",
         key: "auto_create",
       });
-      const { data } = await safeRpc(
-        "auto_create_purchase_orders_min_max"
-      );
+      const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+      const response = await axiosClient.post("/api/v1/purchasing/auto-replenish-min-max");
+      
       message.success({
-        content: `Đã tạo ${data} đơn hàng dự trù!`,
+        content: `Đã tạo ${response.data.created_po_count} đơn hàng dự trù!`,
         key: "auto_create",
       });
       queryClient.invalidateQueries({ queryKey: ["purchaseOrders"] });
       queryClient.invalidateQueries({ queryKey: ["purchaseOrderStats"] });
-    } catch {
+      
+      return response.data;
+    } catch (error) {
+      console.error("Auto Replenish Error:", error);
       message.error({ content: "Lỗi tạo đơn tự động", key: "auto_create" });
+      return null;
     }
   };
 

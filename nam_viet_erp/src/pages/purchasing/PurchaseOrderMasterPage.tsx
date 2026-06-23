@@ -10,8 +10,9 @@ import { PurchaseOrderTable } from "../../features/purchasing/components/Purchas
 import { usePurchaseOrderMaster } from "../../features/purchasing/hooks/usePurchaseOrderMaster";
 import { PurchaseOrderMaster } from "../../features/purchasing/types/purchase";
 import { FinanceFormModal } from "../../pages/finance/components/FinanceFormModal";
-
 import { parseNumericOrZero } from "@/shared/utils/numeric";
+
+import { AutoReplenishPreviewModal } from "../../features/purchasing/components/AutoReplenishPreviewModal";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -33,6 +34,18 @@ const PurchaseOrderMasterPage: React.FC = () => {
   const navigate = useNavigate();
   const { message } = App.useApp();
   const [cloningId, setCloningId] = useState<number | null>(null);
+
+  // Auto Replenish Modal State
+  const [isReplenishModalVisible, setIsReplenishModalVisible] = useState(false);
+  const [replenishData, setReplenishData] = useState<any[]>([]);
+
+  const handleAutoCreate = async () => {
+    const data = await autoCreate();
+    if (data && data.generated_pos) {
+      setReplenishData(data.generated_pos);
+      setIsReplenishModalVisible(true);
+    }
+  };
 
   useEffect(() => {
     const onFocus = () => {
@@ -209,7 +222,7 @@ const PurchaseOrderMasterPage: React.FC = () => {
         <PurchaseOrderFilters
           filters={filters}
           setFilters={setFilters}
-          onAutoCreate={autoCreate}
+          onAutoCreate={handleAutoCreate}
         />
 
         <div style={{ background: "#fff", padding: 12, borderRadius: 8 }}>
@@ -309,8 +322,20 @@ const PurchaseOrderMasterPage: React.FC = () => {
               category_id: paymentModalConfig.category_id,
               po_bulk_allocations: paymentModalConfig.po_bulk_allocations,
             }}
+            onSuccess={() => {
+              handlePaymentModalClose();
+              fetchOrders();
+              setSelectedRowKeys([]);
+              setSelectedRows([]);
+            }}
           />
         ) : null}
+
+        <AutoReplenishPreviewModal
+          visible={isReplenishModalVisible}
+          onCancel={() => setIsReplenishModalVisible(false)}
+          data={replenishData}
+        />
       </Content>
     </Layout>
   );
