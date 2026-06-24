@@ -32,6 +32,7 @@ import {
   Radio,
   QRCode,
   Tabs,
+  Switch,
 } from "antd";
 import viVN from "antd/locale/vi_VN";
 import dayjs from "dayjs";
@@ -45,6 +46,7 @@ import {
 } from "@/features/marketing/stores/usePromotionStore";
 import { useProductStore } from "@/features/product/stores/productStore";
 import UniversalCustomerSelect from "@/shared/ui/common/UniversalCustomerSelect";
+import DebounceProductSelect from "@/shared/ui/common/DebounceProductSelect";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -121,64 +123,62 @@ const DiscountCodeManagement = () => {
     try {
       const values = await form.validateFields();
 
+      // Build advanced_rules if discount_type is 'advanced'
+      let advanced_rules = null;
+      if (values.discount_type === "advanced") {
+        advanced_rules = {
+          condition:
+            values.condition_type === "buy_amount"
+              ? { type: "buy_amount", min_amount: values.min_amount || 0 }
+              : {
+                  type: "buy_quantity",
+                  target_product_id: values.target_product_id,
+                  min_quantity: values.min_quantity || 1,
+                },
+          reward: {
+            type: "give_product",
+            gift_product_id: values.gift_product_id,
+            gift_quantity: values.gift_quantity || 1,
+            gift_value: values.gift_value || 0,
+            discount_percent: 100, // Miễn phí 100%
+          },
+          is_multiply: values.is_multiply ?? true,
+        };
+      }
+
+      const buildPayload = (c?: any, index?: number) => ({
+        code: index !== undefined && values.selected_customers?.length > 1
+          ? `${values.code}-${index + 1}`
+          : values.code,
+        name: values.campaignName,
+        description: values.description,
+        type: values.type,
+        discount_type: values.discount_type,
+        discount_value: values.value || 0,
+        max_discount_value:
+          values.discount_type === "percent" ? values.max_discount_value : null,
+        min_order_value: values.minPurchase || 0,
+        total_usage_limit: values.maxUsage,
+        apply_to_scope: values.apply_to_scope,
+        apply_to_ids: values.apply_to_ids ? [values.apply_to_ids] : [],
+        valid_from: values.validDates[0].toISOString(),
+        valid_to: values.validDates[1].toISOString(),
+        status: values.status,
+        customer_id: c?.value || null,
+        customer_type: c?.item?.type || values.customer_type || "B2C",
+        advanced_rules: advanced_rules,
+      });
+
       // 1. Xử lý logic Voucher Tặng Riêng (Personal)
       if (values.type === "personal" && values.selected_customers) {
-        const batchData = values.selected_customers.map(
-          (c: any, index: number) => ({
-            code:
-              values.selected_customers.length > 1
-                ? `${values.code}-${index + 1}`
-                : values.code,
-            name: values.campaignName,
-            description: values.description,
-            type: values.type,
-            discount_type: values.discount_type,
-            discount_value: values.value,
-            max_discount_value:
-              values.discount_type === "percent"
-                ? values.max_discount_value
-                : null,
-            min_order_value: values.minPurchase || 0,
-            total_usage_limit: values.maxUsage,
-            apply_to_scope: values.apply_to_scope,
-            apply_to_ids: values.apply_to_ids ? [values.apply_to_ids] : [],
-            valid_from: values.validDates[0].toISOString(),
-            valid_to: values.validDates[1].toISOString(),
-            status: values.status,
-
-            customer_id: c.value,
-            customer_type: c.item?.type || values.customer_type || "B2C",
-          })
-        );
+        const batchData = values.selected_customers.map((c: any, index: number) => buildPayload(c, index));
 
         await promotionService.createBatchPromotions(batchData);
         setIsModalVisible(false);
         fetchPromotions();
       } else {
         // 2. Xử lý logic Voucher Công Khai (Public)
-        const payload = {
-          code: values.code,
-          name: values.campaignName,
-          description: values.description,
-          type: values.type,
-          discount_type: values.discount_type,
-          discount_value: values.value,
-          max_discount_value:
-            values.discount_type === "percent"
-              ? values.max_discount_value
-              : null,
-          min_order_value: values.minPurchase || 0,
-          total_usage_limit: values.maxUsage,
-          customer_ids: null,
-          apply_to_scope: values.apply_to_scope,
-          apply_to_ids: values.apply_to_ids ? [values.apply_to_ids] : [],
-          valid_from: values.validDates[0].toISOString(),
-          valid_to: values.validDates[1].toISOString(),
-          status: values.status,
-
-          customer_type: values.customer_type,
-        };
-
+        const payload = buildPayload();
         const success = await createPromotion(payload);
         if (success) setIsModalVisible(false);
       }
@@ -432,27 +432,30 @@ const DiscountCodeManagement = () => {
                         <Form.Item label="Loại giảm giá" required>
                           <Input.Group compact>
                             <Form.Item name="discount_type" noStyle>
-                              <Select style={{ width: "40%" }}>
+                              <Select style={{ width: discountType === "advanced" ? "100%" : "40%" }}>
                                 <Option value="percent">Giảm %</Option>
                                 <Option value="fixed">Tiền mặt</Option>
+                                <Option value="advanced">Quà tặng / Bậc thang</Option>
                               </Select>
                             </Form.Item>
-                            <Form.Item
-                              name="value"
-                              noStyle
-                              rules={[{ required: true }]}
-                            >
-                              <InputNumber
-                                style={{ width: "60%" }}
-                                min={0}
-                                formatter={(value) =>
-                                  `${value}`.replace(
-                                    /\B(?=(\d{3})+(?!\d))/g,
-                                    ","
-                                  )
-                                }
-                              />
-                            </Form.Item>
+                            {discountType !== "advanced" && (
+                              <Form.Item
+                                name="value"
+                                noStyle
+                                rules={[{ required: true }]}
+                              >
+                                <InputNumber
+                                  style={{ width: "60%" }}
+                                  min={0}
+                                  formatter={(value) =>
+                                    `${value}`.replace(
+                                      /\B(?=(\d{3})+(?!\d))/g,
+                                      ","
+                                    )
+                                  }
+                                />
+                              </Form.Item>
+                            )}
                           </Input.Group>
                         </Form.Item>
 
@@ -471,19 +474,79 @@ const DiscountCodeManagement = () => {
                           </Form.Item>
                         )}
 
-                        <Form.Item
-                          name="minPurchase"
-                          label="Đơn hàng tối thiểu"
-                          initialValue={0}
-                        >
-                          <InputNumber
-                            style={{ width: "100%" }}
-                            formatter={(value) =>
-                              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                            }
-                            addonAfter="đ"
-                          />
-                        </Form.Item>
+                        {discountType !== "advanced" && (
+                          <Form.Item
+                            name="minPurchase"
+                            label="Đơn hàng tối thiểu"
+                            initialValue={0}
+                          >
+                            <InputNumber
+                              style={{ width: "100%" }}
+                              formatter={(value) =>
+                                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                              }
+                              addonAfter="đ"
+                            />
+                          </Form.Item>
+                        )}
+
+                        {discountType === "advanced" && (
+                          <Card size="small" style={{ marginTop: 12, borderColor: '#ffc53d' }} title="Cấu hình Bậc thang / Quà tặng">
+                            <Form.Item label="Điều kiện áp dụng" name="condition_type" rules={[{ required: true }]} initialValue="buy_quantity">
+                              <Radio.Group buttonStyle="solid">
+                                <Radio.Button value="buy_quantity">Đạt số lượng</Radio.Button>
+                                <Radio.Button value="buy_amount">Đạt tổng tiền</Radio.Button>
+                              </Radio.Group>
+                            </Form.Item>
+
+                            <Form.Item
+                              noStyle
+                              shouldUpdate={(prev, curr) => prev.condition_type !== curr.condition_type}
+                            >
+                              {({ getFieldValue }) => {
+                                const cType = getFieldValue("condition_type") || "buy_quantity";
+                                return cType === "buy_quantity" ? (
+                                  <>
+                                    <Form.Item label="Sản phẩm mua" name="target_product_id" rules={[{ required: true }]}>
+                                      <DebounceProductSelect placeholder="Chọn sản phẩm yêu cầu mua..." />
+                                    </Form.Item>
+                                    <Form.Item label="Số lượng cần mua tối thiểu" name="min_quantity" rules={[{ required: true }]}>
+                                      <InputNumber min={1} style={{ width: "100%" }} />
+                                    </Form.Item>
+                                  </>
+                                ) : (
+                                  <Form.Item label="Tổng tiền bill tối thiểu" name="min_amount" rules={[{ required: true }]}>
+                                    <InputNumber min={0} style={{ width: "100%" }} formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} addonAfter="đ" />
+                                  </Form.Item>
+                                );
+                              }}
+                            </Form.Item>
+
+                            <Divider dashed style={{ margin: "12px 0" }} />
+                            <Text strong style={{ color: '#fa8c16' }}>Phần Thưởng (Quà tặng)</Text>
+                            
+                            <Form.Item label="Sản phẩm tặng" name="gift_product_id" rules={[{ required: true }]} style={{ marginTop: 12 }}>
+                              <DebounceProductSelect placeholder="Chọn sản phẩm dùng làm quà tặng..." />
+                            </Form.Item>
+                            
+                            <Row gutter={8}>
+                              <Col span={12}>
+                                <Form.Item label="Số lượng tặng" name="gift_quantity" rules={[{ required: true }]} initialValue={1}>
+                                  <InputNumber min={1} style={{ width: "100%" }} />
+                                </Form.Item>
+                              </Col>
+                              <Col span={12}>
+                                <Form.Item label="Trị giá quà" name="gift_value" rules={[{ required: true }]} initialValue={0}>
+                                  <InputNumber min={0} style={{ width: "100%" }} formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} addonAfter="đ" />
+                                </Form.Item>
+                              </Col>
+                            </Row>
+
+                            <Form.Item label="Tặng lũy tiến (Mua nhiều tặng nhiều)" name="is_multiply" valuePropName="checked" initialValue={true}>
+                              <Switch />
+                            </Form.Item>
+                          </Card>
+                        )}
 
                         <Form.Item
                           name="maxUsage"
