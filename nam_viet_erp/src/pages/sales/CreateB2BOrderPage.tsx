@@ -555,7 +555,7 @@ const CreateB2BOrderPage = () => {
         }}
       >
         <Row gutter={24}>
-          <Col span={16}>
+          <Col xs={24} lg={16} xl={17} xxl={18}>
             {/* KHỐI A: THÔNG TIN KHÁCH HÀNG */}
             <div style={{ marginBottom: 16 }}>
               {!customer ? (
@@ -613,7 +613,7 @@ const CreateB2BOrderPage = () => {
             />
           </Col>
 
-          <Col span={8}>
+          <Col xs={24} lg={8} xl={7} xxl={6}>
             <div style={{ position: "sticky", top: 80 }}>
               {/* [NEW] HIỂN THỊ ALERT Ở ĐÂY (Thay vì trong nút bấm) */}
               {financials.isOverLimit ? (
