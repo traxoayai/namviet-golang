@@ -784,7 +784,9 @@ const B2BOrderListPage = ({
   const canBulkDelete = useMemo(() => {
     if (selectedOrders.length === 0) return false;
     return selectedOrders.every(
-      (o: any) => o.status === "cancelled" && o.payment_status === "unpaid"
+      (o: any) =>
+        String(o.status).toUpperCase() === "CANCELLED" &&
+        String(o.payment_status).toLowerCase() === "unpaid"
     );
   }, [selectedOrders]);
 
