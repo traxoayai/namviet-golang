@@ -243,8 +243,14 @@ const CreateB2BOrderPage = () => {
             return;
           }
         }
+        
+        // [FIX] Bỏ qua các sản phẩm là quà tặng (is_gift: true) để hệ thống tự động
+        // tái tạo lại quà tặng chuẩn xác dựa trên số lượng hàng thực tế và voucher (nếu có).
+        const purchasedItems = safeItems.filter(
+          (item: Record<string, unknown>) => !item.is_gift
+        );
 
-        const mappedItems: CartItem[] = safeItems.map(
+        const mappedItems: CartItem[] = purchasedItems.map(
           (item: Record<string, unknown>) => {
             const productInfo = (item.product || {}) as Record<string, unknown>;
             const pid = item.product_id as number;
@@ -294,6 +300,23 @@ const CreateB2BOrderPage = () => {
           );
         if (orderData.shipping_partner_id)
           selectShippingPartner(orderData.shipping_partner_id);
+
+        // [FIX] Khôi phục Voucher nếu có
+        if (orderData.voucher_code && customerData?.id) {
+          try {
+            const availableVouchers = await salesService.getVouchers(
+              customerData.id
+            );
+            const appliedVoucher = availableVouchers.find(
+              (v) => v.code === orderData.voucher_code
+            );
+            if (appliedVoucher) {
+              setVoucher(appliedVoucher);
+            }
+          } catch (vErr) {
+            console.error("Lỗi khi tải lại voucher:", vErr);
+          }
+        }
       } catch (err: unknown) {
         console.error("Hydration Error:", err);
         const msg = err instanceof Error ? err.message : "Lỗi không xác định";
