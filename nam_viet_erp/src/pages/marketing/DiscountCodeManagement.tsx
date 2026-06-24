@@ -31,7 +31,6 @@ import {
   DatePicker,
   Radio,
   QRCode,
-  Tabs,
   Switch,
 } from "antd";
 import viVN from "antd/locale/vi_VN";
@@ -366,7 +365,7 @@ const DiscountCodeManagement = () => {
         open={isModalVisible}
         onOk={handleModalSave}
         onCancel={() => setIsModalVisible(false)}
-        width={800}
+        width={1200}
         destroyOnClose
         okText="Lưu & Kích hoạt"
       >
@@ -379,15 +378,8 @@ const DiscountCodeManagement = () => {
             if (v.apply_to_scope) setScopeType(v.apply_to_scope);
           }}
         >
-          <Tabs
-            defaultActiveKey="1"
-            items={[
-              {
-                key: "1",
-                label: "Cấu hình Cơ bản",
-                children: (
-                  <Row gutter={16}>
-                    <Col span={12}>
+                  <Row gutter={24}>
+                    <Col span={8}>
                       <Form.Item
                         name="campaignName"
                         label="Tên Chiến dịch"
@@ -423,7 +415,7 @@ const DiscountCodeManagement = () => {
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={12}>
+                    <Col span={8}>
                       <Card
                         size="small"
                         title="Giá trị khuyến mãi"
@@ -508,7 +500,7 @@ const DiscountCodeManagement = () => {
                                 return cType === "buy_quantity" ? (
                                   <>
                                     <Form.Item label="Sản phẩm mua" name="target_product_id" rules={[{ required: true }]}>
-                                      <DebounceProductSelect placeholder="Chọn sản phẩm yêu cầu mua..." />
+                                      <DebounceProductSelect placeholder="Chọn sản phẩm yêu cầu mua..." searchTypes={["product", "service", "bundle"]} />
                                     </Form.Item>
                                     <Form.Item label="Số lượng cần mua tối thiểu" name="min_quantity" rules={[{ required: true }]}>
                                       <InputNumber min={1} style={{ width: "100%" }} />
@@ -526,7 +518,7 @@ const DiscountCodeManagement = () => {
                             <Text strong style={{ color: '#fa8c16' }}>Phần Thưởng (Quà tặng)</Text>
                             
                             <Form.Item label="Sản phẩm tặng" name="gift_product_id" rules={[{ required: true }]} style={{ marginTop: 12 }}>
-                              <DebounceProductSelect placeholder="Chọn sản phẩm dùng làm quà tặng..." />
+                              <DebounceProductSelect placeholder="Chọn sản phẩm dùng làm quà tặng..." searchTypes={["product", "service", "bundle"]} />
                             </Form.Item>
                             
                             <Row gutter={8}>
@@ -561,14 +553,12 @@ const DiscountCodeManagement = () => {
                         </Form.Item>
                       </Card>
                     </Col>
-                  </Row>
-                ),
-              },
-              {
-                key: "2",
-                label: "Phạm vi & Đối tượng",
-                children: (
-                  <>
+                    <Col span={8}>
+                      <Card
+                        size="small"
+                        title="Phạm vi & Đối tượng"
+                        style={{ backgroundColor: "#f9f9f9", height: "100%" }}
+                      >
                     <Form.Item
                       name="customer_type"
                       label="Hệ thống áp dụng"
@@ -671,11 +661,9 @@ const DiscountCodeManagement = () => {
                         </Select>
                       </Form.Item>
                     )}
-                  </>
-                ),
-              },
-            ]}
-          />
+                      </Card>
+                    </Col>
+                  </Row>
 
           <Form.Item
             name="status"
