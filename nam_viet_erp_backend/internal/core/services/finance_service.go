@@ -16,6 +16,8 @@ import (
 type FinanceService interface {
 	CreateTransaction(ctx context.Context, tx *gorm.DB, req domain.CreateTransactionRequest, userID string) error
 	AllocateVATInvoice(ctx context.Context, tx *gorm.DB, req domain.VATAllocationRequest) ([]domain.OrderItem, error)
+	GetPendingCODReports(ctx context.Context, db *gorm.DB) ([]domain.CODPendingReport, error)
+	ConfirmCODDeposit(ctx context.Context, tx *gorm.DB, shipperID string, transactionIDs []int64) error
 }
 
 type financeService struct {
@@ -174,4 +176,58 @@ func (s *financeService) AllocateVATInvoice(ctx context.Context, tx *gorm.DB, re
 	}
 
 	return selected, nil
+}
+
+func (s *financeService) GetPendingCODReports(ctx context.Context, db *gorm.DB) ([]domain.CODPendingReport, error) {
+	var results []domain.CODPendingReport
+
+	// Query to group by created_by
+	// In GORM, doing a complex group by with struct loading is tricky, we can do a raw query or manual grouping
+	var transactions []domain.FinanceTransaction
+	if err := db.WithContext(ctx).Where("status = ? AND flow = ?", "pending", "in").Find(&transactions).Error; err != nil {
+		return nil, err
+	}
+
+	mapReports := make(map[string]*domain.CODPendingReport)
+	for _, tx := range transactions {
+		shipperID := tx.CreatedBy
+		if shipperID == "" {
+			continue // ignore if no shipper
+		}
+		if _, exists := mapReports[shipperID]; !exists {
+			mapReports[shipperID] = &domain.CODPendingReport{
+				ShipperID:    shipperID,
+				TotalAmount:  0,
+				Transactions: []domain.FinanceTransaction{},
+			}
+		}
+		mapReports[shipperID].Transactions = append(mapReports[shipperID].Transactions, tx)
+		mapReports[shipperID].TotalAmount += tx.Amount
+	}
+
+	for _, v := range mapReports {
+		results = append(results, *v)
+	}
+
+	return results, nil
+}
+
+func (s *financeService) ConfirmCODDeposit(ctx context.Context, tx *gorm.DB, shipperID string, transactionIDs []int64) error {
+	if len(transactionIDs) == 0 {
+		return errors.New("không có giao dịch nào để xác nhận")
+	}
+
+	// Update transactions to completed
+	res := tx.WithContext(ctx).Model(&domain.FinanceTransaction{}).
+		Where("id IN ? AND status = ? AND flow = ? AND created_by = ?", transactionIDs, "pending", "in", shipperID).
+		Update("status", "completed")
+
+	if res.Error != nil {
+		return res.Error
+	}
+	if res.RowsAffected == 0 {
+		return errors.New("không có giao dịch nào được xác nhận (có thể đã được xác nhận hoặc sai shipper)")
+	}
+
+	return nil
 }

@@ -4,7 +4,7 @@ import "time"
 
 // Order represents a sales order
 type Order struct {
-	ID             int64     `json:"id" gorm:"primaryKey;autoIncrement"`
+	ID             string    `json:"id" gorm:"primaryKey;type:uuid"`
 	OrderCode      string    `json:"order_code"`
 	CustomerID     int64     `json:"customer_id"`
 	TotalAmount    float64   `json:"total_amount"`
@@ -29,7 +29,7 @@ func (Order) TableName() string {
 // OrderItem represents an item in the order
 type OrderItem struct {
 	ID               int64   `json:"id" gorm:"primaryKey;autoIncrement"`
-	OrderID          int64   `json:"order_id"`
+	OrderID          string  `json:"order_id"`
 	ProductID        int64   `json:"product_id"`
 	Uom              string  `json:"uom"`
 	Quantity         float64 `json:"quantity"`

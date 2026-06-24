@@ -238,4 +238,12 @@ export const b2bService = {
 
     return data;
   },
+
+  bulkDeleteOrders: async (orderIds: string[]) => {
+    const { error } = await supabase
+      .from("orders")
+      .delete()
+      .in("id", orderIds);
+    if (error) throw error;
+  },
 };

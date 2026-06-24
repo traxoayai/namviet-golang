@@ -10,7 +10,7 @@ import {
   CheckCircleOutlined,
   FileExcelOutlined,
 } from "@ant-design/icons";
-import { SnippetsOutlined, DollarOutlined } from "@ant-design/icons"; // [NEW]
+import { SnippetsOutlined, DollarOutlined, StopOutlined } from "@ant-design/icons"; // [NEW]
 import {
   Affix,
   Button,
@@ -39,6 +39,7 @@ import { VatActionButton } from "@/features/pos/components/VatActionButton";
 import { b2bService } from "@/features/sales/api/b2bService";
 import { useOrderPrint } from "@/features/sales/hooks/useOrderPrint"; // [NEW]
 import { usePickingListPrint } from "@/features/sales/hooks/usePickingListPrint"; // [NEW]
+import { logisticsService } from "@/features/logistics/api/logisticsService"; // [NEW]
 import { B2BOrderDetail } from "@/features/sales/types/b2b.types";
 import { FinanceFormModal } from "@/pages/finance/components/FinanceFormModal";
 import {
@@ -104,11 +105,69 @@ const B2BOrderDetailPage = () => {
           placement: "topRight",
         });
       } else {
-        message.error(errMsg);
+        notification.error({
+          message: "Lỗi",
+          description: errMsg,
+        });
       }
     } finally {
       setActionLoading(false);
     }
+  };
+
+  const handleMarkCodPaid = () => {
+    if (!id) return;
+    Modal.confirm({
+      title: "Xác nhận đã thu đủ tiền mặt?",
+      content: "Bạn đã nhận đủ số tiền Thu Hộ (COD) từ khách hàng?",
+      okText: "Xác nhận Đã Thu Tiền",
+      cancelText: "Hủy",
+      onOk: async () => {
+        try {
+          setActionLoading(true);
+          await logisticsService.markCodPaid(id);
+          notification.success({
+            message: "Xác nhận thành công!",
+            description: "Nợ của khách hàng đã giảm. Cảm ơn bạn!",
+            icon: <CheckCircleOutlined style={{ color: "#52c41a" }} />,
+          });
+          fetchOrder(id);
+        } catch (error: any) {
+          notification.error({
+            message: "Lỗi xác nhận",
+            description: error.message || "Không thể xác nhận tiền COD",
+          });
+        } finally {
+          setActionLoading(false);
+        }
+      },
+    });
+  };
+
+  const handleRollbackCod = () => {
+    if (!id) return;
+    Modal.confirm({
+      title: "Hủy Xác Nhận Thu Tiền",
+      content: "Bạn chắc chắn muốn hoàn tác xác nhận thu tiền này? Dữ liệu phiếu thu tạm sẽ bị hủy bỏ.",
+      okText: "Đồng ý Hủy",
+      okType: "danger",
+      cancelText: "Bỏ qua",
+      onOk: async () => {
+        try {
+          setActionLoading(true);
+          await logisticsService.rollbackCod(id);
+          message.success("Hủy nhận tiền thành công!");
+          fetchOrder(id);
+        } catch (error: any) {
+          notification.error({
+            message: "Lỗi",
+            description: error.message || "Không thể hoàn tác tiền COD",
+          });
+        } finally {
+          setActionLoading(false);
+        }
+      },
+    });
   };
 
   const confirmAction = (status: string, title: string) => {
@@ -408,6 +467,35 @@ const B2BOrderDetailPage = () => {
                     <Tag color="cyan">{order.payment_method}</Tag>
                   </div>
                 ) : null}
+
+                {/* [NEW] COD Actions */}
+                {order.payment_method === "cash" && (
+                  <div style={{ marginTop: 16 }}>
+                    {order.payment_status !== "paid" ? (
+                      <Button
+                        type="primary"
+                        block
+                        size="large"
+                        icon={<DollarOutlined />}
+                        loading={actionLoading}
+                        onClick={handleMarkCodPaid}
+                      >
+                        Đã Nhận Đủ Tiền Mặt
+                      </Button>
+                    ) : (
+                      <Button
+                        danger
+                        block
+                        size="large"
+                        icon={<StopOutlined />}
+                        loading={actionLoading}
+                        onClick={handleRollbackCod}
+                      >
+                        Hủy Nhận Tiền Mặt (Rollback)
+                      </Button>
+                    )}
+                  </div>
+                )}
               </Card>
             </Col>
 

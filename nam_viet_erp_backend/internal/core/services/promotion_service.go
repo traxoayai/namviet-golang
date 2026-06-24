@@ -43,10 +43,13 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 	// 1. Validations cơ bản cho từng mã
 	for _, promo := range promos {
 		if promo.Status != "active" {
-			return nil, errors.New("mã " + promo.Code + " không còn hoạt động")
+			return nil, errors.New("Mã giảm giá đã bị khóa hoặc không còn hiệu lực.")
 		}
-		if now.Before(promo.ValidFrom) || now.After(promo.ValidTo) {
-			return nil, errors.New("mã " + promo.Code + " đã hết hạn hoặc chưa đến giờ áp dụng")
+		if now.After(promo.ValidTo) {
+			return nil, errors.New("Mã giảm giá đã hết hạn sử dụng.")
+		}
+		if now.Before(promo.ValidFrom) {
+			return nil, errors.New("Mã giảm giá chưa đến giờ áp dụng.")
 		}
 		if promo.UsageCount >= promo.TotalUsageLimit && promo.TotalUsageLimit > 0 {
 			return nil, errors.New("mã " + promo.Code + " đã hết lượt sử dụng")

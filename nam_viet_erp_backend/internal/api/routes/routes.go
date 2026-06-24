@@ -69,6 +69,8 @@ func SetupRoutes(
 		{
 			finance.POST("/transactions", financeHandler.CreateTransaction)
 			finance.POST("/vat-allocation", financeHandler.AllocateVATInvoice)
+			finance.GET("/pending-cod-reports", financeHandler.GetPendingCODReports)
+			finance.POST("/confirm-cod-deposit", financeHandler.ConfirmCODDeposit)
 		}
 
 		// CRM
@@ -108,6 +110,8 @@ func SetupRoutes(
 		logistics.Use(middleware.SupabaseAuthMiddleware())
 		{
 			logistics.POST("/orders/:id/shipping", logisticsHandler.CreateShippingOrder)
+			logistics.POST("/mark-cod-paid", logisticsHandler.MarkCODPaid)
+			logistics.POST("/rollback-cod", logisticsHandler.RollbackCOD)
 		}
 
 		// AI Chat - with RateLimit and RBAC (Admin, Pharmacist, Doctor)

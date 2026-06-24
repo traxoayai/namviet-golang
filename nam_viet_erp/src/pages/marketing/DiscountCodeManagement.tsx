@@ -33,7 +33,7 @@ import {
   Radio,
   QRCode,
   Switch,
-  message,
+  Descriptions,
 } from "antd";
 import viVN from "antd/locale/vi_VN";
 import dayjs from "dayjs";
@@ -80,6 +80,9 @@ const DiscountCodeManagement = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isQrModalVisible, setIsQrModalVisible] = useState(false);
   const [qrCodeValue, setQrCodeValue] = useState("");
+  // [NEW] States for detail view
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+  const [selectedPromotion, setSelectedPromotion] = useState<Promotion | null>(null);
 
   // State điều khiển UI Form
   const [discountType, setDiscountType] = useState("percent");
@@ -273,11 +276,12 @@ const DiscountCodeManagement = () => {
       title: "Trạng thái",
       dataIndex: "status",
       align: "center" as const,
-      render: (status: string) => (
-        <Tag color={status === "active" ? "success" : "default"}>
-          {status === "active" ? "Hiệu lực" : "Hết hạn/Ẩn"}
-        </Tag>
-      ),
+      render: (status: string, record: Promotion) => {
+        const isExpired = record.valid_to && dayjs().isAfter(dayjs(record.valid_to));
+        if (status === "inactive") return <Tag color="default">Đã Ẩn</Tag>;
+        if (isExpired) return <Tag color="error">Hết hiệu lực</Tag>;
+        return <Tag color="success">Hiệu lực</Tag>;
+      },
     },
     {
       title: "Thời gian hiệu lực",
@@ -300,8 +304,8 @@ const DiscountCodeManagement = () => {
               icon={<EyeOutlined />}
               size="small"
               onClick={() => {
-                // Tạm thời mở form, sau này có thể làm Drawer
-                message.info("Tính năng đang phát triển!");
+                setSelectedPromotion(record);
+                setIsDetailVisible(true);
               }}
             />
           </Tooltip>
@@ -744,6 +748,49 @@ const DiscountCodeManagement = () => {
             <Input />
           </Form.Item>
         </Form>
+      </Modal>
+
+      {/* MODAL CHI TIẾT VOUCHER */}
+      <Modal
+        title="Chi tiết Voucher / Khuyến Mãi"
+        open={isDetailVisible}
+        onCancel={() => setIsDetailVisible(false)}
+        footer={[
+          <Button key="close" onClick={() => setIsDetailVisible(false)}>
+            Đóng
+          </Button>,
+        ]}
+        width={600}
+      >
+        {selectedPromotion && (
+          <Descriptions column={1} bordered size="small">
+            <Descriptions.Item label="Mã Code">
+              <Text copyable strong>{selectedPromotion.code}</Text>
+            </Descriptions.Item>
+            <Descriptions.Item label="Tên chương trình">
+              {selectedPromotion.name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Loại">
+              {selectedPromotion.type === "public" ? "Công khai (Public)" : "Dành riêng (Personal)"}
+            </Descriptions.Item>
+            <Descriptions.Item label="Giá trị giảm">
+              {selectedPromotion.discount_type === "percent" 
+                ? `${selectedPromotion.discount_value}%` 
+                : `${selectedPromotion.discount_value.toLocaleString("vi-VN")} đ`}
+            </Descriptions.Item>
+            <Descriptions.Item label="Đã dùng">
+              {selectedPromotion.usage_count} / {selectedPromotion.total_usage_limit || "Không giới hạn"}
+            </Descriptions.Item>
+            <Descriptions.Item label="Thời gian hiệu lực">
+              {dayjs(selectedPromotion.valid_from).format("DD/MM/YYYY HH:mm")} - {dayjs(selectedPromotion.valid_to).format("DD/MM/YYYY HH:mm")}
+            </Descriptions.Item>
+            <Descriptions.Item label="Cấu hình nâng cao (Advanced Rules)">
+              <pre style={{ background: "#f5f5f5", padding: 8, borderRadius: 4, maxHeight: 200, overflow: "auto" }}>
+                {JSON.stringify((selectedPromotion as any).advanced_rules, null, 2)}
+              </pre>
+            </Descriptions.Item>
+          </Descriptions>
+        )}
       </Modal>
 
       {/* Modal QR Code */}

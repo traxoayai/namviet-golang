@@ -394,9 +394,13 @@ export const usePosCartStore = create<PosCartState>()(
           } else {
              import("antd").then(({ message }) => message.error(data.message || "Mã không hợp lệ"));
           }
-        } catch (error) {
+        } catch (error: any) {
           console.error("Lỗi Verify Promotion:", error);
-          // Fallback: Vẫn add voucher nhưng báo lỗi (hoặc cho phép admin ép)
+          
+          const errorMsg = error.response?.data?.error || "Mã không hợp lệ hoặc đã hết hạn";
+          import("antd").then(({ message }) => message.error(errorMsg));
+
+          // Fallback: Xóa voucher nếu bị từ chối
           set({
             orders: get().orders.map((o) =>
               o.id === activeOrderId ? { ...o, selectedVoucher: null, verifyResult: null } : o

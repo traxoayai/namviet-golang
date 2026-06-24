@@ -3,9 +3,9 @@ package handlers
 import (
 	"io"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/namvieterp/backend/internal/core/domain"
 	"github.com/namvieterp/backend/internal/core/services"
 	"gorm.io/gorm"
 )
@@ -29,8 +29,8 @@ func NewLogisticsHandler(db *gorm.DB, logisSvc services.LogisticsService) *Logis
 // @Failure 400 {object} map[string]interface{}
 // @Router /api/v1/logistics/orders/{id}/shipping [post]
 func (h *LogisticsHandler) CreateShippingOrder(c *gin.Context) {
-	orderID, err := strconv.ParseInt(c.Param("id"), 10, 64)
-	if err != nil {
+	orderID := c.Param("id")
+	if orderID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid order ID"})
 		return
 	}
@@ -88,4 +88,80 @@ func (h *LogisticsHandler) HandleGHNWebhook(c *gin.Context) {
 
 	tx.Commit()
 	c.JSON(http.StatusOK, gin.H{"message": "success"})
+}
+
+// MarkCODPaid godoc
+// @Summary Xác nhận thu tiền COD
+// @Description Shipper xác nhận đã thu tiền mặt từ khách
+// @Tags Logistics
+// @Accept json
+// @Produce json
+// @Param req body domain.MarkCODPaidRequest true "Payload"
+// @Router /api/v1/logistics/mark-cod-paid [post]
+func (h *LogisticsHandler) MarkCODPaid(c *gin.Context) {
+	var req domain.MarkCODPaidRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Dữ liệu không hợp lệ: " + err.Error()})
+		return
+	}
+
+	shipperID := "system"
+	if uid, exists := c.Get("user_id"); exists {
+		shipperID = uid.(string)
+	}
+
+	tx := h.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	err := h.logisSvc.MarkCODPaid(c.Request.Context(), tx, req.OrderID, shipperID)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, gin.H{"message": "Xác nhận thu tiền thành công"})
+}
+
+// RollbackCOD godoc
+// @Summary Hủy xác nhận thu tiền COD
+// @Description Hủy phiếu thu COD trong trường hợp ấn nhầm
+// @Tags Logistics
+// @Accept json
+// @Produce json
+// @Param req body domain.MarkCODPaidRequest true "Payload"
+// @Router /api/v1/logistics/rollback-cod [post]
+func (h *LogisticsHandler) RollbackCOD(c *gin.Context) {
+	var req domain.MarkCODPaidRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Dữ liệu không hợp lệ: " + err.Error()})
+		return
+	}
+
+	shipperID := "system"
+	if uid, exists := c.Get("user_id"); exists {
+		shipperID = uid.(string)
+	}
+
+	tx := h.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	err := h.logisSvc.RollbackCOD(c.Request.Context(), tx, req.OrderID, shipperID)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, gin.H{"message": "Hủy xác nhận thu tiền thành công"})
 }

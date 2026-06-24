@@ -36,6 +36,6 @@ func (CustomerSegment) TableName() string {
 // EarnLoyaltyRequest payload
 type EarnLoyaltyRequest struct {
 	CustomerID int64   `json:"customer_id" binding:"required"`
-	OrderID    int64   `json:"order_id" binding:"required"`
+	OrderID    string  `json:"order_id" binding:"required"`
 	Amount     float64 `json:"amount" binding:"required,gt=0"`
 }

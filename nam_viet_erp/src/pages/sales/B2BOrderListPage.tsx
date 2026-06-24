@@ -16,6 +16,7 @@ import {
   CloseCircleOutlined,
   RollbackOutlined, // [NEW]
   CopyOutlined, // [NEW]
+  DeleteOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -33,6 +34,7 @@ import {
   Tooltip, // [NEW]
   Row, // [NEW]
   Col, // [NEW]
+  Popconfirm,
 } from "antd";
 import dayjs from "dayjs";
 import { useMemo, useState, useEffect } from "react";
@@ -779,6 +781,13 @@ const B2BOrderListPage = ({
     return selectedOrders.some((o: any) => o.payment_status === "paid");
   }, [selectedOrders]);
 
+  const canBulkDelete = useMemo(() => {
+    if (selectedOrders.length === 0) return false;
+    return selectedOrders.every(
+      (o: any) => o.status === "cancelled" && o.payment_status === "unpaid"
+    );
+  }, [selectedOrders]);
+
   const totalAmountToCollect = useMemo(() => {
     return selectedOrders.reduce((sum: number, order: any) => {
       const amount =
@@ -925,19 +934,42 @@ const B2BOrderListPage = ({
             ) : null}
           </Space>
 
-          <Button
-            type="primary"
-            style={
-              hasPaidOrder
-                ? {}
-                : { backgroundColor: "#52c41a", borderColor: "#52c41a" }
-            }
-            icon={<DollarCircleOutlined />}
-            disabled={hasPaidOrder}
-            onClick={() => setIsPaymentModalOpen(true)}
-          >
-            Nộp tiền hàng loạt
-          </Button>
+          <Space>
+            <Button
+              type="primary"
+              style={
+                hasPaidOrder
+                  ? {}
+                  : { backgroundColor: "#52c41a", borderColor: "#52c41a" }
+              }
+              icon={<DollarCircleOutlined />}
+              disabled={hasPaidOrder}
+              onClick={() => setIsPaymentModalOpen(true)}
+            >
+              Nộp tiền hàng loạt
+            </Button>
+            
+            {canBulkDelete && (
+              <Popconfirm
+                title="Xóa hàng loạt"
+                description="Bạn có chắc chắn muốn xóa hẳn các đơn hàng đã hủy này khỏi hệ thống không?"
+                onConfirm={async () => {
+                  try {
+                    await b2bService.bulkDeleteOrders(selectedRowKeys as string[]);
+                    message.success("Xóa hàng loạt thành công!");
+                    setSelectedRowKeys([]);
+                    refresh();
+                  } catch (error: any) {
+                    message.error("Xóa thất bại: " + error.message);
+                  }
+                }}
+              >
+                <Button danger icon={<DeleteOutlined />}>
+                  Xóa hàng loạt
+                </Button>
+              </Popconfirm>
+            )}
+          </Space>
         </div>
       )}
 

@@ -27,3 +27,8 @@ type GHNWebhookPayload struct {
 	TotalFee     int    `json:"TotalFee"`
 	ClientOrderCode string `json:"ClientOrderCode"`
 }
+
+// MarkCODPaidRequest payload
+type MarkCODPaidRequest struct {
+	OrderID string `json:"order_id" binding:"required"`
+}

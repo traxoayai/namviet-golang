@@ -92,3 +92,51 @@ func (h *FinanceHandler) AllocateVATInvoice(c *gin.Context) {
 		"total_allocated": sum,
 	})
 }
+
+// GetPendingCODReports godoc
+// @Summary Báo cáo tiền mặt COD đang chờ duyệt
+// @Description Kế toán xem NVGV nào đang cầm bao nhiêu tiền chưa nộp
+// @Tags Finance
+// @Produce json
+// @Router /api/v1/finance/pending-cod-reports [get]
+func (h *FinanceHandler) GetPendingCODReports(c *gin.Context) {
+	reports, err := h.financeSvc.GetPendingCODReports(c.Request.Context(), h.db)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, reports)
+}
+
+// ConfirmCODDeposit godoc
+// @Summary Xác nhận đã nhận tiền mặt từ NVGV
+// @Description Thủ quỹ duyệt nộp tiền, đổi status sang completed
+// @Tags Finance
+// @Accept json
+// @Produce json
+// @Param req body domain.ConfirmCODDepositRequest true "Payload"
+// @Router /api/v1/finance/confirm-cod-deposit [post]
+func (h *FinanceHandler) ConfirmCODDeposit(c *gin.Context) {
+	var req domain.ConfirmCODDepositRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Dữ liệu không hợp lệ: " + err.Error()})
+		return
+	}
+
+	tx := h.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	err := h.financeSvc.ConfirmCODDeposit(c.Request.Context(), tx, req.ShipperUserID, req.TransactionIDs)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, gin.H{"message": "Xác nhận nộp tiền thành công"})
+}

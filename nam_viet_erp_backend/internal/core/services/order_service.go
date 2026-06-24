@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/namvieterp/backend/internal/core/domain"
@@ -121,7 +120,7 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 			Amount:        finalAmount,
 			FundAccountID: 1, // hardcode tạm account_id 1
 			RefType:       "ORDER",
-			RefID:         strconv.FormatInt(order.ID, 10),
+			RefID:         order.ID,
 			Description:   "Thanh toán đơn hàng",
 		}
 		if err := s.financeSvc.CreateTransaction(ctx, tx, reqTrans, userID); err != nil {

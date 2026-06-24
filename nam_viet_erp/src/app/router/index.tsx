@@ -30,6 +30,7 @@ import ChartOfAccountsPage from "@/pages/finance/ChartOfAccountsPage";
 import FinanceTransactionPage from "@/pages/finance/FinanceTransactionPage";
 import InvoiceVerifyPage from "@/pages/finance/invoices/InvoiceVerifyPage";
 import InvoicesPage from "@/pages/finance/invoices/InvoicesPage";
+import LogisticsCodClearancePage from "@/pages/finance/LogisticsCodClearancePage"; // [NEW]
 
 import GeneralLedgerPage from "@/pages/finance/ledger/GeneralLedgerPage";
 import ReconciliationPage from "@/pages/finance/ReconciliationPage";
@@ -722,6 +723,10 @@ const routes: RouteObject[] = [
           {
             path: "finance/transactions",
             element: <FinanceTransactionPage />,
+          },
+          {
+            path: "finance/logistics-cod-clearance",
+            element: <LogisticsCodClearancePage />,
           },
           {
             path: "finance/debts",

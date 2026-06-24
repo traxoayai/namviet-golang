@@ -43,6 +43,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { FinanceFormModal } from "./components/FinanceFormModal";
 import { TransactionDetailModal } from "./components/TransactionDetailModal"; // Import Modal mới
+import { FinanceAllocationNestedTable } from "./components/FinanceAllocationNestedTable"; // [NEW]
 import { useFinanceTransactionLogic } from "./hooks/useFinanceTransactionLogic";
 
 import { PERMISSIONS } from "@/features/auth/constants/permissions"; // [NEW]
@@ -759,6 +760,9 @@ const FinanceTransactionPage = () => {
                 showSizeChanger: true,
               }}
               scroll={{ x: 1000 }}
+              expandable={{
+                expandedRowRender: (record) => <FinanceAllocationNestedTable transactionId={record.id} />,
+              }}
             />
           )}
         </Card>

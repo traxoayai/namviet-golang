@@ -18,8 +18,10 @@ import (
 )
 
 type LogisticsService interface {
-	CreateShippingOrder(ctx context.Context, tx *gorm.DB, orderID int64) (string, error)
+	CreateShippingOrder(ctx context.Context, tx *gorm.DB, orderID string) (string, error)
 	HandleGHNWebhook(ctx context.Context, tx *gorm.DB, signature string, payloadBody []byte) error
+	MarkCODPaid(ctx context.Context, tx *gorm.DB, orderID string, shipperID string) error
+	RollbackCOD(ctx context.Context, tx *gorm.DB, orderID string, shipperID string) error
 }
 
 type logisticsService struct {
@@ -31,7 +33,7 @@ func NewLogisticsService(repo postgres.LogisticsRepository, crmSvc CRMService) L
 	return &logisticsService{repo: repo, crmSvc: crmSvc}
 }
 
-func (s *logisticsService) CreateShippingOrder(ctx context.Context, tx *gorm.DB, orderID int64) (string, error) {
+func (s *logisticsService) CreateShippingOrder(ctx context.Context, tx *gorm.DB, orderID string) (string, error) {
 	order, err := s.repo.GetOrderForShipping(ctx, tx, orderID)
 	if err != nil {
 		return "", errors.New("không tìm thấy đơn hàng")
@@ -44,7 +46,7 @@ func (s *logisticsService) CreateShippingOrder(ctx context.Context, tx *gorm.DB,
 	ghnToken := os.Getenv("GHN_TOKEN")
 	if ghnToken == "" {
 		// Mock logic if GHN_TOKEN is missing to keep the system running
-		mockTrackingCode := fmt.Sprintf("GHN-%d", orderID)
+		mockTrackingCode := fmt.Sprintf("GHN-%s", orderID)
 		err = s.repo.UpdateOrderShippingStatus(ctx, tx, orderID, mockTrackingCode, "shipping")
 		return mockTrackingCode, err
 	}
@@ -73,7 +75,7 @@ func (s *logisticsService) CreateShippingOrder(ctx context.Context, tx *gorm.DB,
 	}
 
 	// For demonstration, let's just generate a code
-	trackingCode := fmt.Sprintf("REAL-GHN-%d", orderID)
+	trackingCode := fmt.Sprintf("REAL-GHN-%s", orderID)
 
 	err = s.repo.UpdateOrderShippingStatus(ctx, tx, orderID, trackingCode, "shipping")
 	if err != nil {
@@ -115,7 +117,7 @@ func (s *logisticsService) HandleGHNWebhook(ctx context.Context, tx *gorm.DB, si
 	if payload.Status == "delivered" {
 		newStatus = "delivered"
 		// Grant Loyalty points asynchronously or synchronously depending on needs
-		go func(oID int64, cID int64, amt float64) {
+		go func(oID string, cID int64, amt float64) {
 			bgCtx := context.Background()
 			// Open a new DB session for background job since tx will be committed
 			bgTx := tx.Session(&gorm.Session{}).Begin()
@@ -141,6 +143,79 @@ func (s *logisticsService) HandleGHNWebhook(ctx context.Context, tx *gorm.DB, si
 
 	if newStatus != order.DeliveryStatus {
 		return s.repo.UpdateOrderShippingStatus(ctx, tx, order.ID, payload.OrderCode, newStatus)
+	}
+
+	return nil
+}
+
+func (s *logisticsService) MarkCODPaid(ctx context.Context, tx *gorm.DB, orderID string, shipperID string) error {
+	// 1. Get Order
+	order, err := s.repo.GetOrderForShipping(ctx, tx, orderID)
+	if err != nil {
+		return errors.New("không tìm thấy đơn hàng")
+	}
+
+	if order.PaymentStatus == "paid" {
+		return errors.New("đơn hàng đã được thanh toán")
+	}
+
+	// 2. Update Order payment status
+	if err := tx.WithContext(ctx).Model(&domain.Order{}).Where("id = ?", orderID).Update("payment_status", "paid").Error; err != nil {
+		return err
+	}
+
+	// 3. Create Finance Transaction
+	ft := domain.FinanceTransaction{
+		Flow:          "in",
+		Amount:        order.FinalAmount,
+		RefType:       "order",
+		RefID:         orderID,
+		Status:        "pending",
+		CreatedBy:     shipperID,
+		Description:   "Thu tiền COD đơn hàng " + order.OrderCode,
+	}
+	if err := tx.WithContext(ctx).Create(&ft).Error; err != nil {
+		return err
+	}
+
+	// 4. Create Allocation
+	alloc := domain.FinanceTransactionAllocation{
+		TransactionID:   ft.ID,
+		OrderID:         orderID,
+		AllocatedAmount: order.FinalAmount,
+	}
+	if err := tx.WithContext(ctx).Create(&alloc).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *logisticsService) RollbackCOD(ctx context.Context, tx *gorm.DB, orderID string, shipperID string) error {
+	// 1. Get Order
+	order, err := s.repo.GetOrderForShipping(ctx, tx, orderID)
+	if err != nil {
+		return errors.New("không tìm thấy đơn hàng")
+	}
+
+	if order.PaymentStatus != "paid" {
+		return errors.New("đơn hàng chưa thanh toán, không thể rollback")
+	}
+
+	// 2. Find pending transaction
+	var ft domain.FinanceTransaction
+	if err := tx.WithContext(ctx).Where("ref_type = 'order' AND ref_id = ? AND status = 'pending' AND created_by = ?", orderID, shipperID).First(&ft).Error; err != nil {
+		return errors.New("không tìm thấy phiếu thu pending hoặc bạn không có quyền hủy phiếu thu này")
+	}
+
+	// 3. Update Order payment status back to unpaid
+	if err := tx.WithContext(ctx).Model(&domain.Order{}).Where("id = ?", orderID).Update("payment_status", "unpaid").Error; err != nil {
+		return err
+	}
+
+	// 4. Update Transaction status to cancelled
+	if err := tx.WithContext(ctx).Model(&ft).Update("status", "cancelled").Error; err != nil {
+		return err
 	}
 
 	return nil
