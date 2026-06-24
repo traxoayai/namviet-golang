@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Layout, Typography, Card, Descriptions, Table, Tabs, Button, Space } from "antd";
 import { useEmployeeDetail } from "@/features/hr/hooks/useEmployees";
