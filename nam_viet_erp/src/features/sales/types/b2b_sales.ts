@@ -83,9 +83,38 @@ export interface VoucherRecord {
   valid_to: string;
 }
 
+export interface PromotionRule {
+  id: number;
+  code: string;
+  name: string;
+  promotion_class: string;
+  advanced_rules: string;
+}
+
+export interface AdvancedRule {
+  condition: {
+    type: string;
+    target_product_id: number;
+    min_quantity?: number;
+    min_amount?: number;
+  };
+  reward: {
+    type: string;
+    gift_product_id: number;
+    gift_quantity: number;
+    discount_percent: number;
+    gift_name?: string;
+    gift_value?: number;
+  };
+  is_multiply: boolean;
+}
+
 export interface CartItem extends ProductB2B {
   key: string;
   quantity: number;
   discount: number;
   total: number;
+  is_gift?: boolean;
+  gift_rule_id?: number;
+  gift_value?: number;
 }

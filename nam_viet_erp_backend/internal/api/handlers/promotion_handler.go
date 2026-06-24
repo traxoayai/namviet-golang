@@ -53,3 +53,12 @@ func (h *PromotionHandler) VerifyPromotion(c *gin.Context) {
 	tx.Commit()
 	c.JSON(http.StatusOK, res)
 }
+
+func (h *PromotionHandler) AutoSuggest(c *gin.Context) {
+	promos, err := h.promoSvc.GetAutoSuggestPromotions(c.Request.Context(), h.db)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, promos)
+}

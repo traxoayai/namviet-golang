@@ -91,6 +91,7 @@ func SetupRoutes(
 		promotions.Use(middleware.SupabaseAuthMiddleware())
 		{
 			promotions.POST("/verify", promotionHandler.VerifyPromotion)
+			promotions.GET("/auto-suggest", promotionHandler.AutoSuggest)
 		}
 
 		// Purchasing

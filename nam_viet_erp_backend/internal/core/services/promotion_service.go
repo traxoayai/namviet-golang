@@ -13,6 +13,7 @@ import (
 
 type PromotionService interface {
 	VerifyVoucher(ctx context.Context, tx *gorm.DB, req domain.VerifyPromotionRequest) (*domain.VerifyPromotionResponse, error)
+	GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
 }
 
 type promotionService struct {
@@ -143,3 +144,6 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 	return res, nil
 }
 
+func (s *promotionService) GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {
+	return s.repo.GetActiveAdvancedPromotions(ctx, tx)
+}
