@@ -561,6 +561,43 @@
                 }
             }
         },
+        "/api/v1/purchasing/auto-replenish-min-max": {
+            "post": {
+                "description": "Quét kho và tự động đẻ các đơn đặt hàng nháp cho sản phẩm thiếu hụt",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Purchasing"
+                ],
+                "summary": "Tạo dự trù mua hàng hàng loạt theo mức Min-Max",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.AutoReplenishResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/purchasing/orders": {
             "post": {
                 "description": "Tạo đơn hàng từ nhà cung cấp",
@@ -625,6 +662,61 @@
                 "responses": {}
             }
         },
+        "/purchasing/orders/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get purchase order details including enriched item data like total_stock and avg_monthly_sold",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "purchasing"
+                ],
+                "summary": "Get purchase order details",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Purchase Order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.PurchaseOrderDetailDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/ws/v1/clinic/queue": {
             "get": {
                 "description": "Kết nối WebSocket để nhận realtime updates từ queue",
@@ -667,6 +759,96 @@
                     "type": "string"
                 },
                 "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.AutoReplenishItemDTO": {
+            "type": "object",
+            "properties": {
+                "avg_monthly_sales_base": {
+                    "type": "number"
+                },
+                "avg_monthly_sales_wholesale": {
+                    "type": "number"
+                },
+                "base_quantity": {
+                    "type": "number"
+                },
+                "conversion_factor": {
+                    "type": "number"
+                },
+                "current_stock_base": {
+                    "type": "number"
+                },
+                "current_stock_wholesale": {
+                    "type": "number"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "quantity_ordered": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "unit_price": {
+                    "type": "number"
+                }
+            }
+        },
+        "domain.AutoReplenishPODTO": {
+            "type": "object",
+            "properties": {
+                "delivery_status": {
+                    "type": "string"
+                },
+                "final_amount": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.AutoReplenishItemDTO"
+                    }
+                },
+                "order_code": {
+                    "type": "string"
+                },
+                "payment_status": {
+                    "type": "string"
+                },
+                "supplier_id": {
+                    "type": "integer"
+                },
+                "total_amount": {
+                    "type": "number"
+                }
+            }
+        },
+        "domain.AutoReplenishResponse": {
+            "type": "object",
+            "properties": {
+                "created_po_count": {
+                    "type": "integer"
+                },
+                "generated_pos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.AutoReplenishPODTO"
+                    }
+                },
+                "message": {
                     "type": "string"
                 }
             }
@@ -974,6 +1156,12 @@
                 "created_at": {
                     "type": "string"
                 },
+                "delivery_status": {
+                    "type": "string"
+                },
+                "final_amount": {
+                    "type": "number"
+                },
                 "id": {
                     "type": "integer"
                 },
@@ -983,11 +1171,54 @@
                         "$ref": "#/definitions/domain.PurchaseOrderItem"
                     }
                 },
+                "note": {
+                    "type": "string"
+                },
                 "order_code": {
                     "type": "string"
                 },
-                "status": {
-                    "description": "'pending', 'completed', 'cancelled'",
+                "payment_status": {
+                    "type": "string"
+                },
+                "supplier_id": {
+                    "type": "integer"
+                },
+                "total_amount": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.PurchaseOrderDetailDTO": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "delivery_status": {
+                    "type": "string"
+                },
+                "final_amount": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.PurchaseOrderItemDetailDTO"
+                    }
+                },
+                "note": {
+                    "type": "string"
+                },
+                "order_code": {
+                    "type": "string"
+                },
+                "payment_status": {
                     "type": "string"
                 },
                 "supplier_id": {
@@ -1024,6 +1255,47 @@
                     "type": "integer"
                 },
                 "quantity_ordered": {
+                    "type": "number"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "unit_price": {
+                    "type": "number"
+                }
+            }
+        },
+        "domain.PurchaseOrderItemDetailDTO": {
+            "type": "object",
+            "properties": {
+                "avg_monthly_sold": {
+                    "type": "number"
+                },
+                "base_quantity": {
+                    "type": "number"
+                },
+                "conversion_factor": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "is_bonus": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity_ordered": {
+                    "type": "number"
+                },
+                "total_stock": {
                     "type": "number"
                 },
                 "unit": {

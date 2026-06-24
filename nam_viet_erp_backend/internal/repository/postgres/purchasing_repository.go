@@ -14,6 +14,7 @@ type PurchasingRepository interface {
 	CreatePurchaseOrderItems(ctx context.Context, tx *gorm.DB, items []domain.PurchaseOrderItem) error
 	GetProductDetails(ctx context.Context, tx *gorm.DB, productID int64) (*domain.ValidateStockItem, error)
 	FindProductsBelowMinStock(ctx context.Context, tx *gorm.DB, warehouseID int64) ([]domain.ProductReplenishDTO, error)
+	GetPurchaseOrderDetails(ctx context.Context, tx *gorm.DB, id int64) (*domain.PurchaseOrderDetailDTO, error)
 }
 
 type purchasingRepository struct{}
@@ -54,6 +55,8 @@ func (r *purchasingRepository) FindProductsBelowMinStock(ctx context.Context, tx
 	query := `
 		SELECT 
 			p.id as product_id,
+			p.name as name,
+			p.image_url as image_url,
 			p.distributor_id as supplier_id,
 			u.unit_name as unit_name,
 			u.conversion_rate as conversion_factor,
@@ -101,4 +104,52 @@ func (r *purchasingRepository) FindProductsBelowMinStock(ctx context.Context, tx
 	}
 
 	return results, nil
+}
+
+func (r *purchasingRepository) GetPurchaseOrderDetails(ctx context.Context, tx *gorm.DB, id int64) (*domain.PurchaseOrderDetailDTO, error) {
+	var po domain.PurchaseOrderDetailDTO
+
+	err := tx.WithContext(ctx).Table("purchase_orders").
+		Select("id, code as order_code, supplier_id, delivery_status, payment_status, total_amount, final_amount, note, created_at, updated_at").
+		Where("id = ?", id).
+		First(&po).Error
+	if err != nil {
+		return nil, err
+	}
+
+	query := `
+		SELECT 
+			poi.id,
+			poi.product_id,
+			p.name as product_name,
+			p.image_url,
+			poi.quantity_ordered,
+			poi.unit,
+			poi.unit_price,
+			poi.conversion_factor,
+			poi.base_quantity,
+			false as is_bonus,
+			(SELECT COALESCE(SUM(stock_quantity), 0) FROM product_inventory WHERE product_id = p.id) as total_stock,
+			COALESCE(
+				(
+					SELECT ROUND(SUM(oi.quantity * COALESCE(oi.conversion_factor, 1)) / 3.0, 1)
+					FROM order_items oi
+					JOIN orders o ON oi.order_id = o.id
+					WHERE oi.product_id = p.id
+					  AND o.status NOT IN ('CANCELLED', 'DRAFT')
+					  AND o.created_at >= NOW() - INTERVAL '3 months'
+				), 0
+			) as avg_monthly_sold
+		FROM purchase_order_items poi
+		JOIN products p ON poi.product_id = p.id
+		WHERE poi.po_id = ?
+	`
+
+	var items []domain.PurchaseOrderItemDetailDTO
+	if err := tx.WithContext(ctx).Raw(query, id).Scan(&items).Error; err != nil {
+		return nil, err
+	}
+
+	po.Items = items
+	return &po, nil
 }

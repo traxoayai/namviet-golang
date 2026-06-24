@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/namvieterp/backend/internal/core/domain"
@@ -89,5 +90,47 @@ func (h *PurchasingHandler) AutoReplenishMinMax(c *gin.Context) {
 	}
 
 	tx.Commit()
+	c.JSON(http.StatusOK, res)
+}
+
+// GetPurchaseOrder godoc
+// @Summary      Get purchase order details
+// @Description  Get purchase order details including enriched item data like total_stock and avg_monthly_sold
+// @Tags         purchasing
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Purchase Order ID"
+// @Success      200  {object}  domain.PurchaseOrderDetailDTO
+// @Failure      400  {object}  map[string]string
+// @Failure      500  {object}  map[string]string
+// @Security     BearerAuth
+// @Router       /purchasing/orders/{id} [get]
+func (h *PurchasingHandler) GetPurchaseOrder(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID không hợp lệ"})
+		return
+	}
+
+	tx := h.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+
+	res, err := h.purchSvc.GetPurchaseOrder(c.Request.Context(), tx, id)
+	if err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := tx.Commit().Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Lỗi hệ thống khi commit transaction"})
+		return
+	}
+
 	c.JSON(http.StatusOK, res)
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -81,8 +82,34 @@ func main() {
 
 	aiHandler := handlers.NewAIHandler()
 
+	hrEmpRepo := postgres.NewHREmployeesRepository()
+	hrEmpSvc := services.NewHREmployeesService(hrEmpRepo)
+	hrEmpHandler := handlers.NewHREmployeesHandler(db, hrEmpSvc)
+
+	hrShiftRepo := postgres.NewHRWorkShiftsRepository()
+	hrAttRepo := postgres.NewHRAttendancesRepository()
+	hrShiftSvc := services.NewHRWorkShiftsService(hrShiftRepo, hrAttRepo)
+	hrShiftHandler := handlers.NewHRWorkShiftsHandler(db, hrShiftSvc)
+
+	hrPayrollRepo := postgres.NewHRPayrollsRepository()
+	hrPayrollSvc := services.NewHRPayrollsService(hrPayrollRepo)
+	hrPayrollHandler := handlers.NewHRPayrollsHandler(db, hrPayrollSvc)
+
+	medDictRepo := postgres.NewMedicalDictRepository()
+	medDictSvc := services.NewMedicalDictService(medDictRepo)
+	medDictHandler := handlers.NewMedicalDictHandler(db, medDictSvc)
+
+	jobRepo := postgres.NewJobRepository()
+	mktRepo := postgres.NewMarketingRepository()
+	mktSvc := services.NewMarketingService(mktRepo, jobRepo)
+	mktHandler := handlers.NewMarketingHandler(db, mktSvc)
+
+	// Start Marketing Worker
+	mktWorker := workers.NewMarketingWorker(db, jobRepo, mktRepo)
+	go mktWorker.Start(context.Background())
+
 	// Setup Routes
-	routes.SetupRoutes(r, db, gdtWorker, gdtService, invHandler, orderHandler, financeHandler, crmHandler, clinicHandler, wsHandler, promoHandler, purchHandler, logisHandler, aiHandler)
+	routes.SetupRoutes(r, db, gdtWorker, gdtService, invHandler, orderHandler, financeHandler, crmHandler, clinicHandler, wsHandler, promoHandler, purchHandler, logisHandler, aiHandler, hrEmpHandler, hrShiftHandler, hrPayrollHandler, medDictHandler, mktHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {

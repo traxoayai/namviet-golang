@@ -36,6 +36,10 @@ import ReconciliationPage from "@/pages/finance/ReconciliationPage";
 import ProfitAndLossPage from "@/pages/finance/reports/ProfitAndLossPage";
 import TrialBalancePage from "@/pages/finance/reports/TrialBalancePage";
 import TaskKanbanPage from "@/pages/hr/TaskKanbanPage";
+import EmployeeListPage from "@/pages/hr/EmployeeListPage";
+import EmployeeDetailPage from "@/pages/hr/EmployeeDetailPage";
+import AttendancePage from "@/pages/hr/AttendancePage";
+import PayrollPage from "@/pages/hr/PayrollPage";
 import CostAdjustmentPage from "@/pages/inventory/cost-adjustment/CostAdjustmentPage";
 import WarehouseOutboundDetailPage from "@/pages/inventory/outbound/WarehouseOutboundDetailPage";
 import WarehouseOutboundPage from "@/pages/inventory/outbound/WarehouseOutboundPage";
@@ -664,14 +668,22 @@ const routes: RouteObject[] = [
           },
 
           // 11. Quản lý Nhân sự
-          { path: "hr", element: <Navigate to="/hr/dashboard" replace /> },
+          { path: "hr", element: <Navigate to="/hr/employees" replace /> },
           {
             path: "hr/dashboard",
             element: <PagePlaceholder title="Dashboard Nhân sự" />,
           },
           {
             path: "hr/employees",
-            element: <PagePlaceholder title="Quản lý Hồ sơ Nhân viên" />,
+            element: <EmployeeListPage />,
+          },
+          {
+            path: "hr/employees/:id",
+            element: <EmployeeDetailPage />,
+          },
+          {
+            path: "hr/attendance",
+            element: <AttendancePage />,
           },
           {
             path: "hr/contracts",
@@ -687,7 +699,7 @@ const routes: RouteObject[] = [
           },
           {
             path: "hr/payroll",
-            element: <PagePlaceholder title="Quản lý Lương & Chế Độ" />,
+            element: <PayrollPage />,
           },
 
           // 12. Tài Chính & Kế Toán

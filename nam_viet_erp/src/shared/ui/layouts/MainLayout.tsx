@@ -37,6 +37,7 @@ import {
   ThunderboltOutlined,
   AuditOutlined,
   AudioOutlined,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
 import {
   Layout,
@@ -495,6 +496,11 @@ const finalMenuItems: MenuItem[] = [
         <Link to="/hr/contracts">Quản lý Hợp đồng & Giấy tờ</Link>,
         "/hr/contracts",
         <ContainerOutlined />
+      ),
+      getItem(
+        <Link to="/hr/attendance">Chấm công & Ca làm</Link>,
+        "/hr/attendance",
+        <EnvironmentOutlined />
       ),
       getItem(
         <Link to="/hr/training">Quản lý Đào tạo</Link>,

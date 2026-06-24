@@ -28,6 +28,11 @@ func SetupRoutes(
 	purchasingHandler *handlers.PurchasingHandler,
 	logisticsHandler *handlers.LogisticsHandler,
 	aiHandler *handlers.AIHandler,
+	hrEmployeesHandler *handlers.HREmployeesHandler,
+	hrWorkShiftsHandler *handlers.HRWorkShiftsHandler,
+	hrPayrollsHandler *handlers.HRPayrollsHandler,
+	medicalDictHandler *handlers.MedicalDictHandler,
+	marketingHandler *handlers.MarketingHandler,
 ) {
 	gdtHandler := handlers.NewGdtHandler(gdtService, gdtWorker)
 
@@ -93,6 +98,8 @@ func SetupRoutes(
 		purchasing.Use(middleware.SupabaseAuthMiddleware())
 		{
 			purchasing.POST("/orders", purchasingHandler.CreatePurchaseOrder)
+			purchasing.POST("/auto-replenish-min-max", purchasingHandler.AutoReplenishMinMax)
+			purchasing.GET("/orders/:id", purchasingHandler.GetPurchaseOrder)
 		}
 
 		// Logistics
@@ -109,6 +116,38 @@ func SetupRoutes(
 		ai.Use(middleware.RequireRole("admin", "pharmacist", "doctor"))
 		{
 			ai.POST("/chat", aiHandler.HandleChat)
+		}
+
+		// HR
+		hr := v1.Group("/hr")
+		hr.Use(middleware.SupabaseAuthMiddleware())
+		{
+			hr.GET("/employees", hrEmployeesHandler.GetEmployees)
+			hr.GET("/employees/:id", hrEmployeesHandler.GetEmployeeProfile)
+			hr.POST("/shifts/register", hrWorkShiftsHandler.RegisterShift)
+			hr.POST("/shifts/check-in", hrWorkShiftsHandler.CheckIn)
+			hr.POST("/employees/:id/payroll/calculate", hrPayrollsHandler.CalculatePayroll)
+		}
+
+		// Medical Dictionary
+		medical := v1.Group("/medical")
+		medical.Use(middleware.SupabaseAuthMiddleware())
+		{
+			medical.GET("/diseases", medicalDictHandler.GetDiseases)
+			medical.GET("/templates", medicalDictHandler.GetPrescriptionTemplate)
+			medical.GET("/vaccines/protocols", medicalDictHandler.GetVaccineProtocols)
+			medical.POST("/vaccines/calculate-next-dose", medicalDictHandler.CalculateNextDose)
+		}
+
+		// Marketing Automation
+		marketing := v1.Group("/marketing")
+		marketing.Use(middleware.SupabaseAuthMiddleware())
+		{
+			marketing.POST("/campaigns", marketingHandler.CreateCampaign)
+			marketing.POST("/campaigns/:id/start", marketingHandler.StartCampaign)
+			marketing.GET("/campaigns/:id/metrics", marketingHandler.GetMetrics)
+			marketing.POST("/surveys", marketingHandler.CreateSurvey)
+			marketing.GET("/surveys", marketingHandler.GetSurveys)
 		}
 
 		// Webhooks

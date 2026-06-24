@@ -3,6 +3,8 @@ package services
 import (
 	"context"
 	"errors"
+	"fmt"
+	"time"
 
 	"github.com/namvieterp/backend/internal/core/domain"
 	"github.com/namvieterp/backend/internal/repository/postgres"
@@ -12,6 +14,7 @@ import (
 type PurchasingService interface {
 	CreatePurchaseOrder(ctx context.Context, tx *gorm.DB, req domain.CreatePurchaseOrderRequest) (*domain.PurchaseOrder, error)
 	AutoReplenishMinMax(ctx context.Context, tx *gorm.DB, warehouseID int64, userID string) (*domain.AutoReplenishResponse, error)
+	GetPurchaseOrder(ctx context.Context, tx *gorm.DB, id int64) (*domain.PurchaseOrderDetailDTO, error)
 }
 
 type purchasingService struct {
@@ -125,14 +128,18 @@ func (s *purchasingService) AutoReplenishMinMax(ctx context.Context, tx *gorm.DB
 			poItems = append(poItems, poItem)
 			
 			dtoItems = append(dtoItems, domain.AutoReplenishItemDTO{
-				ProductID:           item.ProductID,
-				QuantityOrdered:     item.QuantityNeeded,
-				Unit:                item.UnitName,
-				UnitPrice:           item.UnitPrice,
-				ConversionFactor:    item.ConversionFactor,
-				BaseQuantity:        baseQty,
-				CurrentStockBase:    item.CurrentStockBase,
-				AvgMonthlySalesBase: item.AvgMonthlySalesBase,
+				ProductID:                item.ProductID,
+				ProductName:              item.ProductName,
+				ImageURL:                 item.ImageURL,
+				QuantityOrdered:          item.QuantityNeeded,
+				Unit:                     item.UnitName,
+				UnitPrice:                item.UnitPrice,
+				ConversionFactor:         item.ConversionFactor,
+				BaseQuantity:             baseQty,
+				CurrentStockBase:         item.CurrentStockBase,
+				AvgMonthlySalesBase:      item.AvgMonthlySalesBase,
+				CurrentStockWholesale:    item.CurrentStockBase / item.ConversionFactor,
+				AvgMonthlySalesWholesale: item.AvgMonthlySalesBase / item.ConversionFactor,
 			})
 			
 			totalAmount += (qtyOrdered * item.UnitPrice)
@@ -165,4 +172,8 @@ func (s *purchasingService) AutoReplenishMinMax(ctx context.Context, tx *gorm.DB
 		CreatedPOCount: len(generatedPOs),
 		GeneratedPOs:   generatedPOs,
 	}, nil
+}
+
+func (s *purchasingService) GetPurchaseOrder(ctx context.Context, tx *gorm.DB, id int64) (*domain.PurchaseOrderDetailDTO, error) {
+	return s.repo.GetPurchaseOrderDetails(ctx, tx, id)
 }

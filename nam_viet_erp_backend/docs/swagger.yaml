@@ -22,6 +22,65 @@ definitions:
       updated_at:
         type: string
     type: object
+  domain.AutoReplenishItemDTO:
+    properties:
+      avg_monthly_sales_base:
+        type: number
+      avg_monthly_sales_wholesale:
+        type: number
+      base_quantity:
+        type: number
+      conversion_factor:
+        type: number
+      current_stock_base:
+        type: number
+      current_stock_wholesale:
+        type: number
+      image_url:
+        type: string
+      product_id:
+        type: integer
+      product_name:
+        type: string
+      quantity_ordered:
+        type: integer
+      unit:
+        type: string
+      unit_price:
+        type: number
+    type: object
+  domain.AutoReplenishPODTO:
+    properties:
+      delivery_status:
+        type: string
+      final_amount:
+        type: number
+      id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/domain.AutoReplenishItemDTO'
+        type: array
+      order_code:
+        type: string
+      payment_status:
+        type: string
+      supplier_id:
+        type: integer
+      total_amount:
+        type: number
+    type: object
+  domain.AutoReplenishResponse:
+    properties:
+      created_po_count:
+        type: integer
+      generated_pos:
+        items:
+          $ref: '#/definitions/domain.AutoReplenishPODTO'
+        type: array
+      message:
+        type: string
+    type: object
   domain.BookAppointmentRequest:
     properties:
       appointment_time:
@@ -228,16 +287,48 @@ definitions:
     properties:
       created_at:
         type: string
+      delivery_status:
+        type: string
+      final_amount:
+        type: number
       id:
         type: integer
       items:
         items:
           $ref: '#/definitions/domain.PurchaseOrderItem'
         type: array
+      note:
+        type: string
       order_code:
         type: string
-      status:
-        description: '''pending'', ''completed'', ''cancelled'''
+      payment_status:
+        type: string
+      supplier_id:
+        type: integer
+      total_amount:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  domain.PurchaseOrderDetailDTO:
+    properties:
+      created_at:
+        type: string
+      delivery_status:
+        type: string
+      final_amount:
+        type: number
+      id:
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/domain.PurchaseOrderItemDetailDTO'
+        type: array
+      note:
+        type: string
+      order_code:
+        type: string
+      payment_status:
         type: string
       supplier_id:
         type: integer
@@ -262,6 +353,33 @@ definitions:
       purchase_order_id:
         type: integer
       quantity_ordered:
+        type: number
+      unit:
+        type: string
+      unit_price:
+        type: number
+    type: object
+  domain.PurchaseOrderItemDetailDTO:
+    properties:
+      avg_monthly_sold:
+        type: number
+      base_quantity:
+        type: number
+      conversion_factor:
+        type: number
+      id:
+        type: integer
+      image_url:
+        type: string
+      is_bonus:
+        type: boolean
+      name:
+        type: string
+      product_id:
+        type: integer
+      quantity_ordered:
+        type: number
+      total_stock:
         type: number
       unit:
         type: string
@@ -738,6 +856,32 @@ paths:
       summary: Xác thực mã khuyến mãi
       tags:
       - Promotions
+  /api/v1/purchasing/auto-replenish-min-max:
+    post:
+      consumes:
+      - application/json
+      description: Quét kho và tự động đẻ các đơn đặt hàng nháp cho sản phẩm thiếu
+        hụt
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.AutoReplenishResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo dự trù mua hàng hàng loạt theo mức Min-Max
+      tags:
+      - Purchasing
   /api/v1/purchasing/orders:
     post:
       consumes:
@@ -781,6 +925,42 @@ paths:
       summary: Webhook nhận trạng thái từ GHN
       tags:
       - Logistics
+  /purchasing/orders/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get purchase order details including enriched item data like total_stock
+        and avg_monthly_sold
+      parameters:
+      - description: Purchase Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.PurchaseOrderDetailDTO'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get purchase order details
+      tags:
+      - purchasing
   /ws/v1/clinic/queue:
     get:
       description: Kết nối WebSocket để nhận realtime updates từ queue

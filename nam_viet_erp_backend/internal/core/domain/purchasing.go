@@ -5,7 +5,7 @@ import "time"
 // PurchaseOrder represents a PO from supplier
 type PurchaseOrder struct {
 	ID          int64               `json:"id" gorm:"primaryKey;autoIncrement"`
-	OrderCode   string              `json:"order_code" gorm:"uniqueIndex"`
+	OrderCode      string              `json:"order_code" gorm:"column:code;uniqueIndex"`
 	SupplierID  int64               `json:"supplier_id"`
 	TotalAmount    float64             `json:"total_amount"`
 	FinalAmount    float64             `json:"final_amount"`
@@ -24,14 +24,14 @@ func (PurchaseOrder) TableName() string {
 // PurchaseOrderItem represents an item in a PO
 type PurchaseOrderItem struct {
 	ID               int64   `json:"id" gorm:"primaryKey;autoIncrement"`
-	PurchaseOrderID  int64   `json:"purchase_order_id"`
+	PurchaseOrderID  int64   `json:"purchase_order_id" gorm:"column:po_id"`
 	ProductID        int64   `json:"product_id"`
 	QuantityOrdered  float64 `json:"quantity_ordered"`
 	Unit             string  `json:"unit"`
 	ConversionFactor float64 `json:"conversion_factor"`
 	BaseQuantity     float64 `json:"base_quantity"` // Quantity in base unit
 	UnitPrice        float64 `json:"unit_price"`
-	IsBonus          bool    `json:"is_bonus"`
+	IsBonus          bool    `json:"is_bonus" gorm:"-"`
 }
 
 func (PurchaseOrderItem) TableName() string {
@@ -63,18 +63,24 @@ type AutoReplenishPODTO struct {
 }
 
 type AutoReplenishItemDTO struct {
-	ProductID           int64   `json:"product_id"`
-	QuantityOrdered     int     `json:"quantity_ordered"`
-	Unit                string  `json:"unit"`
-	UnitPrice           float64 `json:"unit_price"`
-	ConversionFactor    float64 `json:"conversion_factor"`
-	BaseQuantity        float64 `json:"base_quantity"`
-	CurrentStockBase    float64 `json:"current_stock_base"`
-	AvgMonthlySalesBase float64 `json:"avg_monthly_sales_base"`
+	ProductID                int64   `json:"product_id"`
+	ProductName              string  `json:"product_name"`
+	ImageURL                 string  `json:"image_url"`
+	QuantityOrdered          int     `json:"quantity_ordered"`
+	Unit                     string  `json:"unit"`
+	UnitPrice                float64 `json:"unit_price"`
+	ConversionFactor         float64 `json:"conversion_factor"`
+	BaseQuantity             float64 `json:"base_quantity"`
+	CurrentStockBase         float64 `json:"current_stock_base"`
+	AvgMonthlySalesBase      float64 `json:"avg_monthly_sales_base"`
+	CurrentStockWholesale    float64 `json:"current_stock_wholesale"`
+	AvgMonthlySalesWholesale float64 `json:"avg_monthly_sales_wholesale"`
 }
 
 type ProductReplenishDTO struct {
 	ProductID           int64   `gorm:"column:product_id"`
+	ProductName         string  `gorm:"column:name"`
+	ImageURL            string  `gorm:"column:image_url"`
 	SupplierID          int64   `gorm:"column:supplier_id"`
 	UnitName            string  `gorm:"column:unit_name"`
 	ConversionFactor    float64 `gorm:"column:conversion_factor"`
@@ -82,6 +88,36 @@ type ProductReplenishDTO struct {
 	QuantityNeeded      int     `gorm:"column:quantity_needed"`
 	CurrentStockBase    float64 `gorm:"column:current_stock_base"`
 	AvgMonthlySalesBase float64 `gorm:"column:avg_monthly_sales_base"`
+}
+
+// DTOs for GET /api/v1/purchasing/orders/:id
+type PurchaseOrderDetailDTO struct {
+	ID             int64                        `json:"id"`
+	OrderCode      string                       `json:"order_code"`
+	SupplierID     int64                        `json:"supplier_id"`
+	DeliveryStatus string                       `json:"delivery_status"`
+	PaymentStatus  string                       `json:"payment_status"`
+	TotalAmount    float64                      `json:"total_amount"`
+	FinalAmount    float64                      `json:"final_amount"`
+	Note           string                       `json:"note"`
+	CreatedAt      time.Time                    `json:"created_at"`
+	UpdatedAt      time.Time                    `json:"updated_at"`
+	Items          []PurchaseOrderItemDetailDTO `json:"items"`
+}
+
+type PurchaseOrderItemDetailDTO struct {
+	ID               int64   `json:"id"`
+	ProductID        int64   `json:"product_id"`
+	ProductName      string  `json:"name"`
+	ImageURL         string  `json:"image_url"`
+	QuantityOrdered  float64 `json:"quantity_ordered"`
+	Unit             string  `json:"unit"`
+	UnitPrice        float64 `json:"unit_price"`
+	ConversionFactor float64 `json:"conversion_factor"`
+	BaseQuantity     float64 `json:"base_quantity"`
+	IsBonus          bool    `json:"is_bonus"`
+	TotalStock       float64 `json:"total_stock"`
+	AvgMonthlySold   float64 `json:"avg_monthly_sold"`
 }
 
 // CreatePOItemRequest
