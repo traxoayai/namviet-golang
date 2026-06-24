@@ -23,6 +23,12 @@ export interface PosOrder {
   items: CartItem[];
   customer: PosCustomer | null;
   selectedVoucher: PosVoucher | null;
+  verifyResult?: {
+    discount_amount: number;
+    final_amount: number;
+    is_freeship: boolean;
+    freeship_max_discount: number;
+  } | null;
   isInvoiceRequested: boolean;
   note?: string; // Ghi chú đơn
 }
@@ -216,22 +222,21 @@ export const usePosCartStore = create<PosCartState>()(
             ];
           }
 
-          return { ...order, items: newItems };
+          return { ...order, selectedVoucher: null, verifyResult: null, items: newItems };
         });
 
         set({ orders: newOrders });
         message.success("Đã thêm vào giỏ");
       },
 
-      removeFromCart: (id) => {
-        const { orders, activeOrderId } = get();
-        set({
-          orders: orders.map((o) =>
-            o.id === activeOrderId
-              ? { ...o, items: o.items.filter((i) => i.id !== id) }
+      removeFromCart: (itemId) => {
+        set((state) => ({
+          orders: state.orders.map((o) =>
+            o.id === state.activeOrderId
+              ? { ...o, selectedVoucher: null, verifyResult: null, items: o.items.filter((i) => i.id !== itemId) }
               : o
           ),
-        });
+        }));
       },
 
       updateQuantity: (id, qty) => {
@@ -254,6 +259,8 @@ export const usePosCartStore = create<PosCartState>()(
             o.id === activeOrderId
               ? {
                   ...o,
+                  selectedVoucher: null,
+                  verifyResult: null,
                   items: o.items.map((i) => (i.id === id ? { ...i, qty } : i)),
                 }
               : o
@@ -268,6 +275,8 @@ export const usePosCartStore = create<PosCartState>()(
             o.id === activeOrderId
               ? {
                   ...o,
+                  selectedVoucher: null,
+                  verifyResult: null,
                   items: o.items.map((i) =>
                     i.id === id ? { ...i, [field]: value } : i
                   ),
@@ -282,7 +291,7 @@ export const usePosCartStore = create<PosCartState>()(
         set({
           orders: orders.map((o) =>
             o.id === activeOrderId
-              ? { ...o, customer: cust, selectedVoucher: null }
+              ? { ...o, customer: cust, selectedVoucher: null, verifyResult: null }
               : o
           ),
         });
@@ -312,7 +321,7 @@ export const usePosCartStore = create<PosCartState>()(
           set({
             orders: orders.map((o) =>
               o.id === activeOrderId
-                ? { ...o, selectedVoucher: null, items: newItems }
+                ? { ...o, selectedVoucher: null, verifyResult: null, items: newItems }
                 : o
             ),
           });
@@ -367,11 +376,21 @@ export const usePosCartStore = create<PosCartState>()(
             set({
               orders: get().orders.map((o) =>
                 o.id === activeOrderId
-                  ? { ...o, selectedVoucher: voucher, items: newItems }
+                  ? { 
+                      ...o, 
+                      selectedVoucher: voucher, 
+                      items: newItems,
+                      verifyResult: {
+                        discount_amount: data.discount_amount || 0,
+                        final_amount: data.final_amount || 0,
+                        is_freeship: data.is_freeship || false,
+                        freeship_max_discount: data.freeship_max_discount || 0
+                      }
+                    }
                   : o
               ),
             });
-            import("antd").then(({ message }) => message.success("Áp dụng mã khuyến mãi thành công!"));
+            import("antd").then(({ message }) => message.success(data.message || "Áp dụng khuyến mãi thành công"));
           } else {
              import("antd").then(({ message }) => message.error(data.message || "Mã không hợp lệ"));
           }
@@ -380,9 +399,7 @@ export const usePosCartStore = create<PosCartState>()(
           // Fallback: Vẫn add voucher nhưng báo lỗi (hoặc cho phép admin ép)
           set({
             orders: get().orders.map((o) =>
-              o.id === activeOrderId
-                ? { ...o, selectedVoucher: voucher }
-                : o
+              o.id === activeOrderId ? { ...o, selectedVoucher: null, verifyResult: null } : o
             ),
           });
         }
@@ -468,7 +485,11 @@ export const usePosCartStore = create<PosCartState>()(
 
         // 2. Giảm giá (Voucher)
         let discountVal = 0;
-        if (selectedVoucher) {
+        if (currentOrder.verifyResult) {
+          // [NEW] Ưu tiên dùng số tiền backend trả về nếu đã verify thành công
+          discountVal = currentOrder.verifyResult.discount_amount;
+        } else if (selectedVoucher) {
+          // Tính cục bộ nếu chưa verify
           if (subTotal >= selectedVoucher.min_order_value) {
             if (selectedVoucher.discount_type === "fixed") {
               discountVal = selectedVoucher.discount_value;
@@ -494,7 +515,7 @@ export const usePosCartStore = create<PosCartState>()(
         // 3. Tổng phải thu cho ĐƠN HÀNG NÀY (KHÔNG gộp nợ cũ).
         //    Dùng cho QR pay, "KHÁCH TRẢ", tính tiền thừa, allocate finance_transaction
         //    ref_type='order'. Nợ cũ là giao dịch riêng (ref_type='customer_debt').
-        const orderTotal = subTotal - discountVal;
+        const orderTotal = currentOrder.verifyResult ? currentOrder.verifyResult.final_amount : (subTotal - discountVal);
 
         // 4. Nợ cũ (tham khảo). KHÔNG cộng vào orderTotal — gạch nợ NV phải bấm
         //    riêng để BE tạo finance_transaction ref_type='customer_debt'.

@@ -16,7 +16,7 @@ type Promotion struct {
 	TotalUsageLimit  int       `json:"total_usage_limit"`
 	Status           string    `json:"status"` // 'active', 'inactive'
 	Type             string    `json:"type"`   // 'public', 'personal'
-	CustomerID       *string   `json:"customer_id"`
+	CustomerID       *int64    `json:"customer_id"`
 	PromotionClass   string    `json:"promotion_class" gorm:"column:promotion_class;default:basic"`
 	AdvancedRules    string    `json:"advanced_rules" gorm:"column:advanced_rules;type:jsonb"`
 	PromoGroup       string    `json:"promo_group" gorm:"column:promo_group;default:cash"`
