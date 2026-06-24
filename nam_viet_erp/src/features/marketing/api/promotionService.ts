@@ -23,7 +23,7 @@ export interface Promotion {
 }
 
 export const promotionService = {
-  async fetchPromotions(search: string = "", status?: string) {
+  async fetchPromotions(search: string = "", status?: string, dateRange?: [string, string]) {
     // <-- CẬP NHẬT THAM SỐ
     let query = supabase
       .from("promotions")
@@ -37,6 +37,10 @@ export const promotionService = {
     if (search) {
       // Tìm theo mã code HOẶC tên chiến dịch
       query = query.or(`code.ilike.%${search}%,name.ilike.%${search}%`);
+    }
+    if (dateRange && dateRange.length === 2) {
+      // Lọc các mã được tạo ra trong khoảng thời gian hoặc có thời gian hiệu lực nằm trong khoảng
+      query = query.gte("created_at", dateRange[0]).lte("created_at", dateRange[1]);
     }
 
     const { data, error } = await query;

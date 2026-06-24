@@ -15,7 +15,7 @@ interface PromotionStoreState {
   loading: boolean;
 
   // Cập nhật hàm fetch để nhận tham số tìm kiếm
-  fetchPromotions: (search?: string, status?: string) => Promise<void>;
+  fetchPromotions: (search?: string, status?: string, dateRange?: [string, string]) => Promise<void>;
 
   createPromotion: (data: any) => Promise<boolean>;
   deletePromotion: (id: string) => Promise<void>;
@@ -27,12 +27,13 @@ export const usePromotionStore = create<PromotionStoreState>((set, get) => ({
   loading: false,
 
   // Cập nhật Logic Fetch
-  fetchPromotions: async (search = "", status = "") => {
+  fetchPromotions: async (search = "", status = "", dateRange) => {
     set({ loading: true });
     try {
       const data = await promotionService.fetchPromotions(
         search,
-        status || undefined
+        status || undefined,
+        dateRange
       );
       // Map key cho Antd Table (dùng id làm key)
       set({ promotions: data.map((p) => ({ ...p, key: p.id })) });

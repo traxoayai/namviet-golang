@@ -8,6 +8,7 @@ import {
   UserOutlined,
   GlobalOutlined,
   ReloadOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import {
   Layout,
@@ -32,6 +33,7 @@ import {
   Radio,
   QRCode,
   Switch,
+  message,
 } from "antd";
 import viVN from "antd/locale/vi_VN";
 import dayjs from "dayjs";
@@ -89,6 +91,7 @@ const DiscountCodeManagement = () => {
   const [statusFilter, setStatusFilter] = useState<string | undefined>(
     undefined
   );
+  const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
   const [form] = Form.useForm();
 
@@ -99,8 +102,11 @@ const DiscountCodeManagement = () => {
 
   // Effect 2: Gọi API tìm kiếm khi search/filter thay đổi (MỚI)
   useEffect(() => {
-    fetchPromotions(searchText, statusFilter);
-  }, [searchText, statusFilter]);
+    const formattedDateRange: [string, string] | undefined = dateRange
+      ? [dateRange[0].toISOString(), dateRange[1].toISOString()]
+      : undefined;
+    fetchPromotions(searchText, statusFilter, formattedDateRange);
+  }, [searchText, statusFilter, dateRange]);
 
   const showAddModal = () => {
     setDiscountType("percent");
@@ -268,11 +274,31 @@ const DiscountCodeManagement = () => {
       ),
     },
     {
+      title: "Thời gian hiệu lực",
+      render: (_: any, record: Promotion) => (
+        <Text style={{ fontSize: 13 }}>
+          {record.valid_from ? dayjs(record.valid_from).format("DD/MM/YYYY") : ""}
+          {" - "}
+          {record.valid_to ? dayjs(record.valid_to).format("DD/MM/YYYY") : ""}
+        </Text>
+      ),
+    },
+    {
       title: "Hành động",
       key: "action",
       align: "center" as const,
       render: (_: any, record: Promotion) => (
         <Space>
+          <Tooltip title="Xem chi tiết">
+            <Button
+              icon={<EyeOutlined />}
+              size="small"
+              onClick={() => {
+                // Tạm thời mở form, sau này có thể làm Drawer
+                message.info("Tính năng đang phát triển!");
+              }}
+            />
+          </Tooltip>
           <Tooltip title="QR Code">
             <Button
               icon={<QrcodeOutlined />}
@@ -345,6 +371,13 @@ const DiscountCodeManagement = () => {
                     <Select.Option value="inactive">Hết hạn/Ẩn</Select.Option>
                   </Select>
                 </Col>
+                <Col flex="300px">
+                  <RangePicker
+                    style={{ width: "100%" }}
+                    allowClear
+                    onChange={(dates) => setDateRange(dates as any)}
+                  />
+                </Col>
               </Row>
             </div>
 
@@ -379,7 +412,7 @@ const DiscountCodeManagement = () => {
           }}
         >
                   <Row gutter={24}>
-                    <Col span={8}>
+                    <Col span={6}>
                       <Form.Item
                         name="campaignName"
                         label="Tên Chiến dịch"
@@ -415,7 +448,7 @@ const DiscountCodeManagement = () => {
                         />
                       </Form.Item>
                     </Col>
-                    <Col span={8}>
+                    <Col span={10}>
                       <Card
                         size="small"
                         title="Giá trị khuyến mãi"
