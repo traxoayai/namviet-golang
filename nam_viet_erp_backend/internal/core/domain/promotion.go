@@ -19,6 +19,9 @@ type Promotion struct {
 	CustomerID       *int64    `json:"customer_id"`
 	PromotionClass   string    `json:"promotion_class" gorm:"column:promotion_class;default:basic"`
 	AdvancedRules    string    `json:"advanced_rules" gorm:"column:advanced_rules;type:jsonb"`
+	PromoGroup       string    `json:"promo_group" gorm:"column:promo_group;default:cash"`
+	CombinableGroups string    `json:"combinable_groups" gorm:"column:combinable_groups;type:jsonb;default:'[]'"`
+	IsStackable      bool      `json:"is_stackable" gorm:"column:is_stackable;default:true"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
 }
@@ -35,10 +38,10 @@ type CartItem struct {
 
 // VerifyPromotionRequest
 type VerifyPromotionRequest struct {
-	VoucherCode string     `json:"voucher_code" binding:"required"`
-	CustomerID  int64      `json:"customer_id"`
-	OrderValue  float64    `json:"order_value" binding:"required"`
-	CartItems   []CartItem `json:"cart_items"`
+	VoucherCodes []string   `json:"voucher_codes" binding:"required"`
+	CustomerID   int64      `json:"customer_id"`
+	OrderValue   float64    `json:"order_value" binding:"required"`
+	CartItems    []CartItem `json:"cart_items"`
 }
 
 type PromotionGift struct {
@@ -49,9 +52,12 @@ type PromotionGift struct {
 
 // VerifyPromotionResponse
 type VerifyPromotionResponse struct {
-	PromotionID    int64           `json:"promotion_id"`
-	DiscountAmount float64         `json:"discount_amount"`
-	Gifts          []PromotionGift `json:"gifts,omitempty"`
-	IsValid        bool            `json:"is_valid"`
-	Message        string          `json:"message"`
+	PromotionID         int64           `json:"promotion_id"` // deprecated for multiple
+	DiscountAmount      float64         `json:"discount_amount"`
+	FinalAmount         float64         `json:"final_amount"`
+	Gifts               []PromotionGift `json:"gifts,omitempty"`
+	IsFreeship          bool            `json:"is_freeship"`
+	FreeshipMaxDiscount float64         `json:"freeship_max_discount"`
+	IsValid             bool            `json:"is_valid"`
+	Message             string          `json:"message"`
 }

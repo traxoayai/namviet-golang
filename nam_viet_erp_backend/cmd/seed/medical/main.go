@@ -8,7 +8,6 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/namvieterp/backend/internal/repository/postgres"
-	"gorm.io/gorm"
 )
 
 type DiseaseSeed struct {

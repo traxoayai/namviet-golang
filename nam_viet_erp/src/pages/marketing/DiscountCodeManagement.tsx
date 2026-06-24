@@ -120,6 +120,9 @@ const DiscountCodeManagement = () => {
       apply_to_scope: "all",
       validDates: [dayjs(), dayjs().add(30, "day")],
       maxUsage: 100,
+      is_stackable: true,
+      promo_group: "percent",
+      combinable_groups: [],
     });
     setIsModalVisible(true);
   };
@@ -172,6 +175,9 @@ const DiscountCodeManagement = () => {
         customer_id: c?.value || null,
         customer_type: c?.item?.type || values.customer_type || "B2C",
         advanced_rules: advanced_rules,
+        is_stackable: values.is_stackable ?? true,
+        promo_group: values.promo_group,
+        combinable_groups: values.is_stackable ? values.combinable_groups || [] : [],
       });
 
       // 1. Xử lý logic Voucher Tặng Riêng (Personal)
@@ -446,6 +452,37 @@ const DiscountCodeManagement = () => {
                           format="DD/MM/YYYY HH:mm"
                           style={{ width: "100%" }}
                         />
+                      </Form.Item>
+                      <Divider dashed style={{ margin: "12px 0" }} />
+                      <Text strong style={{ color: '#fa8c16' }}>Cấu hình Cộng dồn (Stackable)</Text>
+                      <Form.Item name="is_stackable" label="Cho phép cộng dồn" valuePropName="checked" style={{ marginTop: 12 }}>
+                        <Switch />
+                      </Form.Item>
+                      <Form.Item name="promo_group" label="Phân nhóm Mã" rules={[{ required: true }]}>
+                        <Select>
+                          <Option value="gift">Quà tặng (Mua X tặng Y)</Option>
+                          <Option value="cash">Trừ Tiền mặt</Option>
+                          <Option value="percent">Giảm Phần trăm (%)</Option>
+                          <Option value="freeship">Miễn phí Vận chuyển</Option>
+                        </Select>
+                      </Form.Item>
+                      <Form.Item
+                        noStyle
+                        shouldUpdate={(prev, curr) => prev.is_stackable !== curr.is_stackable}
+                      >
+                        {({ getFieldValue }) => {
+                          const stackable = getFieldValue("is_stackable");
+                          return stackable ? (
+                            <Form.Item name="combinable_groups" label="Được kết hợp chung với:">
+                              <Select mode="multiple" placeholder="Chọn nhóm (Để trống = Không kết hợp)">
+                                <Option value="gift">Nhóm Quà tặng</Option>
+                                <Option value="cash">Nhóm Tiền mặt</Option>
+                                <Option value="percent">Nhóm Phần trăm</Option>
+                                <Option value="freeship">Nhóm Freeship</Option>
+                              </Select>
+                            </Form.Item>
+                          ) : null;
+                        }}
                       </Form.Item>
                     </Col>
                     <Col span={10}>

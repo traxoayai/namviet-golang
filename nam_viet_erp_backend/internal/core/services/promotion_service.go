@@ -25,121 +25,214 @@ func NewPromotionService(repo postgres.PromotionRepository) PromotionService {
 }
 
 func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req domain.VerifyPromotionRequest) (*domain.VerifyPromotionResponse, error) {
-	promo, err := s.repo.GetPromotionByCodeWithLock(ctx, tx, req.VoucherCode)
+	if len(req.VoucherCodes) == 0 {
+		return nil, errors.New("không có mã khuyến mãi nào được cung cấp")
+	}
+
+	promos, err := s.repo.GetPromotionsByCodesWithLock(ctx, tx, req.VoucherCodes)
 	if err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, errors.New("mã khuyến mãi không tồn tại")
-		}
 		return nil, err
 	}
 
-	if promo.Status != "active" {
-		return nil, errors.New("mã khuyến mãi không còn hoạt động")
+	if len(promos) != len(req.VoucherCodes) {
+		return nil, errors.New("một hoặc nhiều mã khuyến mãi không tồn tại")
 	}
 
 	now := time.Now()
-	if now.Before(promo.ValidFrom) || now.After(promo.ValidTo) {
-		return nil, errors.New("mã khuyến mãi đã hết hạn hoặc chưa đến giờ áp dụng")
-	}
 
-	if promo.UsageCount >= promo.TotalUsageLimit {
-		return nil, errors.New("mã khuyến mãi đã hết lượt sử dụng")
-	}
-
-	if promo.Type == "personal" {
-		if promo.CustomerID == nil || *promo.CustomerID != req.CustomerID {
-			return nil, errors.New("mã khuyến mãi này không dành cho bạn")
+	// 1. Validations cơ bản cho từng mã
+	for _, promo := range promos {
+		if promo.Status != "active" {
+			return nil, errors.New("mã " + promo.Code + " không còn hoạt động")
+		}
+		if now.Before(promo.ValidFrom) || now.After(promo.ValidTo) {
+			return nil, errors.New("mã " + promo.Code + " đã hết hạn hoặc chưa đến giờ áp dụng")
+		}
+		if promo.UsageCount >= promo.TotalUsageLimit && promo.TotalUsageLimit > 0 {
+			return nil, errors.New("mã " + promo.Code + " đã hết lượt sử dụng")
+		}
+		if promo.Type == "personal" {
+			if promo.CustomerID == nil || *promo.CustomerID != req.CustomerID {
+				return nil, errors.New("mã " + promo.Code + " không dành cho bạn")
+			}
 		}
 	}
 
+	// 2. Cross-Validation (Khóa chéo)
+	// a. Check is_stackable
+	for _, promo := range promos {
+		if !promo.IsStackable && len(promos) > 1 {
+			return nil, errors.New("mã " + promo.Code + " là mã độc quyền, không thể áp dụng chung với các mã khác")
+		}
+	}
+
+	// b. Check trùng nhóm (cùng promo_group)
+	groupCount := make(map[string]int)
+	for _, promo := range promos {
+		groupCount[promo.PromoGroup]++
+		if groupCount[promo.PromoGroup] > 1 {
+			return nil, errors.New("không thể áp dụng 2 mã cùng nhóm (" + promo.PromoGroup + ")")
+		}
+	}
+
+	// c. Check combinable_groups chéo nhau
+	for i, promoA := range promos {
+		var combinableA []string
+		if promoA.CombinableGroups != "" {
+			json.Unmarshal([]byte(promoA.CombinableGroups), &combinableA)
+		}
+		
+		for j, promoB := range promos {
+			if i == j {
+				continue
+			}
+			
+			// Kiểm tra xem promoB.PromoGroup có nằm trong allowed array của promoA không
+			isAllowed := false
+			for _, allowedGroup := range combinableA {
+				if allowedGroup == promoB.PromoGroup {
+					isAllowed = true
+					break
+				}
+			}
+			if !isAllowed {
+				return nil, errors.New("mã " + promoA.Code + " không thể áp dụng chung với loại mã " + promoB.PromoGroup)
+			}
+		}
+	}
+
+	// 3. Calculation Logic (Trình tự: Gift -> Cash -> Percent -> Freeship)
 	res := &domain.VerifyPromotionResponse{
-		PromotionID: promo.ID,
-		IsValid:     true,
-		Message:     "Áp dụng mã khuyến mãi thành công",
+		IsValid: true,
+		Message: "Áp dụng các mã khuyến mãi thành công",
 	}
 
-	if promo.PromotionClass == "advanced" && promo.AdvancedRules != "" {
-		var rule map[string]interface{}
-		if err := json.Unmarshal([]byte(promo.AdvancedRules), &rule); err != nil {
-			return nil, errors.New("cấu hình khuyến mãi nâng cao bị lỗi")
-		}
-
-		condition, _ := rule["condition"].(map[string]interface{})
-		reward, _ := rule["reward"].(map[string]interface{})
-		isMultiply, _ := rule["is_multiply"].(bool)
-
-		condType := condition["type"].(string)
-		
-		var times int = 0
-		
-		if condType == "buy_quantity" {
-			targetProductID := int64(condition["target_product_id"].(float64))
-			minQuantity := int(condition["min_quantity"].(float64))
-			
-			var cartQuantity int = 0
-			for _, item := range req.CartItems {
-				if item.ProductID == targetProductID {
-					cartQuantity += item.Quantity
-				}
-			}
-			
-			if cartQuantity >= minQuantity {
-				if isMultiply {
-					times = cartQuantity / minQuantity
-				} else {
-					times = 1
-				}
-			} else {
-				return nil, errors.New("chưa đạt số lượng sản phẩm yêu cầu")
-			}
-		} else if condType == "buy_amount" {
-			minAmount := condition["min_amount"].(float64)
-			if req.OrderValue >= minAmount {
-				if isMultiply {
-					times = int(req.OrderValue / minAmount)
-				} else {
-					times = 1
-				}
-			} else {
-				return nil, errors.New("giá trị đơn hàng chưa đạt mức tối thiểu")
-			}
-		}
-
-		if times > 0 {
-			rewardType := reward["type"].(string)
-			if rewardType == "give_product" {
-				giftProductID := int64(reward["gift_product_id"].(float64))
-				giftQty := int(reward["gift_quantity"].(float64))
-				discountPct := int(reward["discount_percent"].(float64))
-				
-				res.Gifts = append(res.Gifts, domain.PromotionGift{
-					ProductID:       giftProductID,
-					Quantity:        giftQty * times,
-					DiscountPercent: discountPct,
-				})
-			}
-		}
-
-	} else {
-		// Basic Promotion Logic
-		if req.OrderValue < promo.MinOrderValue {
-			return nil, errors.New("giá trị đơn hàng chưa đạt mức tối thiểu")
-		}
-
-		var discountAmount float64
-		if promo.DiscountType == "percentage" {
-			discountAmount = (req.OrderValue * promo.Value) / 100
-			if discountAmount > promo.MaxDiscountValue && promo.MaxDiscountValue > 0 {
-				discountAmount = promo.MaxDiscountValue
-			}
-		} else if promo.DiscountType == "fixed_amount" {
-			discountAmount = promo.Value
-			if discountAmount > req.OrderValue {
-				discountAmount = req.OrderValue
-			}
-		}
-		res.DiscountAmount = discountAmount
+	if len(promos) > 0 {
+		res.PromotionID = promos[0].ID // Backward compatibility
 	}
+
+	// Phân loại mã vào các bucket
+	var promoGift, promoCash, promoPercent, promoFreeship *domain.Promotion
+	for i := range promos {
+		p := &promos[i]
+		switch p.PromoGroup {
+		case "gift":
+			promoGift = p
+		case "cash":
+			promoCash = p
+		case "percent":
+			promoPercent = p
+		case "freeship":
+			promoFreeship = p
+		}
+	}
+
+	subtotal := req.OrderValue
+	var totalDiscount float64
+
+	// Bước 1: Gift
+	if promoGift != nil {
+		if promoGift.PromotionClass == "advanced" && promoGift.AdvancedRules != "" {
+			var rule map[string]interface{}
+			if err := json.Unmarshal([]byte(promoGift.AdvancedRules), &rule); err == nil {
+				condition, _ := rule["condition"].(map[string]interface{})
+				reward, _ := rule["reward"].(map[string]interface{})
+				isMultiply, _ := rule["is_multiply"].(bool)
+
+				condType, _ := condition["type"].(string)
+				var times int = 0
+
+				if condType == "buy_quantity" {
+					targetProductID := int64(condition["target_product_id"].(float64))
+					minQuantity := int(condition["min_quantity"].(float64))
+					
+					var cartQuantity int = 0
+					for _, item := range req.CartItems {
+						if item.ProductID == targetProductID {
+							cartQuantity += item.Quantity
+						}
+					}
+					
+					if cartQuantity >= minQuantity && minQuantity > 0 {
+						if isMultiply {
+							times = cartQuantity / minQuantity
+						} else {
+							times = 1
+						}
+					} else {
+						return nil, errors.New("mã " + promoGift.Code + ": chưa đạt số lượng sản phẩm yêu cầu")
+					}
+				} else if condType == "buy_amount" {
+					minAmount := condition["min_amount"].(float64)
+					if req.OrderValue >= minAmount && minAmount > 0 {
+						if isMultiply {
+							times = int(req.OrderValue / minAmount)
+						} else {
+							times = 1
+						}
+					} else {
+						return nil, errors.New("mã " + promoGift.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
+					}
+				}
+
+				if times > 0 {
+					rewardType, _ := reward["type"].(string)
+					if rewardType == "give_product" {
+						giftProductID := int64(reward["gift_product_id"].(float64))
+						giftQty := int(reward["gift_quantity"].(float64))
+						discountPct := int(reward["discount_percent"].(float64))
+						
+						res.Gifts = append(res.Gifts, domain.PromotionGift{
+							ProductID:       giftProductID,
+							Quantity:        giftQty * times,
+							DiscountPercent: discountPct,
+						})
+					}
+				}
+			}
+		}
+	}
+
+	// Bước 2: Cash
+	if promoCash != nil {
+		if req.OrderValue < promoCash.MinOrderValue {
+			return nil, errors.New("mã " + promoCash.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
+		}
+		discountAmt := promoCash.Value
+		if discountAmt > subtotal {
+			discountAmt = subtotal
+		}
+		subtotal -= discountAmt
+		totalDiscount += discountAmt
+	}
+
+	// Bước 3: Percent
+	if promoPercent != nil {
+		if req.OrderValue < promoPercent.MinOrderValue {
+			return nil, errors.New("mã " + promoPercent.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
+		}
+		discountAmt := (subtotal * promoPercent.Value) / 100
+		if promoPercent.MaxDiscountValue > 0 && discountAmt > promoPercent.MaxDiscountValue {
+			discountAmt = promoPercent.MaxDiscountValue
+		}
+		if discountAmt > subtotal {
+			discountAmt = subtotal
+		}
+		subtotal -= discountAmt
+		totalDiscount += discountAmt
+	}
+
+	// Bước 4: Freeship
+	if promoFreeship != nil {
+		if req.OrderValue < promoFreeship.MinOrderValue {
+			return nil, errors.New("mã " + promoFreeship.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
+		}
+		res.IsFreeship = true
+		res.FreeshipMaxDiscount = promoFreeship.MaxDiscountValue
+	}
+
+	res.DiscountAmount = totalDiscount
+	res.FinalAmount = subtotal
 
 	return res, nil
 }

@@ -11,6 +11,7 @@ import (
 type PromotionRepository interface {
 	GetPromotionByCodeWithLock(ctx context.Context, tx *gorm.DB, code string) (*domain.Promotion, error)
 	GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
+	GetPromotionsByCodesWithLock(ctx context.Context, tx *gorm.DB, codes []string) ([]domain.Promotion, error)
 }
 
 type promotionRepository struct{}
@@ -29,6 +30,18 @@ func (r *promotionRepository) GetPromotionByCodeWithLock(ctx context.Context, tx
 		return nil, err
 	}
 	return &promo, nil
+}
+
+func (r *promotionRepository) GetPromotionsByCodesWithLock(ctx context.Context, tx *gorm.DB, codes []string) ([]domain.Promotion, error) {
+	var promos []domain.Promotion
+	err := tx.WithContext(ctx).
+		Clauses(clause.Locking{Strength: "UPDATE"}).
+		Where("code IN ?", codes).
+		Find(&promos).Error
+	if err != nil {
+		return nil, err
+	}
+	return promos, nil
 }
 
 func (r *promotionRepository) GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {

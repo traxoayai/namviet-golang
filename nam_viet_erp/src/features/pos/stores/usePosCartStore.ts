@@ -322,7 +322,7 @@ export const usePosCartStore = create<PosCartState>()(
         try {
           const { default: axiosClient } = await import("@/shared/utils/axiosClient");
           const payload = {
-            voucher_code: voucher.code,
+            voucher_codes: [voucher.code],
             customer_id: currentOrder.customer?.id,
             order_value: get().getTotals().subTotal,
             cart_items: currentOrder.items

@@ -49,9 +49,9 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 	// 2. Apply Voucher if exists
 	if req.VoucherCode != "" {
 		res, err := s.promoSvc.VerifyVoucher(ctx, tx, domain.VerifyPromotionRequest{
-			VoucherCode: req.VoucherCode,
-			CustomerID:  req.CustomerID,
-			OrderValue:  totalAmount,
+			VoucherCodes: []string{req.VoucherCode},
+			CustomerID:   req.CustomerID,
+			OrderValue:   totalAmount,
 		})
 		if err != nil {
 			return nil, fmt.Errorf("lỗi mã khuyến mãi: %v", err)
