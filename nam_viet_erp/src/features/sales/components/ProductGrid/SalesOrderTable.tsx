@@ -77,6 +77,23 @@ export const SalesOrderTable = ({
                   🎁 Tặng Quà trị giá {r.gift_value?.toLocaleString()} ₫ (Khi mua đủ số lượng)
                 </div>
               )}
+
+              {/* Kịch bản 3: Upsell Hint - Chưa đủ số lượng */}
+              {!r.is_gift && r.upsell_remaining && r.upsell_remaining > 0 && (
+                <div style={{
+                  marginTop: 4,
+                  padding: "4px 8px",
+                  background: "linear-gradient(90deg, #fff7e6, #fffbe6)",
+                  borderRadius: 4,
+                  border: "1px dashed #faad14",
+                  color: "#d48806",
+                  fontWeight: 600,
+                  fontSize: 12,
+                }}>
+                  🔥 Thêm <span style={{ color: "#f5222d", fontSize: 14 }}>{r.upsell_remaining}</span> {r.wholesale_unit} nữa để được tặng{" "}
+                  <span style={{ color: "#52c41a", fontSize: 14 }}>{r.upsell_reward_qty}</span> {r.wholesale_unit}!
+                </div>
+              )}
             </div>
           </Space>
         );

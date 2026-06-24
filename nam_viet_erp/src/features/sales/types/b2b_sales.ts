@@ -117,4 +117,7 @@ export interface CartItem extends ProductB2B {
   is_gift?: boolean;
   gift_rule_id?: number;
   gift_value?: number;
+  upsell_remaining?: number; // Còn cần thêm bao nhiêu để được tặng
+  upsell_reward_qty?: number; // Số lượng sẽ được tặng
+  upsell_min_qty?: number; // Ngưỡng tối thiểu
 }

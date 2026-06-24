@@ -47,7 +47,7 @@ func (r *promotionRepository) GetPromotionsByCodesWithLock(ctx context.Context, 
 func (r *promotionRepository) GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {
 	var promos []domain.Promotion
 	err := tx.WithContext(ctx).
-		Where("is_active = ? AND promotion_class = ?", true, "advanced").
+		Where("status = ? AND advanced_rules IS NOT NULL AND advanced_rules != 'null'", "active").
 		Find(&promos).Error
 	if err != nil {
 		return nil, err

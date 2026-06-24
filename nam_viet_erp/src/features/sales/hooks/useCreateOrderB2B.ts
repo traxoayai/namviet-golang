@@ -144,10 +144,145 @@ export const useCreateOrderB2B = () => {
     fetchRules();
   }, []);
 
+  // --- HÀM TÁCH RIÊNG: Áp dụng Promo Rules lên mảng items ---
+  const applyPromoRules = useCallback(
+    (inputItems: CartItem[]): CartItem[] => {
+      if (promoRules.length === 0) return inputItems;
+      
+      let newItems = [...inputItems];
+      
+      promoRules.forEach((rule) => {
+        if (!rule.advanced_rules) return;
+        try {
+          const advanced = JSON.parse(rule.advanced_rules) as AdvancedRule;
+          const cond = advanced.condition;
+          const rew = advanced.reward;
+
+          if (cond.type === "buy_quantity") {
+            const targetId = cond.target_product_id;
+            
+            // Tính tổng quantity của target product trong giỏ
+            let cartQuantity = 0;
+            newItems.forEach((item) => {
+              if (item.id === targetId && !item.is_gift) {
+                cartQuantity += item.quantity;
+              }
+            });
+
+            // Tính toán số lần đạt chuẩn (times)
+            const minQty = cond.min_quantity || 0;
+            let times = 0;
+            if (minQty > 0 && cartQuantity >= minQty) {
+              times = advanced.is_multiply ? Math.floor(cartQuantity / minQty) : 1;
+            }
+
+            const giftKey = `gift_${rule.id}_${rew.gift_product_id}`;
+
+            // Tính upsell hint: còn thiếu bao nhiêu để đạt ngưỡng
+            const upsellRemaining = minQty > 0 && cartQuantity > 0 && cartQuantity < minQty
+              ? minQty - cartQuantity
+              : 0;
+
+            // Map gift info + upsell hint to TARGET ITEM
+            newItems = newItems.map((item) => {
+              if (item.id === targetId && !item.is_gift) {
+                return {
+                  ...item,
+                  gift_rule_id: rule.id,
+                  gift_value: rew.gift_value || 0,
+                  upsell_remaining: upsellRemaining,
+                  upsell_reward_qty: rew.gift_quantity,
+                  upsell_min_qty: minQty,
+                };
+              }
+              return item;
+            });
+
+            if (times > 0) {
+              // Kiểm tra xem quà tặng đã tồn tại trong giỏ chưa
+              const giftIndex = newItems.findIndex((i) => i.key === giftKey);
+              const expectedQty = rew.gift_quantity * times;
+
+              if (giftIndex >= 0) {
+                // Cập nhật số lượng quà
+                newItems[giftIndex] = {
+                  ...newItems[giftIndex],
+                  quantity: expectedQty,
+                  total: 0,
+                };
+              } else {
+                // Find main product to mock image if it's buy A get A
+                const mainProduct = newItems.find((i) => i.id === rew.gift_product_id && !i.is_gift);
+                
+                // Thêm quà tặng mới
+                newItems.push({
+                  id: rew.gift_product_id,
+                  key: giftKey,
+                  name: mainProduct ? `[🎁 Tặng kèm] ${mainProduct.name}` : (rew.gift_name || "Quà Tặng"),
+                  sku: mainProduct ? `${mainProduct.sku}-GIFT` : "GIFT",
+                  price_wholesale: 0,
+                  quantity: expectedQty,
+                  discount: 0,
+                  total: 0,
+                  image_url: mainProduct ? mainProduct.image_url : null,
+                  lot_number: null,
+                  expiry_date: null,
+                  wholesale_unit: mainProduct ? mainProduct.wholesale_unit : "Cái",
+                  items_per_carton: 1,
+                  stock_quantity: 999, // Không quan trọng
+                  shelf_location: "",
+                  is_gift: true,
+                  gift_rule_id: rule.id,
+                  gift_value: rew.gift_value || 0,
+                } as CartItem);
+                message.success(`🎁 Đã tự động thêm quà tặng: ${mainProduct?.name || rew.gift_name || "Quà Tặng"}`);
+              }
+            } else {
+              // Remove gift nếu không đủ điều kiện
+              newItems = newItems.filter((i) => i.key !== giftKey);
+            }
+          }
+        } catch (e) {
+          console.error("Lỗi parse JSON rules", e);
+        }
+      });
+      
+      return newItems;
+    },
+    [promoRules]
+  );
+
+  // --- useEffect: Tự động chạy promo check mỗi khi items hoặc rules thay đổi ---
+  useEffect(() => {
+    if (promoRules.length === 0 || store.items.length === 0) return;
+    
+    const updatedItems = applyPromoRules(store.items);
+    
+    // So sánh nhanh: chỉ update nếu có thay đổi thực sự (tránh vòng lặp vô hạn)
+    const hasChange =
+      updatedItems.length !== store.items.length ||
+      updatedItems.some((item, idx) => {
+        const orig = store.items[idx];
+        if (!orig) return true;
+        return (
+          item.key !== orig.key ||
+          item.quantity !== orig.quantity ||
+          item.is_gift !== orig.is_gift ||
+          item.gift_rule_id !== orig.gift_rule_id ||
+          item.upsell_remaining !== orig.upsell_remaining
+        );
+      });
+    
+    if (hasChange) {
+      store.setItems(updatedItems);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.items, promoRules, applyPromoRules]);
+
   // Intercept updateItem
   const handleUpdateItem = useCallback(
     (key: string, field: keyof CartItem, value: any) => {
-      // Đầu tiên, cập nhật item như bình thường bằng cách tính toán mảng mới
+      // Cập nhật item như bình thường
       const currentItems = store.items;
       let newItems = currentItems.map((item) => {
         if (item.key !== key) return item;
@@ -157,96 +292,12 @@ export const useCreateOrderB2B = () => {
         return updated;
       });
 
-      // Kiểm tra Kịch bản Auto-Add Gift
-      if (field === "quantity" && promoRules.length > 0) {
-        promoRules.forEach((rule) => {
-          if (!rule.advanced_rules) return;
-          try {
-            const advanced = JSON.parse(rule.advanced_rules) as AdvancedRule;
-            const cond = advanced.condition;
-            const rew = advanced.reward;
-
-            if (cond.type === "buy_quantity") {
-              const targetId = cond.target_product_id;
-              
-              // Tính tổng quantity của target product trong giỏ
-              let cartQuantity = 0;
-              newItems.forEach((item) => {
-                if (item.id === targetId && !item.is_gift) {
-                  cartQuantity += item.quantity;
-                }
-              });
-
-              // Tính toán số lần đạt chuẩn (times)
-              let times = 0;
-              if (cond.min_quantity && cartQuantity >= cond.min_quantity) {
-                times = advanced.is_multiply ? Math.floor(cartQuantity / cond.min_quantity) : 1;
-              }
-
-              const giftKey = `gift_${rule.id}_${rew.gift_product_id}`;
-
-              // Map gift info to TARGET ITEM (so UI can show upsell text)
-              newItems = newItems.map((item) => {
-                if (item.id === targetId && !item.is_gift) {
-                  return {
-                    ...item,
-                    gift_rule_id: rule.id,
-                    gift_value: rew.gift_value || 0,
-                  };
-                }
-                return item;
-              });
-
-              if (times > 0) {
-                // Kiểm tra xem quà tặng đã tồn tại trong giỏ chưa
-                const giftIndex = newItems.findIndex((i) => i.key === giftKey);
-                const expectedQty = rew.gift_quantity * times;
-
-                if (giftIndex >= 0) {
-                  // Cập nhật số lượng quà
-                  newItems[giftIndex].quantity = expectedQty;
-                  newItems[giftIndex].total = 0; // Giá quà luôn = 0
-                } else {
-                  // Find main product to mock image if it's buy A get A
-                  const mainProduct = newItems.find((i) => i.id === rew.gift_product_id && !i.is_gift);
-                  
-                  // Thêm quà tặng mới
-                  newItems.push({
-                    id: rew.gift_product_id,
-                    key: giftKey,
-                    name: mainProduct ? mainProduct.name : (rew.gift_name || "Quà Tặng"),
-                    sku: mainProduct ? `${mainProduct.sku}-GIFT` : "GIFT",
-                    price_wholesale: 0,
-                    quantity: expectedQty,
-                    discount: 0,
-                    total: 0,
-                    image_url: mainProduct ? mainProduct.image_url : null,
-                    lot_number: null,
-                    expiry_date: null,
-                    wholesale_unit: mainProduct ? mainProduct.wholesale_unit : "Cái",
-                    items_per_carton: 1,
-                    stock_quantity: 999, // Không quan trọng
-                    shelf_location: "",
-                    is_gift: true,
-                    gift_rule_id: rule.id,
-                    gift_value: rew.gift_value || 0,
-                  } as CartItem);
-                  message.success(`Đã tự động thêm quà: ${rew.gift_name}`);
-                }
-              } else {
-                // Remove gift nếu không đủ điều kiện
-                newItems = newItems.filter((i) => i.key !== giftKey);
-              }
-            }
-          } catch (e) {
-            console.error("Lỗi parse JSON rules", e);
-          }
-        });
-      }
+      // Áp dụng promo rules ngay lập tức
+      newItems = applyPromoRules(newItems);
 
       store.setItems(newItems);
     },
-    [store.items, promoRules, store.setItems]
+    [store.items, applyPromoRules, store.setItems]
   );
 
   return {

@@ -4,7 +4,7 @@ import "time"
 
 // Promotion represents a discount voucher/campaign
 type Promotion struct {
-	ID               int64     `json:"id" gorm:"primaryKey"`
+	ID               string    `json:"id" gorm:"primaryKey;type:uuid"`
 	Code             string    `json:"code" gorm:"uniqueIndex"`
 	DiscountType     string    `json:"discount_type"` // 'percentage' or 'fixed_amount'
 	Value            float64   `json:"value"`
@@ -16,7 +16,7 @@ type Promotion struct {
 	TotalUsageLimit  int       `json:"total_usage_limit"`
 	Status           string    `json:"status"` // 'active', 'inactive'
 	Type             string    `json:"type"`   // 'public', 'personal'
-	CustomerID       *int64    `json:"customer_id"`
+	CustomerID       *string   `json:"customer_id"`
 	PromotionClass   string    `json:"promotion_class" gorm:"column:promotion_class;default:basic"`
 	AdvancedRules    string    `json:"advanced_rules" gorm:"column:advanced_rules;type:jsonb"`
 	PromoGroup       string    `json:"promo_group" gorm:"column:promo_group;default:cash"`
@@ -52,7 +52,7 @@ type PromotionGift struct {
 
 // VerifyPromotionResponse
 type VerifyPromotionResponse struct {
-	PromotionID         int64           `json:"promotion_id"` // deprecated for multiple
+	PromotionID         string          `json:"promotion_id"` // deprecated for multiple
 	DiscountAmount      float64         `json:"discount_amount"`
 	FinalAmount         float64         `json:"final_amount"`
 	Gifts               []PromotionGift `json:"gifts,omitempty"`
