@@ -301,13 +301,91 @@ export const usePosCartStore = create<PosCartState>()(
 
       setAvailableVouchers: (vouchers) => set({ availableVouchers: vouchers }),
 
-      applyVoucher: (voucher) => {
+      applyVoucher: async (voucher) => {
         const { orders, activeOrderId } = get();
-        set({
-          orders: orders.map((o) =>
-            o.id === activeOrderId ? { ...o, selectedVoucher: voucher } : o
-          ),
-        });
+        const currentOrder = orders.find((o) => o.id === activeOrderId);
+        if (!currentOrder) return;
+
+        if (!voucher) {
+          // Xóa voucher và dọn dẹp hàng tặng
+          const newItems = currentOrder.items.filter((item) => !item.isGift);
+          set({
+            orders: orders.map((o) =>
+              o.id === activeOrderId
+                ? { ...o, selectedVoucher: null, items: newItems }
+                : o
+            ),
+          });
+          return;
+        }
+
+        try {
+          const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+          const payload = {
+            voucher_code: voucher.code,
+            customer_id: currentOrder.customer?.id,
+            order_value: get().getTotals().subTotal,
+            cart_items: currentOrder.items
+              .filter((i) => !i.isGift)
+              .map((i) => ({
+                product_id: i.id,
+                quantity: i.qty,
+                price: i.price,
+              })),
+          };
+
+          const response = await axiosClient.post("/api/v1/promotions/verify", payload);
+          const data = response.data;
+
+          if (data && data.is_valid !== false) {
+            let newItems = [...currentOrder.items.filter((i) => !i.isGift)];
+            
+            // Xử lý Quà Tặng (Promotion Extension)
+            if (data.gifts && data.gifts.length > 0) {
+              data.gifts.forEach((gift: any) => {
+                // Thử tìm thông tin sản phẩm trong giỏ hàng hiện tại (thường Mua X Tặng X)
+                const existingProduct = newItems.find((i) => i.id === gift.product_id);
+                
+                newItems.push({
+                  id: gift.product_id,
+                  name: existingProduct ? `[Hàng tặng không bán] ${existingProduct.name}` : `[Hàng tặng không bán] Quà tặng (ID: ${gift.product_id})`,
+                  sku: existingProduct?.sku || `GIFT-${gift.product_id}`,
+                  retail_price: 0,
+                  price: 0,
+                  qty: gift.quantity,
+                  unit: existingProduct?.unit || "Hộp",
+                  stock_quantity: 999,
+                  dosage: existingProduct?.dosage || "",
+                  isGift: true, // Cờ hiệu khóa UI
+                  image_url: existingProduct?.image_url || "",
+                  location: existingProduct?.location || { cabinet: null, row: null, slot: null },
+                  usage_instructions: {}
+                });
+              });
+            }
+
+            set({
+              orders: get().orders.map((o) =>
+                o.id === activeOrderId
+                  ? { ...o, selectedVoucher: voucher, items: newItems }
+                  : o
+              ),
+            });
+            import("antd").then(({ message }) => message.success("Áp dụng mã khuyến mãi thành công!"));
+          } else {
+             import("antd").then(({ message }) => message.error(data.message || "Mã không hợp lệ"));
+          }
+        } catch (error) {
+          console.error("Lỗi Verify Promotion:", error);
+          // Fallback: Vẫn add voucher nhưng báo lỗi (hoặc cho phép admin ép)
+          set({
+            orders: get().orders.map((o) =>
+              o.id === activeOrderId
+                ? { ...o, selectedVoucher: voucher }
+                : o
+            ),
+          });
+        }
       },
 
       fetchVouchers: async (customerId, total) => {

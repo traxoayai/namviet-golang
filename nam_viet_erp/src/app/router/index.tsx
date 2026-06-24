@@ -51,6 +51,9 @@ import TransferCreatePage from "@/pages/inventory/transfer/TransferCreatePage"; 
 import TransferDetailPage from "@/pages/inventory/transfer/TransferDetailPage";
 import TransferListPage from "@/pages/inventory/transfer/TransferListPage";
 import DiscountCodeManagement from "@/pages/marketing/DiscountCodeManagement";
+import CampaignDashboardPage from "@/pages/marketing/CampaignDashboardPage";
+import CampaignBuilderPage from "@/pages/marketing/CampaignBuilderPage";
+import SurveyPage from "@/pages/marketing/SurveyPage";
 import LoyaltyPolicyPage from "@/pages/marketing/LoyaltyPolicyPage";
 import DoctorPage from "@/pages/medical/DoctorPage";
 import DoctorQueuePage from "@/pages/medical/DoctorQueuePage";
@@ -591,17 +594,22 @@ const routes: RouteObject[] = [
           },
 
           // 10. Quản lý Marketing
-          {
-            path: "marketing",
-            element: <Navigate to="/marketing/dashboard" replace />,
-          },
+          { path: "marketing", element: <Navigate to="/marketing/dashboard" replace /> },
           {
             path: "marketing/dashboard",
-            element: <PagePlaceholder title="Dashboard Marketing" />,
+            element: <CampaignDashboardPage />,
           },
           {
             path: "marketing/campaigns",
-            element: <PagePlaceholder title="Quản lý Chiến dịch" />,
+            element: <CampaignDashboardPage />,
+          },
+          {
+            path: "marketing/campaigns/new",
+            element: <CampaignBuilderPage />,
+          },
+          {
+            path: "marketing/surveys",
+            element: <SurveyPage />,
           },
           {
             path: "marketing/tools/segmentation",

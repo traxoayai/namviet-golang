@@ -25,6 +25,7 @@ export interface CartItem extends PosProductSearchResult {
   price: number;
   dosage: string;
   note?: string;
+  isGift?: boolean; // Hàng tặng không bán
 }
 
 export interface CartTotals {

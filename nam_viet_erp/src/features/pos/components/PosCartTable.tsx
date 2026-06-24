@@ -140,6 +140,7 @@ export const PosCartTable = () => {
           max={r.stock_quantity}
           value={v}
           size="large"
+          disabled={r.isGift}
           style={{ width: "100%", borderRadius: 8 }}
           onChange={(val) => updateQuantity(r.id, val || 1)}
         />
@@ -174,6 +175,7 @@ export const PosCartTable = () => {
           type="text"
           size="large"
           danger
+          disabled={r.isGift}
           icon={<DeleteOutlined style={{ fontSize: 18 }} />}
           onClick={() => removeFromCart(r.id)}
           style={{
