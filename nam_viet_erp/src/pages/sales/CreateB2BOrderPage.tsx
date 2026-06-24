@@ -365,7 +365,7 @@ const CreateB2BOrderPage = () => {
               uom: i.wholesale_unit,
               unit_price: i.price_wholesale,
               discount: i.discount || 0,
-              is_gift: false,
+              is_gift: !!i.isGift,
               note: "",
             })),
           });
@@ -386,6 +386,7 @@ const CreateB2BOrderPage = () => {
             // khi order_type='B2B'. FE chỉ gửi placeholder nhất quán.
             p_warehouse_id: DEFAULT_WAREHOUSE_ID,
             p_payment_method: paymentMethod,
+            p_voucher_code: selectedVoucher?.code || undefined,
             p_order_type: "B2B",
             p_items: verifiedItems.map((i) => ({
               product_id: i.id,
@@ -393,7 +394,7 @@ const CreateB2BOrderPage = () => {
               uom: i.wholesale_unit,
               unit_price: i.price_wholesale,
               discount: i.discount,
-              is_gift: false,
+              is_gift: !!i.isGift,
             })),
           });
 
