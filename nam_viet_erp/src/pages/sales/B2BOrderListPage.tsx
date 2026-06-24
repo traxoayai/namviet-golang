@@ -786,7 +786,7 @@ const B2BOrderListPage = ({
     return selectedOrders.every(
       (o: any) =>
         String(o.status).toUpperCase() === "CANCELLED" &&
-        String(o.payment_status).toLowerCase() === "unpaid"
+        o.payment_status !== "paid"
     );
   }, [selectedOrders]);
 
