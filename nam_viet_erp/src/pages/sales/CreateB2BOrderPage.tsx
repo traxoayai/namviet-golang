@@ -549,13 +549,12 @@ const CreateB2BOrderPage = () => {
       <Content
         style={{
           padding: "24px",
-          maxWidth: 1400,
           margin: "0 auto",
           width: "100%",
         }}
       >
         <Row gutter={24}>
-          <Col xs={24} lg={16} xl={17} xxl={18}>
+          <Col xs={24} lg={17} xl={18} xxl={19}>
             {/* KHỐI A: THÔNG TIN KHÁCH HÀNG */}
             <div style={{ marginBottom: 16 }}>
               {!customer ? (
@@ -613,7 +612,7 @@ const CreateB2BOrderPage = () => {
             />
           </Col>
 
-          <Col xs={24} lg={8} xl={7} xxl={6}>
+          <Col xs={24} lg={7} xl={6} xxl={5}>
             <div style={{ position: "sticky", top: 80 }}>
               {/* [NEW] HIỂN THỊ ALERT Ở ĐÂY (Thay vì trong nút bấm) */}
               {financials.isOverLimit ? (
