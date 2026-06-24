@@ -302,13 +302,16 @@ const CreateB2BOrderPage = () => {
           selectShippingPartner(orderData.shipping_partner_id);
 
         // [FIX] Khôi phục Voucher nếu có
-        if (orderData.voucher_code && customerData?.id) {
+        const voucherCode = (orderData as Record<string, unknown>).voucher_code as string | undefined;
+        if (voucherCode && customerData?.id) {
           try {
+            const orderTotal = (orderData as Record<string, unknown>).total_amount as number || 0;
             const availableVouchers = await salesService.getVouchers(
-              customerData.id
+              customerData.id,
+              orderTotal
             );
             const appliedVoucher = availableVouchers.find(
-              (v) => v.code === orderData.voucher_code
+              (v) => v.code === voucherCode
             );
             if (appliedVoucher) {
               setVoucher(appliedVoucher);
