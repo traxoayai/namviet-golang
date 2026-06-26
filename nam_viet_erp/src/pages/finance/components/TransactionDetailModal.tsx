@@ -34,6 +34,61 @@ dayjs.extend(timezone);
 
 const { Text } = Typography;
 
+/**
+ * Bảng tra cứu mã BIN NAPAS → Tên ngân hàng hiển thị.
+ * Nguồn: Danh sách ngân hàng Việt Nam chuẩn NAPAS / VietQR.
+ */
+const BIN_TO_BANK: Record<string, string> = {
+  "970436": "Vietcombank",
+  "970415": "VietinBank",
+  "970418": "BIDV",
+  "970405": "Agribank",
+  "970432": "VPBank",
+  "970407": "Techcombank",
+  "970458": "MB Bank",
+  "970422": "MBBank",
+  "970414": "OceanBank",
+  "970403": "Sacombank",
+  "970423": "TPBank",
+  "970448": "OCB",
+  "970454": "TienPhongBank",
+  "970440": "SeABank",
+  "970425": "ABBank",
+  "970437": "HDBank",
+  "970430": "PGBank",
+  "970441": "VIB",
+  "970443": "SHB",
+  "970444": "CBBank",
+  "970449": "LPBank",
+  "970452": "KienLongBank",
+  "970456": "BaoVietBank",
+  "970457": "Woori",
+  "970462": "VietBank",
+  "970431": "Eximbank",
+  "970428": "NamABank",
+  "970434": "Indovina Bank",
+  "970409": "BacABank",
+  "970424": "ShinhanBank",
+  "970406": "DongABank",
+  "970408": "GPBank",
+  "970411": "VietABank",
+  "970433": "VietCapitalBank",
+  "970426": "MSB",
+  "970429": "SCB",
+  "970419": "NCB",
+  "970460": "BVBank",
+  "546034": "Cake by VPBank",
+  "963388": "Timo by BVBank",
+  "970472": "LOTTE Finance",
+  "668888": "Momo",
+  "963666": "ZaloPay",
+};
+
+const getBankName = (bin?: string): string => {
+  if (!bin) return "---";
+  return BIN_TO_BANK[bin] || `Ngân hàng (BIN: ${bin})`;
+};
+
 interface Props {
   open: boolean;
   onCancel: () => void;
@@ -308,8 +363,7 @@ export const TransactionDetailModal: React.FC<Props> = ({
             >
               <div style={{ marginBottom: 8 }}>
                 <span style={{ color: "#888" }}>Ngân hàng:</span> <br />
-                <b>{bankInfo?.bin}</b>{" "}
-                {/* Nếu có tên NH thì hiển thị, tạm thời hiện BIN */}
+                <b>{getBankName(bankInfo?.bin)}</b>
               </div>
               <div style={{ marginBottom: 8 }}>
                 <span style={{ color: "#888" }}>Số tài khoản:</span> <br />

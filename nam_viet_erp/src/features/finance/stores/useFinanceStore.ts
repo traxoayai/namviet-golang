@@ -11,7 +11,6 @@ import {
 } from "@/features/finance/types/finance";
 import { FundAccountRecord } from "@/features/finance/types/fundAccount";
 import { supabase } from "@/shared/lib/supabaseClient";
-import { safeRpc } from "@/shared/lib/safeRpc";
 
 interface FinanceState {
   transactions: TransactionRecord[];
@@ -106,7 +105,6 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
   createTransaction: async (payload) => {
     set({ loading: true });
     try {
-      // 1. Gọi API tạo phiếu Hoàn ứng qua Backend Golang
       const { default: axiosClient } = await import("@/shared/utils/axiosClient");
       await axiosClient.post("/api/v1/finance/transactions", {
         amount: payload.p_amount,
@@ -115,6 +113,13 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
         fund_account_id: payload.p_fund_id,
         ref_id: payload.p_ref_id,
         ref_type: payload.p_ref_type,
+        // [MỚI] Các trường bổ sung từ spec BE v22
+        partner_type: (payload as any).partner_type,
+        partner_id: (payload as any).partner_id,
+        partner_name_cache: (payload as any).partner_name_cache,
+        business_type: (payload as any).business_type,
+        bank_reference_id: (payload as any).bank_reference_id,
+        target_bank_info: (payload as any).target_bank_info,
       });
 
       // 2. AURA FIX: Chủ động cập nhật trạng thái phiếu Tạm ứng cũ thành 'completed'
@@ -155,11 +160,14 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
     targetStatus: "approved" | "completed"
   ) => {
     try {
-      // Gọi RPC mới (Sếp nhớ nhắc CORE update RPC này nhận tham số p_status)
-      await safeRpc("confirm_finance_transaction", {
-        p_id: id,
-        p_target_status: targetStatus, // Truyền trạng thái mong muốn xuống
-      });
+      // Gọi đúng API Go theo luồng nghiệp vụ mới:
+      // - approved: chỉ dành Phiếu Chi (pending -> approved), CHƯ A trừ tiền
+      // - completed: dùng cho cả 2 loại, THỰC SỰ trừ/cộng tiền quỹ
+      if (targetStatus === "approved") {
+        await financeService.approveTransaction(id);
+      } else {
+        await financeService.completeTransaction(id);
+      }
 
       const msg =
         targetStatus === "approved" ? "Đã duyệt chi!" : "Giao dịch hoàn tất!";
@@ -172,14 +180,18 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
         ),
       }));
 
-      // Nếu là completed thì mới cập nhật lại số dư quỹ
+      // Nếu là completed thì cập nhật lại số dư quỹ
       if (targetStatus === "completed") {
         get().fetchFunds();
       }
 
       return true;
     } catch (err: any) {
-      message.error("Lỗi: " + err.message);
+      const errMsg =
+        err?.response?.data?.error ||
+        err?.message ||
+        "Lỗi xử lý phiếu";
+      message.error(errMsg);
       return false;
     }
   },

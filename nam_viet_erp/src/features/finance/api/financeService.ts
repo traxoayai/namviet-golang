@@ -169,4 +169,18 @@ export const financeService = {
       category_name: (data?.transaction_categories as any)?.name || "N/A",
     };
   },
+  // [NEW] Workflow: Duyệt Chi (chỉ dành cho Phiếu Chi flow='out')
+  // Chuyển trạng thái: pending -> approved
+  approveTransaction: async (id: number): Promise<void> => {
+    const axiosClient = (await import("@/shared/utils/axiosClient")).default;
+    await axiosClient.post(`/api/v1/finance/transactions/${id}/approve`);
+  },
+
+  // [NEW] Workflow: Hoàn Tất (xuất tiền / thu tiền)
+  // - Phiếu Chi: approved -> completed (trừ tiền quỹ)
+  // - Phiếu Thu: pending -> completed (cộng tiền quỹ)
+  completeTransaction: async (id: number): Promise<void> => {
+    const axiosClient = (await import("@/shared/utils/axiosClient")).default;
+    await axiosClient.post(`/api/v1/finance/transactions/${id}/complete`);
+  },
 };
