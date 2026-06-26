@@ -1,10 +1,10 @@
 import axiosClient from "@/shared/utils/axiosClient";
-import type { Employee, Shift, Payroll, CheckInResponse } from "../types/hrTypes";
+import type { Employee, Shift, Payroll, CheckInResponse, KpiTargetPayload, KpiMetric, KpiProgressResponse, KpiTarget } from "../types/hrTypes";
 
 export const hrService = {
-  getEmployees: async (page: number = 1, pageSize: number = 10) => {
+  getEmployees: async (page: number = 1, pageSize: number = 10, departmentId?: string) => {
     const response = await axiosClient.get("/api/v1/hr/employees", {
-      params: { page, page_size: pageSize },
+      params: { page, page_size: pageSize, ...(departmentId ? { department_id: departmentId } : {}) },
     });
     return response.data;
   },
@@ -34,5 +34,43 @@ export const hrService = {
       year,
     });
     return response.data;
+  },
+
+  // --- KPI APIs ---
+
+  /** Lấy danh sách chỉ số KPI (load động để hỗ trợ mở rộng tương lai) */
+  getKpiMetrics: async (): Promise<KpiMetric[]> => {
+    try {
+      const response = await axiosClient.get("/api/v1/hr/kpi-metrics");
+      return response.data;
+    } catch {
+      // Fallback cứng nếu API chưa sẵn sàng
+      return [
+        { code: "SALES_REVENUE", name: "Doanh thu bán hàng", unit: "VNĐ" },
+        { code: "LOGISTICS_COD", name: "Tổng tiền thu hộ COD", unit: "VNĐ" },
+        { code: "LOGISTICS_ORDER_COUNT", name: "Số đơn giao thành công", unit: "Đơn" },
+      ];
+    }
+  },
+
+  /** Giao KPI cho nhân viên — POST /api/v1/hr/kpi-targets */
+  assignKpiTarget: async (payload: KpiTargetPayload): Promise<void> => {
+    await axiosClient.post("/api/v1/hr/kpi-targets", payload);
+  },
+
+  /** Lấy tiến độ KPI cá nhân (dựa trên JWT) */
+  getMyKpiProgress: async (month: number, year: number): Promise<KpiProgressResponse> => {
+    const response = await axiosClient.get("/api/v1/hr/kpi-progress/me", {
+      params: { month, year },
+    });
+    return response.data;
+  },
+
+  /** Lấy danh sách KPI đã giao cho 1 nhân viên (trên trang chi tiết) */
+  getKpiTargetsByEmployee: async (employeeId: string, month: number, year: number): Promise<KpiTarget[]> => {
+    const response = await axiosClient.get(`/api/v1/hr/kpi-targets`, {
+      params: { employee_id: employeeId, month, year },
+    });
+    return response.data ?? [];
   },
 };

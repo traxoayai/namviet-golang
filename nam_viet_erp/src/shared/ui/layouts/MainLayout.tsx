@@ -513,6 +513,11 @@ const finalMenuItems: MenuItem[] = [
         <StockOutlined />
       ),
       getItem(
+        <Link to="/hr/kpi-assignments">🎯 Giao Chỉ Tiêu KPI</Link>,
+        "/hr/kpi-assignments",
+        <AimOutlined />
+      ),
+      getItem(
         <Link to="/hr/payroll">Quản lý Lương & Chế Độ</Link>,
         "/hr/payroll",
         <DollarCircleOutlined />

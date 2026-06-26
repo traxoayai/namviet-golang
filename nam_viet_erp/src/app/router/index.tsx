@@ -41,6 +41,7 @@ import EmployeeListPage from "@/pages/hr/EmployeeListPage";
 import EmployeeDetailPage from "@/pages/hr/EmployeeDetailPage";
 import AttendancePage from "@/pages/hr/AttendancePage";
 import PayrollPage from "@/pages/hr/PayrollPage";
+import KpiAssignmentPage from "@/pages/hr/KpiAssignmentPage"; // [NEW] KPI Engine
 import CostAdjustmentPage from "@/pages/inventory/cost-adjustment/CostAdjustmentPage";
 import WarehouseOutboundDetailPage from "@/pages/inventory/outbound/WarehouseOutboundDetailPage";
 import WarehouseOutboundPage from "@/pages/inventory/outbound/WarehouseOutboundPage";
@@ -705,6 +706,10 @@ const routes: RouteObject[] = [
           {
             path: "hr/kpi",
             element: <TaskKanbanPage />,
+          },
+          {
+            path: "hr/kpi-assignments", // [NEW] Trang giao chỉ tiêu KPI
+            element: <KpiAssignmentPage />,
           },
           {
             path: "hr/payroll",
