@@ -7,8 +7,14 @@ import {
 
 import { safeRpc } from "@/shared/lib/safeRpc";
 import { supabase } from "@/shared/lib/supabaseClient";
+import axiosClient from "@/shared/utils/axiosClient"; // [NEW]
 
 export const b2bService = {
+  markDelivered: async (id: string) => {
+    const response = await axiosClient.post(`/api/v1/orders/${id}/mark-delivered`);
+    return response.data;
+  },
+
   getOrderDetail: async (id: string): Promise<B2BOrderDetail> => {
     const { data, error } = await supabase
       .from("orders")

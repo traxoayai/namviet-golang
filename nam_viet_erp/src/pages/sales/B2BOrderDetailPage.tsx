@@ -749,10 +749,23 @@ const B2BOrderDetailPage = () => {
 
           {order?.status === "SHIPPING" && (
             <Button
-              onClick={() => handleUpdateStatus("DELIVERED")}
+              onClick={async () => {
+                if (!id) return;
+                try {
+                  setActionLoading(true);
+                  await b2bService.markDelivered(id);
+                  message.success("Đã đánh dấu giao hàng thành công!");
+                  fetchOrder(id);
+                } catch (error: any) {
+                  message.error(error.message || "Lỗi cập nhật trạng thái");
+                } finally {
+                  setActionLoading(false);
+                }
+              }}
               type="primary"
+              loading={actionLoading}
             >
-              Hoàn tất đơn
+              Đã giao cho Khách hàng / Đơn vị VC
             </Button>
           )}
 
