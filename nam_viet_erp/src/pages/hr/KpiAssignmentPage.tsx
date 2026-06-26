@@ -37,6 +37,15 @@ interface KpiRow {
 const MONTHS = Array.from({ length: 12 }, (_, i) => ({ label: `Tháng ${i + 1}`, value: i + 1 }));
 const YEARS = [2024, 2025, 2026, 2027].map((y) => ({ label: `${y}`, value: y }));
 
+const getKpiUnit = (code: string) => {
+  if (!code) return "";
+  if (["SALES_REVENUE", "LOGISTICS_COD", "B2B_PAID_REVENUE", "B2B_AOV"].includes(code)) return "VNĐ";
+  if (["LOGISTICS_ORDER_COUNT"].includes(code)) return "Đơn";
+  if (["B2B_DSO"].includes(code)) return "Ngày";
+  if (["LOGISTICS_SLA_4H", "LOGISTICS_COD_48H", "B2B_RETENTION", "B2B_GROSS_MARGIN", "WH_MINMAX_COMPLIANCE", "WH_AGING_STOCK"].includes(code)) return "%";
+  return "";
+};
+
 const KpiAssignmentPage: React.FC = () => {
   const { profile, permissions } = useAuthStore();
   const userProfile = profile as any;
@@ -74,10 +83,13 @@ const KpiAssignmentPage: React.FC = () => {
 
   const metricOptions = useMemo(
     () =>
-      metrics.map((m: KpiMetric) => ({
-        label: m.unit ? `${m.name} (${m.unit})` : m.name,
-        value: m.code,
-      })),
+      metrics.map((m: KpiMetric) => {
+        const unit = m.unit || getKpiUnit(m.code);
+        return {
+          label: unit ? `${m.name} (${unit})` : m.name,
+          value: m.code,
+        };
+      }),
     [metrics]
   );
 
@@ -205,8 +217,9 @@ const KpiAssignmentPage: React.FC = () => {
             value={record.target_value ?? undefined}
             formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             parser={(v) => Number(v?.replace(/,/g, "")) as any}
-            addonAfter={metric?.unit || ""}
+            addonAfter={metric?.unit || getKpiUnit(record.metric_code)}
             onChange={(val) => updateRow(record.key, "target_value", val)}
+            placeholder={getKpiUnit(record.metric_code) === "%" ? "VD: 95" : "VD: 100000"}
           />
         );
       },
