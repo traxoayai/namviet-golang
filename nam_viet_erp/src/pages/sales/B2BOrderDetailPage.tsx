@@ -42,6 +42,7 @@ import { usePickingListPrint } from "@/features/sales/hooks/usePickingListPrint"
 import { logisticsService } from "@/features/logistics/api/logisticsService"; // [NEW]
 import { B2BOrderDetail } from "@/features/sales/types/b2b.types";
 import { FinanceFormModal } from "@/pages/finance/components/FinanceFormModal";
+import { useAuthStore } from "@/features/auth/stores/useAuthStore"; // [NEW]
 import {
   B2B_STATUS_COLOR,
   B2B_STATUS_LABEL,
@@ -55,6 +56,8 @@ const B2BOrderDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const screens = useBreakpoint();
+  const { profile, permissions } = useAuthStore(); // [NEW]
+  const userProfile = profile as any;
   const { printOrder } = useOrderPrint(); // [NEW]
   const { printById: printPicking, printData: pickingData } =
     usePickingListPrint(); // [NEW]
@@ -63,6 +66,10 @@ const B2BOrderDetailPage = () => {
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
   const [financeModalOpen, setFinanceModalOpen] = useState(false);
+
+  const isAdmin = permissions?.includes("admin-all") || permissions?.includes("portal.manage") || userProfile?.role_id != null;
+  const isDeliveryStaff = order ? userProfile?.id === order.delivery_staff_id : false;
+  const canDeliveryAction = isAdmin || isDeliveryStaff;
 
   useEffect(() => {
     if (id) {
@@ -747,7 +754,7 @@ const B2BOrderDetailPage = () => {
             </Button>
           )} */}
 
-          {order?.status === "SHIPPING" && (
+          {order?.status === "SHIPPING" && canDeliveryAction && (
             <Button
               onClick={async () => {
                 if (!id) return;
@@ -766,6 +773,31 @@ const B2BOrderDetailPage = () => {
               loading={actionLoading}
             >
               Đã giao cho Khách hàng / Đơn vị VC
+            </Button>
+          )}
+
+          {/* Nút Nhận COD */}
+          {order?.status === "DELIVERED" && order?.delivery_method === "cod" && order?.payment_status !== "paid" && canDeliveryAction && (
+            <Button
+              onClick={handleMarkCodPaid}
+              type="primary"
+              style={{ backgroundColor: "#52c41a" }}
+              icon={<DollarOutlined />}
+              loading={actionLoading}
+            >
+              Đã Nhận Đủ Tiền Mặt (COD)
+            </Button>
+          )}
+
+          {order?.status === "DELIVERED" && order?.delivery_method === "cod" && order?.payment_status === "paid" && canDeliveryAction && (
+            <Button
+              onClick={handleRollbackCod}
+              type="default"
+              danger
+              icon={<StopOutlined />}
+              loading={actionLoading}
+            >
+              Hủy Nhận Tiền Mặt (Rollback)
             </Button>
           )}
 
