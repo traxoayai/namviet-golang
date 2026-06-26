@@ -88,4 +88,7 @@ export const PERMISSIONS = {
     VIEW: "portal.view",
     MANAGE: "portal.manage",
   },
+  HR: {
+    ASSIGN_KPI: "hr.assign_kpi",
+  },
 };

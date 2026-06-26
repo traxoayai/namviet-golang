@@ -7,6 +7,7 @@ import {
   AccountBookOutlined,
   SettingOutlined,
   ThunderboltOutlined, // [NEW]
+  TeamOutlined,
 } from "@ant-design/icons";
 import { create } from "zustand";
 
@@ -29,6 +30,7 @@ const MODULE_CONFIG: Record<string, { label: string; icon: React.ReactNode }> =
     marketing: { label: "Marketing & Nội dung", icon: <ShopOutlined /> }, // [NEW]
     order: { label: "Đơn Hàng", icon: <AccountBookOutlined /> }, // [NEW]
     quick: { label: "Thao Tác Nhanh", icon: <ThunderboltOutlined /> }, // [NEW]
+    hr: { label: "Nhân Sự", icon: <TeamOutlined /> },
   };
 
 // 2. Cấu hình Highlight (QUAN TRỌNG)

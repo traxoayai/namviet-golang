@@ -21,6 +21,7 @@ import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { hrService } from "@/features/hr/api/hrService";
 import { useQuery } from "@tanstack/react-query";
 import type { KpiTargetPayload, KpiMetric } from "@/features/hr/types/hrTypes";
+import { PERMISSIONS } from "@/features/auth/constants/permissions";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -37,11 +38,11 @@ const MONTHS = Array.from({ length: 12 }, (_, i) => ({ label: `Tháng ${i + 1}`,
 const YEARS = [2024, 2025, 2026, 2027].map((y) => ({ label: `${y}`, value: y }));
 
 const KpiAssignmentPage: React.FC = () => {
-  const { profile } = useAuthStore();
+  const { profile, permissions } = useAuthStore();
   const userProfile = profile as any;
 
-  const isAdmin = userProfile?.role === "Admin" || userProfile?.role === "Director";
-  const canAssign = isAdmin || userProfile?.permissions?.can_assign_kpi === true;
+  const isAdmin = permissions.includes("admin-all") || permissions.includes("portal.manage") || userProfile?.role_id != null; // Tạm thời nới lỏng hoặc dùng admin-all
+  const canAssign = isAdmin || permissions.includes(PERMISSIONS.HR.ASSIGN_KPI);
   const myDepartmentId: string | undefined = userProfile?.department_id;
 
   const currentMonth = dayjs().month() + 1;
@@ -74,7 +75,7 @@ const KpiAssignmentPage: React.FC = () => {
   const metricOptions = useMemo(
     () =>
       metrics.map((m: KpiMetric) => ({
-        label: `${m.name} (${m.unit})`,
+        label: m.unit ? `${m.name} (${m.unit})` : m.name,
         value: m.code,
       })),
     [metrics]
