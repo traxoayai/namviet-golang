@@ -287,22 +287,15 @@ const SupplierProductMappingTab: React.FC<SupplierProductMappingTabProps> = ({
           key: "ai_mapping",
         });
 
-        // RPC chưa được khai báo trong generated types -> cast tạm thời qua unknown.
-        // Sau khi `npm run typegen` được chạy, có thể đổi sang gọi trực tiếp.
-        const rpcCall = supabase.rpc as unknown as (
-          fn: string,
-          args: { p_vendor_id: number; p_items: RpcItemPayload[] }
-        ) => Promise<{
-          data: RpcMappingResult[] | null;
-          error: { message: string } | null;
-        }>;
-        const { data: rpcData, error } = await rpcCall(
+        // Tránh mất context 'this' của supabase khi gọi rpc
+        const { data: rpcDataRaw, error } = await supabase.rpc(
           "map_scanned_invoice_products",
           {
             p_vendor_id: vendorId,
-            p_items: itemsForRpc,
+            p_items: itemsForRpc as any,
           }
         );
+        const rpcData = rpcDataRaw as RpcMappingResult[] | null;
 
         if (error) throw error;
 
