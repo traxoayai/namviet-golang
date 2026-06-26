@@ -33,6 +33,7 @@ func SetupRoutes(
 	hrPayrollsHandler *handlers.HRPayrollsHandler,
 	medicalDictHandler *handlers.MedicalDictHandler,
 	marketingHandler *handlers.MarketingHandler,
+	hrKpiHandler *handlers.HRKPIHandler,
 ) {
 	gdtHandler := handlers.NewGdtHandler(gdtService, gdtWorker)
 
@@ -68,6 +69,8 @@ func SetupRoutes(
 		finance.Use(middleware.SupabaseAuthMiddleware())
 		{
 			finance.POST("/transactions", financeHandler.CreateTransaction)
+			finance.POST("/transactions/:id/approve", financeHandler.ApproveTransaction)
+			finance.POST("/transactions/:id/complete", financeHandler.CompleteTransaction)
 			finance.POST("/vat-allocation", financeHandler.AllocateVATInvoice)
 			finance.GET("/pending-cod-reports", financeHandler.GetPendingCODReports)
 			finance.POST("/confirm-cod-deposit", financeHandler.ConfirmCODDeposit)
@@ -132,6 +135,9 @@ func SetupRoutes(
 			hr.POST("/shifts/register", hrWorkShiftsHandler.RegisterShift)
 			hr.POST("/shifts/check-in", hrWorkShiftsHandler.CheckIn)
 			hr.POST("/employees/:id/payroll/calculate", hrPayrollsHandler.CalculatePayroll)
+			hr.POST("/kpi-targets", hrKpiHandler.AssignKPI)
+			hr.GET("/kpi-progress/me", hrKpiHandler.GetMyKPIProgress)
+			hr.GET("/kpi-metrics", hrKpiHandler.GetAllMetrics)
 		}
 
 		// Medical Dictionary

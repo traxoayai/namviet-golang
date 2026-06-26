@@ -13,6 +13,11 @@ type FinanceRepository interface {
 	GetInvoiceByID(ctx context.Context, tx *gorm.DB, invoiceID int64) (*domain.FinanceInvoice, error)
 	UpdateInvoicePaidAmount(ctx context.Context, tx *gorm.DB, invoiceID int64, paidAmount float64, status string) error
 	GetUnbilledOrderItems(ctx context.Context, tx *gorm.DB, customerID int64) ([]domain.OrderItem, error)
+
+	GetTransactionByID(ctx context.Context, tx *gorm.DB, id int64) (*domain.FinanceTransaction, error)
+	UpdateTransaction(ctx context.Context, tx *gorm.DB, trans *domain.FinanceTransaction) error
+	UpdateFundAccountBalance(ctx context.Context, tx *gorm.DB, fundAccountID int64, amount float64, flow string) error
+	UpdateOrderPaymentStatus(ctx context.Context, tx *gorm.DB, refType, orderID string) error
 }
 
 type financeRepository struct{}
@@ -52,4 +57,32 @@ func (r *financeRepository) GetUnbilledOrderItems(ctx context.Context, tx *gorm.
 		Where("orders.customer_id = ? AND order_items.id NOT IN (SELECT order_item_id FROM finance_invoice_items WHERE order_item_id IS NOT NULL)", customerID).
 		Find(&items).Error
 	return items, err
+}
+
+func (r *financeRepository) GetTransactionByID(ctx context.Context, tx *gorm.DB, id int64) (*domain.FinanceTransaction, error) {
+	var trans domain.FinanceTransaction
+	err := tx.WithContext(ctx).Where("id = ?", id).First(&trans).Error
+	return &trans, err
+}
+
+func (r *financeRepository) UpdateTransaction(ctx context.Context, tx *gorm.DB, trans *domain.FinanceTransaction) error {
+	return tx.WithContext(ctx).Save(trans).Error
+}
+
+func (r *financeRepository) UpdateFundAccountBalance(ctx context.Context, tx *gorm.DB, fundAccountID int64, amount float64, flow string) error {
+	op := "+"
+	if flow == "out" {
+		op = "-"
+	}
+	return tx.WithContext(ctx).Exec("UPDATE fund_accounts SET balance = balance "+op+" ? WHERE id = ?", amount, fundAccountID).Error
+}
+
+func (r *financeRepository) UpdateOrderPaymentStatus(ctx context.Context, tx *gorm.DB, refType, orderID string) error {
+	// refType expects ORDER or PURCHASE_ORDER
+	if refType == "ORDER" {
+		return tx.WithContext(ctx).Exec("UPDATE orders SET payment_status = 'paid' WHERE id = ?", orderID).Error
+	} else if refType == "PURCHASE_ORDER" {
+		return tx.WithContext(ctx).Exec("UPDATE purchase_orders SET payment_status = 'paid' WHERE id = ?", orderID).Error
+	}
+	return nil
 }

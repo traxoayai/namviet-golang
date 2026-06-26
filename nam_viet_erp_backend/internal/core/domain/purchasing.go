@@ -102,7 +102,7 @@ type PurchaseOrderDetailDTO struct {
 	Note           string                       `json:"note"`
 	CreatedAt      time.Time                    `json:"created_at"`
 	UpdatedAt      time.Time                    `json:"updated_at"`
-	Items          []PurchaseOrderItemDetailDTO `json:"items"`
+	Items          []PurchaseOrderItemDetailDTO `json:"items" gorm:"-"`
 }
 
 type PurchaseOrderItemDetailDTO struct {

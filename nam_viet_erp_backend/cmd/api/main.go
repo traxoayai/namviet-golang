@@ -108,8 +108,12 @@ func main() {
 	mktWorker := workers.NewMarketingWorker(db, jobRepo, mktRepo)
 	go mktWorker.Start(context.Background())
 
+	hrKpiRepo := postgres.NewHRKPIRepository(db)
+	hrKpiSvc := services.NewHRKPIService(hrKpiRepo)
+	hrKpiHandler := handlers.NewHRKPIHandler(hrKpiSvc, db)
+
 	// Setup Routes
-	routes.SetupRoutes(r, db, gdtWorker, gdtService, invHandler, orderHandler, financeHandler, crmHandler, clinicHandler, wsHandler, promoHandler, purchHandler, logisHandler, aiHandler, hrEmpHandler, hrShiftHandler, hrPayrollHandler, medDictHandler, mktHandler)
+	routes.SetupRoutes(r, db, gdtWorker, gdtService, invHandler, orderHandler, financeHandler, crmHandler, clinicHandler, wsHandler, promoHandler, purchHandler, logisHandler, aiHandler, hrEmpHandler, hrShiftHandler, hrPayrollHandler, medDictHandler, mktHandler, hrKpiHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {

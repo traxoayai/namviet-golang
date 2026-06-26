@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+	"errors"
 
 	"github.com/namvieterp/backend/internal/core/domain"
 	"gorm.io/gorm"
@@ -12,6 +13,7 @@ type PromotionRepository interface {
 	GetPromotionByCodeWithLock(ctx context.Context, tx *gorm.DB, code string) (*domain.Promotion, error)
 	GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
 	GetPromotionsByCodesWithLock(ctx context.Context, tx *gorm.DB, codes []string) ([]domain.Promotion, error)
+	IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error
 }
 
 type promotionRepository struct{}
@@ -53,4 +55,18 @@ func (r *promotionRepository) GetActiveAdvancedPromotions(ctx context.Context, t
 		return nil, err
 	}
 	return promos, nil
+}
+
+// IncrementUsageCount tăng usage_count lên 1 một cách atomic, an toàn cho concurrent requests
+func (r *promotionRepository) IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error {
+	result := tx.WithContext(ctx).Model(&domain.Promotion{}).
+		Where("code = ?", code).
+		UpdateColumn("usage_count", gorm.Expr("usage_count + 1"))
+	if result.Error != nil {
+		return result.Error
+	}
+	if result.RowsAffected == 0 {
+		return errors.New("không tìm thấy mã khuyến mãi để cập nhật")
+	}
+	return nil
 }

@@ -1,7 +1,10 @@
 package domain
 
-import "time"
-
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
 // FinanceTransaction represents cash/bank flow
 type FinanceTransaction struct {
 	ID              int64     `json:"id" gorm:"primaryKey"`
@@ -13,9 +16,16 @@ type FinanceTransaction struct {
 	RefType         string    `json:"ref_type"`
 	RefID           string    `json:"ref_id"`
 	Description     string    `json:"description"`
-	Status          string    `json:"status"` // pending, completed
-	CreatedBy       string    `json:"created_by"`
-	CreatedAt       time.Time `json:"created_at"`
+	Status           string                 `json:"status"` // pending, completed
+	CreatedBy        string                 `json:"created_by"`
+	CreatedAt        time.Time              `json:"created_at"`
+	PartnerType      string                 `json:"partner_type" gorm:"column:partner_type"`
+	PartnerID        string                 `json:"partner_id" gorm:"column:partner_id"`
+	PartnerNameCache string                 `json:"partner_name_cache" gorm:"column:partner_name_cache"`
+	TargetBankInfo   map[string]interface{} `json:"target_bank_info" gorm:"type:jsonb;column:target_bank_info"`
+	BankReferenceID  string                 `json:"bank_reference_id" gorm:"column:bank_reference_id"`
+	BusinessType     string                 `json:"business_type" gorm:"column:business_type"`
+	IsPosted         bool                   `json:"is_posted" gorm:"column:is_posted"`
 }
 
 func (FinanceTransaction) TableName() string {
@@ -54,9 +64,41 @@ type CreateTransactionRequest struct {
 	Flow          string  `json:"flow" binding:"required"`
 	Amount        float64 `json:"amount" binding:"required,gt=0"`
 	FundAccountID int64   `json:"fund_account_id" binding:"required"`
-	RefType       string  `json:"ref_type"`
-	RefID         string  `json:"ref_id"`
-	Description   string  `json:"description"`
+	RefType          string                 `json:"ref_type"`
+	RefID            string                 `json:"ref_id"`
+	Description      string                 `json:"description"`
+	PartnerType      string                 `json:"partner_type"`
+	PartnerID        string                 `json:"partner_id"`
+	PartnerNameCache string                 `json:"partner_name_cache"`
+	TargetBankInfo   map[string]interface{} `json:"target_bank_info"`
+	BankReferenceID  string                 `json:"bank_reference_id"`
+	BusinessType     string                 `json:"business_type"`
+}
+
+// UnmarshalJSON handles dynamic typing for RefID (string or number)
+func (r *CreateTransactionRequest) UnmarshalJSON(data []byte) error {
+	type Alias CreateTransactionRequest
+	aux := &struct {
+		RefID interface{} `json:"ref_id"`
+		*Alias
+	}{
+		Alias: (*Alias)(r),
+	}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	if aux.RefID != nil {
+		switch v := aux.RefID.(type) {
+		case string:
+			r.RefID = v
+		case float64:
+			// format float without decimals since PO ID is an integer
+			r.RefID = fmt.Sprintf("%.0f", v)
+		default:
+			r.RefID = fmt.Sprintf("%v", v)
+		}
+	}
+	return nil
 }
 
 // VATAllocationRequest payload

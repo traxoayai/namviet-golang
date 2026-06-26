@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -139,4 +140,64 @@ func (h *FinanceHandler) ConfirmCODDeposit(c *gin.Context) {
 
 	tx.Commit()
 	c.JSON(http.StatusOK, gin.H{"message": "Xác nhận nộp tiền thành công"})
+}
+
+// ApproveTransaction godoc
+// @Summary Duyệt chi
+// @Description Chuyển trạng thái phiếu chi từ pending sang approved
+// @Tags Finance
+// @Accept json
+// @Produce json
+// @Param id path int true "Transaction ID"
+// @Success 200 {object} map[string]interface{}
+// @Router /api/v1/finance/transactions/{id}/approve [post]
+func (h *FinanceHandler) ApproveTransaction(c *gin.Context) {
+	idStr := c.Param("id")
+	var transactionID int64
+	if _, err := fmt.Sscanf(idStr, "%d", &transactionID); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID không hợp lệ"})
+		return
+	}
+
+	userID := c.GetString("user_id")
+	tx := h.db.Begin()
+
+	if err := h.financeSvc.ApproveTransaction(c.Request.Context(), tx, transactionID, userID); err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, gin.H{"message": "Duyệt phiếu thành công"})
+}
+
+// CompleteTransaction godoc
+// @Summary Xác nhận thu/chi tiền
+// @Description Hoàn tất phiếu, trừ/cộng tiền vào quỹ, cập nhật payment_status cho đơn hàng
+// @Tags Finance
+// @Accept json
+// @Produce json
+// @Param id path int true "Transaction ID"
+// @Success 200 {object} map[string]interface{}
+// @Router /api/v1/finance/transactions/{id}/complete [post]
+func (h *FinanceHandler) CompleteTransaction(c *gin.Context) {
+	idStr := c.Param("id")
+	var transactionID int64
+	if _, err := fmt.Sscanf(idStr, "%d", &transactionID); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID không hợp lệ"})
+		return
+	}
+
+	userID := c.GetString("user_id")
+	tx := h.db.Begin()
+
+	if err := h.financeSvc.CompleteTransaction(c.Request.Context(), tx, transactionID, userID); err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	tx.Commit()
+	c.JSON(http.StatusOK, gin.H{"message": "Hoàn tất phiếu thành công"})
 }

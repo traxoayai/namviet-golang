@@ -14,6 +14,7 @@ import (
 type PromotionService interface {
 	VerifyVoucher(ctx context.Context, tx *gorm.DB, req domain.VerifyPromotionRequest) (*domain.VerifyPromotionResponse, error)
 	GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
+	IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error
 }
 
 type promotionService struct {
@@ -51,8 +52,8 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		if now.Before(promo.ValidFrom) {
 			return nil, errors.New("Mã giảm giá chưa đến giờ áp dụng.")
 		}
-		if promo.UsageCount >= promo.TotalUsageLimit && promo.TotalUsageLimit > 0 {
-			return nil, errors.New("mã " + promo.Code + " đã hết lượt sử dụng")
+		if promo.TotalUsageLimit > 0 && promo.UsageCount >= promo.TotalUsageLimit {
+			return nil, errors.New("Mã giảm giá đã đạt giới hạn số lượt sử dụng.")
 		}
 		if promo.Type == "personal" {
 			if promo.CustomerID == nil || *promo.CustomerID != req.CustomerID {
@@ -238,6 +239,10 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 	res.FinalAmount = subtotal
 
 	return res, nil
+}
+
+func (s *promotionService) IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error {
+	return s.repo.IncrementUsageCount(ctx, tx, code)
 }
 
 func (s *promotionService) GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {

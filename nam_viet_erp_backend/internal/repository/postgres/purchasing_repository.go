@@ -129,8 +129,8 @@ func (r *purchasingRepository) GetPurchaseOrderDetails(ctx context.Context, tx *
 			poi.conversion_factor,
 			poi.base_quantity,
 			false as is_bonus,
-			(SELECT COALESCE(SUM(stock_quantity), 0) FROM product_inventory WHERE product_id = p.id) as total_stock,
-			COALESCE(
+			ROUND((SELECT COALESCE(SUM(stock_quantity), 0) FROM product_inventory WHERE product_id = p.id) / COALESCE(NULLIF(poi.conversion_factor, 0), 1), 1) as total_stock,
+			ROUND(COALESCE(
 				(
 					SELECT ROUND(SUM(oi.quantity * COALESCE(oi.conversion_factor, 1)) / 3.0, 1)
 					FROM order_items oi
@@ -139,7 +139,7 @@ func (r *purchasingRepository) GetPurchaseOrderDetails(ctx context.Context, tx *
 					  AND o.status NOT IN ('CANCELLED', 'DRAFT')
 					  AND o.created_at >= NOW() - INTERVAL '3 months'
 				), 0
-			) as avg_monthly_sold
+			) / COALESCE(NULLIF(poi.conversion_factor, 0), 1), 1) as avg_monthly_sold
 		FROM purchase_order_items poi
 		JOIN products p ON poi.product_id = p.id
 		WHERE poi.po_id = ?

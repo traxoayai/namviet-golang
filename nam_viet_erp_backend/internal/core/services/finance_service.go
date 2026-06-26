@@ -18,6 +18,9 @@ type FinanceService interface {
 	AllocateVATInvoice(ctx context.Context, tx *gorm.DB, req domain.VATAllocationRequest) ([]domain.OrderItem, error)
 	GetPendingCODReports(ctx context.Context, db *gorm.DB) ([]domain.CODPendingReport, error)
 	ConfirmCODDeposit(ctx context.Context, tx *gorm.DB, shipperID string, transactionIDs []int64) error
+
+	ApproveTransaction(ctx context.Context, tx *gorm.DB, transactionID int64, userID string) error
+	CompleteTransaction(ctx context.Context, tx *gorm.DB, transactionID int64, userID string) error
 }
 
 type financeService struct {
@@ -67,14 +70,22 @@ func (s *financeService) CreateTransaction(ctx context.Context, tx *gorm.DB, req
 
 		// Tạo phiếu chính
 		transMain := &domain.FinanceTransaction{
-			Code:          fmt.Sprintf("TX-%d", time.Now().UnixNano()),
-			Flow:          req.Flow,
-			Amount:        mainAmount,
-			FundAccountID: req.FundAccountID,
-			RefType:       req.RefType,
-			RefID:         req.RefID,
-			Description:   "Thanh toán hóa đơn chính",
-			Status:        "completed",
+			Code:             fmt.Sprintf("TX-%d", time.Now().UnixNano()),
+			Flow:             req.Flow,
+			Amount:           mainAmount,
+			FundAccountID:    req.FundAccountID,
+			RefType:          req.RefType,
+			RefID:            req.RefID,
+			Description:      "Thanh toán hóa đơn chính",
+			Status:           "pending",
+			CreatedBy:        userID,
+			PartnerType:      req.PartnerType,
+			PartnerID:        req.PartnerID,
+			PartnerNameCache: req.PartnerNameCache,
+			TargetBankInfo:   req.TargetBankInfo,
+			BankReferenceID:  req.BankReferenceID,
+			BusinessType:     req.BusinessType,
+			IsPosted:         false,
 		}
 		if err := s.repo.CreateTransaction(ctx, tx, transMain); err != nil {
 			return err
@@ -83,44 +94,53 @@ func (s *financeService) CreateTransaction(ctx context.Context, tx *gorm.DB, req
 		// Tạo phiếu phụ nếu có chênh lệch
 		if subAmount > 0 {
 			transSub := &domain.FinanceTransaction{
-				Code:          fmt.Sprintf("TX-SUB-%d", time.Now().UnixNano()),
-				Flow:          req.Flow,
-				Amount:        subAmount,
-				FundAccountID: req.FundAccountID,
-				RefType:       "OVERPAYMENT",
-				RefID:         req.RefID,
-				Description:   "Tiền thừa/chênh lệch thanh toán",
-				Status:        "completed",
+				Code:             fmt.Sprintf("TX-SUB-%d", time.Now().UnixNano()),
+				Flow:             req.Flow,
+				Amount:           subAmount,
+				FundAccountID:    req.FundAccountID,
+				RefType:          "OVERPAYMENT",
+				RefID:            req.RefID,
+				Description:      "Tiền thừa/chênh lệch thanh toán",
+				Status:           "pending",
+				CreatedBy:        userID,
+				PartnerType:      req.PartnerType,
+				PartnerID:        req.PartnerID,
+				PartnerNameCache: req.PartnerNameCache,
+				TargetBankInfo:   req.TargetBankInfo,
+				BankReferenceID:  req.BankReferenceID,
+				BusinessType:     req.BusinessType,
+				IsPosted:         false,
 			}
 			if err := s.repo.CreateTransaction(ctx, tx, transSub); err != nil {
 				return err
 			}
 		}
 
-		// Cập nhật trạng thái Hóa đơn
-		newPaid := invoice.PaidAmount + mainAmount
-		status := "PARTIAL"
-		if newPaid >= invoice.TotalAmountPostTax {
-			status = "PAID"
-		}
-		if err := s.repo.UpdateInvoicePaidAmount(ctx, tx, invoice.ID, newPaid, status); err != nil {
-			return err
-		}
-	} else {
-		// Non-Invoice transactions
-		trans := &domain.FinanceTransaction{
-			Code:          fmt.Sprintf("TX-GEN-%d", time.Now().UnixNano()),
-			Flow:          req.Flow,
-			Amount:        req.Amount,
-			FundAccountID: req.FundAccountID,
-			RefType:       req.RefType,
-			RefID:         req.RefID,
-			Description:   req.Description,
-			Status:        "completed",
-		}
-		if err := s.repo.CreateTransaction(ctx, tx, trans); err != nil {
-			return err
-		}
+		return nil
+	}
+
+	// Normal flow (Not INVOICE)
+	trans := &domain.FinanceTransaction{
+		Code:             fmt.Sprintf("TX-%d", time.Now().UnixNano()),
+		Flow:             req.Flow,
+		Amount:           req.Amount,
+		FundAccountID:    req.FundAccountID,
+		RefType:          req.RefType,
+		RefID:            req.RefID,
+		Description:      req.Description,
+		Status:           "pending",
+		CreatedBy:        userID,
+		PartnerType:      req.PartnerType,
+		PartnerID:        req.PartnerID,
+		PartnerNameCache: req.PartnerNameCache,
+		TargetBankInfo:   req.TargetBankInfo,
+		BankReferenceID:  req.BankReferenceID,
+		BusinessType:     req.BusinessType,
+		IsPosted:         false,
+	}
+
+	if err := s.repo.CreateTransaction(ctx, tx, trans); err != nil {
+		return err
 	}
 
 	return nil
@@ -227,6 +247,76 @@ func (s *financeService) ConfirmCODDeposit(ctx context.Context, tx *gorm.DB, shi
 	}
 	if res.RowsAffected == 0 {
 		return errors.New("không có giao dịch nào được xác nhận (có thể đã được xác nhận hoặc sai shipper)")
+	}
+
+	return nil
+}
+
+func (s *financeService) ApproveTransaction(ctx context.Context, tx *gorm.DB, transactionID int64, userID string) error {
+	trans, err := s.repo.GetTransactionByID(ctx, tx, transactionID)
+	if err != nil {
+		return fmt.Errorf("không tìm thấy giao dịch: %v", err)
+	}
+
+	if trans.Flow != "out" {
+		return errors.New("Phiếu thu không cần qua bước Duyệt, vui lòng thu tiền trực tiếp")
+	}
+
+	if trans.Status != "pending" {
+		return fmt.Errorf("không thể duyệt phiếu ở trạng thái: %s", trans.Status)
+	}
+
+	trans.Status = "approved"
+	return s.repo.UpdateTransaction(ctx, tx, trans)
+}
+
+func (s *financeService) CompleteTransaction(ctx context.Context, tx *gorm.DB, transactionID int64, userID string) error {
+	trans, err := s.repo.GetTransactionByID(ctx, tx, transactionID)
+	if err != nil {
+		return fmt.Errorf("không tìm thấy giao dịch: %v", err)
+	}
+
+	if trans.Flow == "out" {
+		if trans.Status != "approved" {
+			return errors.New("phiếu chi phải được duyệt trước khi xuất tiền")
+		}
+	} else if trans.Flow == "in" {
+		if trans.Status != "pending" {
+			return fmt.Errorf("không thể thu tiền từ phiếu ở trạng thái: %s", trans.Status)
+		}
+	} else {
+		return errors.New("loại giao dịch không hợp lệ")
+	}
+
+	// 1. Cập nhật status
+	trans.Status = "completed"
+	trans.IsPosted = true
+	if err := s.repo.UpdateTransaction(ctx, tx, trans); err != nil {
+		return fmt.Errorf("lỗi cập nhật trạng thái phiếu: %v", err)
+	}
+
+	// 2. Cập nhật fund_accounts
+	if err := s.repo.UpdateFundAccountBalance(ctx, tx, trans.FundAccountID, trans.Amount, trans.Flow); err != nil {
+		return fmt.Errorf("lỗi cập nhật số dư quỹ: %v", err)
+	}
+
+	// 3. Xử lý chứng từ gốc
+	if trans.RefType == "ORDER" || trans.RefType == "PURCHASE_ORDER" {
+		if err := s.repo.UpdateOrderPaymentStatus(ctx, tx, trans.RefType, trans.RefID); err != nil {
+			return fmt.Errorf("lỗi cập nhật trạng thái thanh toán đơn hàng: %v", err)
+		}
+	} else if trans.RefType == "INVOICE" {
+		// Xử lý thanh toán hóa đơn
+		invID, _ := strconv.ParseInt(trans.RefID, 10, 64)
+		invoice, err := s.repo.GetInvoiceByID(ctx, tx, invID)
+		if err == nil {
+			newPaid := invoice.PaidAmount + trans.Amount
+			status := "PARTIAL"
+			if newPaid >= invoice.TotalAmountPostTax {
+				status = "PAID"
+			}
+			s.repo.UpdateInvoicePaidAmount(ctx, tx, invoice.ID, newPaid, status)
+		}
 	}
 
 	return nil

@@ -12,6 +12,7 @@ import (
 
 type OrderService interface {
 	CreateSalesOrder(ctx context.Context, tx *gorm.DB, req domain.CreateOrderRequest, userID string) (*domain.Order, error)
+	MarkDelivered(ctx context.Context, tx *gorm.DB, orderID string) error
 }
 
 type orderService struct {
@@ -46,6 +47,7 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 	}
 
 	// 2. Apply Voucher if exists
+	var appliedVoucherCode string
 	if req.VoucherCode != "" {
 		res, err := s.promoSvc.VerifyVoucher(ctx, tx, domain.VerifyPromotionRequest{
 			VoucherCodes: []string{req.VoucherCode},
@@ -56,6 +58,7 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 			return nil, fmt.Errorf("lỗi mã khuyến mãi: %v", err)
 		}
 		discountAmount = res.DiscountAmount
+		appliedVoucherCode = req.VoucherCode
 	}
 
 	finalAmount := totalAmount - discountAmount
@@ -102,6 +105,13 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 		return nil, err
 	}
 
+	// 5b. Increment Voucher usage_count (atomic, inside transaction)
+	if appliedVoucherCode != "" {
+		if err := s.promoSvc.IncrementUsageCount(ctx, tx, appliedVoucherCode); err != nil {
+			return nil, fmt.Errorf("lỗi cập nhật lượt sử dụng mã khuyến mãi: %v", err)
+		}
+	}
+
 	// 6. Deduct Stock if Confirmed/Completed (FEFO logic)
 	if order.Status == "confirmed" || order.Status == "completed" {
 		deductReq := domain.DeductStockRequest{
@@ -131,4 +141,19 @@ func (s *orderService) CreateSalesOrder(ctx context.Context, tx *gorm.DB, req do
 	}
 
 	return order, nil
+}
+
+func (s *orderService) MarkDelivered(ctx context.Context, tx *gorm.DB, orderID string) error {
+	now := time.Now()
+	// Update delivery_status to 'delivered' and set delivered_at
+	if err := tx.WithContext(ctx).Model(&domain.Order{}).
+		Where("id = ?", orderID).
+		Updates(map[string]interface{}{
+			"delivery_status": "delivered",
+			"delivered_at":    now,
+			"updated_at":      now,
+		}).Error; err != nil {
+		return fmt.Errorf("failed to mark order as delivered: %v", err)
+	}
+	return nil
 }

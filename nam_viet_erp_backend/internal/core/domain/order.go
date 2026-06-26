@@ -15,6 +15,7 @@ type Order struct {
 	PaymentStatus  string    `json:"payment_status"` // unpaid, paid
 	TrackingCode   string    `json:"tracking_code"`
 	DeliveryStatus string    `json:"delivery_status"`
+	DeliveredAt    *time.Time `json:"delivered_at"`
 	CreatedAt      time.Time `json:"created_at"`
 	UpdatedAt      time.Time `json:"updated_at"`
 
