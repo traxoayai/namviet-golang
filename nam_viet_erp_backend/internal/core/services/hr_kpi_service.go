@@ -161,8 +161,8 @@ func (s *hrKpiService) GetMyKPIProgress(ctx context.Context, tx *gorm.DB, employ
 			baseQuery := tx.WithContext(ctx).Table("orders").
 				Where("delivery_staff_id = ? AND delivery_status = 'delivered' AND delivery_method = 'cod' AND EXTRACT(MONTH FROM delivered_at) = ? AND EXTRACT(YEAR FROM delivered_at) = ?", employeeID, month, year)
 			baseQuery.Count(&totalCod)
-			baseQuery.Joins("JOIN finance_transactions ft ON ft.target_id = orders.id OR ft.reference_code = orders.code").
-				Where("ft.flow = 'inbound' AND ft.status = 'completed' AND EXTRACT(EPOCH FROM (ft.transaction_date - orders.delivered_at)) <= 172800").
+			baseQuery.Joins("JOIN finance_transactions ft ON (ft.ref_type = 'ORDER' OR ft.ref_type = 'PURCHASE_ORDER') AND ft.ref_id = orders.id::text").
+				Where("ft.flow = 'in' AND ft.status = 'completed' AND EXTRACT(EPOCH FROM (ft.transaction_date - orders.delivered_at)) <= 172800").
 				Count(&onTimeCod)
 			if totalCod > 0 {
 				actualValue = float64(onTimeCod) / float64(totalCod) * 100

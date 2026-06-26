@@ -62,6 +62,7 @@ func SetupRoutes(
 		orders.Use(middleware.SupabaseAuthMiddleware())
 		{
 			orders.POST("", orderHandler.CreateSalesOrder)
+			orders.POST("/:id/mark-delivered", orderHandler.MarkDelivered)
 		}
 
 		// Finance
