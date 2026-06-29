@@ -14,7 +14,7 @@ import {
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { DEFAULT_WAREHOUSE_ID } from "@/shared/constants/defaults";
 import { safeRpc } from "@/shared/lib/safeRpc";
-import { moneyLineTotal, moneySum, moneyMul } from "@/shared/utils/money";
+import { moneyLineTotal, moneySum } from "@/shared/utils/money";
 
 // Định nghĩa cấu trúc 1 Đơn hàng (Tab)
 export interface PosOrder {
@@ -333,11 +333,13 @@ export const usePosCartStore = create<PosCartState>()(
           const payload = {
             voucher_codes: [voucher.code],
             customer_id: currentOrder.customer?.id,
+            shipping_fee: 0,
             order_value: get().getTotals().subTotal,
             cart_items: currentOrder.items
               .filter((i) => !i.isGift)
               .map((i) => ({
                 product_id: i.id,
+                uom: i.unit,
                 quantity: i.qty,
                 price: i.price,
               })),
@@ -480,7 +482,7 @@ export const usePosCartStore = create<PosCartState>()(
             grandTotal: 0,
           };
 
-        const { items, selectedVoucher, customer } = currentOrder;
+        const { items, customer } = currentOrder;
 
         // 1. Tổng tiền hàng (dùng safe money arithmetic)
         const subTotal = moneySum(
@@ -490,28 +492,8 @@ export const usePosCartStore = create<PosCartState>()(
         // 2. Giảm giá (Voucher)
         let discountVal = 0;
         if (currentOrder.verifyResult) {
-          // [NEW] Ưu tiên dùng số tiền backend trả về nếu đã verify thành công
-          discountVal = currentOrder.verifyResult.discount_amount;
-        } else if (selectedVoucher) {
-          // Tính cục bộ nếu chưa verify
-          if (subTotal >= selectedVoucher.min_order_value) {
-            if (selectedVoucher.discount_type === "fixed") {
-              discountVal = selectedVoucher.discount_value;
-            } else {
-              discountVal = moneyMul(
-                subTotal,
-                selectedVoucher.discount_value / 100
-              );
-              if (
-                selectedVoucher.max_discount_value &&
-                discountVal > selectedVoucher.max_discount_value
-              ) {
-                discountVal = selectedVoucher.max_discount_value;
-              }
-            }
-          } else {
-            discountVal = 0;
-          }
+          // [NEW] Bắt buộc dùng 100% kết quả từ Backend trả về, không tự tính nhẩm
+          discountVal = currentOrder.verifyResult.discount_amount || 0;
         }
 
         if (discountVal > subTotal) discountVal = subTotal;

@@ -11,7 +11,7 @@ import { useState } from "react";
 
 import { posService } from "../../api/posService";
 import { usePosCartStore } from "../../stores/usePosCartStore";
-import { PosCreateOrderPayload } from "../../types/pos.types";
+
 import { VatInvoiceModal } from "../modals/VatInvoiceModal";
 
 import { useSubmitLock } from "@/shared/hooks/useSubmitLock";
@@ -39,24 +39,18 @@ export const PosActionToolbar = () => {
         return;
       }
 
-      const totals = getTotals();
-
-      const payload: PosCreateOrderPayload = {
-        p_order_type: "POS",
-        p_customer_b2c_id: customer?.id || null,
-        p_customer_b2b_id: null,
-        p_payment_method: method,
-        p_items: items.map((i) => ({
+      const payload = {
+        customer_id: customer?.id || 1, // Fallback to 1 (Retail Customer) if anonymous to bypass binding
+        warehouse_id: warehouseId,
+        payment_method: method,
+        voucher_code: currentOrder?.selectedVoucher?.code || "",
+        shipping_fee: 0,
+        items: items.filter(i => !i.isGift).map((i) => ({
           product_id: i.id,
           quantity: i.qty,
           uom: i.unit,
           unit_price: i.price,
-          discount: 0,
         })),
-        p_shipping_fee: 0,
-        p_discount_amount: totals.discountVal,
-        p_status: "DELIVERED",
-        p_warehouse_id: warehouseId,
       };
 
       try {
