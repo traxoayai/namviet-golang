@@ -37,7 +37,8 @@ import {
 } from "antd";
 import viVN from "antd/locale/vi_VN";
 import dayjs from "dayjs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { supabase } from "@/shared/lib/supabaseClient";
 
 // Import Store & Components
 import { promotionService } from "@/features/marketing/api/promotionService";
@@ -83,6 +84,7 @@ const DiscountCodeManagement = () => {
   // [NEW] States for detail view
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const [selectedPromotion, setSelectedPromotion] = useState<Promotion | null>(null);
+  const [applyToNames, setApplyToNames] = useState<string[]>([]); // [NEW] Lưu tên sản phẩm
 
   // State điều khiển UI Form
   const [discountType, setDiscountType] = useState("percent");
@@ -110,6 +112,20 @@ const DiscountCodeManagement = () => {
       : undefined;
     fetchPromotions(searchText, statusFilter, formattedDateRange);
   }, [searchText, statusFilter, dateRange]);
+
+  // [NEW] Fetch tên sản phẩm theo ID khi mở modal chi tiết
+  const fetchProductNames = useCallback(async (ids: (string | number)[]) => {
+    if (!ids || ids.length === 0) { setApplyToNames([]); return; }
+    try {
+      const { data } = await supabase
+        .from('products')
+        .select('id, name')
+        .in('id', ids.map(Number));
+      setApplyToNames((data || []).map((p: any) => p.name));
+    } catch {
+      setApplyToNames(ids.map(String)); // fallback: hiển ID nếu không tìm được
+    }
+  }, []);
 
   const showAddModal = () => {
     setDiscountType("percent");
@@ -307,8 +323,14 @@ const DiscountCodeManagement = () => {
             <Button
               icon={<EyeOutlined />}
               size="small"
-              onClick={() => {
+              onClick={async () => {
                 setSelectedPromotion(record);
+                setApplyToNames([]);
+                const scope = (record as any).apply_to_scope;
+                const ids = (record as any).apply_to_ids;
+                if (scope === 'product' && ids && ids.length > 0) {
+                  await fetchProductNames(ids);
+                }
                 setIsDetailVisible(true);
               }}
             />
@@ -807,7 +829,10 @@ const DiscountCodeManagement = () => {
                 const scope = (selectedPromotion as any).apply_to_scope;
                 const ids = (selectedPromotion as any).apply_to_ids;
                 if (!scope || scope === 'all') return <span style={{ color: '#52c41a', fontWeight: 500 }}>Tất cả sản phẩm</span>;
-                if (scope === 'product') return <span>Sản phẩm cụ thể: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
+                if (scope === 'product') {
+                  const displayNames = applyToNames.length > 0 ? applyToNames.join(', ') : (Array.isArray(ids) ? ids.join(', ') : ids);
+                  return <span>Sản phẩm cụ thể: <strong>{displayNames}</strong></span>;
+                }
                 if (scope === 'category') return <span>Danh mục: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
                 if (scope === 'brand') return <span>Hãng sản xuất: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
                 return <span>{scope}</span>;
