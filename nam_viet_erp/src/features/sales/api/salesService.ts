@@ -71,17 +71,33 @@ export const salesService = {
     }
   },
 
-  // 4. Lấy Voucher
+  // 4. Lấy Voucher (dùng Golang API - nguồn dữ liệu thực)
   async getVouchers(
     customerId: number,
     orderTotal: number
   ): Promise<VoucherRecord[]> {
     try {
-      const { data } = await safeRpc("get_available_vouchers", {
-        p_customer_id: customerId,
-        p_order_total: orderTotal,
+      const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+      const response = await axiosClient.get("/api/v1/promotions/auto-suggest", {
+        params: { customer_id: customerId, order_total: orderTotal },
       });
-      return (data ?? []) as unknown as VoucherRecord[];
+      const rawList = response.data ?? [];
+      // Map từ Go struct sang VoucherRecord interface
+      return rawList.map((p: any) => ({
+        id: p.id,
+        code: p.code,
+        name: p.name,
+        discount_type: p.discount_type === "percentage" ? "percent" : p.discount_type,
+        discount_value: p.value ?? p.discount_value ?? 0,
+        max_discount_value: p.max_discount_value ?? 0,
+        min_order_value: p.min_order_value ?? 0,
+        valid_from: p.valid_from,
+        valid_to: p.valid_to,
+        usage_count: p.usage_count ?? 0,
+        total_usage_limit: p.total_usage_limit,
+        status: p.status,
+        is_eligible: p.status === "active",
+      })) as VoucherRecord[];
     } catch {
       return [];
     }

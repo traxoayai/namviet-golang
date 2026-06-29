@@ -179,7 +179,7 @@ const DiscountCodeManagement = () => {
           : values.code,
         name: values.campaignName,
         description: values.description,
-        type: values.type,
+        promotion_type: values.type, // [FIX] DB dùng 'promotion_type', không phải 'type'
         discount_type: values.discount_type,
         discount_value: values.value || 0,
         max_discount_value:
@@ -811,7 +811,7 @@ const DiscountCodeManagement = () => {
               {selectedPromotion.name}
             </Descriptions.Item>
             <Descriptions.Item label="Loại">
-              {selectedPromotion.type === "public" ? "Công khai (Public)" : "Dành riêng (Personal)"}
+              {((selectedPromotion as any).promotion_type || selectedPromotion.type) === "public" ? "Công khai (Public)" : "Dành riêng (Personal)"}
             </Descriptions.Item>
             <Descriptions.Item label="Giá trị giảm">
               {selectedPromotion.discount_type === "percent" 
