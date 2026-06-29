@@ -171,7 +171,9 @@ const DiscountCodeManagement = () => {
         min_order_value: values.minPurchase || 0,
         total_usage_limit: values.maxUsage,
         apply_to_scope: values.apply_to_scope,
-        apply_to_ids: values.apply_to_ids ? [values.apply_to_ids] : [],
+        apply_to_ids: values.apply_to_scope === "product" 
+          ? [values.apply_to_ids]
+          : (values.apply_to_ids ? [values.apply_to_ids] : []),
         valid_from: values.validDates[0].toISOString(),
         valid_to: values.validDates[1].toISOString(),
         status: values.status,
@@ -245,6 +247,8 @@ const DiscountCodeManagement = () => {
         switch (scope) {
           case "all":
             return <Tag>Toàn sàn</Tag>;
+          case "product":
+            return <Tag color="geekblue">Theo Sản phẩm</Tag>;
           case "category":
             return <Tag color="cyan">Theo Nhóm</Tag>;
           case "brand":
@@ -692,10 +696,24 @@ const DiscountCodeManagement = () => {
                     >
                       <Radio.Group>
                         <Radio value="all">Toàn bộ đơn hàng</Radio>
+                        <Radio value="product">Theo Sản phẩm</Radio>
                         <Radio value="category">Theo Nhóm hàng</Radio>
                         <Radio value="brand">Theo Nhà sản xuất</Radio>
                       </Radio.Group>
                     </Form.Item>
+
+                    {scopeType === "product" && (
+                      <Form.Item
+                        name="apply_to_ids"
+                        label="Chọn Sản phẩm"
+                        rules={[{ required: true }]}
+                      >
+                        <DebounceProductSelect
+                          placeholder="Tìm và chọn sản phẩm..."
+                          searchTypes={["product"]}
+                        />
+                      </Form.Item>
+                    )}
 
                     {scopeType === "category" && (
                       <Form.Item
@@ -784,11 +802,24 @@ const DiscountCodeManagement = () => {
             <Descriptions.Item label="Thời gian hiệu lực">
               {dayjs(selectedPromotion.valid_from).format("DD/MM/YYYY HH:mm")} - {dayjs(selectedPromotion.valid_to).format("DD/MM/YYYY HH:mm")}
             </Descriptions.Item>
-            <Descriptions.Item label="Cấu hình nâng cao (Advanced Rules)">
-              <pre style={{ background: "#f5f5f5", padding: 8, borderRadius: 4, maxHeight: 200, overflow: "auto" }}>
-                {JSON.stringify((selectedPromotion as any).advanced_rules, null, 2)}
-              </pre>
+            <Descriptions.Item label="Áp dụng cho">
+              {(() => {
+                const scope = (selectedPromotion as any).apply_to_scope;
+                const ids = (selectedPromotion as any).apply_to_ids;
+                if (!scope || scope === 'all') return <span style={{ color: '#52c41a', fontWeight: 500 }}>Tất cả sản phẩm</span>;
+                if (scope === 'product') return <span>Sản phẩm cụ thể: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
+                if (scope === 'category') return <span>Danh mục: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
+                if (scope === 'brand') return <span>Hãng sản xuất: <strong>{Array.isArray(ids) ? ids.join(', ') : ids}</strong></span>;
+                return <span>{scope}</span>;
+              })()}
             </Descriptions.Item>
+            {(selectedPromotion as any).advanced_rules && (
+              <Descriptions.Item label="Cấu hình nâng cao (Advanced Rules)">
+                <pre style={{ background: "#f5f5f5", padding: 8, borderRadius: 4, maxHeight: 200, overflow: "auto" }}>
+                  {JSON.stringify((selectedPromotion as any).advanced_rules, null, 2)}
+                </pre>
+              </Descriptions.Item>
+            )}
           </Descriptions>
         )}
       </Modal>
