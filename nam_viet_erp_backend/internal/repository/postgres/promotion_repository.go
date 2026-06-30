@@ -11,7 +11,7 @@ import (
 
 type PromotionRepository interface {
 	GetPromotionByCodeWithLock(ctx context.Context, tx *gorm.DB, code string) (*domain.Promotion, error)
-	GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
+	GetAvailablePromotions(ctx context.Context, tx *gorm.DB, customerID int64, orderTotal float64) ([]domain.Promotion, error)
 	GetPromotionsByCodesWithLock(ctx context.Context, tx *gorm.DB, codes []string) ([]domain.Promotion, error)
 	IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error
 }
@@ -46,15 +46,37 @@ func (r *promotionRepository) GetPromotionsByCodesWithLock(ctx context.Context, 
 	return promos, nil
 }
 
-func (r *promotionRepository) GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {
+func (r *promotionRepository) GetAvailablePromotions(ctx context.Context, tx *gorm.DB, customerID int64, orderTotal float64) ([]domain.Promotion, error) {
 	var promos []domain.Promotion
-	err := tx.WithContext(ctx).
-		Where("status = ? AND advanced_rules IS NOT NULL AND advanced_rules != 'null' AND valid_to >= NOW()", "active").
-		Find(&promos).Error
+	
+	// Query to get available promotions
+	// 1. Must be active
+	// 2. valid_to must be >= NOW()
+	// 3. For 'personal' type, it must match the customer_id
+	// 4. (Optional but good) min_order_value should be <= orderTotal
+	
+	query := tx.WithContext(ctx).
+		Where("status = ? AND valid_to >= NOW()", "active").
+		Where("(type = 'public' OR (type = 'personal' AND customer_id = ?))", customerID)
+		
+	// Note: We leave usage_limit checking for later validation, or we can add:
+	// Where("total_usage_limit IS NULL OR usage_count < total_usage_limit")
+	
+	err := query.Find(&promos).Error
+	
 	if err != nil {
 		return nil, err
 	}
-	return promos, nil
+	
+	// Filter by min_order_value
+	var validPromos []domain.Promotion
+	for _, p := range promos {
+		if orderTotal >= p.MinOrderValue {
+			validPromos = append(validPromos, p)
+		}
+	}
+	
+	return validPromos, nil
 }
 
 // IncrementUsageCount tăng usage_count lên 1 một cách atomic, an toàn cho concurrent requests

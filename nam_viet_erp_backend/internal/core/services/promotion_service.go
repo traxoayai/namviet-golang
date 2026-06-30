@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"math"
 	"time"
 
 	"github.com/namvieterp/backend/internal/core/domain"
@@ -13,7 +15,7 @@ import (
 
 type PromotionService interface {
 	VerifyVoucher(ctx context.Context, tx *gorm.DB, req domain.VerifyPromotionRequest) (*domain.VerifyPromotionResponse, error)
-	GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error)
+	GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB, customerID int64, orderTotal float64) ([]domain.Promotion, error)
 	IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error
 }
 
@@ -25,10 +27,128 @@ func NewPromotionService(repo postgres.PromotionRepository) PromotionService {
 	return &promotionService{repo: repo}
 }
 
+func getEligibleSubtotal(tx *gorm.DB, promo *domain.Promotion, req domain.VerifyPromotionRequest, currentSubtotal float64) (float64, []int, error) {
+	var eligibleIndices []int
+	if promo.ApplyToScope == "all" || promo.ApplyToScope == "" {
+		if len(req.CartItems) > 0 {
+			total := 0.0
+			for i, item := range req.CartItems {
+				eligibleIndices = append(eligibleIndices, i)
+				total += item.Price * float64(item.Quantity)
+			}
+			return total, eligibleIndices, nil
+		}
+		return currentSubtotal, eligibleIndices, nil
+	}
+
+	var rawIds []interface{}
+	if promo.ApplyToIds != "" && promo.ApplyToIds != "null" {
+		if err := json.Unmarshal([]byte(promo.ApplyToIds), &rawIds); err != nil {
+			return 0, nil, nil
+		}
+	}
+
+	if len(rawIds) == 0 {
+		return currentSubtotal, nil, nil
+	}
+
+	validStrs := make(map[string]bool)
+	for _, v := range rawIds {
+		validStrs[fmt.Sprintf("%v", v)] = true
+	}
+
+	var productIDs []int64
+	for _, item := range req.CartItems {
+		productIDs = append(productIDs, item.ProductID)
+	}
+
+	if len(productIDs) == 0 {
+		return 0, nil, nil
+	}
+
+	if promo.ApplyToScope == "product" {
+		total := 0.0
+		for i, item := range req.CartItems {
+			idStr := fmt.Sprintf("%d", item.ProductID)
+			if validStrs[idStr] {
+				total += item.Price * float64(item.Quantity)
+				eligibleIndices = append(eligibleIndices, i)
+			}
+		}
+		return total, eligibleIndices, nil
+	}
+
+	type ProductInfo struct {
+		ID               int64
+		CategoryName     string
+		ManufacturerName string
+	}
+	var products []ProductInfo
+	if err := tx.Table("products").Select("id, category_name, manufacturer_name").Where("id IN ?", productIDs).Find(&products).Error; err != nil {
+		return 0, nil, err
+	}
+
+	productInfoMap := make(map[int64]ProductInfo)
+	for _, p := range products {
+		productInfoMap[p.ID] = p
+	}
+
+	total := 0.0
+	for i, item := range req.CartItems {
+		info, exists := productInfoMap[item.ProductID]
+		if !exists {
+			continue
+		}
+		
+		isValid := false
+		if promo.ApplyToScope == "category" && validStrs[info.CategoryName] {
+			isValid = true
+		} else if promo.ApplyToScope == "brand" && validStrs[info.ManufacturerName] {
+			isValid = true
+		}
+
+		if isValid {
+			total += item.Price * float64(item.Quantity)
+			eligibleIndices = append(eligibleIndices, i)
+		}
+	}
+
+	return total, eligibleIndices, nil
+}
+
 func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req domain.VerifyPromotionRequest) (*domain.VerifyPromotionResponse, error) {
 	if len(req.VoucherCodes) == 0 {
 		return nil, errors.New("không có mã khuyến mãi nào được cung cấp")
 	}
+
+	// Option A: Fetch exact price from product_units if Uom is available
+	if len(req.CartItems) > 0 {
+		for i := range req.CartItems {
+			if req.CartItems[i].Uom != "" {
+				var dbPrice float64
+				err := tx.Table("product_units").
+					Select("price").
+					Where("product_id = ? AND unit_name = ?", req.CartItems[i].ProductID, req.CartItems[i].Uom).
+					Row().Scan(&dbPrice)
+				if err != nil {
+					return nil, fmt.Errorf("không tìm thấy giá cho sản phẩm ID %d với đơn vị %s", req.CartItems[i].ProductID, req.CartItems[i].Uom)
+				}
+				req.CartItems[i].Price = dbPrice
+			}
+		}
+	}
+
+	var subtotal float64
+	for _, item := range req.CartItems {
+		subtotal += item.Price * float64(item.Quantity)
+	}
+
+	// Fallback to OrderValue if CartItems is empty
+	if len(req.CartItems) == 0 {
+		subtotal = req.OrderValue - req.ShippingFee
+	}
+
+	originalSubtotal := subtotal
 
 	promos, err := s.repo.GetPromotionsByCodesWithLock(ctx, tx, req.VoucherCodes)
 	if err != nil {
@@ -41,7 +161,6 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 
 	now := time.Now()
 
-	// 1. Validations cơ bản cho từng mã
 	for _, promo := range promos {
 		if promo.Status != "active" {
 			return nil, errors.New("Mã giảm giá đã bị khóa hoặc không còn hiệu lực.")
@@ -62,15 +181,12 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		}
 	}
 
-	// 2. Cross-Validation (Khóa chéo)
-	// a. Check is_stackable
 	for _, promo := range promos {
 		if !promo.IsStackable && len(promos) > 1 {
 			return nil, errors.New("mã " + promo.Code + " là mã độc quyền, không thể áp dụng chung với các mã khác")
 		}
 	}
 
-	// b. Check trùng nhóm (cùng promo_group)
 	groupCount := make(map[string]int)
 	for _, promo := range promos {
 		groupCount[promo.PromoGroup]++
@@ -79,7 +195,6 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		}
 	}
 
-	// c. Check combinable_groups chéo nhau
 	for i, promoA := range promos {
 		var combinableA []string
 		if promoA.CombinableGroups != "" {
@@ -90,8 +205,6 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 			if i == j {
 				continue
 			}
-			
-			// Kiểm tra xem promoB.PromoGroup có nằm trong allowed array của promoA không
 			isAllowed := false
 			for _, allowedGroup := range combinableA {
 				if allowedGroup == promoB.PromoGroup {
@@ -105,17 +218,15 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		}
 	}
 
-	// 3. Calculation Logic (Trình tự: Gift -> Cash -> Percent -> Freeship)
 	res := &domain.VerifyPromotionResponse{
 		IsValid: true,
 		Message: "Áp dụng các mã khuyến mãi thành công",
 	}
 
 	if len(promos) > 0 {
-		res.PromotionID = promos[0].ID // Backward compatibility
+		res.PromotionID = promos[0].ID
 	}
 
-	// Phân loại mã vào các bucket
 	var promoGift, promoCash, promoPercent, promoFreeship *domain.Promotion
 	for i := range promos {
 		p := &promos[i]
@@ -131,10 +242,8 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		}
 	}
 
-	subtotal := req.OrderValue
 	var totalDiscount float64
 
-	// Bước 1: Gift
 	if promoGift != nil {
 		if promoGift.PromotionClass == "advanced" && promoGift.AdvancedRules != "" {
 			var rule map[string]interface{}
@@ -168,9 +277,9 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 					}
 				} else if condType == "buy_amount" {
 					minAmount := condition["min_amount"].(float64)
-					if req.OrderValue >= minAmount && minAmount > 0 {
+					if originalSubtotal >= minAmount && minAmount > 0 {
 						if isMultiply {
-							times = int(req.OrderValue / minAmount)
+							times = int(originalSubtotal / minAmount)
 						} else {
 							times = 1
 						}
@@ -197,46 +306,112 @@ func (s *promotionService) VerifyVoucher(ctx context.Context, tx *gorm.DB, req d
 		}
 	}
 
-	// Bước 2: Cash
 	if promoCash != nil {
-		if req.OrderValue < promoCash.MinOrderValue {
+		eligibleSubtotal, eligibleIndices, err := getEligibleSubtotal(tx, promoCash, req, subtotal)
+		if err != nil {
+			return nil, err
+		}
+		if eligibleSubtotal == 0 {
+			return nil, errors.New("mã " + promoCash.Code + ": không có sản phẩm nào hợp lệ trong giỏ hàng")
+		}
+		if originalSubtotal < promoCash.MinOrderValue {
 			return nil, errors.New("mã " + promoCash.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
 		}
 		discountAmt := promoCash.Value
-		if discountAmt > subtotal {
-			discountAmt = subtotal
+		if discountAmt > eligibleSubtotal {
+			discountAmt = eligibleSubtotal
 		}
+
+		if eligibleSubtotal > 0 && len(eligibleIndices) > 0 {
+			allocatedDiscount := 0.0
+			for i, idx := range eligibleIndices {
+				itemSubtotal := req.CartItems[idx].Price * float64(req.CartItems[idx].Quantity)
+				if itemSubtotal > 0 {
+					var itemDiscount float64
+					if i == len(eligibleIndices)-1 {
+						itemDiscount = discountAmt - allocatedDiscount
+					} else {
+						itemDiscount = math.Round((itemSubtotal / eligibleSubtotal) * discountAmt)
+						allocatedDiscount += itemDiscount
+					}
+					req.CartItems[idx].Price -= itemDiscount / float64(req.CartItems[idx].Quantity)
+					if req.CartItems[idx].Price < 0 {
+						req.CartItems[idx].Price = 0
+					}
+				}
+			}
+		}
+
 		subtotal -= discountAmt
 		totalDiscount += discountAmt
 	}
 
-	// Bước 3: Percent
 	if promoPercent != nil {
-		if req.OrderValue < promoPercent.MinOrderValue {
+		eligibleSubtotal, eligibleIndices, err := getEligibleSubtotal(tx, promoPercent, req, subtotal)
+		if err != nil {
+			return nil, err
+		}
+		if eligibleSubtotal == 0 {
+			return nil, errors.New("mã " + promoPercent.Code + ": không có sản phẩm nào hợp lệ trong giỏ hàng")
+		}
+		if originalSubtotal < promoPercent.MinOrderValue {
 			return nil, errors.New("mã " + promoPercent.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
 		}
-		discountAmt := (subtotal * promoPercent.Value) / 100
+		discountAmt := math.Round((eligibleSubtotal * promoPercent.Value) / 100)
 		if promoPercent.MaxDiscountValue > 0 && discountAmt > promoPercent.MaxDiscountValue {
 			discountAmt = promoPercent.MaxDiscountValue
 		}
-		if discountAmt > subtotal {
-			discountAmt = subtotal
+		if discountAmt > eligibleSubtotal {
+			discountAmt = eligibleSubtotal
 		}
+
+		if eligibleSubtotal > 0 && len(eligibleIndices) > 0 {
+			allocatedDiscount := 0.0
+			for i, idx := range eligibleIndices {
+				itemSubtotal := req.CartItems[idx].Price * float64(req.CartItems[idx].Quantity)
+				if itemSubtotal > 0 {
+					var itemDiscount float64
+					if i == len(eligibleIndices)-1 {
+						itemDiscount = discountAmt - allocatedDiscount
+					} else {
+						itemDiscount = math.Round((itemSubtotal / eligibleSubtotal) * discountAmt)
+						allocatedDiscount += itemDiscount
+					}
+					req.CartItems[idx].Price -= itemDiscount / float64(req.CartItems[idx].Quantity)
+					if req.CartItems[idx].Price < 0 {
+						req.CartItems[idx].Price = 0
+					}
+				}
+			}
+		}
+
 		subtotal -= discountAmt
 		totalDiscount += discountAmt
 	}
 
-	// Bước 4: Freeship
 	if promoFreeship != nil {
-		if req.OrderValue < promoFreeship.MinOrderValue {
+		if originalSubtotal < promoFreeship.MinOrderValue {
 			return nil, errors.New("mã " + promoFreeship.Code + ": giá trị đơn hàng chưa đạt mức tối thiểu")
 		}
 		res.IsFreeship = true
 		res.FreeshipMaxDiscount = promoFreeship.MaxDiscountValue
+		
+		if req.ShippingFee > 0 {
+			fsDiscount := promoFreeship.MaxDiscountValue
+			if fsDiscount > req.ShippingFee {
+				fsDiscount = req.ShippingFee
+			}
+			totalDiscount += fsDiscount
+			req.ShippingFee -= fsDiscount
+		}
 	}
 
+	if subtotal < 0 {
+		subtotal = 0
+	}
+	
 	res.DiscountAmount = totalDiscount
-	res.FinalAmount = subtotal
+	res.FinalAmount = subtotal + req.ShippingFee
 
 	return res, nil
 }
@@ -245,6 +420,6 @@ func (s *promotionService) IncrementUsageCount(ctx context.Context, tx *gorm.DB,
 	return s.repo.IncrementUsageCount(ctx, tx, code)
 }
 
-func (s *promotionService) GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {
-	return s.repo.GetActiveAdvancedPromotions(ctx, tx)
+func (s *promotionService) GetAutoSuggestPromotions(ctx context.Context, tx *gorm.DB, customerID int64, orderTotal float64) ([]domain.Promotion, error) {
+	return s.repo.GetAvailablePromotions(ctx, tx, customerID, orderTotal)
 }

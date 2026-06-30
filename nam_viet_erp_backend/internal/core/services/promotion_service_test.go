@@ -24,14 +24,19 @@ func (m *MockPromotionRepo) GetPromotionByCodeWithLock(ctx context.Context, tx *
 	return args.Get(0).(*domain.Promotion), args.Error(1)
 }
 
-func (m *MockPromotionRepo) GetActiveAdvancedPromotions(ctx context.Context, tx *gorm.DB) ([]domain.Promotion, error) {
-	args := m.Called(ctx, tx)
+func (m *MockPromotionRepo) GetAvailablePromotions(ctx context.Context, tx *gorm.DB, customerID int64, orderTotal float64) ([]domain.Promotion, error) {
+	args := m.Called(ctx, tx, customerID, orderTotal)
 	return args.Get(0).([]domain.Promotion), args.Error(1)
 }
 
 func (m *MockPromotionRepo) GetPromotionsByCodesWithLock(ctx context.Context, tx *gorm.DB, codes []string) ([]domain.Promotion, error) {
 	args := m.Called(ctx, tx, codes)
 	return args.Get(0).([]domain.Promotion), args.Error(1)
+}
+
+func (m *MockPromotionRepo) IncrementUsageCount(ctx context.Context, tx *gorm.DB, code string) error {
+	args := m.Called(ctx, tx, code)
+	return args.Error(0)
 }
 
 func TestVerifyVoucher_Stackable_Success(t *testing.T) {
@@ -47,20 +52,20 @@ func TestVerifyVoucher_Stackable_Success(t *testing.T) {
 	
 	promos := []domain.Promotion{
 		{
-			ID: 1, Code: "MUA1T1", Status: "active", Type: "public",
+			ID: "1", Code: "MUA1T1", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "gift", CombinableGroups: `["cash", "percent", "freeship"]`,
 			PromotionClass: "advanced",
 			AdvancedRules: `{"condition":{"type":"buy_quantity","target_product_id":1,"min_quantity":1},"reward":{"type":"give_product","gift_product_id":2,"gift_quantity":1,"discount_percent":100},"is_multiply":false}`,
 		},
 		{
-			ID: 2, Code: "GIAM100K", Status: "active", Type: "public",
+			ID: "2", Code: "GIAM100K", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "cash", CombinableGroups: `["gift", "percent", "freeship"]`,
 			PromotionClass: "basic", DiscountType: "fixed_amount", Value: 100000, MinOrderValue: 200000,
 		},
 		{
-			ID: 3, Code: "GIAM10", Status: "active", Type: "public",
+			ID: "3", Code: "GIAM10", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "percent", CombinableGroups: `["gift", "cash", "freeship"]`,
 			PromotionClass: "basic", DiscountType: "percentage", Value: 10, MinOrderValue: 200000, MaxDiscountValue: 50000,
@@ -102,12 +107,12 @@ func TestVerifyVoucher_Stackable_FailCrossLock(t *testing.T) {
 	
 	promos := []domain.Promotion{
 		{
-			ID: 1, Code: "MUA1T1", Status: "active", Type: "public",
+			ID: "1", Code: "MUA1T1", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "gift", CombinableGroups: `["freeship"]`, // KHÔNG CHO PHÉP cash
 		},
 		{
-			ID: 2, Code: "GIAM100K", Status: "active", Type: "public",
+			ID: "2", Code: "GIAM100K", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "cash", CombinableGroups: `["gift", "percent", "freeship"]`,
 		},
@@ -134,12 +139,12 @@ func TestVerifyVoucher_Stackable_FailSameGroup(t *testing.T) {
 	
 	promos := []domain.Promotion{
 		{
-			ID: 1, Code: "CASH1", Status: "active", Type: "public",
+			ID: "1", Code: "CASH1", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "cash", CombinableGroups: `["cash"]`, 
 		},
 		{
-			ID: 2, Code: "CASH2", Status: "active", Type: "public",
+			ID: "2", Code: "CASH2", Status: "active", Type: "public",
 			ValidFrom: now.Add(-time.Hour), ValidTo: now.Add(time.Hour),
 			IsStackable: true, PromoGroup: "cash", CombinableGroups: `["cash"]`,
 		},

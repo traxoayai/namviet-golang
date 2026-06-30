@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -55,7 +56,20 @@ func (h *PromotionHandler) VerifyPromotion(c *gin.Context) {
 }
 
 func (h *PromotionHandler) AutoSuggest(c *gin.Context) {
-	promos, err := h.promoSvc.GetAutoSuggestPromotions(c.Request.Context(), h.db)
+	customerIDStr := c.Query("customer_id")
+	orderTotalStr := c.Query("order_total")
+	
+	var customerID int64
+	var orderTotal float64
+	
+	if customerIDStr != "" {
+		fmt.Sscanf(customerIDStr, "%d", &customerID)
+	}
+	if orderTotalStr != "" {
+		fmt.Sscanf(orderTotalStr, "%f", &orderTotal)
+	}
+
+	promos, err := h.promoSvc.GetAutoSuggestPromotions(c.Request.Context(), h.db, customerID, orderTotal)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
