@@ -103,6 +103,18 @@ export const salesService = {
     }
   },
 
+  // 4.1 Verify Voucher (GoLang API)
+  async verifyVoucher(payload: any) {
+    try {
+      const { default: axiosClient } = await import("@/shared/utils/axiosClient");
+      const response = await axiosClient.post("/api/v1/promotions/verify", payload);
+      return response.data;
+    } catch (e) {
+      console.error("Voucher verify failed", e);
+      return null;
+    }
+  },
+
   // 5. Tạo đơn hàng (QUAN TRỌNG: Mapping Payload Mới)
   async createOrder(payload: any) {
     const { data } = await safeRpc("create_sales_order", payload);

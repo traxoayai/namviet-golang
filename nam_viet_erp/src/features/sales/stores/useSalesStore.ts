@@ -158,20 +158,9 @@ export const useSalesStore = create<SalesState>((set, get) => ({
 
     let discountAmount = 0;
 
-    // Ưu tiên Manual Discount nếu có (Override)
+    // [Backend Yêu Cầu]: FE không tự tính toán discount, chỉ lấy từ API
     if (s.manualDiscount > 0) {
       discountAmount = s.manualDiscount;
-    } else if (s.selectedVoucher) {
-      const v = s.selectedVoucher;
-      if (subTotal >= v.min_order_value) {
-        discountAmount =
-          v.discount_type === "fixed"
-            ? v.discount_value
-            : moneyMul(subTotal, v.discount_value / 100);
-        if (v.max_discount_value && discountAmount > v.max_discount_value) {
-          discountAmount = v.max_discount_value;
-        }
-      }
     }
 
     const finalTotal = moneySub(

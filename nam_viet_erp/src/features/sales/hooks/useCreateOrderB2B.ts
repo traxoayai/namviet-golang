@@ -279,6 +279,51 @@ export const useCreateOrderB2B = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.items, promoRules, applyPromoRules]);
 
+  // --- useEffect: Verify voucher từ Backend thay vì tự tính toán (Yêu cầu từ BE) ---
+  useEffect(() => {
+    if (!store.selectedVoucher) {
+      store.setManualDiscount(0);
+      return;
+    }
+
+    const verifyVoucherAsync = async () => {
+      try {
+        const { salesService } = await import("@/features/sales/api/salesService");
+        
+        // Tính SubTotal tạm (không gồm discount) để gửi lên
+        const subTotal = store.items.reduce((sum, item) => sum + (item.quantity * item.price_wholesale), 0);
+        
+        const payload = {
+          voucher_codes: [store.selectedVoucher?.code],
+          customer_id: store.customer?.id || 0,
+          shipping_fee: store.shippingFee || 0,
+          order_value: subTotal,
+          cart_items: store.items.filter((i) => !i.is_gift).map((i) => ({
+            product_id: i.id,
+            uom: i.wholesale_unit,
+            quantity: i.quantity,
+            price: i.price_wholesale,
+          })),
+        };
+
+        const res = await salesService.verifyVoucher(payload);
+        if (res && res.discount_amount !== undefined) {
+          // Lấy con số discount_amount CHUẨN XÁC từ Backend
+          store.setManualDiscount(res.discount_amount);
+        } else {
+          store.setManualDiscount(0);
+        }
+      } catch (err) {
+        console.error("Lỗi khi verify voucher:", err);
+        store.setManualDiscount(0);
+      }
+    };
+
+    // Gọi debounce nhẹ hoặc gọi luôn
+    const timer = setTimeout(verifyVoucherAsync, 300);
+    return () => clearTimeout(timer);
+  }, [store.selectedVoucher, store.items, store.shippingFee, store.customer]);
+
   // Intercept updateItem
   const handleUpdateItem = useCallback(
     (key: string, field: keyof CartItem, value: any) => {

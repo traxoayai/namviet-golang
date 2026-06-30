@@ -179,7 +179,7 @@ const DiscountCodeManagement = () => {
           : values.code,
         name: values.campaignName,
         description: values.description,
-        promotion_type: values.type, // [FIX] DB dùng 'promotion_type', không phải 'type'
+        type: values.type,
         discount_type: values.discount_type,
         discount_value: values.value || 0,
         max_discount_value:
