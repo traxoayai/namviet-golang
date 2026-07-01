@@ -723,7 +723,7 @@ const InvoiceVerifyPage = () => {
       </div>
 
       <Content
-        style={{ padding: 24, overflowY: "auto", background: "#f0f2f5" }}
+        style={{ padding: 24, overflowY: "auto", background: "#f2f7fc" }}
       >
         <Form
           form={form}

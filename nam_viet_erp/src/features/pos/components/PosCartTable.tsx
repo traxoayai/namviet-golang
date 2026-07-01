@@ -38,7 +38,7 @@ export const PosCartTable = () => {
             shape="circle"
             src={r.image_url}
             size={56}
-            style={{ backgroundColor: "#f0f2f5", border: "1px solid #e8e8e8" }}
+            style={{ backgroundColor: "#f2f7fc", border: "1px solid #e8e8e8" }}
           />
           <div>
             <div style={{ fontWeight: 600, fontSize: 16, color: "#262626" }}>

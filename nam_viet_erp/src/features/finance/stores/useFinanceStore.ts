@@ -114,12 +114,13 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
         ref_id: payload.p_ref_id,
         ref_type: payload.p_ref_type,
         // [MỚI] Các trường bổ sung từ spec BE v22
-        partner_type: (payload as any).partner_type,
-        partner_id: (payload as any).partner_id,
-        partner_name_cache: (payload as any).partner_name_cache,
-        business_type: (payload as any).business_type,
-        bank_reference_id: (payload as any).bank_reference_id,
-        target_bank_info: (payload as any).target_bank_info,
+        partner_type: payload.p_partner_type,
+        partner_id: payload.p_partner_id,
+        partner_name_cache: payload.p_partner_name,
+        business_type: payload.p_business_type,
+        target_bank_info: payload.p_target_bank_info,
+        transaction_date: payload.p_transaction_date,
+        category_id: payload.p_category_id,
       });
 
       // 2. AURA FIX: Chủ động cập nhật trạng thái phiếu Tạm ứng cũ thành 'completed'

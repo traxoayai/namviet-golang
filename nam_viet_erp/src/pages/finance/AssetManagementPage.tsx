@@ -800,7 +800,7 @@ const AssetManagementPage: React.FC = () => {
                     tooltip="= Nguyên giá / Thời gian Khấu hao"
                   >
                     <InputNumber
-                      style={{ width: "100%", backgroundColor: "#f0f2f5" }}
+                      style={{ width: "100%", backgroundColor: "#f2f7fc" }}
                       formatter={currencyFormatter}
                       parser={currencyParser}
                       readOnly

@@ -80,7 +80,7 @@ export const AutoReplenishPreviewModal: React.FC<AutoReplenishPreviewModalProps>
             size={40}
             src={record.image_url}
             icon={<PictureOutlined />}
-            style={{ backgroundColor: "#f5f5f5", border: "1px solid #d9d9d9" }}
+            style={{ backgroundColor: "#f2f7fc", border: "1px solid #d9d9d9" }}
           />
           <Space direction="vertical" size={0}>
             <Text strong>{record.product_name || `Sản phẩm #${val}`}</Text>

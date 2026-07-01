@@ -135,7 +135,7 @@ export const TransactionDetailModal: React.FC<Props> = ({
         <div
           style={{
             textAlign: "center",
-            background: "#f0f2f5",
+            background: "#f2f7fc",
             padding: 12,
             borderRadius: 8,
           }}
@@ -293,7 +293,7 @@ export const TransactionDetailModal: React.FC<Props> = ({
         size="middle"
         labelStyle={{ width: 160, fontWeight: 500 }}
       >
-        <Descriptions.Item label="Ngày tạo phiếu">
+        <Descriptions.Item label="Ngày thu/chi">
           {dayjs(data.transaction_date)
             .tz("Asia/Ho_Chi_Minh")
             .format("HH:mm - DD/MM/YYYY")}
@@ -337,7 +337,7 @@ export const TransactionDetailModal: React.FC<Props> = ({
             style={{
               display: "flex",
               gap: 16,
-              background: "#f5f5f5",
+              background: "#f2f7fc",
               padding: 16,
               borderRadius: 8,
             }}

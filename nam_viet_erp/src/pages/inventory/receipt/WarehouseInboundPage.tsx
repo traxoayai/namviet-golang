@@ -246,7 +246,7 @@ const WarehouseInboundPage = () => {
       style={{
         padding: screens.md ? 24 : 12,
         paddingBottom: 80,
-        background: "#f5f5f5",
+        background: "#f2f7fc",
         minHeight: "100vh",
       }}
     >

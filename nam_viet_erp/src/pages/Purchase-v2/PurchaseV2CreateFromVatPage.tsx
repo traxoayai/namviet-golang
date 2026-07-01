@@ -8,7 +8,7 @@ const { Title } = Typography;
 export default function PurchaseV2CreateFromVatPage() {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: 24, minHeight: '100vh', background: '#f5f5f5' }}>
+    <div style={{ padding: 24, minHeight: '100vh', background: '#f2f7fc' }}>
       <Card bordered={false} style={{ borderRadius: 8 }}>
         <Button type="text" icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)} style={{ marginBottom: 16 }}>
           Quay lại

@@ -169,7 +169,7 @@ const UpdateProfilePage: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", backgroundColor: "#f2f7fc" }}>
       <Form form={form} layout="vertical" onFinish={handleSave}>
         <Affix offsetTop={0} style={{ zIndex: 10 }}>
           <Card

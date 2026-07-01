@@ -126,7 +126,7 @@ const ProductMasterDataPage = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       <Content style={{ padding: 24, margin: 0 }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Title level={2}>Quản lý Dữ liệu Sản phẩm (Master)</Title>

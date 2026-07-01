@@ -502,7 +502,7 @@ const InvoicesPage = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       {syncProgress && (
         <div
           style={{

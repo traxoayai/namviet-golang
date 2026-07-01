@@ -840,7 +840,7 @@ const DiscountCodeManagement = () => {
             </Descriptions.Item>
             {(selectedPromotion as any).advanced_rules && (
               <Descriptions.Item label="Cấu hình nâng cao (Advanced Rules)">
-                <pre style={{ background: "#f5f5f5", padding: 8, borderRadius: 4, maxHeight: 200, overflow: "auto" }}>
+                <pre style={{ background: "#f2f7fc", padding: 8, borderRadius: 4, maxHeight: 200, overflow: "auto" }}>
                   {JSON.stringify((selectedPromotion as any).advanced_rules, null, 2)}
                 </pre>
               </Descriptions.Item>

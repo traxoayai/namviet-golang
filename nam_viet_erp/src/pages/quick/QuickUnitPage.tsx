@@ -690,7 +690,7 @@ const QuickUnitPage: React.FC = () => {
   );
 
   return (
-    <div style={{ height: 'calc(100vh - 64px)', padding: isMobile ? 0 : '16px', backgroundColor: isMobile ? '#f5f5f5' : 'transparent' }}>
+    <div style={{ height: 'calc(100vh - 64px)', padding: isMobile ? 0 : '16px', backgroundColor: isMobile ? '#f2f7fc' : 'transparent' }}>
       <Card 
         style={{ height: '100%', display: 'flex', flexDirection: 'column', border: isMobile ? 'none' : undefined, borderRadius: isMobile ? 0 : 8 }}
         bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, padding: isMobile ? '8px' : '16px', overflow: 'hidden' }}

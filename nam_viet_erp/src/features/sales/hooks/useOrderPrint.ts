@@ -23,11 +23,12 @@ interface RawOrderItem {
   uom?: string;
   unit?: string;
   quantity?: number;
-  unit_price?: number;
-  price?: number;
+  unit_price?: number | string;
+  price?: number | string;
   total_line?: number;
-  batch_no?: string;
-  lot_number?: string;
+  discount?: number | string;
+  batch_no?: string | null;
+  lot_number?: string | null;
   expiry_date?: string;
   shelf_location?: string;
 }
@@ -116,7 +117,7 @@ export const useOrderPrint = () => {
           uom: i.uom || i.unit || "ĐVT",
           quantity: i.quantity || 0,
           unit_price: Number(i.unit_price || i.price || 0),
-          total_line: i.total_line || (i.quantity || 0) * (i.unit_price || 0),
+          total_line: i.total_line !== undefined ? i.total_line : ((i.quantity || 0) * Number(i.unit_price || i.price || 0) - Number(i.discount || 0)),
           batch_no: i.batch_no || i.lot_number || "",
           expiry_date: i.expiry_date || "",
           shelf_location: i.shelf_location || "",

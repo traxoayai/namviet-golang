@@ -128,7 +128,7 @@ export default function PurchaseV2CreateEstimatePage() {
       style={{
         padding: 24,
         minHeight: "100vh",
-        background: "#f5f5f5",
+        background: "#f2f7fc",
         display: "flex",
         flexDirection: "column",
       }}

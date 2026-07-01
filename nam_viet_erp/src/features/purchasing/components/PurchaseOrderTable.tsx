@@ -6,10 +6,11 @@ import {
   CarOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Table, Tag, Space, Button, Tooltip, Popconfirm, Input } from "antd";
+import { Tag, Space, Button, Tooltip, Popconfirm, Input } from "antd";
 import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ResponsiveTable } from "@/shared/ui/common/ResponsiveTable";
 
 import { PurchaseOrderMaster } from "../types/purchase";
 
@@ -412,7 +413,7 @@ export const PurchaseOrderTable: React.FC<PurchaseOrderTableProps> = ({
   };
 
   return (
-    <Table
+    <ResponsiveTable
       columns={columns}
       dataSource={orders}
       rowKey="id"

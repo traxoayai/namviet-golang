@@ -37,7 +37,7 @@ export const useCreateOrderB2B = () => {
       isOverLimit,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Zustand store ref ổn định, không cần trong deps
-  }, [store.items, store.shippingFee, store.selectedVoucher, store.customer]);
+  }, [store.items, store.shippingFee, store.selectedVoucher, store.customer, store.manualDiscount]);
 
   // --- 2. LOGIC VẬN CHUYỂN (SMART DELIVERY ESTIMATOR) ---
   const estimatedDeliveryText = useMemo(() => {
@@ -220,9 +220,9 @@ export const useCreateOrderB2B = () => {
                   key: giftKey,
                   name: mainProduct ? `[🎁 Tặng kèm] ${mainProduct.name}` : (rew.gift_name || "Quà Tặng"),
                   sku: mainProduct ? `${mainProduct.sku}-GIFT` : "GIFT",
-                  price_wholesale: 0,
+                  price_wholesale: rew.gift_value || 0,
                   quantity: expectedQty,
-                  discount: 0,
+                  discount: (rew.gift_value || 0) * expectedQty,
                   total: 0,
                   image_url: mainProduct ? mainProduct.image_url : null,
                   lot_number: null,
@@ -233,6 +233,7 @@ export const useCreateOrderB2B = () => {
                   shelf_location: "",
                   is_gift: true,
                   gift_rule_id: rule.id,
+                  gift_source: 'auto_suggest',
                   gift_value: rew.gift_value || 0,
                 } as CartItem);
                 message.success(`🎁 Đã tự động thêm quà tặng: ${mainProduct?.name || rew.gift_name || "Quà Tặng"}`);
@@ -269,6 +270,7 @@ export const useCreateOrderB2B = () => {
           item.quantity !== orig.quantity ||
           item.is_gift !== orig.is_gift ||
           item.gift_rule_id !== orig.gift_rule_id ||
+          item.gift_source !== orig.gift_source ||
           item.upsell_remaining !== orig.upsell_remaining
         );
       });
@@ -279,10 +281,28 @@ export const useCreateOrderB2B = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.items, promoRules, applyPromoRules]);
 
+  // Tính signature của giỏ hàng (chỉ tính hàng bán, không tính quà tặng) để tránh infinite loop
+  const nonGiftItemsSignature = useMemo(() => {
+    return store.items
+      .filter((i) => !i.is_gift)
+      .map((i) => `${i.id}:${i.quantity}:${i.price_wholesale}`)
+      .join("|");
+  }, [store.items]);
+
+  const nonGiftSubTotal = useMemo(() => {
+    return store.items.reduce((sum, item) => sum + (item.is_gift ? 0 : item.quantity * item.price_wholesale), 0);
+  }, [store.items]);
+
   // --- useEffect: Verify voucher từ Backend thay vì tự tính toán (Yêu cầu từ BE) ---
   useEffect(() => {
     if (!store.selectedVoucher) {
       store.setManualDiscount(0);
+      
+      // Xóa quà tặng voucher nếu không có voucher
+      const itemsWithoutVoucherGifts = store.items.filter(i => i.gift_source !== 'voucher');
+      if (itemsWithoutVoucherGifts.length !== store.items.length) {
+        store.setItems(itemsWithoutVoucherGifts);
+      }
       return;
     }
 
@@ -290,39 +310,92 @@ export const useCreateOrderB2B = () => {
       try {
         const { salesService } = await import("@/features/sales/api/salesService");
         
-        // Tính SubTotal tạm (không gồm discount) để gửi lên
-        const subTotal = store.items.reduce((sum, item) => sum + (item.quantity * item.price_wholesale), 0);
-        
         const payload = {
           voucher_codes: [store.selectedVoucher?.code],
           customer_id: store.customer?.id || 0,
           shipping_fee: store.shippingFee || 0,
-          order_value: subTotal,
+          order_value: nonGiftSubTotal,
           cart_items: store.items.filter((i) => !i.is_gift).map((i) => ({
             product_id: i.id,
-            uom: i.wholesale_unit,
+            uom: i.wholesale_unit ? i.wholesale_unit.normalize('NFC') : "",
             quantity: i.quantity,
             price: i.price_wholesale,
           })),
         };
 
         const res = await salesService.verifyVoucher(payload);
-        if (res && res.discount_amount !== undefined) {
+        if (res && res.is_valid && res.discount_amount !== undefined) {
           // Lấy con số discount_amount CHUẨN XÁC từ Backend
           store.setManualDiscount(res.discount_amount);
+          
+          // Xử lý quà tặng từ voucher
+          let newItems = store.items.filter(i => i.gift_source !== 'voucher');
+          let hasNewGifts = false;
+          
+          if (res.gift_items && Array.isArray(res.gift_items)) {
+             const voucherGifts = res.gift_items.map((g: any, index: number) => ({
+                id: g.product_id,
+                key: `voucher_gift_${g.product_id}_${index}`,
+                name: `[🎁 Voucher] ${g.product_name || "Quà Tặng"}`,
+                sku: g.sku || "GIFT",
+                price_wholesale: g.price || 0,
+                quantity: g.quantity,
+                discount: (g.price || 0) * g.quantity,
+                total: 0,
+                image_url: g.image_url || null,
+                lot_number: null,
+                expiry_date: null,
+                wholesale_unit: g.wholesale_unit || "Cái",
+                items_per_carton: 1,
+                stock_quantity: 999,
+                shelf_location: "",
+                is_gift: true,
+                gift_source: 'voucher',
+             } as CartItem));
+             
+             if (voucherGifts.length > 0) {
+               newItems = [...newItems, ...voucherGifts];
+               hasNewGifts = true;
+             }
+          }
+          
+          // Chỉ update nếu có sự thay đổi về số lượng quà voucher
+          const currentVoucherGifts = store.items.filter(i => i.gift_source === 'voucher');
+          if (hasNewGifts || currentVoucherGifts.length > 0) {
+             // Đảm bảo không bị loop: check deep equal hoặc check độ dài
+             const newVoucherGiftsLength = res.gift_items?.length || 0;
+             if (currentVoucherGifts.length !== newVoucherGiftsLength || 
+                 !currentVoucherGifts.every((cg, i) => res.gift_items[i] && cg.id === res.gift_items[i].product_id && cg.quantity === res.gift_items[i].quantity)) {
+               store.setItems(newItems);
+             }
+          }
         } else {
+          // Không đủ điều kiện -> Xóa voucher & quà tặng
           store.setManualDiscount(0);
+          store.setVoucher(null);
+          
+          const itemsWithoutVoucherGifts = store.items.filter(i => i.gift_source !== 'voucher');
+          if (itemsWithoutVoucherGifts.length !== store.items.length) {
+            store.setItems(itemsWithoutVoucherGifts);
+          }
+          
+          message.warning("Tổng đơn hàng thay đổi, Voucher không còn hiệu lực và đã bị gỡ.");
         }
       } catch (err) {
         console.error("Lỗi khi verify voucher:", err);
         store.setManualDiscount(0);
+        // Error implies invalid or network error, let's just clear
+        store.setVoucher(null);
       }
     };
 
     // Gọi debounce nhẹ hoặc gọi luôn
     const timer = setTimeout(verifyVoucherAsync, 300);
     return () => clearTimeout(timer);
-  }, [store.selectedVoucher, store.items, store.shippingFee, store.customer]);
+    
+    // NOTE: Cố tình dùng nonGiftItemsSignature thay vì store.items
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.selectedVoucher, nonGiftItemsSignature, nonGiftSubTotal, store.shippingFee, store.customer]);
 
   // Intercept updateItem
   const handleUpdateItem = useCallback(

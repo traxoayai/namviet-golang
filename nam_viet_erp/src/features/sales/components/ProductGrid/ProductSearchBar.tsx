@@ -3,13 +3,16 @@ import {
   SearchOutlined,
   BarcodeOutlined,
   EnvironmentOutlined,
+  GiftOutlined,
 } from "@ant-design/icons";
-import { Select, Avatar, Tag, Empty, Spin, Row, Col } from "antd";
+import { Select, Avatar, Tag, Empty, Spin, Row, Col, Button, Badge } from "antd";
 import { useState, useEffect, useRef } from "react";
 
 import { salesService } from "@/features/sales/api/salesService";
 import { ProductB2B } from "@/features/sales/types/b2b_sales";
 import { useDebounce } from "@/shared/hooks/useDebounce";
+import { ApplicableVouchersModal } from "./ApplicableVouchersModal";
+import { useSalesStore } from "@/features/sales/stores/useSalesStore";
 
 interface Props {
   onSelect: (product: ProductB2B) => void;
@@ -23,6 +26,8 @@ export const ProductSearchBar = ({ onSelect }: Props) => {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
   const latestReqIdRef = useRef(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const store = useSalesStore();
 
   // Logic gọi API tìm sản phẩm — chuyển useMemo (anti-pattern cho side-effect)
   // sang useEffect và chống race với latestReqIdRef
@@ -108,6 +113,7 @@ export const ProductSearchBar = ({ onSelect }: Props) => {
   }, [debouncedSearch]);
 
   return (
+    <div style={{ display: 'flex', width: "100%", marginBottom: 16, gap: 8, alignItems: 'flex-start' }}>
     <Select
       showSearch
       placeholder="🔍 Gõ tên, SKU hoặc quét mã vạch để thêm hàng..."
@@ -124,7 +130,7 @@ export const ProductSearchBar = ({ onSelect }: Props) => {
       }}
       loading={loading}
       options={options}
-      style={{ width: "100%", marginBottom: 16 }}
+      style={{ flex: 1, minWidth: 300 }}
       size="large"
       suffixIcon={<SearchOutlined />}
       listHeight={400}
@@ -137,5 +143,15 @@ export const ProductSearchBar = ({ onSelect }: Props) => {
       }
       value={null}
     />
+    <Badge dot={store.selectedVoucher ? true : false} color="green">
+      <Button 
+        type="primary" 
+        style={{ height: '40px', background: '#fa8c16', borderColor: '#fa8c16' }}
+        icon={<GiftOutlined />} 
+        onClick={() => setModalOpen(true)}
+      />
+    </Badge>
+    <ApplicableVouchersModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    </div>
   );
 };

@@ -61,9 +61,10 @@ export const VoucherSelector = ({
           label: (
             <Space>
               <Tag color="volcano">{v.code}</Tag>
-              <Text>
-                Giảm {v.discount_value.toLocaleString()}
-                {v.discount_type === "percent" ? "%" : "đ"}
+              <Text strong>{v.name}</Text>
+              <Text type="secondary">
+                (-{v.discount_value.toLocaleString()}
+                {v.discount_type === "percent" ? "%" : "đ"})
               </Text>
             </Space>
           ),

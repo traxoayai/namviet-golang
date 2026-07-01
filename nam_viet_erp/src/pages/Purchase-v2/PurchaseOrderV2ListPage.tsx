@@ -260,7 +260,7 @@ export default function PurchaseOrderV2ListPage() {
   ];
 
   return (
-    <div style={{ padding: 24, minHeight: '100vh', background: '#f5f5f5' }}>
+    <div style={{ padding: 24, minHeight: '100vh', background: '#f2f7fc' }}>
       <Card bordered={false} style={{ borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <Title level={3} style={{ margin: 0 }}>Quản Lý Đơn Mua Hàng (V2)</Title>

@@ -7,6 +7,7 @@ import {
   useNotificationStore,
   AppNotification,
 } from "@/features/settings/stores/useNotificationStore";
+import { useInternalChatStore } from "@/features/chat/stores/useInternalChatStore";
 
 export const NotificationContext = createContext({});
 
@@ -16,7 +17,11 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
   const addNotification = useNotificationStore(
     (state) => state.addNotification
   );
+  const setNotifications = useNotificationStore(
+    (state) => state.setNotifications
+  );
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const lastSoundTimeRef = useRef<number>(0);
 
   useEffect(() => {
     // file âm thanh thông báo.
@@ -31,15 +36,29 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
     // 1. Cập nhật Store
     addNotification(payload);
 
-    // 2. Phát âm thanh
-    if (audioRef.current) {
-      audioRef.current
-        .play()
-        .catch((e) => console.log("Audio autoplay blocked:", e));
+    const isChat = payload.category === "chat_message";
+    const activeConversationId = useInternalChatStore.getState().activeConversationId;
+
+    // Nếu là chat và đang ở đúng phòng chat đó -> Không Toast, Không Âm thanh
+    if (isChat && activeConversationId === payload.reference_id) {
+      return;
     }
 
-    // 3. Hiển thị Toast (Ant Design) - Tự động chọn icon dựa trên type
-    // type: 'info' | 'success' | 'warning' | 'error'
+    // 2. Phát âm thanh (Có Debounce 3s cho tin nhắn chat)
+    const now = Date.now();
+    if (audioRef.current) {
+      if (!isChat || (now - lastSoundTimeRef.current > 3000)) {
+        audioRef.current
+          .play()
+          .catch((e) => console.log("Audio autoplay blocked:", e));
+        lastSoundTimeRef.current = now;
+      }
+    }
+
+    // Nếu là tin nhắn group chat thông thường (không tag), có thể chặn Toast ở đây tùy vào yêu cầu.
+    // Tạm thời vẫn hiện Toast cho direct chat / nhóm. 
+
+    // 3. Hiển thị Toast (Ant Design)
     const type = payload.type || "info";
     notification[type]({
       message: payload.title,
@@ -53,10 +72,15 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
       document.visibilityState === "hidden" &&
       Notification.permission === "granted"
     ) {
-      new Notification(payload.title, {
+      const desktopNoti = new Notification(payload.title, {
         body: payload.message,
         icon: "/vite.svg",
       });
+      desktopNoti.onclick = () => {
+        window.focus();
+        // Có thể navigate dựa trên category ở đây nếu cần, tạm thời focus lại web
+        desktopNoti.close();
+      };
     }
   };
 
@@ -67,6 +91,20 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) return;
+
+      // 1. Lấy 50 thông báo gần nhất khi khởi tạo
+      const { data: recentNotis } = await supabase
+        .from("notifications")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(50);
+        
+      if (recentNotis) {
+        setNotifications(recentNotis as AppNotification[]);
+      }
+
+      // 2. Subscribe Realtime
 
       const channel = supabase
         .channel("realtime-notifications")

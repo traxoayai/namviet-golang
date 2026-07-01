@@ -116,6 +116,7 @@ export interface CartItem extends ProductB2B {
   total: number;
   is_gift?: boolean;
   gift_rule_id?: number;
+  gift_source?: 'voucher' | 'auto_suggest';
   gift_value?: number;
   upsell_remaining?: number; // Còn cần thêm bao nhiêu để được tặng
   upsell_reward_qty?: number; // Số lượng sẽ được tặng

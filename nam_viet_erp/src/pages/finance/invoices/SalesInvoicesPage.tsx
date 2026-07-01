@@ -384,7 +384,7 @@ const SalesInvoicesPage = () => {
   );
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       {syncProgress && (
         <div style={{ padding: "16px 24px 0 24px", maxWidth: 1900, margin: "0 auto", width: "100%" }}>
           <Alert

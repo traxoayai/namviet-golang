@@ -17,7 +17,7 @@ const PendingApprovalPage: React.FC = () => {
         minHeight: "100vh",
         display: "grid",
         placeItems: "center",
-        background: "#f0f2f5",
+        background: "#f2f7fc",
       }}
     >
       <Content>

@@ -59,7 +59,7 @@ const LoginPage = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        background: "#f0f2f5",
+        background: "#f2f7fc",
       }}
     >
       <Spin spinning={loading}>

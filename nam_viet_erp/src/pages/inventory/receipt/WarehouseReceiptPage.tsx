@@ -524,7 +524,7 @@ const WarehouseReceiptPage = () => {
       style={{
         padding: screens.md ? 24 : 12,
         paddingBottom: 100,
-        background: "#f5f5f5",
+        background: "#f2f7fc",
         minHeight: "100vh",
       }}
     >
@@ -677,7 +677,7 @@ const WarehouseReceiptPage = () => {
                   </Space>
 
                   {/* Quantity Block */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f5f5f5', padding: '8px 12px', borderRadius: 6, marginBottom: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f2f7fc', padding: '8px 12px', borderRadius: 6, marginBottom: 8 }}>
                     <div>
                       <Text type="secondary" style={{ fontSize: 12 }}>Cần nhập</Text>
                       <div style={{ fontSize: 16, fontWeight: 'bold' }}>{remains} <Text type="secondary" style={{ fontSize: 13, fontWeight: 'normal' }}>{item.unit}</Text></div>

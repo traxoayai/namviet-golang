@@ -1,7 +1,7 @@
 import { TablePaginationConfig } from "antd";
 import { debounce } from "lodash";
 import { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 
 export interface ListingParams {
   page?: number;
@@ -26,21 +26,47 @@ export function useListingLogic<T>({
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const location = useLocation();
+  const storageKey = `listing_filters_${location.pathname}`;
+
   // State quản lý bộ lọc & phân trang
   const [filters, setFilters] = useState<ListingParams>(() => {
-    const params: ListingParams = {
-      page: Number(searchParams.get("page")) || 1,
-      pageSize: Number(searchParams.get("pageSize")) || 10,
-      search: searchParams.get("search") || "",
+    // 1. Kiểm tra xem có params trên URL không
+    const urlHasParams = Array.from(searchParams.keys()).length > 0;
+    
+    if (urlHasParams) {
+      const params: ListingParams = {
+        page: Number(searchParams.get("page")) || 1,
+        pageSize: Number(searchParams.get("pageSize")) || 10,
+        search: searchParams.get("search") || "",
+        ...defaultFilters,
+      };
+      // Merge các filter khác từ URL
+      searchParams.forEach((value, key) => {
+        if (!["page", "pageSize", "search"].includes(key)) {
+          params[key] = value;
+        }
+      });
+      return params;
+    }
+
+    // 2. Thử khôi phục từ SessionStorage
+    try {
+      const saved = sessionStorage.getItem(storageKey);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error("Lỗi parse sessionStorage:", e);
+    }
+
+    // 3. Fallback về mặc định
+    return {
+      page: 1,
+      pageSize: 10,
+      search: "",
       ...defaultFilters,
     };
-    // Merge các filter khác từ URL
-    searchParams.forEach((value, key) => {
-      if (!["page", "pageSize", "search"].includes(key)) {
-        params[key] = value;
-      }
-    });
-    return params;
   });
 
   const fetchData = useCallback(async () => {
@@ -56,15 +82,16 @@ export function useListingLogic<T>({
     }
   }, [fetcher, filters]);
 
-  // Sync URL
+  // Sync URL và SessionStorage
   useEffect(() => {
     const urlParams: Record<string, string> = {};
     Object.keys(filters).forEach((key) => {
       if (filters[key]) urlParams[key] = String(filters[key]);
     });
-    setSearchParams(urlParams);
+    setSearchParams(urlParams, { replace: true });
+    sessionStorage.setItem(storageKey, JSON.stringify(filters));
     fetchData();
-  }, [filters, fetchData, setSearchParams]);
+  }, [filters, fetchData, setSearchParams, storageKey]);
 
   const handleTableChange = (pagination: TablePaginationConfig) => {
     setFilters((prev) => ({

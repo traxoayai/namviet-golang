@@ -701,6 +701,88 @@
 - **description**: text (Nullable: YES)
 - **account_id**: text (Nullable: YES)
 
+### Table: hr_attendances
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_attendances_id_seq'::regclass)
+- **shift_id**: bigint (Nullable: NO)
+- **user_id**: uuid (Nullable: NO)
+- **check_in_time**: timestamp with time zone (Nullable: YES)
+- **check_in_ip**: character varying(45) (Nullable: YES)
+- **check_in_lat**: numeric (Nullable: YES)
+- **check_in_lng**: numeric (Nullable: YES)
+- **distance_from_branch**: numeric (Nullable: YES)
+- **is_valid_location**: boolean (Nullable: YES)
+- **check_out_time**: timestamp with time zone (Nullable: YES)
+- **check_out_ip**: character varying(45) (Nullable: YES)
+- **check_out_lat**: numeric (Nullable: YES)
+- **check_out_lng**: numeric (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: hr_contracts
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_contracts_id_seq'::regclass)
+- **user_id**: uuid (Nullable: NO)
+- **contract_type**: character varying(255) (Nullable: NO)
+- **base_salary**: numeric (Nullable: NO) DEFAULT 0
+- **start_date**: date (Nullable: NO)
+- **end_date**: date (Nullable: YES)
+- **kpi_target**: text (Nullable: YES)
+- **status**: character varying(50) (Nullable: NO) DEFAULT 'active'::character varying
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: hr_kpi_metrics
+- **code**: text (Nullable: NO)
+- **name**: text (Nullable: NO)
+- **description**: text (Nullable: YES)
+- **query_source**: text (Nullable: NO)
+- **is_active**: boolean (Nullable: YES) DEFAULT true
+- **created_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
+- **unit**: text (Nullable: YES)
+
+### Table: hr_kpi_reward_rules
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_kpi_reward_rules_id_seq'::regclass)
+- **metric_code**: text (Nullable: NO)
+- **condition_type**: text (Nullable: NO)
+- **reward_type**: text (Nullable: NO)
+- **reward_value**: numeric (Nullable: NO)
+- **created_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
+
+### Table: hr_kpi_targets
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_kpi_targets_id_seq'::regclass)
+- **employee_id**: uuid (Nullable: NO)
+- **month**: integer (Nullable: NO)
+- **year**: integer (Nullable: NO)
+- **metric_code**: text (Nullable: NO)
+- **target_value**: numeric (Nullable: NO)
+- **assigned_by**: uuid (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
+
+### Table: hr_payrolls
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_payrolls_id_seq'::regclass)
+- **user_id**: uuid (Nullable: NO)
+- **month**: integer (Nullable: NO)
+- **year**: integer (Nullable: NO)
+- **base_salary**: numeric (Nullable: NO) DEFAULT 0
+- **kpi_bonus**: numeric (Nullable: NO) DEFAULT 0
+- **commission**: numeric (Nullable: NO) DEFAULT 0
+- **total_salary**: numeric (Nullable: NO) DEFAULT 0
+- **status**: character varying(50) (Nullable: NO) DEFAULT 'draft'::character varying
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: hr_work_shifts
+- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_work_shifts_id_seq'::regclass)
+- **user_id**: uuid (Nullable: NO)
+- **shift_name**: character varying(100) (Nullable: NO)
+- **date**: date (Nullable: NO)
+- **start_time**: time without time zone (Nullable: NO)
+- **end_time**: time without time zone (Nullable: NO)
+- **status**: character varying(50) (Nullable: NO) DEFAULT 'pending'::character varying
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
 ### Table: inventory_batches
 - **id**: bigint (Nullable: NO)
 - **warehouse_id**: bigint (Nullable: YES)
@@ -833,6 +915,15 @@
 - **received_by**: uuid (Nullable: YES)
 - **received_at**: timestamp with time zone (Nullable: YES)
 
+### Table: jobs
+- **id**: bigint (Nullable: NO) DEFAULT nextval('jobs_id_seq'::regclass)
+- **job_type**: character varying(255) (Nullable: NO)
+- **payload**: jsonb (Nullable: NO)
+- **status**: character varying(50) (Nullable: NO) DEFAULT 'pending'::character varying
+- **run_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
 ### Table: journal_entries
 - **id**: bigint (Nullable: NO) DEFAULT nextval('journal_entries_id_seq'::regclass)
 - **book**: text (Nullable: NO)
@@ -901,6 +992,74 @@
 - **country**: text (Nullable: YES)
 - **logo_url**: text (Nullable: YES)
 - **status**: text (Nullable: YES) DEFAULT 'active'::text
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: marketing_campaign_metrics
+- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_campaign_metrics_id_seq'::regclass)
+- **campaign_id**: bigint (Nullable: NO)
+- **sent_count**: integer (Nullable: NO) DEFAULT 0
+- **open_count**: integer (Nullable: NO) DEFAULT 0
+- **clicked_count**: integer (Nullable: NO) DEFAULT 0
+- **redeemed_count**: integer (Nullable: NO) DEFAULT 0
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: marketing_campaigns
+- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_campaigns_id_seq'::regclass)
+- **name**: character varying(255) (Nullable: NO)
+- **budget**: numeric (Nullable: NO) DEFAULT 0
+- **spent**: numeric (Nullable: NO) DEFAULT 0
+- **flow_config**: jsonb (Nullable: YES)
+- **status**: character varying(50) (Nullable: NO) DEFAULT 'draft'::character varying
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: marketing_surveys
+- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_surveys_id_seq'::regclass)
+- **name**: character varying(255) (Nullable: NO)
+- **form_config**: jsonb (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: medical_diseases
+- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_diseases_id_seq'::regclass)
+- **dic10_code**: character varying(20) (Nullable: NO)
+- **name**: character varying(255) (Nullable: NO)
+- **symptoms**: jsonb (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: medical_prescription_template_items
+- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_prescription_template_items_id_seq'::regclass)
+- **template_id**: bigint (Nullable: NO)
+- **product_id**: bigint (Nullable: NO)
+- **quantity**: integer (Nullable: NO) DEFAULT 1
+- **dosage**: character varying(255) (Nullable: YES)
+- **instructions**: text (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: medical_prescription_templates
+- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_prescription_templates_id_seq'::regclass)
+- **disease_id**: bigint (Nullable: NO)
+- **min_age_months**: integer (Nullable: NO) DEFAULT 0
+- **max_age_months**: integer (Nullable: NO) DEFAULT 1200
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: medical_vaccine_doses
+- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_vaccine_doses_id_seq'::regclass)
+- **protocol_id**: bigint (Nullable: NO)
+- **dose_number**: integer (Nullable: NO)
+- **min_days_from_previous**: integer (Nullable: NO) DEFAULT 0
+- **max_days_from_previous**: integer (Nullable: YES)
+- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
+
+### Table: medical_vaccine_protocols
+- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_vaccine_protocols_id_seq'::regclass)
+- **protocol_name**: character varying(255) (Nullable: NO)
 - **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
 - **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
 
@@ -1023,6 +1182,7 @@
 - **custom_vehicle_phone**: text (Nullable: YES)
 - **custom_vehicle_route**: text (Nullable: YES)
 - **source**: text (Nullable: YES) DEFAULT 'erp'::text <== Origin of order: erp or portal. NULL treated as erp.>
+- **delivered_at**: timestamp with time zone (Nullable: YES)
 
 ### Table: paraclinical_templates
 - **id**: bigint (Nullable: NO)
@@ -1268,7 +1428,7 @@
 - **name**: text (Nullable: NO)
 - **description**: text (Nullable: YES)
 - **type**: text (Nullable: NO)
-- **discount_type**: text (Nullable: NO)
+- **discount_type**: text (Nullable: YES)
 - **discount_value**: numeric (Nullable: NO) DEFAULT 0
 - **max_discount_value**: numeric (Nullable: YES)
 - **min_order_value**: numeric (Nullable: YES) DEFAULT 0
@@ -1283,6 +1443,11 @@
 - **status**: text (Nullable: YES) DEFAULT 'active'::text
 - **created_at**: timestamp with time zone (Nullable: YES) DEFAULT now()
 - **customer_type**: text (Nullable: YES) DEFAULT 'B2C'::text
+- **promotion_class**: character varying(50) (Nullable: YES) DEFAULT 'basic'::character varying
+- **advanced_rules**: jsonb (Nullable: YES)
+- **is_stackable**: boolean (Nullable: YES) DEFAULT true
+- **promo_group**: character varying(20) (Nullable: YES) DEFAULT 'cash'::character varying
+- **combinable_groups**: jsonb (Nullable: YES) DEFAULT '[]'::jsonb
 
 ### Table: provinces
 - **code**: text (Nullable: NO)
@@ -1701,21 +1866,8 @@
 - **role_id**: uuid (Nullable: YES)
 - **company_id**: uuid (Nullable: YES)
 - **warehouse_id**: bigint (Nullable: YES)
-
-### Table: promotions
-- **id**: bigint (Nullable: NO) DEFAULT nextval('promotions_id_seq'::regclass)
-- **name**: text (Nullable: NO)
-- **code**: text (Nullable: NO)
-- **description**: text (Nullable: YES)
-- **discount_type**: text (Nullable: NO)
-- **discount_value**: numeric (Nullable: NO)
-- **start_date**: timestamp with time zone (Nullable: NO)
-- **end_date**: timestamp with time zone (Nullable: NO)
-- **is_active**: boolean (Nullable: NO) DEFAULT true
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **promotion_class**: character varying(50) (Nullable: YES) DEFAULT 'basic'::character varying
-- **advanced_rules**: jsonb (Nullable: YES)
+- **department_id**: uuid (Nullable: YES)
+- **permissions**: jsonb (Nullable: YES) DEFAULT '{}'::jsonb
 
 ### Table: vaccination_template_items
 - **id**: bigint (Nullable: NO)
@@ -1757,96 +1909,6 @@
 - **pre_vat_price**: numeric (Nullable: YES)
 - **vat_of_supplier**: numeric (Nullable: YES)
 - **internal_product_unit_id**: bigint (Nullable: YES)
-
-### Table: hr_payrolls
-- **id**: bigint (Nullable: NO) DEFAULT nextval('hr_payrolls_id_seq'::regclass)
-- **user_id**: uuid (Nullable: NO)
-- **month**: integer (Nullable: NO)
-- **year**: integer (Nullable: NO)
-- **base_salary**: numeric (Nullable: NO) DEFAULT 0
-- **kpi_bonus**: numeric (Nullable: NO) DEFAULT 0
-- **commission**: numeric (Nullable: NO) DEFAULT 0
-- **total_salary**: numeric (Nullable: NO) DEFAULT 0
-- **status**: character varying(50) (Nullable: NO) DEFAULT 'draft'::character varying
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: medical_diseases
-- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_diseases_id_seq'::regclass)
-- **dic10_code**: character varying(20) (Nullable: NO)
-- **name**: character varying(255) (Nullable: NO)
-- **symptoms**: jsonb (Nullable: YES)
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: medical_prescription_templates
-- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_prescription_templates_id_seq'::regclass)
-- **disease_id**: bigint (Nullable: NO)
-- **min_age_months**: integer (Nullable: NO) DEFAULT 0
-- **max_age_months**: integer (Nullable: NO) DEFAULT 1200
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: medical_prescription_template_items
-- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_prescription_template_items_id_seq'::regclass)
-- **template_id**: bigint (Nullable: NO)
-- **product_id**: bigint (Nullable: NO)
-- **quantity**: integer (Nullable: NO) DEFAULT 1
-- **dosage**: character varying(255) (Nullable: YES)
-- **instructions**: text (Nullable: YES)
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: medical_vaccine_protocols
-- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_vaccine_protocols_id_seq'::regclass)
-- **protocol_name**: character varying(255) (Nullable: NO)
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: medical_vaccine_doses
-- **id**: bigint (Nullable: NO) DEFAULT nextval('medical_vaccine_doses_id_seq'::regclass)
-- **protocol_id**: bigint (Nullable: NO)
-- **dose_number**: integer (Nullable: NO)
-- **min_days_from_previous**: integer (Nullable: NO) DEFAULT 0
-- **max_days_from_previous**: integer (Nullable: YES)
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: jobs
-- **id**: bigint (Nullable: NO) DEFAULT nextval('jobs_id_seq'::regclass)
-- **job_type**: character varying(255) (Nullable: NO)
-- **payload**: jsonb (Nullable: NO)
-- **status**: character varying(50) (Nullable: NO) DEFAULT 'pending'::character varying
-- **run_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: marketing_campaigns
-- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_campaigns_id_seq'::regclass)
-- **name**: character varying(255) (Nullable: NO)
-- **budget**: numeric (Nullable: NO) DEFAULT 0
-- **spent**: numeric (Nullable: NO) DEFAULT 0
-- **flow_config**: jsonb (Nullable: YES)
-- **status**: character varying(50) (Nullable: NO) DEFAULT 'draft'::character varying
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: marketing_campaign_metrics
-- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_campaign_metrics_id_seq'::regclass)
-- **campaign_id**: bigint (Nullable: NO)
-- **sent_count**: integer (Nullable: NO) DEFAULT 0
-- **open_count**: integer (Nullable: NO) DEFAULT 0
-- **clicked_count**: integer (Nullable: NO) DEFAULT 0
-- **redeemed_count**: integer (Nullable: NO) DEFAULT 0
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-
-### Table: marketing_surveys
-- **id**: bigint (Nullable: NO) DEFAULT nextval('marketing_surveys_id_seq'::regclass)
-- **name**: character varying(255) (Nullable: NO)
-- **form_config**: jsonb (Nullable: YES)
-- **created_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
-- **updated_at**: timestamp with time zone (Nullable: NO) DEFAULT now()
 
 ### Table: wards
 - **code**: text (Nullable: NO)

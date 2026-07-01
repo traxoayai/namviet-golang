@@ -9,6 +9,7 @@ import {
   Select,
   message,
   Alert,
+  Grid,
 } from "antd";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,6 +44,9 @@ const CreateB2BOrderPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditMode = !!id;
+  const screens = Grid.useBreakpoint();
+  const isMobile = screens.xs || (screens.sm && !screens.md);
+  
   const { isLocked: submitLoading, withLock } = useSubmitLock();
   const [editLoading, setLoading] = useState(false);
   const loading = submitLoading || editLoading;
@@ -388,7 +392,7 @@ const CreateB2BOrderPage = () => {
             p_items: verifiedItems.map((i) => ({
               product_id: i.id,
               quantity: i.quantity,
-              uom: i.wholesale_unit,
+              uom: i.wholesale_unit ? i.wholesale_unit.normalize('NFC') : "",
               unit_price: i.price_wholesale,
               discount: i.discount || 0,
               is_gift: !!i.is_gift,
@@ -417,7 +421,7 @@ const CreateB2BOrderPage = () => {
             p_items: verifiedItems.map((i) => ({
               product_id: i.id,
               quantity: i.quantity,
-              uom: i.wholesale_unit,
+              uom: i.wholesale_unit ? i.wholesale_unit.normalize('NFC') : "",
               unit_price: i.price_wholesale,
               discount: i.discount,
               is_gift: !!i.is_gift,
@@ -505,11 +509,11 @@ const CreateB2BOrderPage = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: isMobile ? "#fff" : "#f2f7fc" }}>
       {/* --- KHU VỰC HEADER --- */}
       <div
         style={{
-          padding: "12px 24px",
+          padding: isMobile ? "12px 16px" : "12px 24px",
           background: "#fff",
           borderBottom: "1px solid #ddd",
           position: "sticky",
@@ -519,22 +523,31 @@ const CreateB2BOrderPage = () => {
           display: "flex", // [NEW] Flex layout
           justifyContent: "space-between", // [NEW] Đẩy 2 bên
           alignItems: "center",
+          gap: 12,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 0 }}>
           <ArrowLeftOutlined
-            style={{ fontSize: 18, marginRight: 12, cursor: "pointer" }}
+            style={{ fontSize: 18, marginRight: 12, cursor: "pointer", flexShrink: 0 }}
             onClick={() => navigate(-1)}
           />
-          <Title level={4} style={{ margin: 0 }}>
+          <Title 
+            level={isMobile ? 5 : 4} 
+            style={{ 
+              margin: 0, 
+              whiteSpace: "nowrap", 
+              overflow: "hidden", 
+              textOverflow: "ellipsis" 
+            }}
+          >
             {isEditMode
-              ? "Cập nhật Đơn Bán Buôn (B2B)"
+              ? "Cập nhật Đơn B2B"
               : "Tạo Đơn Bán Buôn (B2B)"}
           </Title>
         </div>
 
         {/* [NEW] ĐƯA NÚT BẤM LÊN ĐÂY */}
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
           <ActionButtons
             loading={loading}
             isOverLimit={financials.isOverLimit}
@@ -548,13 +561,13 @@ const CreateB2BOrderPage = () => {
 
       <Content
         style={{
-          padding: "24px",
+          padding: isMobile ? "8px" : "24px",
           margin: "0 auto",
           width: "100%",
         }}
       >
         <Row gutter={24}>
-          <Col xs={24} lg={17} xl={18} xxl={19}>
+          <Col xs={24} lg={16} xl={17} xxl={18}>
             {/* KHỐI A: THÔNG TIN KHÁCH HÀNG */}
             <div style={{ marginBottom: 16 }}>
               {!customer ? (
@@ -612,7 +625,7 @@ const CreateB2BOrderPage = () => {
             />
           </Col>
 
-          <Col xs={24} lg={7} xl={6} xxl={5}>
+          <Col xs={24} lg={8} xl={7} xxl={6}>
             <div style={{ position: "sticky", top: 80 }}>
               {/* [NEW] HIỂN THỊ ALERT Ở ĐÂY (Thay vì trong nút bấm) */}
               {financials.isOverLimit ? (

@@ -2,12 +2,12 @@
 import {
   SendOutlined,
   CloseOutlined,
-  //FileTextOutlined,
   PrinterOutlined,
   SaveOutlined,
-  SnippetsOutlined, // [NEW]
+  SnippetsOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
-import { Button, Popconfirm, Space } from "antd";
+import { Button, Popconfirm, Space, Dropdown, MenuProps, Grid, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -17,6 +17,8 @@ interface Props {
   onPrint?: () => void;
   onPrintPicking?: () => void; // [NEW]
 }
+
+const { useBreakpoint } = Grid;
 
 // Sửa lại Component để linh hoạt hơn
 export const ActionButtons = ({
@@ -28,8 +30,74 @@ export const ActionButtons = ({
   style,
 }: Props & { style?: React.CSSProperties }) => {
   const navigate = useNavigate();
+  const screens = useBreakpoint();
+  const isMobile = screens.xs || (screens.sm && !screens.md);
 
-  // [REMOVED] Đã tách Alert ra ngoài để component này chỉ chứa nút bấm thuần túy
+  const menuItems: MenuProps["items"] = [
+    ...(onPrintPicking
+      ? [
+          {
+            key: "print_picking",
+            icon: <SnippetsOutlined />,
+            label: "In Phiếu Nhặt",
+            onClick: onPrintPicking,
+          },
+        ]
+      : []),
+    {
+      key: "print",
+      icon: <PrinterOutlined />,
+      label: "In Đơn",
+      onClick: onPrint,
+    },
+    {
+      key: "draft",
+      icon: <SaveOutlined />,
+      label: "Lưu nháp",
+      onClick: () => onSubmit("DRAFT"),
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "cancel",
+      icon: <CloseOutlined />,
+      label: "Hủy bỏ",
+      danger: true,
+      onClick: () => {
+        Modal.confirm({
+          title: "Hủy đơn hàng?",
+          content: "Dữ liệu chưa lưu sẽ bị mất. Bạn có chắc không?",
+          okText: "Đồng ý",
+          cancelText: "Không",
+          onOk: () => navigate("/b2b/orders"),
+        });
+      },
+    },
+  ];
+
+  if (isMobile) {
+    return (
+      <Space style={style}>
+        <Dropdown menu={{ items: menuItems }} trigger={["click"]}>
+          <Button icon={<MoreOutlined />} size="large" />
+        </Dropdown>
+        <Button
+          type="primary"
+          icon={<SendOutlined />}
+          size="large"
+          onClick={() => onSubmit("CONFIRMED")}
+          loading={loading}
+          style={{
+            background: isOverLimit ? undefined : "#0050b3",
+            borderColor: isOverLimit ? undefined : "#0050b3",
+          }}
+        >
+          Tạo Đơn
+        </Button>
+      </Space>
+    );
+  }
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8, ...style }}>
@@ -73,14 +141,6 @@ export const ActionButtons = ({
           >
             In Đơn
           </Button>
-          {/* <Button
-            icon={<FileTextOutlined />}
-            size="large"
-            onClick={() => onSubmit("QUOTE")}
-            loading={loading}
-          >
-            Báo giá
-          </Button> */}
           <Button
             icon={<SaveOutlined />}
             size="large"

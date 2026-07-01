@@ -20,19 +20,19 @@ BEGIN
         RAISE EXCEPTION 'Đơn hàng này đã bị hủy từ trước.';
     END IF;
 
-    -- KHÔNG cho phép hủy ngang đơn đã giao/hoàn tất. (Nghiệp vụ kế toán: Đã giao thì phải làm Phiếu Trả Hàng)
+    -- KHÔNG cho phép hủy ngang đơn đã giao/hoàn tất.
     IF v_order.status IN ('DELIVERED', 'COMPLETED') THEN
         RAISE EXCEPTION 'Đơn hàng đã giao thành công. Vui lòng sử dụng tính năng Trả Hàng thay vì Hủy Đơn.';
     END IF;
 
-    -- 3. Lấy tên người hủy để ghi vào note
+    -- 3. Lấy tên người hủy
     SELECT COALESCE(full_name, email, 'Hệ thống') INTO v_user_name 
     FROM public.users WHERE id = COALESCE(p_user_id, auth.uid());
 
-    -- 4. THỰC THI HỦY (PHÉP MÀU NẰM Ở ĐÂY)
+    -- 4. THỰC THI HỦY
     -- Khi update thành 'CANCELLED', PostgreSQL sẽ tự động đánh thức:
-    -- + trigger_order_cancel_restore_stock: Tìm lại lịch sử trừ Lô (Batch) và cộng trả kho nguyên vẹn.
-    -- + trg_update_debt_from_orders: Trừ lại phần nợ đã ghi nhận cho khách.
+    -- + trigger_order_cancel_restore_stock: Đã được sửa để tự động hoàn trả đúng kho, lô, số lượng.
+    -- + trg_update_debt_from_orders: Trừ lại công nợ
     UPDATE public.orders
     SET status = 'CANCELLED',
         note = COALESCE(note, '') || E'\n--- \n[HỦY ĐƠN ' || TO_CHAR(NOW(), 'DD/MM/YYYY HH24:MI') || '] - Người hủy: ' || v_user_name || ' - Lý do: ' || p_reason,
@@ -41,7 +41,7 @@ BEGIN
 
     RETURN jsonb_build_object(
         'success', true, 
-        'message', 'Đã hủy đơn hàng thành công! Hệ thống đã tự động hoàn trả kho và công nợ (nếu có).'
+        'message', 'Đã hủy đơn hàng thành công! Hệ thống đã tự động hoàn trả đầy đủ Kho và Công nợ.'
     );
 END;
 $function$

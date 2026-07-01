@@ -101,7 +101,7 @@ const InvoiceUploadModal: React.FC<Props> = ({ open, onCancel }) => {
         disabled={loading}
         style={{
           padding: 32,
-          background: loading ? "#f5f5f5" : "#fff",
+          background: loading ? "#f2f7fc" : "#fff",
           border: "2px dashed #d9d9d9",
         }}
       >

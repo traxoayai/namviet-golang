@@ -120,7 +120,7 @@ export const PermissionGate: React.FC<{ children: React.ReactNode }> = ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "#f0f2f5",
+        background: "#f2f7fc",
         padding: 20,
       }}
     >

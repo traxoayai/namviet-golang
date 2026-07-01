@@ -242,7 +242,7 @@ export const InventoryCheckDetail = () => {
             style={{
               height: 36,
               width: 36,
-              background: "#f5f5f5",
+              background: "#f2f7fc",
               borderRadius: 0,
               borderRight: "1px solid #eee",
               padding: 0,
@@ -281,7 +281,7 @@ export const InventoryCheckDetail = () => {
             style={{
               height: 36,
               width: 36,
-              background: "#f5f5f5",
+              background: "#f2f7fc",
               borderRadius: 0,
               borderLeft: "1px solid #eee",
               padding: 0,
@@ -723,7 +723,7 @@ export const InventoryCheckDetail = () => {
   }
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       {/* HEADER */}
       <Header
         style={{
@@ -808,7 +808,7 @@ export const InventoryCheckDetail = () => {
               top: 60, // Cách top 60px (chiều cao Header)
               zIndex: 99, // Nổi lên trên items
               marginBottom: 16,
-              background: "#f0f2f5", // Trùng màu nền để che nội dung trôi qua
+              background: "#f2f7fc", // Trùng màu nền để che nội dung trôi qua
               paddingBottom: 8, // Tạo khoảng cách
               paddingTop: 8, // Tạo khoảng cách
             }}

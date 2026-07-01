@@ -298,7 +298,7 @@ export const CostAllocationModal: React.FC<CostAllocationModalProps> = ({
       {/* Header Inputs */}
       <div
         style={{
-          background: "#f5f5f5",
+          background: "#f2f7fc",
           padding: 16,
           borderRadius: 8,
           marginBottom: 16,

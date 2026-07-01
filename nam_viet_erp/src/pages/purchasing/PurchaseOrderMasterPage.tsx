@@ -211,7 +211,7 @@ const PurchaseOrderMasterPage: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       <Content style={{ padding: "12px" }}>
         <div style={{ marginBottom: 16 }}>
           <Title level={3} style={{ marginTop: 6 }}>

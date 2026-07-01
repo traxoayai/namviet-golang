@@ -49,7 +49,7 @@ export const VoucherSelectorModal: React.FC<Props> = ({
           backgroundColor: isSelected
             ? "#e6f7ff"
             : disabled
-              ? "#f5f5f5"
+              ? "#f2f7fc"
               : "#fff",
           borderRadius: 8,
           marginBottom: 12,

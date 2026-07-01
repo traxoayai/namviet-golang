@@ -90,7 +90,7 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
           <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop
               offset="0%"
-              style={{ stopColor: "#f5f5f5", stopOpacity: 1 }}
+              style={{ stopColor: "#f2f7fc", stopOpacity: 1 }}
             />
             <stop
               offset="100%"

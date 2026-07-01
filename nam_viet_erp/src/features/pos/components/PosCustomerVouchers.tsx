@@ -58,7 +58,7 @@ export const PosCustomerVouchers = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: isDisabled ? "#f5f5f5" : "#fff0f6",
+            backgroundColor: isDisabled ? "#f2f7fc" : "#fff0f6",
             color: "#eb2f96",
             borderRight: "1px dashed #e8e8e8",
           }}

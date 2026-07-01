@@ -611,7 +611,7 @@ const PurchaseCostingPage: React.FC = () => {
   if (!id) return <Result status="404" title="Not Found" />;
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       <Content style={{ padding: "16px" }}>
         {/* HEADER */}
         <div style={{ marginBottom: 16 }}>

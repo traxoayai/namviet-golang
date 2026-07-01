@@ -3,16 +3,12 @@ import { BellOutlined, RightOutlined, CheckOutlined } from "@ant-design/icons";
 import { Badge, Button, Divider, List, Popover, Typography, Empty, Avatar } from "antd";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import {
   useNotificationStore,
   AppNotification,
 } from "@/features/settings/stores/useNotificationStore";
-import { safeRpc } from "@/shared/lib/safeRpc";
-import { supabase } from "@/shared/lib/supabaseClient";
 import "dayjs/locale/vi";
 
 dayjs.extend(relativeTime);
@@ -45,48 +41,24 @@ function getNotificationLink(noti: AppNotification): string | null {
 }
 
 export const NotificationBell = () => {
-  const { user } = useAuthStore();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   // Dùng store thay vì local state — NotificationContext đã subscribe realtime
   const notifications = useNotificationStore((s) => s.notifications);
   const unreadCount = useNotificationStore((s) => s.unreadCount);
-  const setNotifications = useNotificationStore((s) => s.setNotifications);
   const markAsReadInStore = useNotificationStore((s) => s.markAsRead);
   const markAllAsRead = useNotificationStore((s) => s.markAllAsRead);
 
-  // 1. Tải thông báo ban đầu vào store
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      if (!user) return;
-      const { data } = await supabase
-        .from("notifications")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false })
-        .limit(10);
-
-      if (data) {
-        setNotifications(data as AppNotification[]);
-      }
-    };
-
-    fetchNotifications();
-  }, [user, setNotifications]);
+  // 1. Khởi tạo đã được xử lý bởi NotificationContext
 
   // 2. Realtime đã được xử lý bởi NotificationContext — không cần subscribe lại
 
   // 3. Đánh dấu đã đọc + navigate đến trang nguồn
   const handleClick = async (item: AppNotification) => {
-    // Optimistic Update qua store
+    // Optimistic Update qua store và DB (handled by store)
     if (!item.is_read) {
       markAsReadInStore(item.id);
-      await safeRpc(
-        "mark_notification_read",
-        { p_noti_id: item.id },
-        { silent: true }
-      );
     }
 
     // Navigate đến trang nguồn
@@ -99,7 +71,6 @@ export const NotificationBell = () => {
 
   const handleMarkAllRead = async () => {
     markAllAsRead();
-    await safeRpc("mark_all_my_notifications_read", undefined, { silent: true });
   };
 
   const handleViewAll = () => {

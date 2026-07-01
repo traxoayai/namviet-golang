@@ -29,13 +29,16 @@ import {
   Avatar,
   Space,
   Input,
-  Table as AntTable, // [NEW]
   InputNumber, // [NEW]
   Tooltip, // [NEW]
   Row, // [NEW]
   Col, // [NEW]
   Popconfirm,
+  Grid,
+  List,
+  Card,
 } from "antd";
+import { ResponsiveTable } from "@/shared/ui/common/ResponsiveTable";
 import dayjs from "dayjs";
 import { useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -55,6 +58,11 @@ import { FilterAction } from "@/shared/ui/listing/FilterAction";
 import { SmartTable } from "@/shared/ui/listing/SmartTable";
 import { StatHeader } from "@/shared/ui/listing/StatHeader";
 import { parseBankStatement } from "@/shared/utils/bankStatementParser";
+import PullToRefresh from "react-simple-pull-to-refresh";
+import {
+  B2B_STATUS_COLOR,
+  B2B_STATUS_LABEL,
+} from "@/shared/utils/b2bConstants";
 import { generateInvoiceExcel } from "@/shared/utils/invoiceExcelGenerator";
 import { isPaid as isPaidAmount } from "@/shared/utils/money";
 import { parseNumericOrZero } from "@/shared/utils/numeric";
@@ -80,6 +88,8 @@ const B2BOrderListPage = ({
   hideSourceFilter,
 }: B2BOrderListPageProps = {}) => {
   const navigate = useNavigate();
+  const screens = Grid.useBreakpoint();
+  const isMobile = !screens.md;
 
   // --- 1. STATE & HOOKS ---
   const { tableProps, filterProps, stats, currentFilters, refresh } =
@@ -246,21 +256,25 @@ const B2BOrderListPage = ({
       closable: true,
       maskClosable: true,
       footer: () => (
-        <div style={{ textAlign: "right", marginTop: 10 }}>
-          <Button onClick={() => Modal.destroyAll()} style={{ marginRight: 8 }}>
-            Hủy
-          </Button>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "flex-end",
+            gap: 8,
+            marginTop: 10,
+          }}
+        >
+          <Button onClick={() => Modal.destroyAll()}>Hủy</Button>
 
           {/* Nút 1-click "Đã nhận đủ tiền" — extract thành component reusable */}
-          <span style={{ marginRight: 8, display: "inline-block" }}>
-            <ConfirmPaidButton
-              order={order}
-              onSuccess={() => {
-                Modal.destroyAll();
-                refresh();
-              }}
-            />
-          </span>
+          <ConfirmPaidButton
+            order={order}
+            onSuccess={() => {
+              Modal.destroyAll();
+              refresh();
+            }}
+          />
 
           {/* Nút CHUYỂN KHOẢN -> Mở Modal, Set type = bank_transfer */}
           <Button
@@ -270,7 +284,7 @@ const B2BOrderListPage = ({
               setInitialPaymentMethod("bank_transfer");
               setFinanceModalOpen(true);
             }}
-            style={{ marginRight: 8, borderColor: "#1890ff", color: "#1890ff" }}
+            style={{ borderColor: "#1890ff", color: "#1890ff" }}
           >
             Chuyển khoản
           </Button>
@@ -757,9 +771,10 @@ const B2BOrderListPage = ({
               ...(record.customer_b2b || {}),
               name: record.customer_name || record.customer_b2b?.name,
               phone: record.customer_phone || record.customer_b2b?.phone,
-              tax_code: record.customer_tax_code || record.customer_b2b?.tax_code || "",
+              tax_code:
+                record.customer_tax_code || record.customer_b2b?.tax_code || "",
               email: record.customer_email || record.customer_b2b?.email || "",
-              customer_type: record.customer_b2b?.customer_type || "B2B"
+              customer_type: record.customer_b2b?.customer_type || "B2B",
             }}
             onUpdate={() => refresh()}
           />
@@ -821,11 +836,14 @@ const B2BOrderListPage = ({
   ];
 
   return (
-    <div style={{ padding: 8, background: "#e1e1dfff", minHeight: "100vh" }}>
-      <StatHeader items={statItems} loading={tableProps.loading} />
+    <div style={{ padding: 8, background: "#f2f7fc", minHeight: "100vh" }}>
+      {!isMobile && (
+        <StatHeader items={statItems} loading={tableProps.loading} />
+      )}
 
       <FilterAction
         {...filterProps}
+        initialSearch={currentFilters.search}
         searchPlaceholder="Tìm mã đơn, SĐT, Tên SP..."
         filterValues={currentFilters}
         filters={[
@@ -882,32 +900,36 @@ const B2BOrderListPage = ({
               ]
             : []),
         ]}
-        actions={[
-          {
-            render: (
-              <Upload
-                beforeUpload={handleUploadStatement}
-                showUploadList={false}
-                accept=".xlsx,.xls,.csv,.pdf"
-              >
-                <Button icon={<CloudUploadOutlined />}>Đọc Sao Kê</Button>
-              </Upload>
-            ),
-          },
-          {
-            label: "Xuất Excel Đơn Hàng",
-            icon: <FileExcelOutlined />,
-            onClick: handleExportInvoiceExcel,
-            type: "default",
-            loading: exportInvoiceLoading,
-          },
-          {
-            label: "Tạo đơn B2B",
-            type: "primary",
-            icon: <PlusOutlined />,
-            onClick: () => navigate("/b2b/create-order"),
-          },
-        ]}
+        actions={
+          isMobile
+            ? []
+            : [
+                {
+                  render: (
+                    <Upload
+                      beforeUpload={handleUploadStatement}
+                      showUploadList={false}
+                      accept=".xlsx,.xls,.csv,.pdf"
+                    >
+                      <Button icon={<CloudUploadOutlined />}>Đọc Sao Kê</Button>
+                    </Upload>
+                  ),
+                },
+                {
+                  label: "Xuất Excel Đơn Hàng",
+                  icon: <FileExcelOutlined />,
+                  onClick: handleExportInvoiceExcel,
+                  type: "default",
+                  loading: exportInvoiceLoading,
+                },
+                {
+                  label: "Tạo đơn B2B",
+                  type: "primary",
+                  icon: <PlusOutlined />,
+                  onClick: () => navigate("/b2b/create-order"),
+                },
+              ]
+        }
       />
 
       {selectedRowKeys.length > 0 && (
@@ -950,14 +972,16 @@ const B2BOrderListPage = ({
             >
               Nộp tiền hàng loạt
             </Button>
-            
+
             {canBulkDelete && (
               <Popconfirm
                 title="Xóa hàng loạt"
                 description="Bạn có chắc chắn muốn xóa hẳn các đơn hàng đã hủy này khỏi hệ thống không?"
                 onConfirm={async () => {
                   try {
-                    await b2bService.bulkDeleteOrders(selectedRowKeys as string[]);
+                    await b2bService.bulkDeleteOrders(
+                      selectedRowKeys as string[]
+                    );
                     message.success("Xóa hàng loạt thành công!");
                     setSelectedRowKeys([]);
                     refresh();
@@ -975,20 +999,175 @@ const B2BOrderListPage = ({
         </div>
       )}
 
-      <SmartTable
-        {...tableProps}
-        columns={columns}
-        emptyText="Chưa có đơn hàng nào"
-        rowSelection={{
-          selectedRowKeys,
-          onChange: setSelectedRowKeys,
-          preserveSelectedRowKeys: true,
-        }}
-        onRow={(record) => ({
-          onClick: () => navigate(`/b2b/orders/${record.id}`),
-          style: { cursor: "pointer" },
-        })}
-      />
+      {isMobile ? (
+        <div style={{ paddingBottom: 80 }}>
+          <PullToRefresh
+            onRefresh={async () => {
+              refresh();
+            }}
+          >
+            <List
+              loading={tableProps.loading}
+              dataSource={tableProps.dataSource}
+              renderItem={(record: any) => (
+                <List.Item style={{ padding: "8px 0", borderBottom: "none" }}>
+                  <Card
+                    size="small"
+                    onClick={() => navigate(`/b2b/orders/${record.id}`)}
+                    style={{
+                      width: "100%",
+                      borderRadius: 12,
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                      cursor: "pointer",
+                    }}
+                    bodyStyle={{ padding: 12 }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        marginBottom: 8,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontWeight: 600,
+                          color: "#1890ff",
+                          fontSize: 15,
+                        }}
+                      >
+                        {record.code}
+                      </span>
+                      <Tag
+                        color={
+                          B2B_STATUS_COLOR[
+                            record.status as keyof typeof B2B_STATUS_COLOR
+                          ] || "default"
+                        }
+                      >
+                        {B2B_STATUS_LABEL[
+                          record.status as keyof typeof B2B_STATUS_LABEL
+                        ] || record.status}
+                      </Tag>
+                    </div>
+
+                    <div style={{ marginBottom: 4, fontSize: 14 }}>
+                      <Text strong>
+                        {record.customer_name || record.customer_b2b?.name}
+                      </Text>
+                    </div>
+
+                    <div
+                      style={{
+                        marginBottom: 8,
+                        color: "#888",
+                        fontSize: 13,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span>
+                        {dayjs(record.created_at).format("DD/MM/YYYY HH:mm")}
+                      </span>
+                      <span
+                        style={{
+                          fontWeight: 700,
+                          fontSize: 16,
+                          color: isOrderPaid(record) ? "#52c41a" : "#faad14",
+                        }}
+                      >
+                        {Number(record.final_amount).toLocaleString()}đ
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: 8,
+                        marginTop: 12,
+                        borderTop: "1px solid #f0f0f0",
+                        paddingTop: 12,
+                      }}
+                    >
+                      <Button
+                        size="middle"
+                        icon={<PrinterOutlined />}
+                        style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          printOrder(record);
+                        }}
+                      />
+
+                      {record.payment_status !== "paid" &&
+                        record.status !== "CANCELLED" && (
+                          <Button
+                            size="middle"
+                            type="primary"
+                            style={{
+                              backgroundColor: "#52c41a",
+                              borderColor: "#52c41a",
+                              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                            }}
+                            icon={<DollarCircleOutlined />}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handlePaymentClick(record);
+                            }}
+                          >
+                            Thu tiền
+                          </Button>
+                        )}
+
+                      {record.status === "SHIPPING" && (
+                        <Button
+                          size="middle"
+                          type="primary"
+                          icon={<CheckCircleOutlined />}
+                          style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            b2bService
+                              .markDelivered(record.id)
+                              .then(() => {
+                                message.success("Đã giao hàng");
+                                refresh();
+                              })
+                              .catch((err) => message.error(err.message));
+                          }}
+                        >
+                          Đã giao
+                        </Button>
+                      )}
+                    </div>
+                  </Card>
+                </List.Item>
+              )}
+              pagination={{
+                ...tableProps.pagination,
+                style: { padding: "0 16px" },
+              }}
+            />
+          </PullToRefresh>
+        </div>
+      ) : (
+        <SmartTable
+          {...tableProps}
+          columns={columns}
+          emptyText="Chưa có đơn hàng nào"
+          rowSelection={{
+            selectedRowKeys,
+            onChange: setSelectedRowKeys,
+            preserveSelectedRowKeys: true,
+          }}
+          onRow={(record) => ({
+            onClick: () => navigate(`/b2b/orders/${record.id}`),
+            style: { cursor: "pointer" },
+          })}
+        />
+      )}
 
       {/* MODAL PAYMENT */}
       <Modal
@@ -1109,7 +1288,9 @@ const B2BOrderListPage = ({
                 // ⚠️ [CRITICAL] Core yêu cầu: Dùng CODE, không dùng ID
                 ref_id: selectedOrderForPayment.code,
 
-                description: `Thu tiền đơn hàng ${selectedOrderForPayment.code}`,
+                description: `${selectedOrderForPayment.customer_name} - Thu tiền đơn hàng ${selectedOrderForPayment.code}`,
+                category_id: 18, // Hạng mục tự động chọn (ID = 18 - THU_KH)
+                readOnlyDescription: true, // Disable textarea
 
                 // Truyền hình thức để Modal tự chọn Quỹ
                 payment_method: initialPaymentMethod,
@@ -1200,7 +1381,7 @@ const B2BOrderListPage = ({
             </Button>
           </div>
 
-          <AntTable
+          <ResponsiveTable
             dataSource={returnItemsState}
             pagination={false}
             rowKey="id"
@@ -1307,6 +1488,26 @@ const B2BOrderListPage = ({
           />
         </div>
       ) : null}
+
+      {/* FAB Tạo đơn trên Mobile */}
+      {isMobile && (
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<PlusOutlined />}
+          size="large"
+          style={{
+            position: "fixed",
+            bottom: 80,
+            right: 24,
+            width: 56,
+            height: 56,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1000,
+          }}
+          onClick={() => navigate("/b2b/create-order")}
+        />
+      )}
     </div>
   );
 };

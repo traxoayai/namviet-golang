@@ -136,7 +136,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
                 src={item.image_url}
                 icon={<PictureOutlined />}
                 style={{
-                  backgroundColor: "#f5f5f5",
+                  backgroundColor: "#f2f7fc",
                   border: "1px solid #d9d9d9",
                 }}
               />
@@ -280,7 +280,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
             src={r.image_url}
             icon={<PictureOutlined />}
             style={{
-              backgroundColor: "#f5f5f5",
+              backgroundColor: "#f2f7fc",
               border: "1px solid #747474ff",
             }}
           />

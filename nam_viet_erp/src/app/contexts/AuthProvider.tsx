@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "#f0f2f5",
+          background: "#f2f7fc",
           flexDirection: "column", // [FIX] Stack vertical
         }}
       >

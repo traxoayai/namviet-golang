@@ -22,12 +22,21 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+html, body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  /* Chống kéo ngang xộc xệch */
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+/* Chống auto-zoom khi focus input trên iOS (yêu cầu font-size >= 16px) */
+@media screen and (max-width: 768px) {
+  input, select, textarea, .ant-input, .ant-select-selection-item, .ant-input-number-input {
+    font-size: 16px !important;
+  }
 }
 
 h1 {
@@ -102,75 +111,7 @@ button:focus-visible {
   box-shadow: 0 0 0 1px #ffffff;
 }
 
-/* --- POS VOUCHER ANIMATIONS --- */
-@keyframes neon-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0.4);
-    transform: scale(1);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(114, 46, 209, 0);
-    transform: scale(1.02);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0);
-    transform: scale(1);
-  }
-}
 
-.voucher-btn-glow {
-  animation: neon-pulse 2s infinite;
-  background-color: #f9f0ff !important; /* Tím nhạt nền */
-  border-color: #722ed1 !important;      /* Viền tím đậm */
-  color: #722ed1 !important;
-  font-weight: 600 !important;
-  transition: all 0.3s;
-}
-
-.voucher-btn-glow:hover {
-  background-color: #efdbff !important;
-}
-
-/* Style cho Badge số lượng */
-.voucher-badge .ant-badge-count {
-  background-color: #722ed1; 
-  box-shadow: 0 0 0 1px #ffffff;
-}
-
-/* --- POS VOUCHER ANIMATIONS --- */
-@keyframes neon-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0.4);
-    transform: scale(1);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(114, 46, 209, 0);
-    transform: scale(1.02);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(114, 46, 209, 0);
-    transform: scale(1);
-  }
-}
-
-.voucher-btn-glow {
-  animation: neon-pulse 2s infinite;
-  background-color: #f9f0ff !important; /* Tím nhạt nền */
-  border-color: #722ed1 !important;      /* Viền tím đậm */
-  color: #722ed1 !important;
-  font-weight: 600 !important;
-  transition: all 0.3s;
-}
-
-.voucher-btn-glow:hover {
-  background-color: #efdbff !important;
-}
-
-/* Style cho Badge số lượng */
-.voucher-badge .ant-badge-count {
-  background-color: #722ed1; 
-  box-shadow: 0 0 0 1px #ffffff;
-}
 
 /* --- ROW FLASH ANIMATION --- */
 @keyframes flashRow {
@@ -189,4 +130,10 @@ button:focus-visible {
 
 .huge-input-number-centered .ant-input-number-input {
   text-align: center !important;
+}
+
+/* Thêm đổ bóng mờ (box-shadow) cho tất cả các Card */
+.ant-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  border-color: #f0f0f0;
 }

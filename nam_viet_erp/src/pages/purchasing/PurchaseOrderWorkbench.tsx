@@ -139,7 +139,7 @@ const PurchaseOrderWorkbench: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: 24, paddingBottom: 100, background: '#f0f2f5', minHeight: '100vh' }}>
+    <div style={{ padding: 24, paddingBottom: 100, background: '#f2f7fc', minHeight: '100vh' }}>
       <Form form={form} layout="vertical" onValuesChange={handleValuesChange} disabled={loading}>
         
         {/* HEADER */}

@@ -56,7 +56,7 @@ const CampaignBuilderPage: React.FC = () => {
               {(fields, { add, remove }) => (
                 <>
                   {fields.map(({ key, name, ...restField }, index) => (
-                    <Card key={key} size="small" style={{ marginBottom: 16, background: "#f5f5f5" }}>
+                    <Card key={key} size="small" style={{ marginBottom: 16, background: "#f2f7fc" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <Text strong>Bước {index + 1}</Text>
                         <Button type="text" danger icon={<MinusCircleOutlined />} onClick={() => remove(name)} />

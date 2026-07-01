@@ -46,7 +46,7 @@ const VoucherDistributionPage = () => {
   const selectedSegment = segments.find((s) => s.id === selectedSegmentId);
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
       <Content
         style={{ padding: 12, maxWidth: 1800, margin: "0 auto", width: "100%" }}
       >

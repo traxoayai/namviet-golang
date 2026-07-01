@@ -56,6 +56,7 @@ const B2BOrderDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const screens = useBreakpoint();
+  const isMobile = !screens.md;
   const { profile, permissions } = useAuthStore(); // [NEW]
   const userProfile = profile as any;
   const { printOrder } = useOrderPrint(); // [NEW]
@@ -551,7 +552,7 @@ const B2BOrderDetailPage = () => {
                             style={{
                               width: 60,
                               height: 60,
-                              background: "#f5f5f5",
+                              background: "#f2f7fc",
                               borderRadius: 4,
                             }}
                           />
@@ -614,20 +615,21 @@ const B2BOrderDetailPage = () => {
       </Spin>
 
       {/* FOOTER ACTIONS */}
-      {/* FOOTER ACTIONS */}
       <Affix offsetBottom={0}>
         <div
           style={{
             background: "#fff",
-            padding: "10px 24px",
+            padding: "16px 24px",
             borderTop: "1px solid #f0f0f0",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: isMobile ? "center" : "flex-end",
+            flexWrap: "wrap",
             gap: 10,
+            boxShadow: isMobile ? "0 -4px 12px rgba(0,0,0,0.08)" : "none",
           }}
         >
-          {/* 1. Nút Xuất VAT (Luôn hiện bên trái) */}
-          <div style={{ marginRight: "auto" }}>
+          {/* 1. Nút Xuất VAT (Luôn hiện bên trái trên Desktop, fullwidth hoặc ẩn tùy ý trên Mobile, ở đây cho fullwidth) */}
+          <div style={{ marginRight: isMobile ? 0 : "auto", width: isMobile ? "100%" : "auto", display: "flex", justifyContent: "center", marginBottom: isMobile ? 8 : 0 }}>
             {order ? (
               <VatActionButton
                 /* ... Giữ nguyên props cũ ... */
@@ -678,26 +680,30 @@ const B2BOrderDetailPage = () => {
           {/* 2. CÁC NÚT IN ẤN (LUÔN HIỆN TRỪ KHI ĐÃ HỦY) */}
           {order?.status !== "CANCELLED" && (
             <>
-              <Button
-                icon={<FileExcelOutlined />}
-                onClick={handleExportExcel}
-                style={{ color: "#52c41a", borderColor: "#52c41a" }}
-              >
-                Xuất Excel
-              </Button>
+              {!isMobile && (
+                <Button
+                  icon={<FileExcelOutlined />}
+                  onClick={handleExportExcel}
+                  style={{ color: "#52c41a", borderColor: "#52c41a", boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }}
+                >
+                  Xuất Excel
+                </Button>
+              )}
 
               <Button
                 icon={<SnippetsOutlined />}
                 onClick={() => order && printPicking(order.id)}
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? 1 : undefined }}
               >
-                In Phiếu Nhặt
+                {isMobile ? "Phiếu nhặt" : "In Phiếu Nhặt"}
               </Button>
 
               <Button
                 icon={<PrinterOutlined />}
                 onClick={() => order && printOrder(order)}
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? 1 : undefined }}
               >
-                In Đơn
+                {isMobile ? "In" : "In Đơn"}
               </Button>
             </>
           )}
@@ -710,10 +716,10 @@ const B2BOrderDetailPage = () => {
           order.payment_status !== "paid" ? (
             <Button
               icon={<DollarOutlined />}
-              style={{ color: "#faad14", borderColor: "#faad14" }}
+              style={{ color: "#faad14", borderColor: "#faad14", boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? "1 0 100%" : undefined }}
               onClick={() => setFinanceModalOpen(true)}
             >
-              Tạo Phiếu Thu
+              {isMobile ? "Thu tiền" : "Tạo Phiếu Thu"}
             </Button>
           ) : null}
 
@@ -723,36 +729,31 @@ const B2BOrderDetailPage = () => {
               <Button
                 icon={<EditOutlined />}
                 onClick={() => navigate(`/b2b/orders/edit/${order.id}`)}
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? 1 : undefined }}
               >
-                Sửa đơn
+                {isMobile ? "Sửa" : "Sửa đơn"}
               </Button>
 
               <Button
                 danger
                 onClick={() => confirmAction("CANCELLED", "Hủy đơn hàng")}
                 loading={actionLoading}
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? 1 : undefined }}
               >
-                Hủy đơn
+                {isMobile ? "Hủy" : "Hủy đơn"}
               </Button>
+              
               <Button
                 type="primary"
                 icon={<CheckCircleOutlined />}
                 onClick={() => confirmAction("CONFIRMED", "Chốt đơn hàng")}
                 loading={actionLoading}
+                style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)", flex: isMobile ? "1 0 100%" : undefined }}
               >
-                Chốt đơn
+                {isMobile ? "Chốt" : "Chốt đơn"}
               </Button>
             </>
           )}
-
-          {/* {order?.status === "CONFIRMED" && (
-            <Button
-              onClick={() => handleUpdateStatus("SHIPPING")} // Logic cũ là DELIVERED, nên đổi thành SHIPPING hoặc DELIVERED tùy quy trình
-              type="primary"
-            >
-              Giao hàng
-            </Button>
-          )} */}
 
           {order?.status === "SHIPPING" && canDeliveryAction && (
             <Button
@@ -771,8 +772,9 @@ const B2BOrderDetailPage = () => {
               }}
               type="primary"
               loading={actionLoading}
+              style={{ backgroundColor: "#1890ff", borderColor: "#1890ff", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", flex: isMobile ? "1 0 100%" : undefined }}
             >
-              Đã giao cho Khách hàng / Đơn vị VC
+              {isMobile ? "Đã giao hàng" : "Đã giao cho Khách hàng / Đơn vị VC"}
             </Button>
           )}
 
@@ -781,11 +783,11 @@ const B2BOrderDetailPage = () => {
             <Button
               onClick={handleMarkCodPaid}
               type="primary"
-              style={{ backgroundColor: "#52c41a" }}
+              style={{ backgroundColor: "#52c41a", boxShadow: "0 2px 4px rgba(0,0,0,0.1)", flex: isMobile ? "1 0 100%" : undefined }}
               icon={<DollarOutlined />}
               loading={actionLoading}
             >
-              Đã Nhận Đủ Tiền Mặt (COD)
+              {isMobile ? "Đã nhận COD" : "Đã Nhận Đủ Tiền Mặt (COD)"}
             </Button>
           )}
 
@@ -796,8 +798,9 @@ const B2BOrderDetailPage = () => {
               danger
               icon={<StopOutlined />}
               loading={actionLoading}
+              style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.05)", flex: isMobile ? "1 0 100%" : undefined }}
             >
-              Hủy Nhận Tiền Mặt (Rollback)
+              {isMobile ? "Hủy COD" : "Hủy Nhận Tiền Mặt (Rollback)"}
             </Button>
           )}
 

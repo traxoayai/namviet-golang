@@ -383,7 +383,7 @@ const WarehouseOutboundDetailPage = () => {
       style={{
         padding: screens.md ? 8 : 12,
         paddingBottom: 100,
-        background: "#f5f5f5",
+        background: "#f2f7fc",
         minHeight: "100vh",
       }}
     >
@@ -523,7 +523,7 @@ const WarehouseOutboundDetailPage = () => {
                   </div>
                 )}
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f5f5f5', padding: '8px 12px', borderRadius: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f2f7fc', padding: '8px 12px', borderRadius: 6 }}>
                   <div>
                     <Text type="secondary" style={{ fontSize: 12 }}>Yêu cầu</Text>
                     <div style={{ fontSize: 16, fontWeight: 'bold' }}>{item.quantity_ordered} <Text type="secondary" style={{ fontSize: 13, fontWeight: 'normal' }}>{item.unit}</Text></div>

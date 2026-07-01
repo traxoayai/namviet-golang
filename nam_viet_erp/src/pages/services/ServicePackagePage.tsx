@@ -821,7 +821,7 @@ const ServicePackagePage: React.FC = () => {
                   label="Tổng giá vốn (Ước tính)"
                 >
                   <InputNumber
-                    style={{ width: "100%", backgroundColor: "#f0f2f5" }}
+                    style={{ width: "100%", backgroundColor: "#f2f7fc" }}
                     readOnly
                     formatter={(v) => currencyFormatter(v)}
                   />
@@ -830,7 +830,7 @@ const ServicePackagePage: React.FC = () => {
               <Col span={8}>
                 <Form.Item name="discountPercent" label="% Chiết khấu">
                   <InputNumber
-                    style={{ width: "100%", backgroundColor: "#f0f2f5" }}
+                    style={{ width: "100%", backgroundColor: "#f2f7fc" }}
                     readOnly
                     addonAfter="%"
                   />

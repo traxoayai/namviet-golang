@@ -42,7 +42,7 @@ export const PatientHistoryDrawer: React.FC<Props> = ({
       width={800}
       onClose={onClose}
       open={open}
-      bodyStyle={{ padding: "24px", backgroundColor: "#f0f2f5" }}
+      bodyStyle={{ padding: "24px", backgroundColor: "#f2f7fc" }}
     >
       {loading ? (
         <Card loading />

@@ -332,7 +332,7 @@ const FinanceTransactionPage = () => {
     {
       title: "Người tạo",
       dataIndex: "creator_name", // [FIX] Map field creator_name
-      width: 240,
+      width: 150,
       render: (name: string) => (
         <Tag color="cyan" style={{ margin: 0 }}>
           {name || "N/A"}
@@ -340,7 +340,7 @@ const FinanceTransactionPage = () => {
       ),
     },
     {
-      title: "Ngày tạo", // Đổi tên cho rõ nghĩa
+      title: "Ngày thu/chi", // Đổi tên cho rõ nghĩa
       dataIndex: "transaction_date",
       width: 150, // Tăng độ rộng một chút
       // AURA FIX: Format hiển thị Giờ trước, Ngày sau để dễ nhìn
@@ -368,7 +368,7 @@ const FinanceTransactionPage = () => {
       title: "Nội dung / Diễn giải",
       dataIndex: "description",
       render: (text: string, record: TransactionRecord) => (
-        <div style={{ maxWidth: 200 }}>
+        <div style={{ maxWidth: 300 }}>
           <div className="font-medium text-blue-800">{record.partner_name}</div>
           <div
             className="text-xs text-gray-600"
@@ -487,8 +487,8 @@ const FinanceTransactionPage = () => {
   );
 
   return (
-    <Layout style={{ minHeight: "100vh", background: "#f0f2f5" }}>
-      <Content style={{ padding: isMobile ? 8 : 24 }}>
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc" }}>
+      <Content style={{ padding: isMobile ? 8 : 12 }}>
         <Row gutter={16} style={{ marginBottom: isMobile ? 12 : 24 }}>
           <Col xs={24} sm={12} md={8}>
             <Card bordered={false} bodyStyle={isMobile ? { padding: 12 } : {}}>
@@ -761,7 +761,9 @@ const FinanceTransactionPage = () => {
               }}
               scroll={{ x: 1000 }}
               expandable={{
-                expandedRowRender: (record) => <FinanceAllocationNestedTable transactionId={record.id} />,
+                expandedRowRender: (record) => (
+                  <FinanceAllocationNestedTable transactionId={record.id} />
+                ),
               }}
             />
           )}

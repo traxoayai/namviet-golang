@@ -365,7 +365,7 @@ const QuickBarcodePage: React.FC = () => {
           style={{
             width: 60,
             height: 60,
-            background: "#f5f5f5",
+            background: "#f2f7fc",
             borderRadius: 4,
             overflow: "hidden",
           }}
@@ -449,7 +449,7 @@ const QuickBarcodePage: React.FC = () => {
             style={{
               width: 48,
               height: 48,
-              background: "#f5f5f5",
+              background: "#f2f7fc",
               borderRadius: 4,
               overflow: "hidden",
               flexShrink: 0
@@ -528,7 +528,7 @@ const QuickBarcodePage: React.FC = () => {
         paddingLeft: screens.md ? 24 : 12,
         paddingRight: screens.md ? 24 : 12,
         paddingBottom: 80,
-        background: "#f0f2f5",
+        background: "#f2f7fc",
         minHeight: "100vh",
       }}
     >

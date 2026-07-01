@@ -89,6 +89,7 @@ type NotificationRow = {
 export default function NotificationsPage() {
   const navigate = useNavigate();
   const markAllAsRead = useNotificationStore((s) => s.markAllAsRead);
+  const markAsReadInStore = useNotificationStore((s) => s.markAsRead);
 
   const [data, setData] = useState<NotificationRow[]>([]);
   const [total, setTotal] = useState(0);
@@ -117,19 +118,12 @@ export default function NotificationsPage() {
 
   const handleMarkAllRead = async () => {
     markAllAsRead();
-    await safeRpc("mark_all_my_notifications_read", undefined, {
-      silent: true,
-    });
     fetchData();
   };
 
   const handleRowClick = async (record: NotificationRow) => {
     if (!record.is_read) {
-      await safeRpc(
-        "mark_notification_read",
-        { p_noti_id: record.id },
-        { silent: true }
-      );
+      markAsReadInStore(record.id);
     }
     const link = getNotificationLink(record as AppNotification);
     if (link) navigate(link);

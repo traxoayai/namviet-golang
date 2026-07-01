@@ -65,7 +65,7 @@ export const InvoiceXmlUpload: React.FC<Props> = ({
         beforeUpload={handleUpload}
         showUploadList={false}
         disabled={isProcessing}
-        style={{ padding: 32, background: isProcessing ? "#f5f5f5" : "#fff" }}
+        style={{ padding: 32, background: isProcessing ? "#f2f7fc" : "#fff" }}
       >
         <p className="ant-upload-drag-icon">
           {isProcessing ? (

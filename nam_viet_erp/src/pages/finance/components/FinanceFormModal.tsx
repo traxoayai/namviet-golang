@@ -3,6 +3,7 @@ import {
   UploadOutlined,
   QrcodeOutlined,
   BankOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import {
   Modal,
@@ -21,6 +22,7 @@ import {
   Alert,
   Button,
   Spin,
+  Popover,
 } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
@@ -102,7 +104,7 @@ export const FinanceFormModal: React.FC<Props> = ({
   const partnerType = Form.useWatch("partner_type", form);
   const partnerId = Form.useWatch("partner_id", form);
 
-  const isB2BBulkPayment = flow === "in" && partnerType === "customer_b2b" && !!partnerId;
+  const isB2BBulkPayment = flow === "in" && partnerType === "customer_b2b" && !!partnerId && !initialValues?.ref_id;
 
   const {
       loading: bulkLoading,
@@ -138,7 +140,7 @@ export const FinanceFormModal: React.FC<Props> = ({
         setCheckingPending(true);
         const { data } = await supabase
           .from("finance_transactions")
-          .select("code, amount, created_at")
+          .select("code, amount, transaction_date")
           .eq("ref_type", initialValues.ref_type)
           .eq("ref_id", String(initialValues.ref_id))
           .eq("status", "pending");
@@ -290,7 +292,7 @@ export const FinanceFormModal: React.FC<Props> = ({
                   {pendingTrans.map((t: any) => (
                     <li key={t.code}>
                       <b>{t.code}</b>: {Number(t.amount).toLocaleString()}đ (
-                      {dayjs(t.created_at).format("DD/MM HH:mm")})
+                      {dayjs(t.transaction_date).format("DD/MM HH:mm")})
                     </li>
                   ))}
                 </ul>
@@ -505,10 +507,17 @@ export const FinanceFormModal: React.FC<Props> = ({
                   <Input
                     value={initialValues.partner_name}
                     readOnly
-                    style={{ background: "#f5f5f5", fontWeight: 600 }}
+                    style={{ background: "#f2f7fc", fontWeight: 600 }}
                   />
                 </Form.Item>
                 <Form.Item name="partner_name" hidden>
+                  <Input />
+                </Form.Item>
+                {/* [FIX] Need to include partner_type and partner_id as hidden fields so they are submitted */}
+                <Form.Item name="partner_type" hidden>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="partner_id" hidden>
                   <Input />
                 </Form.Item>
               </Col>
@@ -794,20 +803,89 @@ export const FinanceFormModal: React.FC<Props> = ({
           </Col>
           <Col span={12}>
             <Form.Item
-              name="fund_account_id"
-              label="Hình thức"
-              rules={[{ required: true }]}
+              noStyle
+              shouldUpdate={(prev, curr) =>
+                prev.fund_account_id !== curr.fund_account_id
+              }
             >
-              <Select
-                placeholder="Chọn hình thức..."
-                loading={funds.length === 0}
-              >
-                {funds.map((f) => (
-                  <Option key={f.id} value={f.id}>
-                    {f.name}
-                  </Option>
-                ))}
-              </Select>
+              {({ getFieldValue }) => {
+                const fundId = getFieldValue("fund_account_id");
+                const fund = funds.find((f) => f.id === fundId);
+                const isCash = fund?.type === "cash";
+
+                return (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+                    <Form.Item
+                      name="fund_account_id"
+                      label="Hình thức"
+                      rules={[{ required: true }]}
+                      style={{ flex: 1, marginBottom: 0 }}
+                    >
+                      <Select
+                        placeholder="Chọn hình thức..."
+                        loading={funds.length === 0}
+                      >
+                        {funds.map((f) => (
+                          <Option key={f.id} value={f.id}>
+                            {f.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+
+                    {isCash && (
+                      <Popover
+                        content={
+                          <div style={{ width: 350 }}>
+                            <Row gutter={[8, 8]}>
+                              {DENOMINATIONS.map((denom) => (
+                                <Col span={8} key={denom}>
+                                  <Form.Item
+                                    name={["cash_tally", denom]}
+                                    label={`${denom.toLocaleString()}đ`}
+                                    style={{ marginBottom: 0 }}
+                                  >
+                                    <InputNumber
+                                      min={0}
+                                      placeholder="SL"
+                                      style={{ width: "100%" }}
+                                      onChange={() =>
+                                        calculateCashTally(
+                                          form.getFieldValue("cash_tally")
+                                        )
+                                      }
+                                    />
+                                  </Form.Item>
+                                </Col>
+                              ))}
+                            </Row>
+                            <div style={{ marginTop: 10, textAlign: "right" }}>
+                              <Text
+                                strong
+                                style={{
+                                  color:
+                                    cashTallyTotal === amount ? "#52c41a" : "#f5222d",
+                                }}
+                              >
+                                {cashTallyTotal.toLocaleString()} ₫
+                              </Text>
+                            </div>
+                          </div>
+                        }
+                        title="Bảng kê tiền mặt"
+                        trigger="click"
+                        placement="right"
+                      >
+                        <Button
+                          icon={<DollarOutlined />}
+                          type={cashTallyTotal > 0 ? "primary" : "default"}
+                          style={{ marginTop: 30 }}
+                        />
+                      </Popover>
+                    )}
+                  </div>
+                );
+              }}
             </Form.Item>
           </Col>
         </Row>
@@ -899,65 +977,7 @@ export const FinanceFormModal: React.FC<Props> = ({
           </Card>
         )}
 
-        <Form.Item
-          noStyle
-          shouldUpdate={(prev, curr) =>
-            prev.fund_account_id !== curr.fund_account_id
-          }
-        >
-          {({ getFieldValue }) => {
-            const fundId = getFieldValue("fund_account_id");
-            const fund = funds.find((f) => f.id === fundId);
-            if (fund?.type === "cash") {
-              return (
-                <Card
-                  size="small"
-                  title="Bảng kê tiền mặt"
-                  style={{
-                    marginBottom: 16,
-                    borderColor: "#b7eb8f",
-                    background: "#f6ffed",
-                  }}
-                >
-                  <Row gutter={[8, 8]}>
-                    {DENOMINATIONS.map((denom) => (
-                      <Col span={8} key={denom}>
-                        <Form.Item
-                          name={["cash_tally", denom]}
-                          label={`${denom.toLocaleString()}đ`}
-                          style={{ marginBottom: 0 }}
-                        >
-                          <InputNumber
-                            min={0}
-                            placeholder="SL"
-                            style={{ width: "100%" }}
-                            onChange={() =>
-                              calculateCashTally(
-                                form.getFieldValue("cash_tally")
-                              )
-                            }
-                          />
-                        </Form.Item>
-                      </Col>
-                    ))}
-                  </Row>
-                  <div style={{ marginTop: 10, textAlign: "right" }}>
-                    <Text
-                      strong
-                      style={{
-                        color:
-                          cashTallyTotal === amount ? "#52c41a" : "#f5222d",
-                      }}
-                    >
-                      {cashTallyTotal.toLocaleString()} ₫
-                    </Text>
-                  </div>
-                </Card>
-              );
-            }
-            return null;
-          }}
-        </Form.Item>
+
 
         <Form.Item label="Chứng từ">
           <Upload
@@ -975,7 +995,11 @@ export const FinanceFormModal: React.FC<Props> = ({
           label="Diễn giải"
           rules={[{ required: true }]}
         >
-          <Input.TextArea rows={2} />
+          <Input.TextArea 
+            rows={2} 
+            readOnly={initialValues?.readOnlyDescription}
+            style={initialValues?.readOnlyDescription ? { background: "#f2f7fc" } : {}}
+          />
         </Form.Item>
       </Form>
     </Modal>

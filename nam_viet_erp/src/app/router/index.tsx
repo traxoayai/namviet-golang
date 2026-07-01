@@ -101,6 +101,7 @@ import { PermissionGuard } from "@/shared/components/auth/PermissionGuard"; // [
 import BlankLayout from "@/shared/ui/layouts/BlankLayout";
 import MainLayout from "@/shared/ui/layouts/MainLayout";
 import OnboardingLayout from "@/shared/ui/layouts/OnboardingLayout";
+import { DashboardPage } from "@/pages/dashboard/DashboardPage";
 
 // Lazy import (giữ tách riêng để chunk-split — không tham gia eslint import/order)
 const NotificationsPage = lazy(
@@ -134,7 +135,7 @@ const routes: RouteObject[] = [
           // 1. Trang chủ
           {
             index: true, // Đây là /
-            element: <PagePlaceholder title="Trang chủ (Dashboard)" />,
+            element: <DashboardPage />,
           },
 
           // 2. Kênh Cửa Hàng

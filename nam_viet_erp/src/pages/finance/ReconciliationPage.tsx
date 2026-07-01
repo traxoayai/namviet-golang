@@ -187,7 +187,7 @@ const ReconciliationPage = () => {
     );
 
     return (
-        <div style={{ padding: 24, minHeight: '100vh', background: '#f0f2f5' }}>
+        <div style={{ padding: 24, minHeight: '100vh', background: '#f2f7fc' }}>
             <Row gutter={16} style={{ marginBottom: 16 }}>
                 <Col span={12}>
                     <Title level={3} style={{ margin: 0 }}>Đối soát Giao dịch</Title>

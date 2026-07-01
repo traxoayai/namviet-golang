@@ -984,7 +984,7 @@ export const printPurchaseOrder = (order: PrintOrder) => {
           
           .product-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
           .product-table th, .product-table td { border: 1px solid #000; padding: 6px 8px; font-size: 14px; }
-          .product-table th { background-color: #f5f5f5; text-align: center; font-weight: bold; }
+          .product-table th { background-color: #f2f7fc; text-align: center; font-weight: bold; }
           
           .total-section { width: 40%; margin-left: auto; border-top: 2px solid #000; padding-top: 10px; }
           .total-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
