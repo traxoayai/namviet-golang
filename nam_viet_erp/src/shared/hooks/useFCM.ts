@@ -30,6 +30,7 @@ export const useFCM = () => {
                 user_agent: navigator.userAgent
               });
               console.log("Đã gửi FCM token lên backend.");
+              message.success("Đã kết nối máy chủ Thông báo (FCM) thành công!", 3);
             } catch (err) {
               console.error("Lỗi gửi FCM token:", err);
             }
