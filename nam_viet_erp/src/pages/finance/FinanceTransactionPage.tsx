@@ -56,6 +56,7 @@ import { Access } from "@/shared/components/auth/Access"; // [NEW]
 import { supabase } from "@/shared/lib/supabaseClient"; // [NEW]
 import { generatePaymentVoucherHTML } from "@/shared/utils/printTemplates"; // [NEW]
 import { printHTML } from "@/shared/utils/printUtils"; // [RESTORED]
+import PullToRefresh from "react-simple-pull-to-refresh"; // [NEW]
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -672,11 +673,12 @@ const FinanceTransactionPage = () => {
           </Drawer>
 
           {isMobile ? (
-            <List
-              loading={logic.loading}
-              dataSource={logic.transactions}
-              renderItem={(record: TransactionRecord) => (
-                <List.Item style={{ padding: "12px 0", borderBottom: "none" }}>
+            <PullToRefresh onRefresh={async () => logic.fetchTransactions()}>
+              <List
+                loading={logic.loading}
+                dataSource={logic.transactions}
+                renderItem={(record: TransactionRecord) => (
+                  <List.Item style={{ padding: "12px 0", borderBottom: "none" }}>
                   <Card
                     size="small"
                     style={{
@@ -741,7 +743,8 @@ const FinanceTransactionPage = () => {
                 total: logic.totalCount,
                 onChange: logic.setPage,
               }}
-            />
+              />
+            </PullToRefresh>
           ) : (
             <Table
               rowSelection={{

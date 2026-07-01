@@ -15,6 +15,8 @@ import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { dashboardService, WarehouseStats, FinanceStats, Announcement } from "@/features/dashboard/api/dashboardService";
 import { getToken } from "firebase/messaging";
 import { messaging } from "@/shared/lib/firebaseClient";
+import PullToRefresh from "react-simple-pull-to-refresh";
+import { supabase } from "@/shared/lib/supabaseClient";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -53,12 +55,13 @@ export const DashboardPage: React.FC = () => {
     };
     testFirebase();
     // ---- [TEST FIREBASE] Kết thúc đoạn code test ----
+  }, []);
 
-    const fetchData = async () => {
-      // Chỉ set loading toàn trang lần đầu tiên
-      if (!warehouseStats && !financeStats) {
-        setLoading(true);
-      }
+  const fetchData = async () => {
+    // Chỉ set loading toàn trang lần đầu tiên
+    if (!warehouseStats && !financeStats) {
+      setLoading(true);
+    }
       try {
         // Fetch announcements first (for everyone)
         try {
@@ -91,10 +94,38 @@ export const DashboardPage: React.FC = () => {
       } finally {
         setLoading(false);
       }
-    };
+  };
 
+  useEffect(() => {
     fetchData();
   }, [hasWarehousePerm, hasFinancePerm, financeMonth]);
+
+  // [NEW] True Realtime với Supabase WebSockets
+  useEffect(() => {
+    const channel = supabase
+      .channel("dashboard_changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "finance_transactions" },
+        () => {
+          console.log("[Realtime] Có thay đổi giao dịch tài chính, tải lại Dashboard...");
+          if (hasFinancePerm) fetchData();
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "orders" },
+        () => {
+          console.log("[Realtime] Có thay đổi đơn hàng, tải lại Dashboard...");
+          if (hasWarehousePerm || hasFinancePerm) fetchData();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [hasWarehousePerm, hasFinancePerm]);
 
   // Greetings logic
   const hour = new Date().getHours();
@@ -113,8 +144,9 @@ export const DashboardPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      {/* Header Greeting */}
+    <PullToRefresh onRefresh={fetchData}>
+      <div className="max-w-7xl mx-auto space-y-6 overflow-x-hidden pb-6">
+        {/* Header Greeting */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl p-6 md:p-8 text-white shadow-sm">
         <Title level={2} style={{ color: 'white', margin: 0 }}>{greeting}, {profile?.full_name || 'Bạn'}! 👋</Title>
         <Text className="text-blue-50 text-base opacity-90 mt-2 block">
@@ -329,6 +361,7 @@ export const DashboardPage: React.FC = () => {
           </div>
         </Col>
       </Row>
-    </div>
+      </div>
+    </PullToRefresh>
   );
 };

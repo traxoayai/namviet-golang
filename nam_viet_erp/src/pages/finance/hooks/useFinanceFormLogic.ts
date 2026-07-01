@@ -83,6 +83,14 @@ export const useFinanceFormLogic = (
 
   useEffect(() => {
     if (open) {
+      if (users.length === 0) fetchUsers();
+      if (suppliers.length === 0) fetchSuppliers();
+      if (categories.length === 0) fetchCategories();
+    }
+  }, [open, users.length, fetchUsers, suppliers.length, fetchSuppliers, categories.length, fetchCategories]);
+
+  useEffect(() => {
+    if (open) {
       form.resetFields();
 
       // 1. Set Default
@@ -124,31 +132,14 @@ export const useFinanceFormLogic = (
       setFileList([]);
       setQrUrl(null);
       setCashTallyTotal(0);
-      setQrUrl(null);
-      setCashTallyTotal(0);
       setReimburseDiff(null);
 
       // Reset Search State
       setPartnerOptions([]);
       setCurrentDebt(null);
       setIsSearching(false);
-
-      if (users.length === 0) fetchUsers();
-      if (suppliers.length === 0) fetchSuppliers();
-      if (categories.length === 0) fetchCategories();
     }
-  }, [
-    open,
-    initialFlow,
-    initialValues, // Add dependency
-    form,
-    users.length,
-    fetchUsers,
-    suppliers,
-    fetchSuppliers,
-    categories.length,
-    fetchCategories,
-  ]);
+  }, [open]); // ONLY re-run when modal opens/closes, not when suppliers load
 
   // --- LOGIC HOÀN ỨNG (UPDATED) ---
 

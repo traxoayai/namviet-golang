@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { financeService } from "@/features/finance/api/financeService";
 import { useFinanceStore } from "@/features/finance/stores/useFinanceStore";
+import { supabase } from "@/shared/lib/supabaseClient";
 
 export const useFinanceTransactionLogic = () => {
   const queryClient = useQueryClient();
@@ -24,6 +25,29 @@ export const useFinanceTransactionLogic = () => {
   useEffect(() => {
     fetchFunds();
   }, [fetchFunds]);
+
+  // [NEW] True Realtime với Supabase WebSockets
+  useEffect(() => {
+    const channel = supabase
+      .channel("finance_transactions_changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "finance_transactions",
+        },
+        () => {
+          console.log("[Realtime] Có thay đổi giao dịch, đang làm mới...");
+          queryClient.invalidateQueries({ queryKey: ["finance_transactions"] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
 
   const { data, isLoading: loading, refetch } = useQuery({
     queryKey: ["finance_transactions", page, pageSize, filters],

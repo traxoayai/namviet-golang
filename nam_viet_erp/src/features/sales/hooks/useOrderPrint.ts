@@ -110,14 +110,13 @@ export const useOrderPrint = () => {
         []) as RawOrderItem[];
       const printData = {
         ...orderToPrint,
-        items: orderItems.map((i) => ({
+        items: orderItems.map((i: any) => ({
           ...i,
-          product_name:
-            i.product_name || i.product?.name || i.name || "Sản phẩm",
+          product_name: i.is_gift ? `[🎁 Voucher] ${i.product_name || i.product?.name || i.name || "Sản phẩm"}` : (i.product_name || i.product?.name || i.name || "Sản phẩm"),
           uom: i.uom || i.unit || "ĐVT",
           quantity: i.quantity || 0,
           unit_price: Number(i.unit_price || i.price || 0),
-          total_line: i.total_line !== undefined ? i.total_line : ((i.quantity || 0) * Number(i.unit_price || i.price || 0) - Number(i.discount || 0)),
+          total_line: i.is_gift ? 0 : (i.total_line !== undefined ? i.total_line : ((i.quantity || 0) * Number(i.unit_price || i.price || 0) - Number(i.discount || 0))),
           batch_no: i.batch_no || i.lot_number || "",
           expiry_date: i.expiry_date || "",
           shelf_location: i.shelf_location || "",

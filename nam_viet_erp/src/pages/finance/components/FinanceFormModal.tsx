@@ -99,6 +99,15 @@ export const FinanceFormModal: React.FC<Props> = ({
     handleSelectPartner,
   } = useFinanceFormLogic(open, onCancel, initialFlow, initialValues);
 
+  useEffect(() => {
+    if (open && initialValues?.payment_method === "cash" && funds.length > 0) {
+      const cashFund = funds.find((f) => f.type === "cash" || f.name.toLowerCase().includes("tiền mặt"));
+      if (cashFund) {
+        form.setFieldValue("fund_account_id", cashFund.id);
+      }
+    }
+  }, [open, funds, initialValues?.payment_method, form]);
+
   // [NEW] Bulk Payment Hooks
   const flow = Form.useWatch("flow", form);
   const partnerType = Form.useWatch("partner_type", form);
@@ -824,6 +833,7 @@ export const FinanceFormModal: React.FC<Props> = ({
                       <Select
                         placeholder="Chọn hình thức..."
                         loading={funds.length === 0}
+                        disabled={initialValues?.payment_method === "cash"}
                       >
                         {funds.map((f) => (
                           <Option key={f.id} value={f.id}>
