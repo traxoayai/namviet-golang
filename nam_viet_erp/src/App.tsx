@@ -10,8 +10,12 @@ import { useAuthStore } from "./features/auth/stores/useAuthStore";
 import { NotificationProvider } from "@/app/contexts/NotificationContext";
 import theme from "@/app/theme";
 import { SystemSetupModal } from "@/shared/ui/common/SystemSetupModal";
+import { useFCM } from "@/shared/hooks/useFCM";
 
-// --- MỚI: Import SystemSetupModal ---
+function FCMWrapper() {
+  useFCM();
+  return null;
+}
 
 function App() {
   const element = useRoutes(routes);
@@ -25,6 +29,7 @@ function App() {
     <ConfigProvider locale={viVN} theme={theme}>
       <NotificationProvider>
         <AntApp>
+          <FCMWrapper />
           {/* Đặt ở đây để nó luôn kiểm tra đè lên mọi giao diện */}
           <SystemSetupModal />
           {element}

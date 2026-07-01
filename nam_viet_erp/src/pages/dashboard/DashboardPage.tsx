@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { dashboardService, WarehouseStats, FinanceStats, Announcement } from "@/features/dashboard/api/dashboardService";
-import { getToken } from "firebase/messaging";
-import { messaging } from "@/shared/lib/firebaseClient";
 import PullToRefresh from "react-simple-pull-to-refresh";
 import { supabase } from "@/shared/lib/supabaseClient";
 
@@ -34,27 +32,7 @@ export const DashboardPage: React.FC = () => {
   const hasFinancePerm = permissions.includes("finance.view") || permissions.includes("admin-all");
 
   useEffect(() => {
-    // ---- [TEST FIREBASE] Bắt đầu đoạn code test của BA ----
-    const testFirebase = async () => {
-      try {
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted') {
-          const token = await getToken(messaging, { 
-            vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY || 'BDeOprBzYOuFmLH-1Hh1yk3HJrb66K8yaxUi5sgye132FliqJzFLGPv-Np6Nwbjnzxsk08bXmooQXUeT7Jly-xk' 
-          });
-          if (token) {
-            console.log("🔥 [SUCCESS] Lấy Token thành công! Cấu hình .env chuẩn xác:", token);
-            // alert("Firebase kết nối THÀNH CÔNG! Token: " + token.substring(0, 20) + "...");
-          } else {
-            console.log("Không có quyền tạo token.");
-          }
-        }
-      } catch (error) {
-        console.error("❌ [ERROR] Lỗi cấu hình Firebase:", error);
-      }
-    };
-    testFirebase();
-    // ---- [TEST FIREBASE] Kết thúc đoạn code test ----
+    // fetchData sẽ được gọi qua useEffect bên dưới
   }, []);
 
   const fetchData = async () => {

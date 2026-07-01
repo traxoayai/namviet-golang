@@ -16,7 +16,33 @@ messaging.onBackgroundMessage(function(payload) {
   const notificationTitle = payload.notification?.title || 'Thông báo mới';
   const notificationOptions = {
     body: payload.notification?.body || 'Bạn có thông báo mới',
-    icon: '/vite.svg'
+    icon: '/logo-namviet.png',
+    data: {
+      url: payload.data?.click_action || payload.fcmOptions?.link || payload.notification?.click_action || '/'
+    }
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener('notificationclick', (event) => {
+  console.log('[firebase-messaging-sw.js] Click thông báo: ', event);
+  event.notification.close();
+
+  // Try to get URL from various payload fields
+  const targetUrl = event.notification.data?.url || '/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
+      // Check if there is already a window/tab open with the target URL
+      for (let i = 0; i < windowClients.length; i++) {
+        const client = windowClients[i];
+        if (client.url.includes(targetUrl) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
 });
