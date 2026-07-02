@@ -271,7 +271,7 @@ export const salesService = {
                 *,
                 customer:customer_id(id, name, phone, shipping_address, tax_code, email),
                 items:order_items(
-                    id, quantity, unit_price, total_line,
+                    id, quantity, unit_price, total_line, is_gift,
                     product:product_id(
                         id, name, sku, image_url, wholesale_unit,
                         product_inventory(warehouse_id, shelf_location, stock_quantity)

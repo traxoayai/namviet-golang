@@ -31,6 +31,7 @@ export const b2bService = {
           total_line,
           batch_no,
           expiry_date,
+          is_gift,
           product:product_id (
             id,
             sku,
@@ -170,6 +171,7 @@ export const b2bService = {
         quantity: Number(item.quantity ?? 0),
         unit_price: Number(item.unit_price ?? 0),
         // Lưu ý: total_line trong DB là cột generated, hoặc tính tay
+        total_line: Number(item.total_line ?? 0),
         total_price:
           Number(item.total_line ?? 0) ||
           Number(item.quantity ?? 0) * Number(item.unit_price ?? 0),
@@ -179,6 +181,7 @@ export const b2bService = {
         shelf_location:
           (item.product?.id !== undefined && shelfMap.get(item.product.id)) ||
           undefined,
+        is_gift: item.is_gift,
       })),
       sales_invoices: (orderData.sales_invoices?.[0] ?? null) as
         | B2BOrderDetail["sales_invoices"]
