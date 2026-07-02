@@ -100,10 +100,21 @@ export const FinanceFormModal: React.FC<Props> = ({
   } = useFinanceFormLogic(open, onCancel, initialFlow, initialValues);
 
   useEffect(() => {
-    if (open && initialValues?.payment_method === "cash" && funds.length > 0) {
-      const cashFund = funds.find((f) => f.type === "cash" || f.name.toLowerCase().includes("tiền mặt"));
-      if (cashFund) {
-        form.setFieldValue("fund_account_id", cashFund.id);
+    if (open && initialValues?.payment_method && funds.length > 0) {
+      if (initialValues.payment_method === "cash") {
+        const cashFund = funds.find(
+          (f) => f.type === "cash" || f.name.toLowerCase().includes("tiền mặt") || f.name.includes("[ Tiền mặt ]")
+        );
+        if (cashFund) {
+          form.setFieldValue("fund_account_id", cashFund.id);
+        }
+      } else if (initialValues.payment_method === "bank_transfer") {
+        const bankFund = funds.find(
+          (f: any) => f.type === "bank" && f.status === "active"
+        );
+        if (bankFund) {
+          form.setFieldValue("fund_account_id", bankFund.id);
+        }
       }
     }
   }, [open, funds, initialValues?.payment_method, form]);
@@ -185,21 +196,7 @@ export const FinanceFormModal: React.FC<Props> = ({
     checkWallet();
   }, [open, initialValues]);
 
-  // [NEW] Auto-select Fund based on payment_method
-  useEffect(() => {
-    if (open && initialValues?.payment_method && funds.length > 0) {
-      const targetType =
-        initialValues.payment_method === "cash" ? "cash" : "bank";
-      // Tìm quỹ đầu tiên khớp loại và đang hoạt động
-      const defaultFund = funds.find(
-        (f: any) => f.type === targetType && f.status === "active"
-      );
-
-      if (defaultFund) {
-        form.setFieldValue("fund_account_id", defaultFund.id);
-      }
-    }
-  }, [open, initialValues, funds]);
+  // Removed redundant auto-select fund logic to avoid overriding the one above
 
   // [NEW] Auto-fill Partner Details when Opened with Initial Values
   useEffect(() => {
@@ -833,7 +830,6 @@ export const FinanceFormModal: React.FC<Props> = ({
                       <Select
                         placeholder="Chọn hình thức..."
                         loading={funds.length === 0}
-                        disabled={initialValues?.payment_method === "cash"}
                       >
                         {funds.map((f) => (
                           <Option key={f.id} value={f.id}>

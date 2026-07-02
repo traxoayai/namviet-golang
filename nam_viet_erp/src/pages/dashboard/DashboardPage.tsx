@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Card, Spin, Typography, Tag, Statistic, Row, Col, DatePicker, Button, Modal } from "antd";
+import { Card, Spin, Typography, Tag, Statistic, Row, Col, DatePicker, Button, Modal, Layout } from "antd";
+const { Content } = Layout;
 import { Link } from "react-router-dom";
 import { 
   Package, 
@@ -122,8 +123,10 @@ export const DashboardPage: React.FC = () => {
   }
 
   return (
-    <PullToRefresh onRefresh={fetchData}>
-      <div className="max-w-7xl mx-auto space-y-6 overflow-x-hidden pb-6">
+    <Layout style={{ minHeight: "100vh", background: "#f2f7fc", overflowX: "hidden" }}>
+      <Content style={{ padding: 12, overflowX: "hidden" }}>
+        <PullToRefresh onRefresh={fetchData}>
+          <div className="max-w-7xl mx-auto space-y-6 pb-6">
         {/* Header Greeting */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl p-6 md:p-8 text-white shadow-sm">
         <Title level={2} style={{ color: 'white', margin: 0 }}>{greeting}, {profile?.full_name || 'Bạn'}! 👋</Title>
@@ -340,6 +343,8 @@ export const DashboardPage: React.FC = () => {
         </Col>
       </Row>
       </div>
-    </PullToRefresh>
+        </PullToRefresh>
+      </Content>
+    </Layout>
   );
 };
