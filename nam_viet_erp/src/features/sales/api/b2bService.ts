@@ -61,6 +61,7 @@ export const b2bService = {
       total_line?: number;
       batch_no?: string;
       expiry_date?: string;
+      is_gift?: boolean;
       product?: {
         id?: number;
         sku?: string;
