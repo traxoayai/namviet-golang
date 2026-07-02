@@ -176,3 +176,5 @@ Dựa trên toàn bộ cấu trúc Schema, RPCs, Triggers và hệ thống Code 
 ### 11.2 Rate Limiting & Logs
 - **Thực hiện:** Giới hạn chống spam API và Audit Logs.
 - **Logic:** `rpc_rate_log`, `rpc_access_rules`, `system_logs`, `llm_request_log` để trace lại ai làm gì, khi nào, tốn bao nhiêu token AI.
+
+
