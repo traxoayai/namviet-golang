@@ -104,7 +104,7 @@ const ProductFormPage: React.FC = () => {
 
   return (
     <ConfigProvider locale={viVN}>
-      <Layout style={{ minHeight: "100vh", backgroundColor: "#efededff" }}>
+      <Layout style={{ minHeight: "100vh", backgroundColor: "#f2f7fc" }}>
         <Spin
           spinning={loading || loadingDetails}
           tip={loading ? "Đang xử lý..." : "Đang tải dữ liệu..."}

@@ -49,6 +49,7 @@ export const inboundService = {
       items: payload.p_items.map(item => ({
         product_id: item.product_id,
         quantity: item.quantity,
+        unit: item.unit,
         lot_number: item.lot_number,
         expiry_date: item.expiry_date
       }))

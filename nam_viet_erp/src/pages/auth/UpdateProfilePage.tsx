@@ -146,7 +146,7 @@ const UpdateProfilePage: React.FC = () => {
       }; // 3. Gọi "Bộ não"
       await updateProfile(profileData); // BƯỚC 5 (Chờ duyệt)
       antMessage.success({
-        content: "Cập nhật thành công! Hồ sơ của Sếp đang chờ Admin duyệt.",
+        content: "Cập nhật thành công! Hồ sơ của Bạn đang chờ Admin duyệt.",
         key: msgKey,
         duration: 5,
       }); // Đăng xuất Sếp ra
@@ -186,7 +186,7 @@ const UpdateProfilePage: React.FC = () => {
                   type="secondary"
                   style={{ margin: "0 0 0 8px", display: "inline-block" }}
                 >
-                  (Sếp cần hoàn tất hồ sơ này để Admin duyệt tài khoản)
+                  (Bạn cần hoàn tất hồ sơ này để Admin duyệt tài khoản)
                 </Paragraph>
               </Col>
               <Col>
