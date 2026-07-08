@@ -116,6 +116,8 @@ export const purchaseOrderService = {
       quantity_ordered:
         item.quantity && Number(item.quantity) > 0 ? Number(item.quantity) : 1,
       uom_ordered: item.uom,
+      uom: item.uom,
+      unit: item.uom,
       unit_price: item.unit_price || 0,
       is_bonus: item.is_bonus || false,
       bonus_quantity: item.bonus_quantity || 0,
