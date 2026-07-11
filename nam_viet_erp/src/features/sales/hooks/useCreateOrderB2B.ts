@@ -151,101 +151,130 @@ export const useCreateOrderB2B = () => {
       
       let newItems = [...inputItems];
       
+      // BƯỚC 1: Parse và nhóm các rules theo target_product_id
+      const rulesByTarget = new Map<number, { rule: PromotionRule, advanced: AdvancedRule }[]>();
+      
       promoRules.forEach((rule) => {
         if (!rule.advanced_rules) return;
         try {
           const advanced = JSON.parse(rule.advanced_rules) as AdvancedRule;
-          const cond = advanced.condition;
-          const rew = advanced.reward;
-
-          if (cond.type === "buy_quantity") {
-            const targetId = cond.target_product_id;
-            
-            // Tính tổng quantity của target product trong giỏ
-            let cartQuantity = 0;
-            newItems.forEach((item) => {
-              if (item.id === targetId && !item.is_gift) {
-                cartQuantity += item.quantity;
-              }
-            });
-
-            // Tính toán số lần đạt chuẩn (times)
-            const minQty = cond.min_quantity || 0;
-            let times = 0;
-            if (minQty > 0 && cartQuantity >= minQty) {
-              times = advanced.is_multiply ? Math.floor(cartQuantity / minQty) : 1;
-            }
-
-            const giftKey = `gift_${rule.id}_${rew.gift_product_id}`;
-
-            // Tính upsell hint: còn thiếu bao nhiêu để đạt ngưỡng
-            const upsellRemaining = minQty > 0 && cartQuantity > 0 && cartQuantity < minQty
-              ? minQty - cartQuantity
-              : 0;
-
-            // Map gift info + upsell hint to TARGET ITEM
-            newItems = newItems.map((item) => {
-              if (item.id === targetId && !item.is_gift) {
-                return {
-                  ...item,
-                  gift_rule_id: rule.id,
-                  gift_value: rew.gift_value || 0,
-                  upsell_remaining: upsellRemaining,
-                  upsell_reward_qty: rew.gift_quantity,
-                  upsell_min_qty: minQty,
-                };
-              }
-              return item;
-            });
-
-            if (times > 0) {
-              // Kiểm tra xem quà tặng đã tồn tại trong giỏ chưa
-              const giftIndex = newItems.findIndex((i) => i.key === giftKey);
-              const expectedQty = rew.gift_quantity * times;
-
-              if (giftIndex >= 0) {
-                // Cập nhật số lượng quà
-                newItems[giftIndex] = {
-                  ...newItems[giftIndex],
-                  quantity: expectedQty,
-                  total: 0,
-                };
-              } else {
-                // Find main product to mock image if it's buy A get A
-                const mainProduct = newItems.find((i) => i.id === rew.gift_product_id && !i.is_gift);
-                
-                // Thêm quà tặng mới
-                newItems.push({
-                  id: rew.gift_product_id,
-                  key: giftKey,
-                  name: mainProduct ? `[🎁 Tặng kèm] ${mainProduct.name}` : (rew.gift_name || "Quà Tặng"),
-                  sku: mainProduct ? `${mainProduct.sku}-GIFT` : "GIFT",
-                  price_wholesale: rew.gift_value || 0,
-                  quantity: expectedQty,
-                  discount: (rew.gift_value || 0) * expectedQty,
-                  total: 0,
-                  image_url: mainProduct ? mainProduct.image_url : null,
-                  lot_number: null,
-                  expiry_date: null,
-                  wholesale_unit: mainProduct ? mainProduct.wholesale_unit : "Cái",
-                  items_per_carton: 1,
-                  stock_quantity: 999, // Không quan trọng
-                  shelf_location: "",
-                  is_gift: true,
-                  gift_rule_id: rule.id,
-                  gift_source: 'auto_suggest',
-                  gift_value: rew.gift_value || 0,
-                } as CartItem);
-                message.success(`🎁 Đã tự động thêm quà tặng: ${mainProduct?.name || rew.gift_name || "Quà Tặng"}`);
-              }
-            } else {
-              // Remove gift nếu không đủ điều kiện
-              newItems = newItems.filter((i) => i.key !== giftKey);
+          if (advanced.condition?.type === "buy_quantity") {
+            const targetId = advanced.condition.target_product_id;
+            if (targetId) {
+              if (!rulesByTarget.has(targetId)) rulesByTarget.set(targetId, []);
+              rulesByTarget.get(targetId)!.push({ rule, advanced });
             }
           }
         } catch (e) {
           console.error("Lỗi parse JSON rules", e);
         }
+      });
+
+      // BƯỚC 2: Xử lý theo từng nhóm (Tiered fallback)
+      rulesByTarget.forEach((groupRules, targetId) => {
+        // Sắp xếp rules theo min_quantity giảm dần (Ưu tiên mốc to nhất)
+        groupRules.sort((a, b) => (b.advanced.condition.min_quantity || 0) - (a.advanced.condition.min_quantity || 0));
+
+        // Tính tổng quantity của target product trong giỏ
+        let cartQuantity = 0;
+        newItems.forEach((item) => {
+          if (item.id === targetId && !item.is_gift) {
+            cartQuantity += item.quantity;
+          }
+        });
+
+        let remainingQty = cartQuantity;
+        
+        // Tìm mốc upsell gần nhất (mốc nhỏ nhất nhưng lớn hơn remainingQty)
+        const nextTier = [...groupRules].reverse().find(r => (r.advanced.condition.min_quantity || 0) > remainingQty);
+
+        // Gắn hint upsell vào các sản phẩm chính
+        newItems = newItems.map((item) => {
+          if (item.id === targetId && !item.is_gift) {
+            if (nextTier) {
+              const minQty = nextTier.advanced.condition.min_quantity || 0;
+              return {
+                ...item,
+                gift_rule_id: nextTier.rule.id,
+                gift_value: nextTier.advanced.reward.gift_value || 0,
+                upsell_remaining: minQty - remainingQty,
+                upsell_reward_qty: nextTier.advanced.reward.gift_quantity,
+                upsell_min_qty: minQty,
+              };
+            } else {
+              // Xóa hint nếu đã vượt qua mốc cao nhất
+              const { upsell_remaining, upsell_reward_qty, upsell_min_qty, ...rest } = item;
+              return rest;
+            }
+          }
+          return item;
+        });
+
+        groupRules.forEach(({ rule, advanced }) => {
+          const cond = advanced.condition;
+          const rew = advanced.reward;
+          const minQty = cond.min_quantity || 0;
+          const giftKey = `gift_${rule.id}_${rew.gift_product_id}`;
+
+          let times = 0;
+          if (minQty > 0 && remainingQty >= minQty) {
+            times = advanced.is_multiply ? Math.floor(remainingQty / minQty) : 1;
+          }
+
+          if (times > 0) {
+            // Trừ đi số lượng đã được dùng để đổi quà
+            remainingQty -= times * minQty;
+
+            // Xử lý thêm/cập nhật quà tặng
+            const giftIndex = newItems.findIndex((i) => i.key === giftKey);
+            const expectedQty = rew.gift_quantity * times;
+
+            if (giftIndex >= 0) {
+              newItems[giftIndex] = {
+                ...newItems[giftIndex],
+                quantity: expectedQty,
+                total: 0,
+              };
+            } else {
+              const mainProduct = newItems.find((i) => i.id === rew.gift_product_id && !i.is_gift);
+              newItems.push({
+                id: rew.gift_product_id,
+                key: giftKey,
+                name: mainProduct ? `[🎁 Tặng kèm] ${mainProduct.name}` : (rew.gift_name || "Quà Tặng"),
+                sku: mainProduct ? `${mainProduct.sku}-GIFT` : "GIFT",
+                price_wholesale: rew.gift_value || 0,
+                quantity: expectedQty,
+                discount: (rew.gift_value || 0) * expectedQty,
+                total: 0,
+                image_url: mainProduct ? mainProduct.image_url : null,
+                lot_number: null,
+                expiry_date: null,
+                wholesale_unit: mainProduct ? mainProduct.wholesale_unit : "Cái",
+                items_per_carton: 1,
+                stock_quantity: 999,
+                shelf_location: "",
+                is_gift: true,
+                gift_rule_id: rule.id,
+                gift_source: 'auto_suggest',
+                gift_value: rew.gift_value || 0,
+              } as CartItem);
+              message.success(`🎁 Đã tự động thêm quà tặng: ${mainProduct?.name || rew.gift_name || "Quà Tặng"} x${expectedQty}`);
+            }
+            
+            // Cập nhật gift_rule_id cho sản phẩm chính nếu đã vượt mốc cao nhất
+            if (!nextTier) {
+               newItems = newItems.map((item) => {
+                  if (item.id === targetId && !item.is_gift) {
+                    return { ...item, gift_rule_id: rule.id, gift_value: rew.gift_value || 0 };
+                  }
+                  return item;
+               });
+            }
+          } else {
+            // Remove gift nếu không đủ điều kiện (VD số dư không đủ ăn mốc này)
+            newItems = newItems.filter((i) => i.key !== giftKey);
+          }
+        });
       });
       
       return newItems;
