@@ -148,12 +148,11 @@ export const financeService = {
 
   // [NEW] Get Full Detail for Transaction Modal
   getTransactionDetail: async (id: number) => {
-    const { data, error } = await supabase
+      const { data, error } = await supabase
       .from("finance_transactions")
       .select(`
         *,
         fund_accounts ( name ),
-        users ( full_name, email ),
         transaction_categories ( name )
       `)
       .eq("id", id)
@@ -161,11 +160,22 @@ export const financeService = {
     
     if (error) throw error;
 
+    let created_by_name = "N/A";
+    if (data?.created_by) {
+      const { data: userData } = await supabase
+        .from("portal_users")
+        .select("display_name, email")
+        .eq("id", data.created_by)
+        .maybeSingle();
+      created_by_name = userData?.display_name || userData?.email || "N/A";
+    }
+
     // Normalize
     return {
       ...data,
       fund_name: (data?.fund_accounts as any)?.name,
-      creator_name: (data?.users as any)?.full_name || (data?.users as any)?.email || "N/A",
+      partner_name: data?.partner_name_cache || "---",
+      created_by_name,
       category_name: (data?.transaction_categories as any)?.name || "N/A",
     };
   },
