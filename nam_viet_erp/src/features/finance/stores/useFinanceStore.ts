@@ -121,6 +121,7 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
         target_bank_info: payload.p_target_bank_info,
         transaction_date: payload.p_transaction_date,
         category_id: payload.p_category_id,
+        evidence_url: payload.p_evidence_url,
       });
 
       // 2. AURA FIX: Chủ động cập nhật trạng thái phiếu Tạm ứng cũ thành 'completed'
