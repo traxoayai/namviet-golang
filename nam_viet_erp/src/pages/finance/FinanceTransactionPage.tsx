@@ -386,11 +386,11 @@ const FinanceTransactionPage = () => {
       title: "Nội dung / Diễn giải",
       dataIndex: "description",
       render: (text: string, record: TransactionRecord) => (
-        <div style={{ maxWidth: 300 }}>
+        <div style={{ fontWeight: "bold", maxWidth: 300 }}>
           <div className="font-medium text-blue-800">{record.partner_name}</div>
           <div
             className="text-xs text-gray-600"
-            style={{ fontWeight: "bold", whiteSpace: "pre-wrap" }}
+            style={{ whiteSpace: "pre-wrap" }}
           >
             {text}
           </div>
