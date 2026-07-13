@@ -135,16 +135,18 @@ const POHeaderAction = ({
                 </>
               )}
 
-              {canEdit && (
+              {poStatus !== "DRAFT" && poStatus !== "CANCELLED" && (
                 <>
-                  <Button
-                    type="primary"
-                    icon={<SaveOutlined />}
-                    onClick={onSave}
-                    loading={loading}
-                  >
-                    Lưu
-                  </Button>
+                  {canEdit && (
+                    <Button
+                      type="primary"
+                      icon={<SaveOutlined />}
+                      onClick={onSave}
+                      loading={loading}
+                    >
+                      Lưu
+                    </Button>
+                  )}
                   <Button
                     style={{ borderColor: "#faad14", color: "#faad14" }}
                     icon={<DollarCircleOutlined />}

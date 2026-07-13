@@ -43,6 +43,7 @@ export const usePurchaseOrderLogic = () => {
   const [itemsList, setItemsList] = useState<POItem[]>([]);
   const [poCode, setPoCode] = useState<string>("");
   const [poStatus, setPoStatus] = useState<string>("");
+  const [paymentStatus, setPaymentStatus] = useState<string>("unpaid");
   const [costingConfirmedAt, setCostingConfirmedAt] = useState<string | null>(
     null
   );
@@ -102,6 +103,7 @@ export const usePurchaseOrderLogic = () => {
       setPoCode(po.code as string);
       if (!po.status) throw new Error("Đơn hàng không có trạng thái hợp lệ");
       setPoStatus(po.status as string);
+      setPaymentStatus((po.payment_status as string) || "unpaid");
       setCostingConfirmedAt((po.costing_confirmed_at as string) || null);
 
       const supplier = po.supplier as Record<string, unknown> | undefined;
@@ -972,10 +974,11 @@ export const usePurchaseOrderLogic = () => {
     isEditMode,
     loading,
     isUploadingInvoice,
+    itemsList,
     poCode,
     poStatus,
+    paymentStatus,
     costingConfirmedAt,
-    itemsList,
     financials,
     searchKey,
     shippingPartners,

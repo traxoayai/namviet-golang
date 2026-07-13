@@ -183,6 +183,7 @@ const PurchaseOrderDetailContent = () => {
               items={logic.itemsList}
               onItemChange={logic.handleItemChange}
               onRemove={logic.handleRemoveItem}
+              isReadOnly={logic.paymentStatus !== "unpaid"}
             />
           </div>
         </div>

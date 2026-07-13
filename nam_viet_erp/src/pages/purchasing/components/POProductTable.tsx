@@ -26,12 +26,12 @@ const { Option } = Select;
 
 interface Props {
   items: POItem[];
-  // FIX: Định nghĩa field là 'keyof POItem' thay vì string
   onItemChange: (index: number, field: keyof POItem, value: any) => void;
   onRemove: (index: number) => void;
+  isReadOnly?: boolean;
 }
 
-const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
+const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove, isReadOnly }) => {
   const screens = useBreakpoint();
   const DATE_FORMATS = ["DD/MM/YYYY", "DDMMYY", "DDMMYYYY"];
 
@@ -61,6 +61,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
         value={currentValue}
         style={{ width: "100%" }}
         popupMatchSelectWidth={false} // Để dropdown không bị cắt chữ nếu dài
+        disabled={isReadOnly}
         onChange={(val) => {
           // 1. Cập nhật đơn vị mới cho State
           onItemChange(idx, "uom", val);
@@ -166,6 +167,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
                 danger
                 icon={<DeleteOutlined />}
                 onClick={() => onRemove(idx)}
+                disabled={isReadOnly}
               />
             </div>
 
@@ -185,6 +187,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
                   value={item.quantity}
                   min={1}
                   style={{ width: "100%" }}
+                  disabled={isReadOnly}
                   onChange={(val) => onItemChange(idx, "quantity", val)}
                 />
               </Form.Item>
@@ -243,6 +246,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
                   }
                   onChange={(val) => onItemChange(idx, "unit_price", val)}
                   addonAfter="₫"
+                  disabled={item.is_bonus || isReadOnly}
                   status={item.expected_pre_vat_price !== undefined && item.unit_price !== item.expected_pre_vat_price && item.expected_pre_vat_price > 0 ? "warning" : undefined}
                 />
                 {item.expected_pre_vat_price !== undefined && item.unit_price !== item.expected_pre_vat_price && item.expected_pre_vat_price > 0 && (
@@ -324,6 +328,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
           value={r.quantity}
           min={1}
           style={{ width: "100%" }}
+          disabled={isReadOnly}
           onChange={(val) => onItemChange(idx, "quantity", val)}
         />
       ),
@@ -343,7 +348,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
               parser={(v) => v!.replace(/\$\s?|(,*)/g, "") as unknown as number}
               onChange={(val) => onItemChange(idx, "unit_price", val)}
               addonAfter="₫"
-              disabled={r.is_bonus}
+              disabled={r.is_bonus || isReadOnly}
               status={isPriceVariance ? "warning" : undefined}
             />
             {isPriceVariance && (
@@ -390,6 +395,7 @@ const POProductTable: React.FC<Props> = ({ items, onItemChange, onRemove }) => {
           danger
           icon={<DeleteOutlined />}
           onClick={() => onRemove(idx)}
+          disabled={isReadOnly}
         />
       ),
     },
