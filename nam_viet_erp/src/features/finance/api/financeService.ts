@@ -153,6 +153,7 @@ export const financeService = {
       .select(`
         *,
         fund_accounts ( name ),
+        users ( full_name, email ),
         transaction_categories ( name )
       `)
       .eq("id", id)
@@ -161,13 +162,16 @@ export const financeService = {
     if (error) throw error;
 
     let created_by_name = "N/A";
-    if (data?.created_by) {
+    if (data?.users) {
+      created_by_name = (data.users as any).full_name || (data.users as any).email || "N/A";
+    } else if (data?.created_by) {
+      // Fallback in case join fails
       const { data: userData } = await supabase
-        .from("portal_users")
-        .select("display_name, email")
+        .from("users")
+        .select("full_name, email")
         .eq("id", data.created_by)
         .maybeSingle();
-      created_by_name = userData?.display_name || userData?.email || "N/A";
+      created_by_name = userData?.full_name || userData?.email || "N/A";
     }
 
     // Normalize
