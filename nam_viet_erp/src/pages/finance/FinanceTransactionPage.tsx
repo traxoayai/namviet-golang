@@ -51,6 +51,7 @@ import { useAuthStore } from "@/features/auth/stores/useAuthStore";
 import { useUserStore } from "@/features/auth/stores/useUserStore"; // [NEW]
 import { useFinanceStore } from "@/features/finance/stores/useFinanceStore";
 import { useTransactionCategoryStore } from "@/features/finance/stores/useTransactionCategoryStore";
+import { financeService } from "@/features/finance/api/financeService";
 import { TransactionRecord } from "@/features/finance/types/finance";
 import { Access } from "@/shared/components/auth/Access"; // [NEW]
 import { supabase } from "@/shared/lib/supabaseClient"; // [NEW]
@@ -145,6 +146,22 @@ const FinanceTransactionPage = () => {
 
   const handleDelete = async (id: number) => {
     await handleOptimisticStatus(id, "cancelled");
+  };
+
+  const handleViewDetail = async (record: TransactionRecord) => {
+    const hideLoading = message.loading("Đang tải dữ liệu chi tiết...", 0);
+    try {
+      // Fetch full details (đã có JOIN sẵn bảng Quỹ, Users...)
+      const fullDetail = await financeService.getTransactionDetail(record.id);
+      setViewRecord(fullDetail as unknown as TransactionRecord);
+    } catch (error) {
+      console.error(error);
+      message.error("Lỗi khi tải chi tiết phiếu");
+      // Fallback: Nếu lỗi thì vẫn hiển thị dữ liệu thô có sẵn
+      setViewRecord(record); 
+    } finally {
+      hideLoading();
+    }
   };
 
   // [NEW] Handlers for GL
@@ -294,7 +311,7 @@ const FinanceTransactionPage = () => {
         <Button
           size="small"
           icon={<EyeOutlined />}
-          onClick={() => setViewRecord(record)}
+          onClick={() => handleViewDetail(record)}
         />
       </Tooltip>
 

@@ -10,7 +10,7 @@ import { useFinanceStore } from "@/features/finance/stores/useFinanceStore";
 import { useTransactionCategoryStore } from "@/features/finance/stores/useTransactionCategoryStore";
 import { CreateTransactionParams } from "@/features/finance/types/finance";
 import { useSupplierStore } from "@/features/purchasing/stores/supplierStore";
-import { uploadFile } from "@/shared/api/storageService";
+import { uploadImageToCloudinary } from "@/shared/utils/cloudinary";
 
 type PartnerOption = {
   label: string;
@@ -311,9 +311,8 @@ export const useFinanceFormLogic = (
       let evidenceUrl = null;
       if (fileList.length > 0 && fileList[0].originFileObj) {
         try {
-          evidenceUrl = await uploadFile(
-            fileList[0].originFileObj,
-            "finance_evidence"
+          evidenceUrl = await uploadImageToCloudinary(
+            fileList[0].originFileObj as File
           );
         } catch (err) {
           console.warn("Lỗi upload ảnh:", err);
