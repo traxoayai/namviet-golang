@@ -131,4 +131,4 @@ BEGIN
 
     RETURN jsonb_build_object('success', true, 'count', v_success_count);
 END;
-$function$
+$function$;
