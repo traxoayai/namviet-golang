@@ -158,7 +158,7 @@ const FinanceTransactionPage = () => {
       console.error(error);
       message.error("Lỗi khi tải chi tiết phiếu");
       // Fallback: Nếu lỗi thì vẫn hiển thị dữ liệu thô có sẵn
-      setViewRecord(record); 
+      setViewRecord(record);
     } finally {
       hideLoading();
     }
@@ -390,7 +390,7 @@ const FinanceTransactionPage = () => {
           <div className="font-medium text-blue-800">{record.partner_name}</div>
           <div
             className="text-xs text-gray-600"
-            style={{ whiteSpace: "pre-wrap" }}
+            style={{ fontWeight: "bold", whiteSpace: "pre-wrap" }}
           >
             {text}
           </div>
@@ -695,71 +695,77 @@ const FinanceTransactionPage = () => {
                 loading={logic.loading}
                 dataSource={logic.transactions}
                 renderItem={(record: TransactionRecord) => (
-                  <List.Item style={{ padding: "12px 0", borderBottom: "none" }}>
-                  <Card
-                    size="small"
-                    style={{
-                      width: "100%",
-                      borderRadius: 12,
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                    }}
+                  <List.Item
+                    style={{ padding: "12px 0", borderBottom: "none" }}
                   >
-                    <div
+                    <Card
+                      size="small"
                       style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginBottom: 8,
+                        width: "100%",
+                        borderRadius: 12,
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                       }}
                     >
-                      <span style={{ fontWeight: 600, color: "#1890ff" }}>
-                        {record.code}
-                      </span>
-                      <span
+                      <div
                         style={{
-                          color: record.flow === "in" ? "#52c41a" : "#f5222d",
-                          fontWeight: "bold",
-                          fontSize: 16,
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: 8,
                         }}
                       >
-                        {record.flow === "in" ? "+" : "-"}
-                        {Number(record.amount).toLocaleString()}
-                      </span>
-                    </div>
-                    <div style={{ marginBottom: 4 }}>
-                      <Tag color={record.flow === "in" ? "green" : "red"}>
-                        {record.flow === "in" ? "THU" : "CHI"}
-                      </Tag>
-                      <span style={{ color: "#888", fontSize: 12 }}>
-                        {dayjs(record.transaction_date)
-                          .tz("Asia/Ho_Chi_Minh")
-                          .format("HH:mm - DD/MM/YYYY")}
-                      </span>
-                    </div>
-                    <div
-                      style={{ marginBottom: 12, fontSize: 13, color: "#555" }}
-                    >
-                      <strong>{record.partner_name}</strong> -{" "}
-                      {record.description}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div>{renderStatusTag(record.status)}</div>
-                      <div>{renderActions(record)}</div>
-                    </div>
-                  </Card>
-                </List.Item>
-              )}
-              pagination={{
-                current: logic.page,
-                pageSize: logic.pageSize,
-                total: logic.totalCount,
-                onChange: logic.setPage,
-              }}
+                        <span style={{ fontWeight: 600, color: "#1890ff" }}>
+                          {record.code}
+                        </span>
+                        <span
+                          style={{
+                            color: record.flow === "in" ? "#52c41a" : "#f5222d",
+                            fontWeight: "bold",
+                            fontSize: 16,
+                          }}
+                        >
+                          {record.flow === "in" ? "+" : "-"}
+                          {Number(record.amount).toLocaleString()}
+                        </span>
+                      </div>
+                      <div style={{ marginBottom: 4 }}>
+                        <Tag color={record.flow === "in" ? "green" : "red"}>
+                          {record.flow === "in" ? "THU" : "CHI"}
+                        </Tag>
+                        <span style={{ color: "#888", fontSize: 12 }}>
+                          {dayjs(record.transaction_date)
+                            .tz("Asia/Ho_Chi_Minh")
+                            .format("HH:mm - DD/MM/YYYY")}
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          marginBottom: 12,
+                          fontSize: 13,
+                          color: "#555",
+                        }}
+                      >
+                        <strong>{record.partner_name}</strong> -{" "}
+                        {record.description}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div>{renderStatusTag(record.status)}</div>
+                        <div>{renderActions(record)}</div>
+                      </div>
+                    </Card>
+                  </List.Item>
+                )}
+                pagination={{
+                  current: logic.page,
+                  pageSize: logic.pageSize,
+                  total: logic.totalCount,
+                  onChange: logic.setPage,
+                }}
               />
             </PullToRefresh>
           ) : (
