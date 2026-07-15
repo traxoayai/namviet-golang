@@ -87,7 +87,15 @@ export const useFinanceFormLogic = (
       if (suppliers.length === 0) fetchSuppliers();
       if (categories.length === 0) fetchCategories();
     }
-  }, [open, users.length, fetchUsers, suppliers.length, fetchSuppliers, categories.length, fetchCategories]);
+  }, [
+    open,
+    users.length,
+    fetchUsers,
+    suppliers.length,
+    fetchSuppliers,
+    categories.length,
+    fetchCategories,
+  ]);
 
   useEffect(() => {
     if (open) {
@@ -112,9 +120,11 @@ export const useFinanceFormLogic = (
         }
 
         // Fix: If supplier_id provided -> Load Bank Info
-        const supplierId = initialValues.supplier_id;
-        if (typeof supplierId === "number" && suppliers.length > 0) {
-          const s = suppliers.find((x) => x.id === supplierId);
+        // Fix: Ép kiểu an toàn để xử lý cả type string/number từ form
+        const rawSupplierId = initialValues.supplier_id;
+        if (rawSupplierId != null && suppliers.length > 0) {
+          const parsedSupplierId = Number(rawSupplierId);
+          const s = suppliers.find((x) => Number(x.id) === parsedSupplierId);
           if (s) {
             setManualBankInfo({
               bin: s.bank_bin || "",
@@ -144,9 +154,10 @@ export const useFinanceFormLogic = (
   // [NEW] Separate useEffect to handle supplier bank info sync when suppliers are loaded asynchronously
   useEffect(() => {
     if (open && initialValues) {
-      const supplierId = initialValues.supplier_id;
-      if (typeof supplierId === "number" && suppliers.length > 0) {
-        const s = suppliers.find((x) => x.id === supplierId);
+      const rawSupplierId = initialValues.supplier_id;
+      if (rawSupplierId != null && suppliers.length > 0) {
+        const parsedSupplierId = Number(rawSupplierId);
+        const s = suppliers.find((x) => Number(x.id) === parsedSupplierId);
         if (s) {
           setManualBankInfo({
             bin: s.bank_bin || "",
@@ -447,10 +458,12 @@ export const useFinanceFormLogic = (
             p_amount: alloc.amount,
             p_ref_id: String(alloc.po_id),
             // Có thể nối thêm mã đơn vào mô tả để dễ quản lý
-            p_description: values.description ? `${values.description} (Đơn: ${alloc.po_id})` : `Thanh toán đơn ${alloc.po_id}`,
+            p_description: values.description
+              ? `${values.description} (Đơn: ${alloc.po_id})`
+              : `Thanh toán đơn ${alloc.po_id}`,
           });
         });
-        
+
         const results = await Promise.all(promises);
         const allSuccess = results.every(Boolean);
         if (allSuccess) {
@@ -461,8 +474,6 @@ export const useFinanceFormLogic = (
         }
         return allSuccess;
       }
-
-
 
       const success = await createTransaction(payload);
       if (success) onCancel();
