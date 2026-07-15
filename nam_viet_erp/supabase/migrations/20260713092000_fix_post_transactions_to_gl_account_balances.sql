@@ -69,8 +69,25 @@ BEGIN
             RAISE EXCEPTION 'Tài khoản định khoản không hợp lệ (Lý do Thu/Chi chưa gán TK Nợ/Có). (ID Phiếu: %)', v_tx.id;
         END IF;
 
-        -- Nếu là Tái Hạch Toán: Xóa nhật ký cũ
+        -- Nếu là Tái Hạch Toán: Xóa nhật ký cũ và HOÀN XẢ (revert) số dư cũ
         IF v_tx.is_posted = true THEN
+            -- 1. Hoàn xả số dư cũ
+            WITH old_lines AS (
+                SELECT jel.account_id, jel.debit, jel.credit, je.period_id, je.book
+                FROM public.journal_entry_lines jel
+                JOIN public.journal_entries je ON je.id = jel.entry_id
+                WHERE je.source_ref_id = v_tx.id::text AND je.source_ref_type = 'FINANCE_TRANSACTION'
+            )
+            UPDATE public.account_balances ab
+            SET period_debit = ab.period_debit - ol.debit,
+                period_credit = ab.period_credit - ol.credit,
+                updated_at = now()
+            FROM old_lines ol
+            WHERE ab.account_id = ol.account_id 
+              AND ab.period_id = ol.period_id 
+              AND ab.book = ol.book;
+
+            -- 2. Xóa bút toán cũ
             DELETE FROM public.journal_entries WHERE source_ref_id = v_tx.id::text AND source_ref_type = 'FINANCE_TRANSACTION';
         END IF;
 

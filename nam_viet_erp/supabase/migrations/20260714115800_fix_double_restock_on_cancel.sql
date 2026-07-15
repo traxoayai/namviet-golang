@@ -61,4 +61,4 @@ BEGIN
         );
     END LOOP;
 END;
-$function$
+$function$;

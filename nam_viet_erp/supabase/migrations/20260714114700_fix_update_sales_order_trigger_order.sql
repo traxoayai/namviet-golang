@@ -100,4 +100,4 @@ BEGIN
         status = p_status
     WHERE id = p_order_id;
 END;
-$function$
+$function$;

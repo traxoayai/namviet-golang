@@ -141,6 +141,23 @@ export const useFinanceFormLogic = (
     }
   }, [open]); // ONLY re-run when modal opens/closes, not when suppliers load
 
+  // [NEW] Separate useEffect to handle supplier bank info sync when suppliers are loaded asynchronously
+  useEffect(() => {
+    if (open && initialValues) {
+      const supplierId = initialValues.supplier_id;
+      if (typeof supplierId === "number" && suppliers.length > 0) {
+        const s = suppliers.find((x) => x.id === supplierId);
+        if (s) {
+          setManualBankInfo({
+            bin: s.bank_bin || "",
+            acc: s.bank_account || "",
+            holder: s.bank_holder || "",
+          });
+        }
+      }
+    }
+  }, [open, initialValues, suppliers]);
+
   // --- LOGIC HOÀN ỨNG (UPDATED) ---
 
   const handleEmployeeChange = async (userId: string) => {
