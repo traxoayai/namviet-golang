@@ -301,6 +301,7 @@ export const printPosBill = (order: PrintOrder) => {
                  </div>
             </div>
 
+            <!-- QR THANH TOÁN - TẠM THỜI ẨN (comment out ngày 2026-09-04)
             <div class="text-center mt-4">
                 <div class="font-bold mb-1">QUÉT QR THANH TOÁN ĐƠN NÀY</div>
                 <img src="${qrUrl}" alt="QR Payment" class="w-32 h-32 mx-auto border border-gray-300 rounded"/>
@@ -312,6 +313,7 @@ export const printPosBill = (order: PrintOrder) => {
                     : ""
                 }
             </div>
+            -->
 
             <div class="mt-4 text-center italic text-[9px]">Cảm ơn quý khách! Hẹn gặp lại.</div>
         </div>
@@ -516,6 +518,7 @@ export const generateB2BOrderHTML = (order: PrintOrder) => {
          </table>
 
          <div class="bottom-section">
+            <!-- QR THANH TOÁN - TẠM THỜI ẨN (comment out ngày 2026-09-04)
             <div class="qr-col" style="width: 40%; text-align: center;">
                 <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">QUÉT MÃ THANH TOÁN</div>
                 <img src="${qrUrl}" width="120" height="120" style="border: 1px solid #ddd; padding: 2px;"/>
@@ -524,6 +527,7 @@ export const generateB2BOrderHTML = (order: PrintOrder) => {
                     ${ACCOUNT_NAME}
                 </div>
             </div>
+            -->
             <div class="total-col" style="width: 60%;">
                <div class="total-row"><span>Cộng tiền hàng:</span> <span>${formatVnd(order.sub_total ?? order.total_amount ?? 0)} ₫</span></div>
                <div class="total-row"><span>Chiết khấu:</span> <span>- ${formatVnd(order.discount_amount || 0)} ₫</span></div>
